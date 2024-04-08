@@ -57,7 +57,7 @@ $(document).ready(function () {
             showLoaderOnConfirm: true,
             preConfirm: async (description) => {
                 $.ajax({
-                    url: "/approve-payment-request",
+                    url: "approve-payment-request",
                     type: "POST",
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -104,7 +104,7 @@ $(document).ready(function () {
                     return Swal.showValidationMessage('Chưa điền lý do');
                 }
                 $.ajax({
-                    url: "/cancel-payment-request",
+                    url: "cancel-payment-request",
                     type: "POST",
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
