@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('manage')->group(function () {
+Route::prefix('/')->group(function () {
     Route::middleware('checkLogout')->name('login.')->group(function () {
         Route::get('login', [AuthController::class, 'getLogin'])->name('get');
         Route::post('login', [AuthController::class, 'postLogin'])->name('post');

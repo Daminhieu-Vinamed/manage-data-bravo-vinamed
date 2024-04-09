@@ -7,8 +7,8 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h4 class="text-gray-900 mb-4">WELCOME</h4>
+                            <div class="text-center mb-4">
+                                <img src="{{ asset('assets/images/logo-vmed-text.png') }}" alt="">
                             </div>
                             <form class="user" action="{{ route('login.post') }}" method="POST">
                                 @csrf

@@ -15,13 +15,12 @@
                         <tr>
                             <th>Mã công ty</th>
                             <th>Ngày</th>
+                            <th>Số chứng từ</th>
                             <th>Người nhận</th>
                             <th>Tiền</th>
-                            <th>Đơn vị tiền tệ</th>
                             <th>Người đề nghị</th>
                             <th>Hành động</th>
                             <th>Tình trạng thanh toán</th>
-                            <th>Số chứng từ</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -31,10 +30,9 @@
                             <th>Số chứng từ</th>
                             <th>Người nhận</th>
                             <th>Tiền</th>
-                            <th>Đơn vị tiền tệ</th>
                             <th>Người đề nghị</th>
-                            <th>Tình trạng thanh toán</th>
                             <th>Hành động</th>
+                            <th>Tình trạng thanh toán</th>
                         </tr>
                     </tfoot>
                     <tbody></tbody>
