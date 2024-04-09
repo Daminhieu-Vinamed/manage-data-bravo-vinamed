@@ -1,5 +1,5 @@
 @extends('layout.base')
-@section('title', 'LOGIN')
+@section('title', 'Login')
 @section('screen')
     <div class="container">
         <div class="row min-vh-100 d-flex align-items-center justify-content-center">
@@ -20,7 +20,9 @@
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block" type="submit">Đăng nhập</button>
                                 @if (Session::has('error'))
-                                    <span class="text-danger">{{ Session::get('error') }}</span>
+                                    <div class="text-center mt-2">
+                                        <span class="text-danger">{{ Session::get('error') }}</span>
+                                    </div>
                                 @endif
                             </form>
                         </div>

@@ -44,11 +44,12 @@ class CompanyController extends Controller
         $connectCompany->beginTransaction();
         try {
             $connectCompany->update(
-                'EXEC Usp_ApproveDNTT ?, ?, ?',
+                'EXEC Usp_ApproveDNTT ?, ?, ?, ?',
                 [
                     $request->Stt,
                     Auth::user()->nUserId,
                     $request->description === config('constants.value.null') ? config('constants.value.null') : $request->description,
+                    Auth::user()->username,
                 ]
             );
             $connectCompany->commit();
@@ -64,11 +65,12 @@ class CompanyController extends Controller
         $connectCompany->beginTransaction();
         try {
             $connectCompany->update(
-                'EXEC Usp_CancelDNTT ?, ?, ?',
+                'EXEC Usp_CancelDNTT ?, ?, ?, ?',
                 [
                     $request->Stt,
                     Auth::user()->nUserId,
                     $request->description,
+                    Auth::user()->username,
                 ]
             );
             $connectCompany->commit();
