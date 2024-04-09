@@ -17,7 +17,7 @@ class AuthController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect()->route('company.list');
         } else {
-            return redirect()->back()->with('error', 'Sai tài khoản hoặc mật khẩu');
+            return redirect()->back()->with('error', 'Sai tên đăng nhập hoặc mật khẩu');
         }
     }
 

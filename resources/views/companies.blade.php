@@ -1,4 +1,5 @@
 @extends('layout.master')
+@section('title', 'Payment order')
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
