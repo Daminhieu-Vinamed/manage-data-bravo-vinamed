@@ -2,10 +2,10 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+            <img src="{{ asset('assets/images/logo-vmed-white.png') }}" alt="">
         </div>
-        <div class="sidebar-brand-text mx-3">Vmed <sup>Group</sup></div>
+        <div class="sidebar-brand-text mx-2">Vmed <sup>Group</sup></div>
     </a>
 
     <!-- Divider -->
