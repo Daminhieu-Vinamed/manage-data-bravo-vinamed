@@ -10,13 +10,12 @@ $(document).ready(function () {
         columns: [
             { data: "BranchCode", name: "BranchCode" },
             { data: "DocDate", name: "DocDate" },
+            { data: "DocNo", name: "DocNo" },
             { data: "CustomerName", name: "CustomerName" },
             { data: "TotalAmount", name: "TotalAmount" },
-            { data: "CurrencyCode", name: "CurrencyCode" },
             { data: "EmployeeName", name: "EmployeeName" },
             { data: "action", name: "action" },
             { data: "_StatusTT", name: "_StatusTT" },
-            { data: "DocNo", name: "DocNo" },
         ],
         language: {
             paginate: {
