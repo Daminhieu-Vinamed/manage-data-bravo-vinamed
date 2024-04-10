@@ -27,7 +27,7 @@ class CompanyController extends Controller
         $collectData = collect($arrayData);
         return DataTables::of($collectData)
             ->editColumn('TotalAmount', function ($approvalVote) {
-                return number_format($approvalVote->TotalAmount, config('constants.number.two'), ",", ".");
+                return number_format($approvalVote->TotalAmount, config('constants.number.zero'), ".", ".");    
             })
             ->editColumn('DocDate', function ($approvalVote) {
                 return date('d-m-Y', strtotime($approvalVote->DocDate));
