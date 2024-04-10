@@ -20,10 +20,12 @@ $(document).on("click", "#login-admin", function () {
         },
         error: function (error) {
             let notification = error.responseJSON;
-            ToastTopRight.fire({
-                icon: notification.status,
-                title: notification.msg,
-            });
+            if (notification.status !== undefinedValue && notification.msg !== undefinedValue) {
+                ToastTopRight.fire({
+                    icon: notification.status,
+                    title: notification.msg,
+                });   
+            }
             notification.errors.username ? $('.username-notification').text(notification.errors.username[zero]) : $('.username-notification').text('');
             notification.errors.password ? $('.password-notification').text(notification.errors.password[zero]) : $('.password-notification').text('');
         },
