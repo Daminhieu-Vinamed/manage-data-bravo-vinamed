@@ -1,12 +1,12 @@
 var ToastTopRight = Swal.mixin({
-    toast: true,
+    toast: trueValue,
     position: 'top-right',
     customClass: {
       popup: 'colored-toast'
     },
-    showConfirmButton: false,
+    showConfirmButton: falseValue,
     timer: 1500,
-    timerProgressBar: true,
+    timerProgressBar: trueValue,
     didOpen: function didOpen(toast) {
       toast.addEventListener('mouseenter', Swal.stopTimer);
       toast.addEventListener('mouseleave', Swal.resumeTimer);
@@ -14,8 +14,7 @@ var ToastTopRight = Swal.mixin({
 });
 
 var ToastErrorCenter = Swal.mixin({
-    icon: 'error',
-    title: 'THÔNG BÁO !',
-    allowOutsideClick: false,
-    allowEscapeKey: false,
+  title: textNOTIFICATION,
+  allowOutsideClick: falseValue,
+  allowEscapeKey: falseValue,
 })
