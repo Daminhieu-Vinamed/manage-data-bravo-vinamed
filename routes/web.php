@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PaymentOrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -12,10 +12,10 @@ Route::prefix('/')->group(function () {
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::middleware('checkLogin')->name('company.')->group(function () {
-        Route::get('list', [CompanyController::class, 'list'])->name('list');
-        Route::get('get-data', [CompanyController::class, 'getData']);
-        Route::post('approve-payment-request', [CompanyController::class, 'approvePaymentRequest']);
-        Route::post('cancel-payment-request', [CompanyController::class, 'cancelPaymentRequest']);
+    Route::prefix('payment-order')->middleware('checkLogin')->name('payment-order.')->group(function () {
+        Route::get('/', [PaymentOrderController::class, 'list'])->name('list');
+        Route::get('get-data', [PaymentOrderController::class, 'getData']);
+        Route::post('approve-payment-request', [PaymentOrderController::class, 'approve']);
+        Route::post('cancel-payment-request', [PaymentOrderController::class, 'cancelPaymentRequest']);
     });
 });

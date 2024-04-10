@@ -10,21 +10,17 @@
                             <div class="text-center mb-4">
                                 <img src="{{ asset('assets/images/logo-vmed-text.png') }}" alt="">
                             </div>
-                            <form class="user" action="{{ route('login.post') }}" method="POST">
-                                @csrf
+                            <div class="user">
                                 <div class="form-group">
                                     <input type="text" name="username" class="form-control form-control-user" placeholder="Điền tên đăng nhập...">
+                                    <small class="text-danger pl-2 username-notification"></small>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control form-control-user" placeholder="Mật khẩu">
+                                    <small class="text-danger pl-2 password-notification"></small>
                                 </div>
-                                <button class="btn btn-primary btn-user btn-block" type="submit">Đăng nhập</button>
-                                @if (Session::has('error'))
-                                    <div class="text-center mt-2">
-                                        <span class="text-danger">{{ Session::get('error') }}</span>
-                                    </div>
-                                @endif
-                            </form>
+                                <button class="btn btn-primary btn-user btn-block" id="login-admin">Đăng nhập</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,3 +28,6 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script src="{{ asset('assets/js/auth.js') }}"></script>
+@endpush

@@ -98,7 +98,7 @@
     </li> --}}
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item {{ request()->routeIs('company.list') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->routeIs('payment-order.list') ? 'active' : '' }}">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-fw fa-table"></i>
             <span>Đề nghị thanh toán</span></a>

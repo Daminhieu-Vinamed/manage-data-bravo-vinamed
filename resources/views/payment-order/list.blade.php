@@ -46,5 +46,7 @@
      <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
-     <script src="{{ asset('assets/js/companies.js') }}"></script>
+     <script src="{{ asset('assets/js/payment-order/list.js') }}"></script>
+     <script src="{{ asset('assets/js/payment-order/approve.js') }}"></script>
+     <script src="{{ asset('assets/js/payment-order/cancel.js') }}"></script>
 @endpush

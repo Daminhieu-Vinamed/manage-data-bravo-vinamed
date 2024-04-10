@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthRequest;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    protected AuthService $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+    
     public function getLogin()
     {
         return view('login');
     }
 
-    public function postLogin(Request $request)
+    public function postLogin(AuthRequest $request)
     {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect()->route('company.list');
-        } else {
-            return redirect()->back()->with('error', 'Sai tên đăng nhập hoặc mật khẩu');
-        }
+        return $this->authService->postLogin($request);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->flush();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('login.get');
+        return $this->authService->logout($request);
     }
 }
