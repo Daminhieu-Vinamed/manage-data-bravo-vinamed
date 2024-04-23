@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('title', 'Thống kê')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/selectize/selectize.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/selectize/selectize.min.css') }}"> --}}
 @endsection
 @section('title-manage')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Thống kê</h1>
+        <h1 class="h3 mb-0 text-gray-800">THỐNG KÊ</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
 @endsection
