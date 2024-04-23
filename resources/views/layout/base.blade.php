@@ -12,7 +12,7 @@
     <title>@yield('title')</title>
     @yield('css')
 </head>
-<body @if (request()->routeIs('login.get'))
+<body @if (request()->routeIs('admin.login.get') || request()->routeIs('client.login.get'))
         class="bg-gradient-primary"
     @else
         id="page-top"

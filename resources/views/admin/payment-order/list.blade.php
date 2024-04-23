@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Payment order')
+@section('title', 'Đề nghị thanh toán')
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
@@ -15,25 +15,27 @@
                     <thead>
                         <tr>
                             <th>Mã công ty</th>
-                            <th>Ngày</th>
                             <th>Số chứng từ</th>
                             <th>Người nhận</th>
-                            <th>Tiền</th>
                             <th>Người đề nghị</th>
+                            <th>Tiền</th>
+                            <th>Đơn vị</th>
                             <th>Hành động</th>
-                            <th>Tình trạng thanh toán</th>
+                            <th>Ngày</th>
+                            <th>Tình trạng</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Mã công ty</th>
-                            <th>Ngày</th>
                             <th>Số chứng từ</th>
                             <th>Người nhận</th>
-                            <th>Tiền</th>
                             <th>Người đề nghị</th>
+                            <th>Tiền</th>
+                            <th>Đơn vị</th>
                             <th>Hành động</th>
-                            <th>Tình trạng thanh toán</th>
+                            <th>Ngày</th>
+                            <th>Tình trạng</th>
                         </tr>
                     </tfoot>
                     <tbody></tbody>

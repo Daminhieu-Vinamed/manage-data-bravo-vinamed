@@ -1,8 +1,8 @@
-$(document).on("click", "#login-admin", function () {
+$(document).on("click", "#login", function () {
     const username = $("input[name='username']").val();
     const password = $("input[name='password']").val();
     $.ajax({
-        url: "login",
+        url: linkOrigin + "/admin/login",
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -12,11 +12,11 @@ $(document).on("click", "#login-admin", function () {
             password: password,
         },
         success: function (success) {
-            ToastTopRight.fire({
-                icon: success.status,
-                title: success.msg,
-            });
-            location.href = window.location.origin + success.url
+            // ToastTopRight.fire({
+            //     icon: success.status,
+            //     title: success.msg,
+            // });
+            location.href = linkOrigin + success.url
         },
         error: function (error) {
             let notification = error.responseJSON;

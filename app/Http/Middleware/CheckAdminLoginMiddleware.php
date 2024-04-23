@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckLoginMiddleware
+class CheckAdminLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,6 +19,6 @@ class CheckLoginMiddleware
         if (Auth::check()) {
             return $next($request);
         }
-        return redirect()->route('login.get')->with('error', 'Yêu cầu bạn hãy đăng nhập !');
+        return redirect()->route('login.admin.get');
     }
 }

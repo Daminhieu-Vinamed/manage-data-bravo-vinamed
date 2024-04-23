@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\paymentOrderRequest;
-use App\Services\PaymentOrderService;
+use App\Services\Admin\PaymentOrderService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\Facades\DataTables;
 
 class PaymentOrderController extends Controller
 {
@@ -21,7 +19,7 @@ class PaymentOrderController extends Controller
 
     public function list()
     {
-        return view('payment-order.list');
+        return view('admin.payment-order.list');
     }
 
     public function getData()
@@ -37,5 +35,11 @@ class PaymentOrderController extends Controller
     public function cancelPaymentRequest(paymentOrderRequest $request)
     {
         return $this->paymentOrderService->cancel($request);
+    }
+
+    public function create(Request $request)
+    {
+        $data = $this->paymentOrderService->create($request);
+        return view('admin.payment-order.create', compact('data'));
     }
 }

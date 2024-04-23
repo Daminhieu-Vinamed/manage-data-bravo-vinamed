@@ -1,5 +1,5 @@
 @extends('layout.base')
-@section('title', 'Login')
+@section('title', 'Client login')
 @section('screen')
     <div class="container">
         <div class="row min-vh-100 d-flex align-items-center justify-content-center">
@@ -19,7 +19,16 @@
                                     <input type="password" name="password" class="form-control form-control-user" placeholder="Mật khẩu">
                                     <small class="text-danger pl-2 password-notification"></small>
                                 </div>
-                                <button class="btn btn-primary btn-user btn-block" id="login-admin">Đăng nhập</button>
+                                <div class="form-group">
+                                    <select name="company" class="form-control form-control-user">
+                                        <option selected disabled>Chọn công ty</option>
+                                        <option value="A11">A11</option>
+                                        <option value="A12">A12</option>
+                                        <option value="A14">A14</option>
+                                    </select>
+                                    <small class="text-danger pl-2 company-notification"></small>
+                                </div>
+                                <button class="btn btn-primary btn-user btn-block" id="login">Đăng nhập</button>
                             </div>
                         </div>
                     </div>
@@ -29,5 +38,5 @@
     </div>
 @endsection
 @push('js')
-    <script src="{{ asset('assets/js/auth.js') }}"></script>
+    <script src="{{ asset('assets/js/auth/client.js') }}"></script>
 @endpush

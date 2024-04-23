@@ -2,7 +2,7 @@
 return [
     'value' => [
         'null' => NULL,
-        'string-empty' => "",
+        'empty' => '',
     ],
     'number' => [
         'zero' => 0,

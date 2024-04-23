@@ -1,21 +1,27 @@
 var listPaymentOrder = $("#dataTable").DataTable({
     ajax: {
         type: "get",
-        url: linkHref + "/get-data",
+        url: linkPaymentAdmin + "get-data",
     },
     responsive: trueValue,
     rowReorder: trueValue,
     scrollX: trueValue,
     columns: [
         { data: "BranchCode", name: "BranchCode" },
-        { data: "DocDate", name: "DocDate" },
         { data: "DocNo", name: "DocNo" },
         { data: "CustomerName", name: "CustomerName" },
-        { data: "TotalAmount", name: "TotalAmount" },
         { data: "EmployeeName", name: "EmployeeName" },
+        { data: "TotalAmount", name: "TotalAmount" },
+        { data: "CurrencyCode", name: "CurrencyCode" },
         { data: "action", name: "action" },
+        { data: "DocDate", name: "DocDate" },
         { data: "_StatusTT", name: "_StatusTT" },
     ],
+    ordering: falseValue,
+    order: {
+        name: "DocDate",
+        dir: "desc",
+    },
     language: {
         paginate: {
             previous: '<i class="fas fa-caret-left"></i>',
