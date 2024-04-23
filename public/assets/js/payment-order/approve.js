@@ -13,7 +13,7 @@ $(document).on("click", ".approve-payment-request", function () {
         showLoaderOnConfirm: trueValue,
         preConfirm: async (description) => {
             $.ajax({
-                url: linkHref + "/approve-payment-request",
+                url: linkPaymentAdmin + "approve-payment-request",
                 type: "POST",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),

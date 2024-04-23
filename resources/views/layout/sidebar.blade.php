@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-icon">
             <img src="{{ asset('assets/images/logo-vmed-white.png') }}" alt="">
         </div>
@@ -44,12 +44,12 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#paymentOrder"
+            aria-expanded="true" aria-controls="paymentOrder">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Utilities</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+        <div id="paymentOrder" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
@@ -98,10 +98,41 @@
     </li> --}}
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item {{ request()->routeIs('payment-order.list') ? 'active' : '' }}">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Đề nghị thanh toán</span></a>
+    <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : config('constants.value.empty') }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Thống kê</span>
+        </a>
+    </li>
+    <li
+        class="nav-item {{ request()->routeIs('admin.payment-order.list') || request()->routeIs('admin.payment-order.create') ? 'active' : config('constants.value.empty') }}">
+        <a class="nav-link {{ request()->routeIs('admin.payment-order.list') || request()->routeIs('admin.payment-order.create') ? config('constants.value.empty') : 'collapsed' }}"
+            data-toggle="collapse" data-target="#paymentOrder" aria-expanded="true" aria-controls="paymentOrder">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Đề nghị thanh toán</span>
+        </a>
+        <div id="paymentOrder"
+            class="collapse {{ request()->routeIs('admin.payment-order.list') || request()->routeIs('admin.payment-order.create') ? 'show' : config('constants.value.empty') }}"
+            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Hành động:</h6>
+                <a class="collapse-item {{ request()->routeIs('admin.payment-order.list') ? 'active' : config('constants.value.empty') }}"
+                    href="{{ route('admin.payment-order.list') }}">Danh sách</a>
+                <a class="collapse-item {{ request()->routeIs('admin.payment-order.create') ? 'active' : config('constants.value.empty') }}"
+                    data-toggle="collapse" data-target="#paymentOrderCreate" aria-expanded="true"
+                    aria-controls="paymentOrderCreate">Tạo mới</a>
+                <div id="paymentOrderCreate"
+                    class="bg-white rounded collapse {{ request()->routeIs('admin.payment-order.create') ? 'show' : config('constants.value.empty') }}">
+                    <a class="collapse-item {{ request()->get('company') === 'A11' ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('admin.payment-order.create', ['company' => 'A11']) }}">A11 TMVM</a>
+                    <a class="collapse-item {{ request()->get('company') === 'A12' ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('admin.payment-order.create', ['company' => 'A12']) }}">A12 PPVM</a>
+                    <a class="collapse-item {{ request()->get('company') === 'A14' ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('admin.payment-order.create', ['company' => 'A14']) }}">A14 VMPP</a>
+                </div>
+                <a class="collapse-item" href="utilities-animation.html">chỉnh sửa</a>
+            </div>
+        </div>
     </li>
 
     <!-- Divider -->

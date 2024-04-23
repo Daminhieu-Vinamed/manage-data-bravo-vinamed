@@ -1,9 +1,16 @@
 const trueValue = true;
 const falseValue = false;
+const nullValue = null;
 const undefinedValue = undefined;
-const linkHref = window.location.href;
+
+const linkOrigin =  window.location.origin;
+const linkHref =  window.location.href;
+
+const linkPaymentAdmin = window.location.origin + '/admin/payment-order/';
 
 const zero = 0;
+const one = 1;
+const four = 4;
 
 const textContentApprovePaymentOrder = "Lý do duyệt đề nghị thanh toán";
 const textContentCancelPaymentOrder = "Nội dung từ chối duyệt đề nghị thanh toán (bắt buộc nhập)";

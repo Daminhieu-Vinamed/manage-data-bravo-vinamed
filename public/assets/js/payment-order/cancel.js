@@ -16,7 +16,7 @@ $(document).on("click", ".cancel-payment-request", function () {
                 return Swal.showValidationMessage(textRequiredContentCancelPaymentOrder);
             }
             $.ajax({
-                url: linkHref + "/cancel-payment-request",
+                url: linkPaymentAdmin + "cancel-payment-request",
                 type: "POST",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
