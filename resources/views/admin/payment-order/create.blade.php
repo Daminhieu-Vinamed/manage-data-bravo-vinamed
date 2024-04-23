@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title', 'Tạo mới')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/select2/select2.min.css') }}"> --}}
 @endsection
 @section('content')
     <div class="card shadow mb-4">
@@ -240,7 +240,7 @@
     </div>
 @endsection
 @push('js')
-    <script src="{{ asset('assets/vendor/select2/select2.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/vendor/select2/select2.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/payment-order/func.js') }}"></script>
     <script src="{{ asset('assets/js/payment-order/create.js') }}"></script>
 @endpush
