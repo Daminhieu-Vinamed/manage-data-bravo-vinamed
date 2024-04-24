@@ -55,7 +55,8 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="accounting_exchange_rate" class="form-label small">Tỷ giá hạch toán</label>
-                    <input type="number" class="form-control" name="accounting_exchange_rate" id="accounting_exchange_rate" disabled>
+                    <input type="number" class="form-control" name="accounting_exchange_rate" id="accounting_exchange_rate"
+                        disabled>
                 </div>
             </div>
             <div class="table-responsive">
@@ -81,7 +82,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="tr-0">
+                        <tr id="line-0">
                             <td>
                                 <input type="text" class="form-control" name="bill_number[]" id="bill_number">
                             </td>
@@ -129,7 +130,8 @@
                                 <input list="list_bill_staff" class="form-control" name="bill_staff[]" id="bill_staff">
                                 <datalist id="list_bill_staff">
                                     @foreach ($data['bill_staff'] as $item)
-                                        <option department="{{ $item->DeptCode }}" data-value="{{ $item->Code }}" value="{{ $item->Code }}">
+                                        <option department="{{ $item->DeptCode }}" data-value="{{ $item->Code }}"
+                                            value="{{ $item->Code }}">
                                             {{ $item->Name }}
                                             {{ $item->Email !== config('constants.value.empty') ? ' - ' . $item->Email : config('constants.value.empty') }}
                                         </option>
@@ -178,13 +180,13 @@
                             </td>
                             <td>
                                 <label for="bill_tax_percent" class="form-label small">%</label>
-                                <input type="text" class="form-control" name="bill_tax_percent[]" disabled
+                                <input type="number" class="form-control" name="bill_tax_percent[]" disabled
                                     id="bill_tax_percent">
                             </td>
                             <td>
                                 <label for="bill_tax_money_vnd" class="form-label small">Tiền VND</label>
-                                <input type="text" class="form-control" name="bill_tax_money_vnd2[]"
-                                    id="bill_tax_money_vnd2">
+                                <input type="number" class="form-control" name="bill_tax_money_vnd[]"
+                                    id="bill_tax_money_vnd" disabled>
                             </td>
                             <td>
                                 <textarea class="form-control" maxlength="255" name="bill_note[]" id="bill_note"></textarea>
@@ -205,11 +207,11 @@
                 </div>
                 <div class="form-group col-md-4 form-group-tax-money">
                     <label for="tax_money" class="form-label small">Tiền VAT</label>
-                    <input type="number" class="form-control" name="tax_money" id="tax_money" disabled>
+                    <input type="number" class="form-control" name="tax_money1" id="tax_money1" disabled>
                 </div>
                 <div class="form-group col-md-4 form-group-total">
-                    <label for="total" class="form-label small">Tổng cộng</label>
-                    <input type="number" class="form-control" name="total" id="total" disabled>
+                    <label for="total_money1" class="form-label small">Tổng cộng</label>
+                    <input type="number" class="form-control" name="total_money1" id="total_money1" disabled>
                 </div>
             </div>
             <div class="py-3 row justify-content-center">

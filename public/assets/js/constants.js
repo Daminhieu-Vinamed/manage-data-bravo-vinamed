@@ -8,9 +8,16 @@ const linkHref =  window.location.href;
 
 const linkPaymentAdmin = window.location.origin + '/admin/payment-order/';
 
-const zero = 0;
-const one = 1;
-const four = 4;
+var zero = 0;
+var one = 1;
+var four = 4;
+var oneHundred = 100;
+
+const zeroConst = 0;
+const oneConst = 1;
+const threeConst = 3;
+const fourConst = 4;
+const oneHundredConst = 100;
 
 const textContentApprovePaymentOrder = "Lý do duyệt đề nghị thanh toán";
 const textContentCancelPaymentOrder = "Nội dung từ chối duyệt đề nghị thanh toán (bắt buộc nhập)";
