@@ -19,6 +19,6 @@ class CheckAdminLoginMiddleware
         if (Auth::check()) {
             return $next($request);
         }
-        return redirect()->route('login.admin.get');
+        return redirect()->route('admin.login.get');
     }
 }
