@@ -117,8 +117,11 @@ $(document).ready(function () {
         })
     });
 
-    $(document).on("blur", "#bill_tax_category", function () {
+    $(document).on("change keyup paste", "#bill_tax_category", function () {
         const valueSelected = $(this).val();
+        if (!valueSelected) {
+            $(this).parents('tr').find('#bill_tax_percent').val(nullValue);
+        }
         var this_bill_tax_category = $(this).val(nullValue);
         $(this).next('#list_bill_tax_category').children('option').each(function () {
             if ($(this).val() === valueSelected) {
