@@ -9,7 +9,7 @@ var myPieChart = new Chart(ctx, {
   data: {
     labels: ["A11", "A12", "A14"],
     datasets: [{
-      data: [6, 14, 18],
+      data: [ctx.getAttribute("dataA11"), ctx.getAttribute("dataA12"), ctx.getAttribute("dataA14")],
       backgroundColor: ['#1cc88a', '#36b9cc', '#f6c23e'],
       hoverBackgroundColor: ['#17a673', '#2c9faf', '#f4b619'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

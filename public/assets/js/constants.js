@@ -27,10 +27,3 @@ const textCancel = "Hủy";
 const textSend = "Gửi";
 
 const textNOTIFICATION = "THÔNG BÁO !";
-
-const textListEmpty = "Danh sách hiện tại đang trống";
-const textSearch = "Tìm kiếm";
-const textSearchDataEmpty = "Dữ liệu tìm kiếm không tồn tại";
-const textLoadingData = "Đang tải dữ liệu...";
-
-const textInfoDatatable = "Đang hiển thị trang _PAGE_ trên tổng _PAGES_ trang, _PAGES_ trang này có tổng _TOTAL_ bản ghi";
