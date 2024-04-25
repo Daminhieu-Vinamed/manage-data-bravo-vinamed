@@ -1,8 +1,5 @@
 @extends('layout.master')
 @section('title', 'Tạo mới')
-@section('css')
-    {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/select2/select2.min.css') }}"> --}}
-@endsection
 @section('title-manage')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ ĐỀ NGHỊ THANH TOÁN</h1>
@@ -11,7 +8,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary text-center">Tạo mới đề nghị thanh toán</h6>
+            <h6 class="m-0 font-weight-bold text-primary text-center">Tạo mới đề nghị thanh toán cho {{ request()->get('company') }}</h6>
             <div class="input-group input-group-sm col-md-2 p-0">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Ngày tạo</span>
@@ -247,7 +244,6 @@
     </div>
 @endsection
 @push('js')
-    {{-- <script src="{{ asset('assets/vendor/select2/select2.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/payment-order/func.js') }}"></script>
     <script src="{{ asset('assets/js/payment-order/create.js') }}"></script>
 @endpush

@@ -21,6 +21,7 @@ Route::prefix('/')->group(function () {
             Route::get('get-data', [PaymentOrderController::class, 'getData']);
             Route::post('approve-payment-request', [PaymentOrderController::class, 'approve']);
             Route::post('cancel-payment-request', [PaymentOrderController::class, 'cancelPaymentRequest']);
+            Route::get('choose-company', [PaymentOrderController::class, 'chooseCompany'])->name('choose-company');
             Route::get('create', [PaymentOrderController::class, 'create'])->name('create');
             Route::get('get-data-create', [PaymentOrderController::class, 'getDataCreate']);
         });

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\paymentOrderRequest;
+use App\Http\Requests\Admin\PaymentOrder\ChooseCompanyRequest;
+use App\Http\Requests\Admin\PaymentOrder\PaymentOrderRequest;
 use App\Services\Admin\PaymentOrderService;
 use Illuminate\Http\Request;
 
@@ -32,12 +33,16 @@ class PaymentOrderController extends Controller
         return $this->paymentOrderService->approve($request);
     }
 
-    public function cancelPaymentRequest(paymentOrderRequest $request)
+    public function cancelPaymentRequest(PaymentOrderRequest $request)
     {
         return $this->paymentOrderService->cancel($request);
     }
 
-    public function create(Request $request)
+    public function chooseCompany() {
+        return view('admin.payment-order.choose-company');
+    }
+
+    public function create(ChooseCompanyRequest $request)
     {
         try {
             $data = $this->paymentOrderService->create($request);
