@@ -167,12 +167,6 @@
                                     <th>Số lượng</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Bộ phận</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </tfoot>
                             <tbody>
                                 @foreach ($statistical['partA11'] as $part)
                                     <tr>
@@ -216,12 +210,6 @@
                                     <th>Số lượng</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Bộ phận</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </tfoot>
                             <tbody>
                                 @foreach ($statistical['partA12'] as $part)
                                     <tr>
@@ -265,12 +253,6 @@
                                     <th>Số lượng</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Bộ phận</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </tfoot>
                             <tbody>
                                 @foreach ($statistical['partA14'] as $part)
                                     <tr>
