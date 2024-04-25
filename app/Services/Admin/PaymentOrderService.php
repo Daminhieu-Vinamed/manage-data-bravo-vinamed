@@ -29,8 +29,9 @@ class PaymentOrderService extends PaymentOrderRepository
                 return date('d-m-Y', strtotime($approvalVote->DocDate));
             })
             ->addColumn('action', function ($approvalVote) {
-                return '<button type="button" class="btn btn-success btn-circle approve-payment-request" branch_code="' . $approvalVote->BranchCode . '" stt="' . $approvalVote->Stt . '"><i class="fas fa-check"></i></button> ' .
-                    ' <button type="button" class="btn btn-danger btn-circle cancel-payment-request" branch_code="' . $approvalVote->BranchCode . '" stt="' . $approvalVote->Stt . '"><i class="fas fa-ban"></i></button>';
+                return '<button title="Duyệt đề nghị thanh toán" type="button" class="btn btn-success btn-circle approve-payment-request" branch_code="' . $approvalVote->BranchCode . '" stt="' . $approvalVote->Stt . '"><i class="fas fa-check"></i></button> ' .
+                        '<a title="Chỉnh sửa đề nghị thanh toán" class="btn btn-info btn-circle"><i class="fas fa-edit"></i></a> ' .
+                        ' <button title="Hủy đề nghị thanh toán" type="button" class="btn btn-danger btn-circle cancel-payment-request" branch_code="' . $approvalVote->BranchCode . '" stt="' . $approvalVote->Stt . '"><i class="fas fa-ban"></i></button>';
             })->make(true);
     }
 
