@@ -13,10 +13,12 @@ $(document).on("click", ".approve-payment-request", function () {
         showLoaderOnConfirm: trueValue,
         preConfirm: async (description) => {
             $.ajax({
-                url: linkPaymentAdmin + "approve-payment-request",
+                url: linkPaymentOrder + "approve-payment-request",
                 type: "POST",
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
                 },
                 data: {
                     Stt: Stt,
@@ -31,7 +33,7 @@ $(document).on("click", ".approve-payment-request", function () {
                     listPaymentOrder.ajax.reload();
                 },
                 error: function (error) {
-                    let notification = error.responseJSON
+                    let notification = error.responseJSON;
                     ToastErrorCenter.fire({
                         icon: notification.status,
                         text: notification.msg,

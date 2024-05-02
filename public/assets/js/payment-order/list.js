@@ -1,7 +1,7 @@
 var listPaymentOrder = $("#dataTable").DataTable({
     ajax: {
         type: "get",
-        url: linkPaymentAdmin + "get-data",
+        url: linkPaymentOrder + "get-data",
     },
     responsive: trueValue,
     rowReorder: trueValue,

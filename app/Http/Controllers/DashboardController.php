@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\DashboardService;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -14,9 +13,15 @@ class DashboardController extends Controller
         $this->dashboardService = $dashboardService;
     }
 
-    public function dashboardAdmin()
+    public function statisticalAdmin()
     {
-        $statistical = $this->dashboardService->statistical();
-        return view('dashboard', compact('statistical'));
+        $statistical = $this->dashboardService->statisticalAdmin();
+        return view('dashboard.admin', compact('statistical'));
+    }
+    
+    public function statisticalManage()
+    {
+        $statistical = $this->dashboardService->statisticalManage();
+        return view('dashboard.manage', compact('statistical'));
     }
 }

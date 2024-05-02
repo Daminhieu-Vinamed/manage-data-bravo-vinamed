@@ -7,26 +7,20 @@ use Illuminate\Support\Facades\DB;
 
 class AuthService
 {
-    public function postAdminLogin($request)
+    public function postLogin($request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công !', 'url' => '/admin/payment-order'], 200);
+            if (Auth::user()->role === config('constants.number.one') || Auth::user()->role === config('constants.number.two')) {
+                $url = '/dashboard/admin';
+            } elseif(Auth::user()->role === config('constants.number.three')) {
+                $url = '/dashboard/manage';
+            }else{
+                $url = '/payment-order';
+            }
+            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công !', 'url' => $url], 200);
         } else {
             return response()->json(['status' => 'error', 'msg' => 'Sai tên đăng nhập hoặc mật khẩu !'], 401);
         }
-    }
-    
-    public function postClientLogin($request)
-    {
-        $dataCompany = DB::connection($request->company);
-        $user = $dataCompany->table("B00UserList")->select('username', 'Checksum')->where('username', $request->username)->first();
-        $pass = decrypt($user->Checksum);
-        dd(bcrypt($user->Checksum), bcrypt($request->password));
-        // if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-        //     return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công !', 'url' => '/admin/payment-order'], 200);
-        // } else {
-        //     return response()->json(['status' => 'error', 'msg' => 'Sai tên đăng nhập hoặc mật khẩu !'], 401);
-        // }
     }
 
     public function logout($request)
@@ -35,6 +29,6 @@ class AuthService
         $request->session()->flush();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('admin.login.get');
+        return redirect()->route('login.get');
     }
 }

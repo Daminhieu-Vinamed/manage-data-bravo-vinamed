@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\DashboardRepository;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardService extends DashboardRepository
 {
@@ -13,9 +14,18 @@ class DashboardService extends DashboardRepository
         $this->dashboardRepository = $dashboardRepository;
     }
 
-    public function statistical()
+    public function statisticalAdmin()
     {
-        $statisticalHead = $this->dashboardRepository->statisticalHead();
+        $statisticalHead = $this->dashboardRepository->statisticalAdmin();
+        $countAll = array_sum($statisticalHead);
+        $statisticalHead['countAll'] = $countAll;
+        return $statisticalHead;
+    }
+    
+    public function statisticalManage()
+    {
+        $user = Auth::user();
+        $statisticalHead = $this->dashboardRepository->statisticalManager($user->deptCode);
         $countAll = array_sum($statisticalHead);
         $statisticalHead['countAll'] = $countAll;
         return $statisticalHead;
