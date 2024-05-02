@@ -13,13 +13,17 @@ $(document).on("click", ".cancel-payment-request", function () {
         showLoaderOnConfirm: trueValue,
         preConfirm: async (description) => {
             if (!description || description.length === zero) {
-                return Swal.showValidationMessage(textRequiredContentCancelPaymentOrder);
+                return Swal.showValidationMessage(
+                    textRequiredContentCancelPaymentOrder
+                );
             }
             $.ajax({
-                url: linkPaymentAdmin + "cancel-payment-request",
+                url: linkPaymentOrder + "cancel-payment-request",
                 type: "POST",
                 headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
                 },
                 data: {
                     Stt: Stt,
@@ -34,10 +38,13 @@ $(document).on("click", ".cancel-payment-request", function () {
                     listPaymentOrder.ajax.reload();
                 },
                 error: function (error) {
-                    let notification = error.responseJSON
+                    let notification = error.responseJSON;
                     ToastErrorCenter.fire({
                         icon: notification.status,
-                        text: notification.msg !== undefinedValue ? notification.msg : notification.responseJSON?.errors.description
+                        text:
+                            notification.msg !== undefinedValue
+                                ? notification.msg
+                                : notification.responseJSON?.errors.description,
                     });
                 },
             });

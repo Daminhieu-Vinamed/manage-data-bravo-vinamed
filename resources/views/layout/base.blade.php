@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" href="{{ asset('favicon.ico') }}">
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/vendor/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="{{ asset('assets/css/style-b4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/progressbar.css') }}" rel="stylesheet">
     <title>@yield('title')</title>
     @yield('css')
 </head>
-<body @if (request()->routeIs('admin.login.get') || request()->routeIs('client.login.get'))
+<body @if (request()->routeIs('login.get'))
         class="bg-gradient-primary"
     @else
         id="page-top"
@@ -21,10 +22,11 @@
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }} "></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('assets/js/script-b4.min.js') }}"></script>
-    <script src="{{ asset('assets/js/swalalert2@11.js') }}"></script>
+    <script src="{{ asset('assets/vendor/swalalert2@11.js') }}"></script>
+    <script src="{{ asset('assets/js/script.min.js') }}"></script>
     <script src="{{ asset('assets/js/constants.js') }}"></script>
     <script src="{{ asset('assets/js/notification.js') }}"></script>
+    <script src="{{ asset('assets/js/progressbar.js') }}"></script>
     @stack('js')
 </body>
 </html>

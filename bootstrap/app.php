@@ -12,7 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'checkAdminLogin' => \App\Http\Middleware\CheckAdminLoginMiddleware::class,
+            'checkLogin' => \App\Http\Middleware\CheckLoginMiddleware::class,
+            'checkRoleAdmin' => \App\Http\Middleware\CheckRoleAdminMiddleware::class,
+            'checkRoleManage' => \App\Http\Middleware\CheckRoleManageMiddleware::class,
             'checkLogout' => \App\Http\Middleware\CheckLogoutMiddleware::class,
         ]);
     })
