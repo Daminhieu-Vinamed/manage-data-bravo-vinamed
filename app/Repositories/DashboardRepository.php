@@ -32,12 +32,12 @@ class DashboardRepository
     
     public function statisticalManager($deptCode)
     {
-        $countA11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->where('Dept', $deptCode)->count();
-        $countA12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->where('Dept', $deptCode)->count();
-        $countA14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->where('Dept', $deptCode)->count();
-        $staffA11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->where('Dept', $deptCode)->groupBy('EmployeeName')->get();
-        $staffA12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->where('Dept', $deptCode)->groupBy('EmployeeName')->get();
-        $staffA14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->where('Dept', $deptCode)->groupBy('EmployeeName')->get();
+        $countA11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $deptCode)->count();
+        $countA12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $deptCode)->count();
+        $countA14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $deptCode)->count();
+        $staffA11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->whereIn('Dept', $deptCode)->groupBy('EmployeeName')->get();
+        $staffA12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->whereIn('Dept', $deptCode)->groupBy('EmployeeName')->get();
+        $staffA14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->whereIn('Dept', $deptCode)->groupBy('EmployeeName')->get();
         return array(
             'countA11' => $countA11, 
             'countA12' => $countA12, 

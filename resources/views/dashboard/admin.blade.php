@@ -33,7 +33,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A11</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $statistical['countA11'] }} phiếu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A11" data="{{ $statistical['countA11'] }}">{{ $statistical['countA11'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
                             <h3 class="mb-0 fa-2x text-gray-400">A11</h3>
@@ -48,7 +48,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A12</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $statistical['countA12'] }} phiếu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A12" data="{{ $statistical['countA12'] }}">{{ $statistical['countA12'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
                             <h3 class="mb-0 fa-2x text-gray-400">A12</h3>
@@ -63,7 +63,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A14</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $statistical['countA14'] }} phiếu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A14" data="{{ $statistical['countA14'] }}">{{ $statistical['countA14'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
                             <h3 class="mb-0 fa-2x text-gray-400">A14</h3>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas dataA11="{{ $statistical['countA11'] }}" dataA12="{{ $statistical['countA12'] }}" dataA14="{{ $statistical['countA14'] }}" id="myPieChart" width="301" height="306" style="display: block; height: 245px; width: 241px;" class="chartjs-render-monitor"></canvas>
+                        <canvas id="myPieChart" width="301" height="306" style="display: block; height: 245px; width: 241px;" class="chartjs-render-monitor"></canvas>
                     </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">

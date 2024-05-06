@@ -20,12 +20,5 @@ const fourConst = 4;
 const fiveConst = 5;
 const oneHundredConst = 100;
 
-const textContentApprovePaymentOrder = "Lý do duyệt đề nghị thanh toán";
-const textContentCancelPaymentOrder =
-    "Nội dung từ chối duyệt đề nghị thanh toán (bắt buộc nhập)";
-const textRequiredContentCancelPaymentOrder = "Chưa điền nội dung";
-
 const textCancel = "Hủy";
 const textSend = "Gửi";
-
-const textNOTIFICATION = "THÔNG BÁO !";

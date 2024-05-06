@@ -2115,6 +2115,7 @@ pre code {
 }
 
 .form-control {
+    padding: 0 10px;
     background-color: #fff;
     border: 1px solid #d1d3e2;
     border-radius: 4px;
