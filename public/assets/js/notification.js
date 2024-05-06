@@ -14,7 +14,7 @@ var ToastTopRight = Swal.mixin({
 });
 
 var ToastErrorCenter = Swal.mixin({
-  title: textNOTIFICATION,
+  title: "THÔNG BÁO !",
   allowOutsideClick: falseValue,
   allowEscapeKey: falseValue,
 })

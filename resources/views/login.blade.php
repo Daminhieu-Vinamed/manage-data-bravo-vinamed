@@ -19,7 +19,7 @@
                                     <input type="password" name="password" class="form-control form-control-user" placeholder="Mật khẩu">
                                     <small class="text-danger pl-2 password-notification"></small>
                                 </div>
-                                <button class="btn btn-primary btn-user btn-block" id="login">Đăng nhập</button>
+                                <button class="btn btn-primary btn-user btn-block shadow-sm" id="login">Đăng nhập</button>
                             </div>
                         </div>
                     </div>

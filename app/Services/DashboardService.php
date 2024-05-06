@@ -25,7 +25,11 @@ class DashboardService extends DashboardRepository
     public function statisticalManage()
     {
         $user = Auth::user();
-        $statisticalHead = $this->dashboardRepository->statisticalManager($user->deptCode);
+        $arrayDeptCode = json_decode($user->deptCode);
+        foreach ($arrayDeptCode as $key => $value) {
+            $arrayDeptCode[$key] = (string) $value;
+        }
+        $statisticalHead = $this->dashboardRepository->statisticalManager($arrayDeptCode);
         $countAll = array_sum($statisticalHead);
         $statisticalHead['countAll'] = $countAll;
         return $statisticalHead;

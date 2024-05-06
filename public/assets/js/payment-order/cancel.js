@@ -2,7 +2,7 @@ $(document).on("click", ".cancel-payment-request", function () {
     const Stt = $(this).attr("stt");
     const BranchCode = $(this).attr("branch_code");
     Swal.fire({
-        title: textContentCancelPaymentOrder,
+        title: "Nội dung từ chối duyệt đề nghị thanh toán (bắt buộc nhập)",
         input: "textarea",
         inputAttributes: {
             autocapitalize: "off",
@@ -11,11 +11,14 @@ $(document).on("click", ".cancel-payment-request", function () {
         confirmButtonText: textSend,
         cancelButtonText: textCancel,
         showLoaderOnConfirm: trueValue,
+        buttonsStyling: falseValue,
+        customClass: {
+            confirmButton: 'btn btn-primary shadow-sm m-2',
+            cancelButton: 'btn btn-danger shadow-sm m-2',
+        },
         preConfirm: async (description) => {
             if (!description || description.length === zero) {
-                return Swal.showValidationMessage(
-                    textRequiredContentCancelPaymentOrder
-                );
+                return Swal.showValidationMessage("Chưa điền nội dung");
             }
             $.ajax({
                 url: linkPaymentOrder + "cancel-payment-request",

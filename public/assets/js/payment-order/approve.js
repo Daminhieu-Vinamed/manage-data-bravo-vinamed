@@ -2,7 +2,7 @@ $(document).on("click", ".approve-payment-request", function () {
     const Stt = $(this).attr("stt");
     const BranchCode = $(this).attr("branch_code");
     Swal.fire({
-        title: textContentApprovePaymentOrder,
+        title: "Lý do duyệt đề nghị thanh toán",
         input: "textarea",
         inputAttributes: {
             autocapitalize: "off",
@@ -11,6 +11,11 @@ $(document).on("click", ".approve-payment-request", function () {
         confirmButtonText: textSend,
         cancelButtonText: textCancel,
         showLoaderOnConfirm: trueValue,
+        buttonsStyling: falseValue,
+        customClass: {
+            confirmButton: 'btn btn-primary shadow-sm m-2',
+            cancelButton: 'btn btn-danger shadow-sm m-2',
+        },
         preConfirm: async (description) => {
             $.ajax({
                 url: linkPaymentOrder + "approve-payment-request",
