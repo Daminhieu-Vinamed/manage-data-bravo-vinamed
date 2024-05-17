@@ -1,4 +1,4 @@
-var listPaymentOrder = $("#dataTable").DataTable({
+var listPaymentOrder = $("#payment_order").DataTable({
     ajax: {
         type: "get",
         url: linkPaymentOrder + "get-data",
@@ -42,5 +42,14 @@ var listPaymentOrder = $("#dataTable").DataTable({
         searchPlaceholder: "Tìm kiếm",
         zeroRecords: "Dữ liệu tìm kiếm không tồn tại",
         loadingRecords: "Đang tải dữ liệu...",
+    },
+    initComplete: function () {
+        var api = this.api();
+        var len = api.page.len();
+        var numRows = api.rows().count();
+        if (numRows <= len) {
+            $('#payment_order_wrapper').children('.row:last').remove();
+            $('#payment_order_wrapper').children('.row:first').remove();
+        }
     },
 });

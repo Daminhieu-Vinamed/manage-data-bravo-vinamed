@@ -2,15 +2,27 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PaymentOrderRepository
 {
     public function getData()
     {
-        $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-        $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-        $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+        if (Auth::user()->role->code === config('constants.role.super_admin.code') || Auth::user()->role->code === config('constants.role.admin.code')) {
+            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+        }elseif (Auth::user()->role->code === config('constants.role.manage.code')) {
+            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
+            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
+            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
+            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
+        }else{
+            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
+            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
+            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
+        }
         return array('A11' => $A11, 'A12' => $A12, 'A14' => $A14);
     }
 

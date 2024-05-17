@@ -33,40 +33,4 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal fade bd-example-modal-lg" id="paymentOrderModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Quy trình</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="stepper-wrapper">
-                    <div class="stepper-item completed">
-                      <div class="step-counter">1</div>
-                      <div class="step-name">Phạm Thị Vân Ngọc</div>
-                    </div>
-                    <div class="stepper-item completed">
-                      <div class="step-counter">2</div>
-                      <div class="step-name">Đặng Thùy Linh</div>
-                    </div>
-                    <div class="stepper-item active">
-                      <div class="step-counter">3</div>
-                      <div class="step-name">Trần Thanh Tùng</div>
-                    </div>
-                    <div class="stepper-item">
-                      <div class="step-counter">4</div>
-                      <div class="step-name">Đàm Minh Hiếu</div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary shadow-sm" href="#">Xác nhận</button>
-            </div>
-          </div>
-        </div>
-    </div>
 @endsection

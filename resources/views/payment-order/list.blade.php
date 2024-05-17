@@ -3,9 +3,10 @@
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/progressbar.css') }}" rel="stylesheet">
 @endsection
 @section('title-manage')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="mb-4">
         <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ ĐỀ NGHỊ THANH TOÁN</h1>
     </div>
 @endsection
@@ -16,7 +17,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="payment_order" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Mã công ty</th>
@@ -46,6 +47,42 @@
                     <tbody></tbody>
                 </table>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="paymentOrderModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Quy trình</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="stepper-wrapper">
+                    <div class="stepper-item completed">
+                      <div class="step-counter"><img src="{{ asset('assets/images/man.png') }}" alt=""></div>
+                      <div class="step-name">Phạm Thị Vân Ngọc</div>
+                    </div>
+                    <div class="stepper-item completed">
+                      <div class="step-counter">2</div>
+                      <div class="step-name">Đặng Thùy Linh</div>
+                    </div>
+                    <div class="stepper-item active">
+                      <div class="step-counter">3</div>
+                      <div class="step-name">Trần Thanh Tùng</div>
+                    </div>
+                    <div class="stepper-item">
+                      <div class="step-counter">4</div>
+                      <div class="step-name">Đàm Minh Hiếu</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary shadow-sm" href="#">Xác nhận</button>
+            </div>
+          </div>
         </div>
     </div>
 @endsection

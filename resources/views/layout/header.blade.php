@@ -49,7 +49,7 @@
         </li>
 
         <!-- Nav Item - Alerts -->
-        <li class="nav-item dropdown no-arrow mx-1">
+        {{-- <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
@@ -60,7 +60,7 @@
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">Thông báo</h6>
-                <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="modal" data-target="#paymentOrderModal">
+                <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle bg-primary">
                             <i class="fas fa-file-alt text-white"></i>
@@ -95,7 +95,7 @@
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
             </div>
-        </li>
+        </li> --}}
 
         {{-- <!-- Nav Item - Messages -->
         <li class="nav-item dropdown no-arrow mx-1">
@@ -171,7 +171,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                 <img class="img-profile rounded-circle"
-                    src="{{ Auth::user()->gender === config('constants.gender.man') ? asset('assets/images/man.png') : asset('assets/images/woman.png') }}">
+                    src="{{ asset(Auth::user()->avatar) }}">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -184,9 +184,9 @@
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Cài đặt
                 </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
+                <a class="dropdown-item" href="{{ route('timekeeping.list') }}">
+                    <i class="fas fa-calendar-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Chấm công
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

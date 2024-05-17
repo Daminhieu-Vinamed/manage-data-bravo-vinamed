@@ -7,6 +7,8 @@ const linkOrigin = window.location.origin;
 const linkHref = window.location.href;
 
 const linkPaymentOrder = window.location.origin + "/payment-order/";
+const linkUser = window.location.origin + "/user/";
+const linkTimekeeping = window.location.origin + "/timekeeping/";
 
 var zero = 0;
 var one = 1;
@@ -18,7 +20,11 @@ const oneConst = 1;
 const threeConst = 3;
 const fourConst = 4;
 const fiveConst = 5;
+const tenConst = 10;
+const sixtyConst = 60;
 const oneHundredConst = 100;
 
 const textCancel = "Hủy";
 const textSend = "Gửi";
+
+const minTime = '00:00:00';
