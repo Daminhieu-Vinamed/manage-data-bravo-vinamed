@@ -3,6 +3,8 @@
 use App\Http\Controllers\PaymentOrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TimekeepingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -22,6 +24,19 @@ Route::prefix('/')->group(function () {
             Route::get('choose-company', [PaymentOrderController::class, 'chooseCompany'])->name('choose-company');
             Route::get('create', [PaymentOrderController::class, 'create'])->name('create');
             Route::get('get-data-create', [PaymentOrderController::class, 'getDataCreate']);
+        });
+
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/', [UserController::class, 'list'])->name('list');
+            Route::get('get-data', [UserController::class, 'getData']);
+            Route::post('create', [UserController::class, 'create']);
+            Route::delete('delete', [UserController::class, 'delete']);
+        });
+
+        Route::prefix('timekeeping')->name('timekeeping.')->group(function () {
+            Route::get('/', [TimekeepingController::class, 'list'])->name('list');
+            Route::post('clock-in', [TimekeepingController::class, 'clockIn']);
+            Route::put('clock-out', [TimekeepingController::class, 'clockOut']);
         });
         
     });

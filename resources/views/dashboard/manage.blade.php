@@ -33,7 +33,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A11</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $statistical['countA11'] }} phiếu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A11" data="{{ $statistical['countA11'] }}">{{ $statistical['countA11'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
                             <h3 class="mb-0 fa-2x text-gray-400">A11</h3>
@@ -48,7 +48,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A12</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $statistical['countA12'] }} phiếu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A12" data="{{ $statistical['countA12'] }}">{{ $statistical['countA12'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
                             <h3 class="mb-0 fa-2x text-gray-400">A12</h3>
@@ -63,7 +63,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A14</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $statistical['countA14'] }} phiếu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A14" data="{{ $statistical['countA14'] }}">{{ $statistical['countA14'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
                             <h3 class="mb-0 fa-2x text-gray-400">A14</h3>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas dataA11="{{ $statistical['countA11'] }}" dataA12="{{ $statistical['countA12'] }}" dataA14="{{ $statistical['countA14'] }}" id="myPieChart" width="301" height="306" style="display: block; height: 245px; width: 241px;" class="chartjs-render-monitor"></canvas>
+                        <canvas id="myPieChart" width="301" height="306" style="display: block; height: 245px; width: 241px;" class="chartjs-render-monitor"></canvas>
                     </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">
@@ -139,129 +139,102 @@
     <div class="row">
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA11Bottom" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA11Bottom">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A11</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA11">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tableStaffA11" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nhân viên</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['staffA11'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA11Bottom">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA11">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tableStaffA11" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->EmployeeName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Nhân viên</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['staffA11'] as $part)
+                                        <tr>
+                                            <td>{{$part->EmployeeName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA12Bottom" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA12Bottom">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A12</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA12">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tableStaffA12" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nhân viên</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['staffA12'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA12Bottom">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA12">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tableStaffA12" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->EmployeeName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Nhân viên</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['staffA12'] as $part)
+                                        <tr>
+                                            <td>{{$part->EmployeeName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA14Bottom" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA14Bottom">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A14</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA14">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tableStaffA14" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nhân viên</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['staffA14'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA14Bottom">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA14">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tableStaffA14" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->EmployeeName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Nhân viên</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['staffA14'] as $part)
+                                        <tr>
+                                            <td>{{$part->EmployeeName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

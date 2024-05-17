@@ -50,6 +50,14 @@
     margin-bottom: 6px;
     color: #ffff;
   }
+
+  .stepper-item .step-counter img{
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
   
   .stepper-item.active {
     font-weight: bold;

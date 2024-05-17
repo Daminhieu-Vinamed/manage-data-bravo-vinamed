@@ -139,129 +139,102 @@
     <div class="row">
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA11Top" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA11Top">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các bộ phận của A11</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterPartA11">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tablePartA11" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Bộ phận</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['partA11'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA11Top">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterPartA11">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tablePartA12" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->DeptName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Bộ phận</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['partA11'] as $part)
+                                        <tr>
+                                            <td>{{$part->DeptName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA12Top" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA12Top">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các bộ phận của A12</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterPartA12">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tablePartA12" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Bộ phận</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['partA12'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA12Top">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterPartA12">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tablePartA12" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->DeptName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Bộ phận</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['partA12'] as $part)
+                                        <tr>
+                                            <td>{{$part->DeptName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA14Top" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA14Top">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các bộ phận của A14</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterPartA14">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tablePartA14" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Bộ phận</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['partA14'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA14Top">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterPartA14">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tablePartA14" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->DeptName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Bộ phận</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['partA14'] as $part)
+                                        <tr>
+                                            <td>{{$part->DeptName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -270,129 +243,102 @@
     <div class="row">
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA11Bottom" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA11Bottom">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A11</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA11">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tableStaffA11" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nhân viên</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['staffA11'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA11Bottom">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA11">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tableStaffA11" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->EmployeeName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Nhân viên</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['staffA11'] as $part)
+                                        <tr>
+                                            <td>{{$part->EmployeeName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA12Bottom" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA12Bottom">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A12</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA12">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tableStaffA12" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nhân viên</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['staffA12'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA12Bottom">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA12">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tableStaffA12" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->EmployeeName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Nhân viên</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['staffA12'] as $part)
+                                        <tr>
+                                            <td>{{$part->EmployeeName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <a href="#collapseCardA14Bottom" class="d-block card-header py-3" data-toggle="collapse"
+                    role="button" aria-expanded="true" aria-controls="collapseCardA14Bottom">
                     <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A14</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA14">
-                            <div class="lengthInTable"></div>
-                            <div class="searchInTable"></div>
-                        </div>
-                        <table class="table table-bordered" id="tableStaffA14" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nhân viên</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($statistical['staffA14'] as $part)
+                </a>
+                <div class="collapse show" id="collapseCardA14Bottom">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA14">
+                                <div class="lengthInTable"></div>
+                                <div class="searchInTable"></div>
+                            </div>
+                            <table class="table table-bordered" id="tableStaffA14" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{$part->EmployeeName}}</td>
-                                        <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        <th>Nhân viên</th>
+                                        <th>Số lượng</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($statistical['staffA14'] as $part)
+                                        <tr>
+                                            <td>{{$part->EmployeeName}}</td>
+                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

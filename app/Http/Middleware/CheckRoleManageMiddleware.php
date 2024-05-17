@@ -16,7 +16,7 @@ class CheckRoleManageMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role === config('constants.number.three')) {
+        if (Auth::user()->role->id === config('constants.number.three')) {
             return $next($request);
         }
         return redirect()->back();
