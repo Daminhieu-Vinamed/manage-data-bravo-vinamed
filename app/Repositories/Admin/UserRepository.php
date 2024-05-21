@@ -26,4 +26,9 @@ class UserRepository extends AbstractRepository
         $users = $this->builder()->where('id', $id)->delete();
         return $users;
     }
+
+    public function edit($id) {
+        $users = $this->find($id);
+        return $users;
+    }
 }

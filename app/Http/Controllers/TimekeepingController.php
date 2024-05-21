@@ -13,11 +13,8 @@ class TimekeepingController extends Controller
     public function list()
     {
         if(request()->ajax()) {
-         $start = (!empty($_GET["start"])) ? ($_GET["start"]) : ('');
-         $end = (!empty($_GET["end"])) ? ($_GET["end"]) : ('');
- 
-         $data = Timekeeping::whereDate('start', '>=', $start)->whereDate('end', '<=', $end)->where('EmployeeCode_user', Auth::user()->EmployeeCode)->get(['EmployeeCode_user','start', 'end', 'title']);
-         return Response::json($data);
+            $data = Timekeeping::where('EmployeeCode_user', Auth::user()->EmployeeCode)->get(['EmployeeCode_user','start', 'end', 'title']);
+            return Response::json($data);
         }
         $timeNow = new Carbon();
         $timekeepingToday = Timekeeping::whereDate('start', $timeNow->format('Y-m-d'))->where('EmployeeCode_user', Auth::user()->EmployeeCode)->first();
@@ -32,7 +29,6 @@ class TimekeepingController extends Controller
         $timekeeping = new Timekeeping();
         $timekeeping->EmployeeCode_user = Auth::user()->EmployeeCode;
         $timekeeping->start = $clockIn;
-        $timekeeping->end = $clockIn->createFromFormat('H:i:s', config('constants.timekeeping.default'));
         if ($clockIn->greaterThan($standardTimeClockIn)) {
             $lateTime = $clockIn->diff($standardTimeClockIn);
             if (!empty($lateTime->h)) {

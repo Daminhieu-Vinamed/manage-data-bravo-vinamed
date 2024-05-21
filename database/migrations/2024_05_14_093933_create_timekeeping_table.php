@@ -17,7 +17,7 @@ class CreateTimekeepingTable extends Migration
             $table->increments('id');
             $table->string('EmployeeCode_user');
             $table->dateTime('start');
-            $table->dateTime('end');
+            $table->dateTime('end')->nullable();
             $table->string('title')->nullable();
             $table->timestamps();
         });

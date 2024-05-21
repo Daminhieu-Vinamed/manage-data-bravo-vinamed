@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Đề nghị thanh toán')
+@section('title', 'Chấm công')
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/vendor/calendar/fullcalendar.css') }}" />
 @endsection
@@ -16,7 +16,6 @@
                 title="Tạo mới tài khoản"><i class="fas fa-clock"></i></button>
         </div>
         <div class="card-body">
-            <div class="response"></div>
             <div id='calendar'></div>
         </div>
     </div>
@@ -57,22 +56,24 @@
                         </div>
                         <div class="bd-highlight d-sm-flex align-items-center justify-content-between">
                             <p class="font-weight-bold">
-                                <b class="text-primary">Thời gian vào:</b> 
-                                <b id="standard-clock-in">{{$StandardClockIn}}</b>
+                                <b class="text-primary">Thời gian vào:</b>
+                                <b id="standard-clock-in">{{ $StandardClockIn }}</b>
                             </p>
                             <p class="font-weight-bold">
-                                <b class="text-primary">Thời gian ra:</b> 
-                                <b id="standard-clock-out">{{$StandardClockOut}}</b>
+                                <b class="text-primary">Thời gian ra:</b>
+                                <b id="standard-clock-out">{{ $StandardClockOut }}</b>
                             </p>
                         </div>
                         <div class="bd-highlight d-sm-flex align-items-center justify-content-between">
                             <p class="font-weight-bold">
-                                <b class="text-primary">Thời gian vào:</b> 
-                                <b id="timekeeping-in">{{ isset($timekeepingToday) ? date('H:i:s', strtotime($timekeepingToday->start)) : config('constants.timekeeping.default') }}</b>
+                                <b class="text-primary">Thời gian vào:</b>
+                                <b
+                                    id="timekeeping-in">{{ !empty($timekeepingToday->start) ? date('H:i:s', strtotime($timekeepingToday->start)) : config('constants.timekeeping.min') }}</b>
                             </p>
                             <p class="font-weight-bold">
-                                <b class="text-primary">Thời gian ra:</b> 
-                                <b id="timekeeping-out">{{ isset($timekeepingToday) ? date('H:i:s', strtotime($timekeepingToday->end)) : config('constants.timekeeping.default') }}</b>
+                                <b class="text-primary">Thời gian ra:</b>
+                                <b
+                                    id="timekeeping-out">{{ !empty($timekeepingToday->end) ? date('H:i:s', strtotime($timekeepingToday->end)) : config('constants.timekeeping.min') }}</b>
                             </p>
                         </div>
                     </div>
@@ -90,7 +91,9 @@
 @endsection
 @push('js')
     <script src="{{ asset('assets/vendor/calendar/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/calendar/locale.js') }}"></script>
     <script src="{{ asset('assets/vendor/calendar/fullcalendar.js') }}"></script>
     <script src="{{ asset('assets/js/timekeeping/func.js') }}"></script>
     <script src="{{ asset('assets/js/timekeeping/list.js') }}"></script>
+    <script src="{{ asset('assets/js/timekeeping/realtime.js') }}"></script>
 @endpush

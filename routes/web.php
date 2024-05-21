@@ -30,6 +30,7 @@ Route::prefix('/')->group(function () {
             Route::get('/', [UserController::class, 'list'])->name('list');
             Route::get('get-data', [UserController::class, 'getData']);
             Route::post('create', [UserController::class, 'create']);
+            Route::get('edit', [UserController::class, 'edit']);
             Route::delete('delete', [UserController::class, 'delete']);
         });
 
