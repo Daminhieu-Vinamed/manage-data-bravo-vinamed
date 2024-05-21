@@ -22,7 +22,7 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nUserId' => 'required|integer',
+            'EmployeeCode' => 'required|integer',
             'username' => 'required|string|min:6|max:255|unique:users,username',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',

@@ -33,7 +33,7 @@ return [
 
     'timekeeping' => [
         'clock_in' => '08:15:00',
-        'clock_out' => '10:40:00',
-        'default' => '00:00:00',
+        'clock_out' => '10:00:00',
+        'min' => '00:00:00',
     ],
 ];

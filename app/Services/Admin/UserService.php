@@ -39,8 +39,8 @@ class UserService
             return '<img class="w-25 img-thumbnail" src="'. $user->avatar .'" />';
         })
         ->addColumn('action', function ($user) {
-            return '<button title="Chỉnh sửa tài khoản" class="btn btn-info shadow-sm btn-circle"><i class="fas fa-user-edit"></i></button> ' .
-                    ' <button title="Xóa tài khoản" id="'. $user->id .'" class="btn btn-danger shadow-sm btn-circle delete_user"><i class="fas fa-trash-alt"></i></button>';
+            return '<button id="'. $user->id .'" title="Chỉnh sửa tài khoản" data-toggle="modal" data-target="#EditUserModal" class="btn btn-info shadow-sm btn-circle edit_user"><i class="fas fa-user-edit"></i></button> ' .
+                    ' <button id="'. $user->id .'" title="Xóa tài khoản" class="btn btn-danger shadow-sm btn-circle delete_user"><i class="fas fa-trash-alt"></i></button>';
         })
         ->rawColumns(['avatar', 'action'])
         ->make(true);
@@ -65,7 +65,7 @@ class UserService
             return response()->json(['status' => 'success', 'msg' => 'Tạo tài khoản thành công !'], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đang xảy ra lỗi !'], 401);
+            return response()->json(['status' => 'error', 'msg' => 'Tạo tài khoản thất bại !'], 401);
         }
     }
 
@@ -79,6 +79,15 @@ class UserService
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['status' => 'error', 'msg' => 'Hệ thống đang xảy ra lỗi !'], 401);
+        }
+    }
+    
+    public function edit($id)
+    { 
+        try {
+            return $this->userRepository->edit($id);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'msg' => 'Tài khoản này đang xảy ra lỗi !'], 401);
         }
     }
 }
