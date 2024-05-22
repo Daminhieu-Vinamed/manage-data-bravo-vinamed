@@ -50,19 +50,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-column bd-highlight mt-4 mx-4">
-                        <div class="bd-highlight">
+                    <div class="bd-highlight mt-4 mx-4">
+                        <div class="bd-highlight d-sm-flex align-items-center justify-content-center">
                             <h5 class="text-primary font-weight-bold pb-2 date-today"></h5>
-                        </div>
-                        <div class="bd-highlight d-sm-flex align-items-center justify-content-between">
-                            <p class="font-weight-bold">
-                                <b class="text-primary">Thời gian vào:</b>
-                                <b id="standard-clock-in">{{ $StandardClockIn }}</b>
-                            </p>
-                            <p class="font-weight-bold">
-                                <b class="text-primary">Thời gian ra:</b>
-                                <b id="standard-clock-out">{{ $StandardClockOut }}</b>
-                            </p>
                         </div>
                         <div class="bd-highlight d-sm-flex align-items-center justify-content-between">
                             <p class="font-weight-bold">
@@ -80,7 +70,7 @@
                 </div>
                 <div class="modal-footer">
                     @if (isset($timekeepingToday))
-                        <button class="btn btn-danger shadow-sm clock_out" disabled>Kết thúc</button>
+                        <button class="btn btn-danger shadow-sm" time-now="{{$timeNow}}" id="clock_out">Kết thúc</button>
                     @else
                         <button class="btn btn-primary shadow-sm" id="clock_in">Chấm công</button>
                     @endif

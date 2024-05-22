@@ -24,7 +24,4 @@ const tenConst = 10;
 const sixtyConst = 60;
 const oneHundredConst = 100;
 
-const textCancel = "Hủy";
-const textSend = "Gửi";
-
 const minTime = '00:00:00';
