@@ -6,6 +6,7 @@ use App\Models\Timekeeping;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class TimekeepingController extends Controller
@@ -18,27 +19,32 @@ class TimekeepingController extends Controller
         }
         $timeNow = new Carbon();
         $timekeepingToday = Timekeeping::whereDate('start', $timeNow->format('Y-m-d'))->where('EmployeeCode_user', Auth::user()->EmployeeCode)->first();
-        $StandardClockIn = config('constants.timekeeping.clock_in');
-        $StandardClockOut = config('constants.timekeeping.clock_out');
-        return view('timekeeping.list', compact('timekeepingToday', 'StandardClockIn', 'StandardClockOut'));
+        return view('timekeeping.list', compact('timekeepingToday', 'timeNow'));
     }
 
     public function clockIn() {
-        $clockIn = new Carbon();
-        $standardTimeClockIn = $clockIn->createFromFormat('H:i:s', config('constants.timekeeping.clock_in'));
-        $timekeeping = new Timekeeping();
-        $timekeeping->EmployeeCode_user = Auth::user()->EmployeeCode;
-        $timekeeping->start = $clockIn;
-        if ($clockIn->greaterThan($standardTimeClockIn)) {
-            $lateTime = $clockIn->diff($standardTimeClockIn);
-            if (!empty($lateTime->h)) {
-                $timekeeping->title = 'Đi trễ: ' . $lateTime->h . ' tiếng ' . $lateTime->i . ' phút ' . $lateTime->s . ' giây';
-            }else{
-                $timekeeping->title = 'Đi trễ: ' . $lateTime->i . ' phút ' . $lateTime->s . ' giây';
+        DB::beginTransaction();
+        try {
+            $clockIn = new Carbon();
+            $standardTimeClockIn = $clockIn->createFromFormat('H:i:s', config('constants.timekeeping.clock_in'));
+            $timekeeping = new Timekeeping();
+            $timekeeping->EmployeeCode_user = Auth::user()->EmployeeCode;
+            $timekeeping->start = $clockIn;
+            if ($clockIn->greaterThan($standardTimeClockIn)) {
+                $lateTime = $clockIn->diff($standardTimeClockIn);
+                if (!empty($lateTime->h)) {
+                    $timekeeping->title = 'Đi trễ: ' . $lateTime->h . ' tiếng ' . $lateTime->i . ' phút ' . $lateTime->s . ' giây';
+                }else{
+                    $timekeeping->title = 'Đi trễ: ' . $lateTime->i . ' phút ' . $lateTime->s . ' giây';
+                }
             }
+            $timekeeping->save();
+            DB::commit();
+            return response()->json(['status' => 'success', 'msg' => 'Đã chấm công !', 'clockIn' => $clockIn->format('H:i:s')], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Chấm công lỗi !'], 401);
         }
-        $timekeeping->save();
-        return response()->json(['status' => 'success', 'msg' => 'Đã chấm công !', 'clockIn' => $clockIn->format('H:i:s')], 200);
     }
     
     public function clockOut() {

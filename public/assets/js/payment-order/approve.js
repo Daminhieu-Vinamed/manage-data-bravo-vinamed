@@ -8,8 +8,8 @@ $(document).on("click", ".approve-payment-request", function () {
             autocapitalize: "off",
         },
         showCancelButton: trueValue,
-        confirmButtonText: textSend,
-        cancelButtonText: textCancel,
+        confirmButtonText: 'Gửi',
+        cancelButtonText: 'Hủy',
         showLoaderOnConfirm: trueValue,
         buttonsStyling: falseValue,
         customClass: {

@@ -9,24 +9,6 @@ function displayRunRealtime(hour, minute, second) {
     }
 }
 
-function checkButtonRealtime() {
-    const standardClockOut = moment($('#standard-clock-out').text(), 'H:mm:ss');
-    const clockOut = moment($('#timekeeping-out').text(), 'H:mm:ss');
-    const myInterval = setInterval(function () {
-        var timeNow = moment();
-        if (standardClockOut <= timeNow) {
-            $('.clock_out').attr('id', 'clock_out').removeAttr('disabled').removeClass('clock_out');
-            clearInterval(myInterval);
-        }
-    }, 1000);
-    if (clockOut >= standardClockOut) {
-        $('.clock_out').text("Chấm công").attr({
-            class: "btn btn-primary shadow-sm",
-            disabled: "disabled",
-        }).removeAttr('id');
-    }
-}
-
 function runRealtime(hour, minute, second) {
     return setInterval(function () {
         var displayTime = displayRunRealtime(hour, minute, second);
@@ -68,12 +50,38 @@ function runRealtime(hour, minute, second) {
 
 function calculationTime(start, end) {
     var duration = moment.duration(end.diff(start));
-    let hour = Math.floor(duration.asHours());
-    let minute = Math.floor(duration.asMinutes()) % sixtyConst;
-    let second = Math.floor(duration.asSeconds()) % sixtyConst;
     return {
-        hour: hour, 
-        minute: minute, 
-        second: second
+        hour: duration.hours(), 
+        minute: duration.minutes(), 
+        second: duration.seconds()
+    }
+}
+
+function changeButtonTimekeeping(id) {
+    if (id === 'clock_out') {
+        return $('#' + id).text("Chấm công").attr({
+            class: "btn btn-primary shadow-sm",
+            disabled: "disabled",
+        }).removeAttr('id').removeAttr('time-now');
+    }else if(id === 'clock_in'){
+        return $('#' + id).text("Kết thúc").attr({
+            class: "btn btn-danger shadow-sm",
+            id: "clock_out"
+        });
+    }
+}
+
+function checkTimekeeping(start, end) {
+    if (start !== minTime && end === minTime) {
+        var getTimeNow = $('#clock_out');
+        var now = moment(getTimeNow.attr('time-now'));
+        getTimeNow.removeAttr('time-now');
+        var calculationTimeFunc = calculationTime(moment(start, 'H:mm:ss'), now);
+        var runRealtimeFunc = runRealtime(calculationTimeFunc.hour, calculationTimeFunc.minute, calculationTimeFunc.second);
+        return runRealtimeFunc;
+    }else if (start !== minTime && end !== minTime) {
+        changeButtonTimekeeping('clock_out');
+        var calculationTimeFunc = calculationTime(moment(start, 'H:mm:ss'), moment(end, 'H:mm:ss'));
+        displayRunRealtime(calculationTimeFunc.hour, calculationTimeFunc.minute, calculationTimeFunc.second)
     }
 }
