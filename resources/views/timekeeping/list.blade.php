@@ -13,7 +13,7 @@
         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
             <h6 class="m-0 font-weight-bold text-primary">Lịch chấm công</h6>
             <button class="btn btn-primary shadow-sm btn-circle" data-toggle="modal" data-target="#timekeepingModal"
-                title="Tạo mới tài khoản"><i class="fas fa-clock"></i></button>
+                title="Chấm công"><i class="fas fa-clock"></i></button>
         </div>
         <div class="card-body">
             <div id='calendar'></div>
@@ -24,7 +24,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Chấm công cho ngày hôm nay</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">CHẤM CÔNG CHO NGÀY HÔM NAY</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -78,6 +78,58 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="additionalWork" tabindex="-1" role="dialog" aria-labelledby="additionalWorkTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="additionalWorkTitle">BỔ XUNG CÔNG</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-sm-flex align-items-center justify-content-center" id="type-timekeeping">
+                    <div class="form-group col-md-12" id="col-type-timekeeping">
+                        <label for="type" class="form-label small">Loại ngày công</label>
+                        <select class="form-control" id="type">
+                            <option selected disabled>Chọn loại ngày công</option>
+                            <option>Công tác</option>
+                            <option>Nghỉ chế độ vợ sinh con</option>
+                            <option>Nghỉ chế độ vợ sinh con không lương</option>
+                            <option value="2">Công tác 1/2 ngày</option>
+                            <option>Nghỉ cưới theo chế độ</option>
+                            <option>Quên chấm 1 công</option>
+                            <option value="2">Quên chấm 1/2 công</option>
+                            <option>Nghỉ thai sản</option>
+                            <option>Bổ sung 1 ngày công</option>
+                            <option value="2">Bổ sung 1/2 ngày công</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-sm-flex align-items-center justify-content-between">
+                    <div class="form-group col-md-6">
+                        <label for="start" class="form-label small">Từ ngày</label>
+                        <input type="date" class="form-control" id="start">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="end" class="form-label small">Đến ngày</label>
+                        <input type="date" class="form-control" id="end">
+                    </div>
+                </div>
+                <div class="d-sm-flex align-items-center justify-content-center">
+                    <div class="form-group col-md-12">
+                        <label for="reason" class="form-label small">Lý do</label>
+                        <textarea class="form-control" id="reason"></textarea>
+                        <span id="validate-error"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Bổ xung</button>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 @push('js')
     <script src="{{ asset('assets/vendor/calendar/moment.min.js') }}"></script>

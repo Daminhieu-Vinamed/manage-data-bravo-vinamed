@@ -29,7 +29,7 @@ $(document).ready(function () {
                 var runRealtimeFunc = runRealtime(zeroConst, zeroConst, zeroConst);
                 
                 $(document).on("click", "#clock_out", function () {
-                    clearInterval(runRealtimeFunc);
+                    clockOutApi(runRealtimeFunc, $(this).attr("id"))
                 });
                 $("#timekeeping-in").text(success.clockIn);
                 calendar.fullCalendar("refetchEvents");
@@ -45,46 +45,6 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#clock_out", function () {
-        
-        Swal.fire({
-            showCancelButton: trueValue,
-            showLoaderOnConfirm: trueValue,
-            buttonsStyling: falseValue,
-            confirmButtonText: 'Kết thúc',
-            cancelButtonText: 'Hủy',
-            width: "27%",
-            html: 'Kết thúc chấm công ?',
-            customClass: {
-                confirmButton: 'btn btn-primary shadow-sm m-2',
-                cancelButton: 'btn btn-danger shadow-sm m-2',
-            },
-            preConfirm: async () => {
-                changeButtonTimekeeping($(this).attr("id"));
-
-                $.ajax({
-                    url: linkTimekeeping + "clock-out",
-                    type: "PUT",
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    success: function (success) {
-                        ToastTopRight.fire({
-                            icon: success.status,
-                            title: success.msg,
-                        });
-                        $("#timekeeping-out").text(success.clockOut);
-                        clearInterval(removeCheckTimekeeping);
-                        calendar.fullCalendar("refetchEvents");
-                    },
-                    error: function (error) {
-                        let errors = error.responseJSON.errors;
-                        ToastTopRight.fire({
-                            icon: errors.status,
-                            title: errors.msg,
-                        });
-                    },
-                });
-            },
-        });
+        clockOutApi(removeCheckTimekeeping, $(this).attr("id"))
     });
 });
