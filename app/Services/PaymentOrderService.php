@@ -44,6 +44,7 @@ class PaymentOrderService extends PaymentOrderRepository
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Duyệt phiếu thành công !'], 200);
         } catch (\Exception $e) {
+            $connectCompany->rollBack();
             return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
         }
     }
@@ -57,6 +58,7 @@ class PaymentOrderService extends PaymentOrderRepository
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Từ chối duyệt phiếu thành công !'], 200);
         } catch (\Exception $e) {
+            $connectCompany->rollBack();
             return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
         }
     }

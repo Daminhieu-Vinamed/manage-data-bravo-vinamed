@@ -21,16 +21,17 @@ var calendar = $("#calendar").fullCalendar({
     noEventsMessage: "Không có sự kiện để hiển thị",
     timeFormat: 'H(:mm) A',
     events: linkTimekeeping,
-    nowIndicator: true,
-    displayEventEnd: true,
-    selectable: true,
-    navLinks: true,
-    weekNumbers: true,
-    eventLimit: true,
+    nowIndicator: trueValue,
+    displayEventEnd: trueValue,
+    selectable: trueValue,
+    navLinks: trueValue,
+    weekNumbers: trueValue,
+    eventLimit: trueValue,
     eventLimitClick: 'popover',
+    editable: trueValue,
     eventRender: function (event, element, view) {
         var popover = {
-            title: event.title,
+            title: 'CHI TIẾT THỜI GIAN',
             trigger: 'hover',
             placement: 'top',
             container: 'body',
@@ -47,13 +48,25 @@ var calendar = $("#calendar").fullCalendar({
         element.find('.fc-title').remove();
     },
     select: function(start, end, jsEvent, view) {
-        console.log(jsEvent);
-        Swal.fire({
-            html: '1',
-            width: "21%",
-            customClass: {
-                confirmButton: "btn btn-primary shadow-sm",
-            },
+        $('#additionalWork').modal('toggle');
+        $('#start').val(moment(start).format('YYYY-MM-DD'));
+        $('#end').val(moment(end).subtract(oneConst, 'days').format('YYYY-MM-DD'));
+        $('#type').on('change', function() {
+            if ($(this).val() === '2') {
+                if (!$('#period').length) {
+                    $('#type-timekeeping').append(`<div class="form-group col-md-4" id="period">
+                    <label for="period" class="form-label small">Khoảng thời gian</label>
+                    <select class="form-control" id="period">
+                        <option>AM</option>
+                        <option>PM</option>
+                    </select>
+                    </div>`)
+                    $('#col-type-timekeeping').removeClass('col-md-12').addClass('col-md-8');
+                }
+            } else {
+                $('#period').remove();
+                $('#col-type-timekeeping').removeClass('col-md-8').addClass('col-md-12');
+            }
         });
     },
 });

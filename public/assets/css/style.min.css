@@ -2259,7 +2259,9 @@ select.form-control[size] {
 }
 
 textarea.form-control {
-    height: auto
+    padding-top: 5px;
+    height: auto;
+    resize: vertical
 }
 
 .form-group {
