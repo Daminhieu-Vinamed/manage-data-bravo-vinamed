@@ -74,9 +74,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
-    
-    public function timekeeping()
-    {
-        return $this->hasMany(Timekeeping::class, 'EmployeeCode', 'EmployeeCode_user');
-    }
 }

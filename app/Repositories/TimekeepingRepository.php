@@ -19,7 +19,6 @@ class TimekeepingRepository
             $endTime = DB::connection($company)->table('vB30HrmCheckInOut')->select('checkTime as end')->whereDate('CheckTime', $timeNow->format('Y-m-d'))->where('EmployeeCodeCC', $EmployeeCode)->orderBy('CheckTime', 'DESC')->first();
             $dataArr['end'] = $endTime->end;
         }
-        
         return $dataArr;
     }
 }
