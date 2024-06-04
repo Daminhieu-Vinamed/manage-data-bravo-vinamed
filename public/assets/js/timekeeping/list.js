@@ -35,15 +35,16 @@ var calendar = $("#calendar").fullCalendar({
             trigger: 'hover',
             placement: 'top',
             container: 'body',
-            html: true
+            html: trueValue
         }
-        if (event.end) {
-            popover.content = 'Thời gian vào: ' + moment(event.start).format('LLLL') + '<br> thời gian ra: ' + moment(event.end).format('LLLL');
-            element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
-        }else{
-            popover.content = 'Thời gian vào: ' + moment(event.start).format('LLLL');
-            element.css({'background-color': '#e74a3b', 'border': '1px solid #e74a3b'});
-        }
+        // if (event.start == 2) {
+            // popover.content = 'Thời gian vào: ' + moment(event.start).format('LLLL');
+        //     element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
+        // }else{
+            // popover.content = 'Thời gian vào: ' + moment(event.start).format('LLLL');
+            // element.css({'background-color': '#e74a3b', 'border': '1px solid #e74a3b'});
+        // }
+        popover.content = moment(event.start).format('LLLL');
         element.popover(popover);
         element.find('.fc-title').remove();
     },
