@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#tableStaffA11, #tableStaffA12, #tableStaffA14").DataTable({
+    $("#tableStaffA06, #tableStaffA11, #tableStaffA12, #tableStaffA14, #tableStaffA18, #tableStaffA19, #tableStaffA21, #tableStaffA22, #tableStaffA25").DataTable({
         pageLength : fiveConst,
         responsive: trueValue,
         rowReorder: trueValue,

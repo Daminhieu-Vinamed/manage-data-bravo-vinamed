@@ -13,11 +13,11 @@
 @section('content')
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card border-left-blue shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tổng đề nghị thanh toán chờ duyệt</div>
+                            <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">Tổng đề nghị thanh toán chờ duyệt</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $statistical['countAll'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -28,11 +28,26 @@
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
+            <div class="card border-left-purple shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A11</div>
+                            <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A06</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A06" data="{{ $statistical['countA06'] }}">{{ $statistical['countA06'] }} phiếu</div>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="mb-0 fa-2x text-gray-400">A06</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-pink shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-pink text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A11</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A11" data="{{ $statistical['countA11'] }}">{{ $statistical['countA11'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -43,11 +58,11 @@
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
+            <div class="card border-left-red shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A12</div>
+                            <div class="text-xs font-weight-bold text-red text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A12</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A12" data="{{ $statistical['countA12'] }}">{{ $statistical['countA12'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -58,15 +73,90 @@
             </div>
         </div>
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card border-left-orange shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A14</div>
+                            <div class="text-xs font-weight-bold text-orange text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A14</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A14" data="{{ $statistical['countA14'] }}">{{ $statistical['countA14'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
                             <h3 class="mb-0 fa-2x text-gray-400">A14</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-yellow shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-yellow text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A18" data="{{ $statistical['countA18'] }}">{{ $statistical['countA18'] }} phiếu</div>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="mb-0 fa-2x text-gray-400">A18</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-green shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-green text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A19</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A19" data="{{ $statistical['countA19'] }}">{{ $statistical['countA19'] }} phiếu</div>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="mb-0 fa-2x text-gray-400">A19</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-teal shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-teal text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A21</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A21" data="{{ $statistical['countA21'] }}">{{ $statistical['countA21'] }} phiếu</div>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="mb-0 fa-2x text-gray-400">A21</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-cyan shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-cyan text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A22</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A22" data="{{ $statistical['countA22'] }}">{{ $statistical['countA22'] }} phiếu</div>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="mb-0 fa-2x text-gray-400">A22</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-gray shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-gray text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A25</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="A25" data="{{ $statistical['countA25'] }}">{{ $statistical['countA25'] }} phiếu</div>
+                        </div>
+                        <div class="col-auto">
+                            <h3 class="mb-0 fa-2x text-gray-400">A25</h3>
                         </div>
                     </div>
                 </div>
@@ -123,13 +213,31 @@
                     </div>
                     <div class="mt-4 text-center small">
                         <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> A11
+                            <i class="fas fa-circle text-purple"></i> A06
                         </span>
                         <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> A12
+                            <i class="fas fa-circle text-pink"></i> A11
                         </span>
                         <span class="mr-2">
-                            <i class="fas fa-circle text-warning"></i> A14
+                            <i class="fas fa-circle text-red"></i> A12
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-orange"></i> A14
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-yellow"></i> A18
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-green"></i> A19
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-teal"></i> A21
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-cyan"></i> A22
+                        </span>
+                        <span class="mr-2">
+                            <i class="fas fa-circle text-gray"></i> A25
                         </span>
                     </div>
                 </div>
@@ -137,108 +245,42 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-4 col-lg-6">
-            <div class="card shadow mb-4">
-                <a href="#collapseCardA11Bottom" class="d-block card-header py-3" data-toggle="collapse"
-                    role="button" aria-expanded="true" aria-controls="collapseCardA11Bottom">
-                    <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A11</h6>
-                </a>
-                <div class="collapse show" id="collapseCardA11Bottom">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA11">
-                                <div class="lengthInTable"></div>
-                                <div class="searchInTable"></div>
-                            </div>
-                            <table class="table table-bordered" id="tableStaffA11" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Nhân viên</th>
-                                        <th>Số lượng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($statistical['staffA11'] as $part)
+        @foreach ($statistical['staff'] as $key => $arr)
+            <div class="col-xl-4 col-lg-6">
+                <div class="card shadow mb-4">
+                    <a href="#collapseCard{{$key}}Bottom" class="d-block card-header py-3 collapsed" data-toggle="collapse"
+                        role="button" aria-expanded="false" aria-controls="collapseCard{{$key}}Bottom">
+                        <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của {{$key}}</h6>
+                    </a>
+                    <div class="collapse" id="collapseCard{{$key}}Bottom">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="d-sm-flex align-items-center justify-content-between" id="filterStaff{{$key}}">
+                                    <div class="lengthInTable"></div>
+                                    <div class="searchInTable"></div>
+                                </div>
+                                <table class="table table-bordered" id="tableStaff{{$key}}" width="100%" cellspacing="0">
+                                    <thead>
                                         <tr>
-                                            <td>{{$part->EmployeeName}}</td>
-                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                            <th>Nhân viên</th>
+                                            <th>Số lượng</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($arr as $part)
+                                            <tr>
+                                                <td>{{$part->EmployeeName}}</td>
+                                                <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-4 col-lg-6">
-            <div class="card shadow mb-4">
-                <a href="#collapseCardA12Bottom" class="d-block card-header py-3" data-toggle="collapse"
-                    role="button" aria-expanded="true" aria-controls="collapseCardA12Bottom">
-                    <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A12</h6>
-                </a>
-                <div class="collapse show" id="collapseCardA12Bottom">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA12">
-                                <div class="lengthInTable"></div>
-                                <div class="searchInTable"></div>
-                            </div>
-                            <table class="table table-bordered" id="tableStaffA12" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Nhân viên</th>
-                                        <th>Số lượng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($statistical['staffA12'] as $part)
-                                        <tr>
-                                            <td>{{$part->EmployeeName}}</td>
-                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6">
-            <div class="card shadow mb-4">
-                <a href="#collapseCardA14Bottom" class="d-block card-header py-3" data-toggle="collapse"
-                    role="button" aria-expanded="true" aria-controls="collapseCardA14Bottom">
-                    <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên của A14</h6>
-                </a>
-                <div class="collapse show" id="collapseCardA14Bottom">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="d-sm-flex align-items-center justify-content-between" id="filterStaffA14">
-                                <div class="lengthInTable"></div>
-                                <div class="searchInTable"></div>
-                            </div>
-                            <table class="table table-bordered" id="tableStaffA14" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Nhân viên</th>
-                                        <th>Số lượng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($statistical['staffA14'] as $part)
-                                        <tr>
-                                            <td>{{$part->EmployeeName}}</td>
-                                            <td>{{$part->QuantityPaymentOrder}} phiếu</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 @push('js') 

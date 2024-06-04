@@ -9,21 +9,27 @@ class PaymentOrderRepository
 {
     public function getData()
     {
-        if (Auth::user()->role->code === config('constants.role.super_admin.code') || Auth::user()->role->code === config('constants.role.admin.code')) {
+        // if (Auth::user()->role->code === config('constants.role.super_admin.code') || Auth::user()->role->code === config('constants.role.admin.code')) {
+            $A06 = DB::connection('A06')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
             $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
             $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
             $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-        }elseif (Auth::user()->role->code === config('constants.role.manage.code')) {
-            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
-            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
-            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
-            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
-        }else{
-            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-        }
-        return array('A11' => $A11, 'A12' => $A12, 'A14' => $A14);
+            $A18 = DB::connection('A18')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+            $A19 = DB::connection('A19')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+            $A21 = DB::connection('A21')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+            $A22 = DB::connection('A22')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+            $A25 = DB::connection('A25')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+        // }elseif (Auth::user()->role->code === config('constants.role.manage.code')) {
+        //     $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
+        //     $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
+        //     $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
+        //     $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->whereIn('Dept', $arrayDeptCode)->get();
+        // }else{
+        //     $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
+        //     $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
+        //     $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
+        // }
+        return array('A06' => $A06, 'A11' => $A11, 'A12' => $A12, 'A14' => $A14, 'A18' => $A18, 'A19' => $A19, 'A21' => $A21, 'A22' => $A22, 'A25' => $A25);
     }
 
     public function approvePaymentOrder($connectCompany, $Stt, $nUserId, $description, $username)

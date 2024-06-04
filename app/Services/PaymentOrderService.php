@@ -19,7 +19,17 @@ class PaymentOrderService extends PaymentOrderRepository
     public function getData()
     {
         $arrayDataCollect = $this->paymentOrderRepository->getData();
-        $arrayData = array_merge($arrayDataCollect["A11"]->toArray(), $arrayDataCollect["A12"]->toArray(), $arrayDataCollect["A14"]->toArray());
+        $arrayData = array_merge(
+            $arrayDataCollect["A06"]->toArray(), 
+            $arrayDataCollect["A11"]->toArray(), 
+            $arrayDataCollect["A12"]->toArray(), 
+            $arrayDataCollect["A14"]->toArray(), 
+            $arrayDataCollect["A18"]->toArray(), 
+            $arrayDataCollect["A19"]->toArray(),
+            $arrayDataCollect["A21"]->toArray(),
+            $arrayDataCollect["A22"]->toArray(),
+            $arrayDataCollect["A25"]->toArray()
+        );
         $collectData = collect($arrayData)->sortByDesc('DocDate')->all();
         return DataTables::of($collectData)
             ->editColumn('TotalAmount', function ($approvalVote) {
