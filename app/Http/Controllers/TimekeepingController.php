@@ -23,11 +23,9 @@ class TimekeepingController extends Controller
     {
         $data = $this->timekeepingService->list();
         if(request()->ajax()) {
-            return Response::json($data[config('constants.number.one')]);
+            return Response::json($data['listTimekeeping']);
         }
-        $timeNow = $data[config('constants.number.zero')];
-        $timekeepingToday = $data[config('constants.number.two')];
-        return view('timekeeping.list', compact('timekeepingToday', 'timeNow'));
+        return view('timekeeping.list', compact('data'));
     }
 
     public function clockIn() {

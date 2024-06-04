@@ -18,8 +18,9 @@ class TimekeepingService extends TimekeepingRepository
     public function list()
     {
         $timeNow = new Carbon();
-        $data = $this->timekeepingRepository->getData(Auth::user()->EmployeeCode, $timeNow);
-        return array($timeNow, $data[config('constants.number.zero')], $data[config('constants.number.one')]);
+        $data = $this->timekeepingRepository->getData(Auth::user()->EmployeeCode, Auth::user()->company, $timeNow);
+        $data['now'] = $timeNow;
+        return $data;
     }
 
     public function clockIn() {

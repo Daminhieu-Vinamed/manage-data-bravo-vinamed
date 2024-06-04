@@ -58,19 +58,19 @@
                             <p class="font-weight-bold">
                                 <b class="text-primary">Thời gian vào:</b>
                                 <b
-                                    id="timekeeping-in">{{ !empty($timekeepingToday->start) ? date('H:i:s', strtotime($timekeepingToday->start)) : config('constants.timekeeping.min') }}</b>
+                                    id="timekeeping-in">{{ !empty($data['start']) ? date('H:i:s', strtotime($data['start'])) : config('constants.timekeeping.min') }}</b>
                             </p>
                             <p class="font-weight-bold">
                                 <b class="text-primary">Thời gian ra:</b>
                                 <b
-                                    id="timekeeping-out">{{ !empty($timekeepingToday->end) ? date('H:i:s', strtotime($timekeepingToday->end)) : config('constants.timekeeping.min') }}</b>
+                                    id="timekeeping-out">{{ !empty($data['end']) ? date('H:i:s', strtotime($data['end'])) : config('constants.timekeeping.min') }}</b>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @if (isset($timekeepingToday))
-                        <button class="btn btn-danger shadow-sm" time-now="{{$timeNow}}" id="clock_out">Kết thúc</button>
+                    @if (isset($data['start']))
+                        <button class="btn btn-danger shadow-sm" time-now="{{$data['now']}}" id="clock_out">Kết thúc</button>
                     @else
                         <button class="btn btn-primary shadow-sm" id="clock_in">Chấm công</button>
                     @endif
