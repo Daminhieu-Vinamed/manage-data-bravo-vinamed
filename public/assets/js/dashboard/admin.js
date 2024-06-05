@@ -5,6 +5,7 @@ $(document).ready(function () {
         responsive: trueValue,
         rowReorder: trueValue,
         scrollX: trueValue,
+        ordering: falseValue,
         drawCallback: function () {
             var api = this.api();
             var len = api.page.len();
