@@ -14,7 +14,9 @@ class TimekeepingRepository
         $countTimekeeping = DB::connection($company)->table('vB30HrmCheckInOut')->whereDate('CheckTime', $timeNow->format('Y-m-d'))->where('EmployeeCodeCC', $EmployeeCode)->count();
         $starTime = DB::connection($company)->table('vB30HrmCheckInOut')->select('checkTime as start')->whereDate('CheckTime', $timeNow->format('Y-m-d'))->where('EmployeeCodeCC', $EmployeeCode)->orderBy('CheckTime', 'ASC')->first();
         $dataArr['listTimekeeping'] = $data;
-        $dataArr['start'] = $starTime->start;
+        if ($starTime !== config('constants.value.null')) {
+            $dataArr['start'] = $starTime->start;
+        }
         if ($countTimekeeping == config('constants.number.two')) {
             $endTime = DB::connection($company)->table('vB30HrmCheckInOut')->select('checkTime as end')->whereDate('CheckTime', $timeNow->format('Y-m-d'))->where('EmployeeCodeCC', $EmployeeCode)->orderBy('CheckTime', 'DESC')->first();
             $dataArr['end'] = $endTime->end;
