@@ -93,16 +93,9 @@
                         <label for="type" class="form-label small">Loại ngày công</label>
                         <select class="form-control" id="type">
                             <option selected disabled>Chọn loại ngày công</option>
-                            <option>Công tác</option>
-                            <option>Nghỉ chế độ vợ sinh con</option>
-                            <option>Nghỉ chế độ vợ sinh con không lương</option>
-                            <option value="2">Công tác 1/2 ngày</option>
-                            <option>Nghỉ cưới theo chế độ</option>
-                            <option>Quên chấm 1 công</option>
-                            <option value="2">Quên chấm 1/2 công</option>
-                            <option>Nghỉ thai sản</option>
-                            <option>Bổ sung 1 ngày công</option>
-                            <option value="2">Bổ sung 1/2 ngày công</option>
+                            @foreach ($data['typeOfAdditionalWork'] as $item)
+                                <option value="{{$item->RowId}}" type="{{$item->WorkDay}}">{{ $item->Name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
