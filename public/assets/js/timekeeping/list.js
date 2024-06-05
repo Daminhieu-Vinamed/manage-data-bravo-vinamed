@@ -44,6 +44,7 @@ var calendar = $("#calendar").fullCalendar({
             // popover.content = 'Thời gian vào: ' + moment(event.start).format('LLLL');
             // element.css({'background-color': '#e74a3b', 'border': '1px solid #e74a3b'});
         // }
+        element.css({'background-color': '#4e73df', 'border': '1px solid #4e73df'});
         popover.content = moment(event.start).format('LLLL');
         element.popover(popover);
         element.find('.fc-title').remove();
@@ -53,7 +54,7 @@ var calendar = $("#calendar").fullCalendar({
         $('#start').val(moment(start).format('YYYY-MM-DD'));
         $('#end').val(moment(end).subtract(oneConst, 'days').format('YYYY-MM-DD'));
         $('#type').on('change', function() {
-            if ($(this).val() === '2') {
+            if ($(this).children('option:selected').attr('type') === '.50') {
                 if (!$('#period').length) {
                     $('#type-timekeeping').append(`<div class="form-group col-md-4" id="period">
                     <label for="period" class="form-label small">Khoảng thời gian</label>
