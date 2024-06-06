@@ -10,6 +10,8 @@ const linkPaymentOrder = window.location.origin + "/payment-order/";
 const linkUser = window.location.origin + "/user/";
 const linkTimekeeping = window.location.origin + "/timekeeping/";
 
+const linkDashboardAdmin = window.location.origin + "/dashboard/admin";
+
 var zero = 0;
 var one = 1;
 var four = 4;

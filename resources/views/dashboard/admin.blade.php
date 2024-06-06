@@ -3,6 +3,7 @@
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/calendar/fullcalendar.css') }}" />
 @endsection
 @section('title-manage')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -32,7 +33,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A06</div>
+                            <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A06</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A06" data="{{ $statistical['countA06'] }}">{{ $statistical['countA06'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -47,7 +48,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-pink text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A11</div>
+                            <div class="text-xs font-weight-bold text-pink text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A11</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A11" data="{{ $statistical['countA11'] }}">{{ $statistical['countA11'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -62,7 +63,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-red text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A12</div>
+                            <div class="text-xs font-weight-bold text-red text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A12</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A12" data="{{ $statistical['countA12'] }}">{{ $statistical['countA12'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -77,7 +78,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-orange text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A14</div>
+                            <div class="text-xs font-weight-bold text-orange text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A14</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A14" data="{{ $statistical['countA14'] }}">{{ $statistical['countA14'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -92,7 +93,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-yellow text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A18</div>
+                            <div class="text-xs font-weight-bold text-yellow text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A18</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A18" data="{{ $statistical['countA18'] }}">{{ $statistical['countA18'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -107,7 +108,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-green text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A19</div>
+                            <div class="text-xs font-weight-bold text-green text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A19</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A19" data="{{ $statistical['countA19'] }}">{{ $statistical['countA19'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -122,7 +123,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-teal text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A21</div>
+                            <div class="text-xs font-weight-bold text-teal text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A21</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A21" data="{{ $statistical['countA21'] }}">{{ $statistical['countA21'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -137,7 +138,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-cyan text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A22</div>
+                            <div class="text-xs font-weight-bold text-cyan text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A22</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A22" data="{{ $statistical['countA22'] }}">{{ $statistical['countA22'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -152,7 +153,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-gray text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A25</div>
+                            <div class="text-xs font-weight-bold text-gray text-uppercase mb-1">Đề nghị thanh toán chờ duyệt A25</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="A25" data="{{ $statistical['countA25'] }}">{{ $statistical['countA25'] }} phiếu</div>
                         </div>
                         <div class="col-auto">
@@ -168,7 +169,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Thống kê nghỉ phép</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -184,9 +185,10 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <div id='calendar'></div>
+                    {{-- <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                         <canvas id="myAreaChart" width="531" height="400" style="display: block; height: 320px; width: 425px;" class="chartjs-render-monitor"></canvas>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -329,4 +331,7 @@
      <script src="{{ asset('assets/js/dashboard/chart-pie.js') }}"></script>
      <script src="{{ asset('assets/js/dashboard/chart-area.js') }}"></script>
      <script src="{{ asset('assets/js/dashboard/admin.js') }}"></script>
+     <script src="{{ asset('assets/vendor/calendar/moment.min.js') }}"></script>
+     <script src="{{ asset('assets/vendor/calendar/locale.js') }}"></script>
+     <script src="{{ asset('assets/vendor/calendar/fullcalendar.js') }}"></script>
 @endpush
