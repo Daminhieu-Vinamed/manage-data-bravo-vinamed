@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Timekeeping\additionalWork;
-use App\Models\Timekeeping;
 use App\Services\TimekeepingService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
-use Carbon\Carbon;
 
 class TimekeepingController extends Controller
 {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\DashboardService;
+use Illuminate\Support\Facades\Response;
 
 class DashboardController extends Controller
 {
@@ -12,10 +13,18 @@ class DashboardController extends Controller
     {
         $this->dashboardService = $dashboardService;
     }
+    
+    public function welcome()
+    {
+        return view('welcome');
+    }
 
     public function statisticalAdmin()
     {
         $statistical = $this->dashboardService->statisticalAdmin();
+        if(request()->ajax()) {
+            return Response::json($statistical['additionalWorkAll']);
+        }
         return view('dashboard.admin', compact('statistical'));
     }
     

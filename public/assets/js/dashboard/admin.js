@@ -75,4 +75,49 @@ $(document).ready(function () {
     $('#tableStaffA22_filter').appendTo('#filterStaffA22 .searchInTable');
     $('#tableStaffA25_length').appendTo('#filterStaffA25 .lengthInTable');
     $('#tableStaffA25_filter').appendTo('#filterStaffA25 .searchInTable');
+
+    $("#calendar").fullCalendar({
+        locale: 'vi',
+        header: {
+            left: 'prev, next today',
+            center: 'title',
+            right: 'agendaDay, agendaWeek, month, listMonth',
+        },
+        buttonText: {
+            today:    'Hôm nay',
+            month:    'Tháng',
+            week:     'Tuần',
+            day:      'Ngày',
+            list:     'Lịch biểu'
+        },
+        noEventsMessage: "Không có sự kiện để hiển thị",
+        timeFormat: 'H(:mm) A',
+        events: linkDashboardAdmin,
+        nowIndicator: trueValue,
+        selectable: trueValue,
+        navLinks: trueValue,
+        weekNumbers: trueValue,
+        eventLimit: trueValue,
+        eventLimitClick: 'popover',
+        editable: trueValue,
+        displayEventTime: falseValue,
+        eventRender: function (event, element, view) {
+            var popover = {
+                title: 'Nghỉ phép của: ' + event.title,
+                trigger: 'hover',
+                placement: 'top',
+                container: 'body',
+                html: trueValue
+            }
+            element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
+            if (event.end) {
+                popover.content = 'Bắt đầu: ' + moment(event.start).format('LLLL') + '<br>Kết thúc: ' + moment(event.end).format('LLLL');
+            }else{
+                popover.content = moment(event.start).format('LLLL');
+            }
+            element.popover(popover);
+        },
+        select: function(start, end, jsEvent, view) {
+        },
+    });
 })
