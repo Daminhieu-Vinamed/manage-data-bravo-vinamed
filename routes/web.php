@@ -1,19 +1,28 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PaymentOrderController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\StatisticalController as StatisticalAdmin;
+use App\Http\Controllers\Manage\StatisticalController as StatisticalManage;
 use App\Http\Controllers\TimekeepingController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
     
     Route::middleware('checkLogin')->group(function () {
+
+        Route::get('welcome', [AuthController::class, 'welcome']);
         
-        Route::prefix('dashboard')->name('dashboard.')->group(function () {
-            Route::get('admin', [DashboardController::class, 'statisticalAdmin'])->middleware('checkRoleAdmin')->name('admin'); 
-            Route::get('manage', [DashboardController::class, 'statisticalManage'])->middleware('checkRoleManage')->name('manage'); 
+        Route::prefix('statistical')->name('statistical.')->group(function () {
+            Route::middleware('checkRoleAdmin')->prefix('admin')->name('admin.')->group(function () {
+                Route::get('payment-order', [StatisticalAdmin::class, 'paymentOrder'])->name('payment-order'); 
+                Route::get('on-leave', [StatisticalAdmin::class, 'onLeave'])->name('on-leave'); 
+            });
+            Route::middleware('checkRoleManage')->prefix('manage')->name('manage.')->group(function () {
+                Route::get('payment-order', [StatisticalManage::class, 'paymentOrder'])->name('payment-order'); 
+                Route::get('on-leave', [StatisticalManage::class, 'onLeave'])->name('on-leave'); 
+            });
         });
         
         Route::prefix('payment-order')->name('payment-order.')->group(function () {

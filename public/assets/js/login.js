@@ -16,7 +16,7 @@ $(document).on("click", "#login", function () {
             //     icon: success.status,
             //     title: success.msg,
             // });
-            location.href = linkOrigin + success.url
+            location.href = linkOrigin + '/welcome'
         },
         error: function (error) {
             let notification = error.responseJSON;

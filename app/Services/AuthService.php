@@ -10,14 +10,7 @@ class AuthService
     public function postLogin($request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
-                $url = '/dashboard/admin';
-            } elseif(Auth::user()->role->id === config('constants.number.three')) {
-                $url = '/dashboard/manage';
-            }else{
-                $url = '/payment-order';
-            }
-            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công !', 'url' => $url], 200);
+            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công !'], 200);
         } else {
             return response()->json(['status' => 'error', 'msg' => 'Sai tên đăng nhập hoặc mật khẩu !'], 401);
         }

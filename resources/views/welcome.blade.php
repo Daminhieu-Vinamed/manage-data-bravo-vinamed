@@ -4,12 +4,8 @@
 <link href="{{ asset('assets/css/welcome.css') }}" rel="stylesheet">
 @endsection
 @section('content')
-    <section class="text-center">
-        <p>WELCOME<br>
-         <small>{{Auth::user()->name}}</small>
-        </p>
-        <span class="circle big"></span>
-        <span class="circle med"></span>
-        <span class="circle small"></span>
-    </section>
+    <div class="text-center">
+        <h1 class="display-1 text-primary font-weight-bold">WELCOME</h1>
+        <h4 class="display-4 text-primary font-weight-bold">{{Auth::user()->name}}</h4>
+    </div>
 @endsection
