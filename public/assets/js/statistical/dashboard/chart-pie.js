@@ -46,7 +46,7 @@ var myPieChart = new Chart(ctx, {
     labels: ["A06", "A11", "A12", "A14", "A18", "A19", "A21", "A22", "A25"],
     datasets: [{
       data: [countA06, countA11, countA12, countA14, countA18, countA19, countA21, countA22, countA25],
-      backgroundColor: ['#6f42c1', '#e83e8c', '#e74a3b', '#fd7e14', '#f6c23e', '#1cc88a', '#20c9a6', '#36b9cc', '#858796'],
+      backgroundColor: ['#6f42c1', '#e83e8c', '#e74a3b', '#fd7e14', '#f6c23e', '#1cc88a', '#4e73df', '#36b9cc', '#858796'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },
@@ -63,7 +63,7 @@ var myPieChart = new Chart(ctx, {
       caretPadding: 10,
     },
     legend: {
-      display: false
+      display: false,
     },
     cutoutPercentage: 80,
   },

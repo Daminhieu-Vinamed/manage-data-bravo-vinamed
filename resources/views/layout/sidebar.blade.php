@@ -14,12 +14,38 @@
     <!-- Nav Item - Tables -->
     @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three'))
         <li
-            class="nav-item {{ request()->routeIs('dashboard.admin') || request()->routeIs('dashboard.manage') ? 'active' : config('constants.value.empty') }}">
-            <a class="nav-link"
-                href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('dashboard.admin') : route('dashboard.manage') }}">
+            class="nav-item {{ 
+                request()->routeIs('statistical.manage.on-leave') ||
+                request()->routeIs('statistical.manage.payment-order') || 
+                request()->routeIs('statistical.admin.payment-order') || 
+                request()->routeIs('statistical.admin.on-leave') ? 'active' : config('constants.value.empty') 
+            }}">
+            <a class="nav-link {{ 
+                request()->routeIs('statistical.manage.on-leave') ||
+                request()->routeIs('statistical.manage.payment-order') || 
+                request()->routeIs('statistical.admin.payment-order') || 
+                request()->routeIs('statistical.admin.on-leave') ? config('constants.value.empty') : 'collapsed' 
+            }}"
+                data-toggle="collapse" data-target="#onLeave" aria-expanded="true" aria-controls="onLeave">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Thống kê</span>
             </a>
+            <div id="onLeave"
+                class="collapse {{ 
+                    request()->routeIs('statistical.manage.payment-order') || 
+                    request()->routeIs('statistical.admin.payment-order') || 
+                    request()->routeIs('statistical.manage.on-leave') ||
+                    request()->routeIs('statistical.admin.on-leave') ? 'show' : config('constants.value.empty') 
+                }}"
+                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Hành động:</h6>
+                    <a class="collapse-item {{ request()->routeIs('statistical.admin.payment-order') || request()->routeIs('statistical.manage.payment-order') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.payment-order') : route('statistical.manage.payment-order') }}">Đề nghị thanh toán</a>
+                    <a class="collapse-item {{ request()->routeIs('statistical.admin.on-leave') || request()->routeIs('statistical.manage.on-leave') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.on-leave') : route('statistical.manage.on-leave') }}">Nghỉ phép</a>
+                </div>
+            </div>
         </li>
     @endif
     <li

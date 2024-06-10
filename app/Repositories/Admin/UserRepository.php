@@ -13,7 +13,7 @@ class UserRepository extends AbstractRepository
     }
     
     public function getData() {
-        $users = $this->all();
+        $users = $this->builder()->where('role_code', '<>', config('constants.role.super_admin.code'))->get();
         return $users;
     }
     
