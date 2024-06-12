@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tạo tài khoản</h5>
+            <h5 class="modal-title" id="exampleModalLabel">TẠO TÀI KHOẢN</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
@@ -28,9 +28,9 @@
                     <label for="company_c" class="form-label small">Công ty</label>
                     <select class="form-control" name="company_c" id="company_c">
                         <option disabled selected>Chọn</option>
-                        <option value="A11">A11</option>
-                        <option value="A12">A12</option>
-                        <option value="A14">A14</option>
+                        @foreach (config('constants.company') as $company)
+                            <option value="{{$company}}">{{$company}}</option>
+                        @endforeach
                     </select>
                     <span class="text-danger small" id="company_error_c"></span>
                 </div>
@@ -75,7 +75,7 @@
                     <span class="text-danger small" id="gender_id_error_c"></span>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="EmployeeCode_c" class="form-label small">ID user Bravo</label>
+                    <label for="EmployeeCode_c" class="form-label small">Mã nhân viên Bravo</label>
                     <input type="text" class="form-control" name="EmployeeCode_c" id="EmployeeCode_c">
                     <span class="text-danger small" id="EmployeeCode_error_c"></span>
                 </div>
@@ -107,13 +107,13 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa tài khoản</h5>
+            <h5 class="modal-title" id="exampleModalLabel">CHỈNH SỬA TÀI KHOẢN</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
         <div class="modal-body">
-            <div class="row" id="body_create">
+            <div class="row" id="body_edit">
                 <div class="form-group col-md-4">
                     <label for="username_e" class="form-label small">Tên đăng nhập</label>
                     <input type="text" class="form-control" name="username_e" id="username_e">

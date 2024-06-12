@@ -15,16 +15,20 @@
     @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three'))
         <li
             class="nav-item {{ 
-                request()->routeIs('statistical.manage.on-leave') ||
                 request()->routeIs('statistical.manage.payment-order') || 
                 request()->routeIs('statistical.admin.payment-order') || 
-                request()->routeIs('statistical.admin.on-leave') ? 'active' : config('constants.value.empty') 
+                request()->routeIs('statistical.manage.on-leave') ||
+                request()->routeIs('statistical.admin.on-leave') ||
+                request()->routeIs('statistical.manage.additional-work') ||
+                request()->routeIs('statistical.admin.additional-work') ? 'active' : config('constants.value.empty') 
             }}">
             <a class="nav-link {{ 
-                request()->routeIs('statistical.manage.on-leave') ||
                 request()->routeIs('statistical.manage.payment-order') || 
                 request()->routeIs('statistical.admin.payment-order') || 
-                request()->routeIs('statistical.admin.on-leave') ? config('constants.value.empty') : 'collapsed' 
+                request()->routeIs('statistical.manage.on-leave') ||
+                request()->routeIs('statistical.admin.on-leave') ||
+                request()->routeIs('statistical.manage.additional-work') ||
+                request()->routeIs('statistical.admin.additional-work') ? config('constants.value.empty') : 'collapsed' 
             }}"
                 data-toggle="collapse" data-target="#onLeave" aria-expanded="true" aria-controls="onLeave">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -35,7 +39,9 @@
                     request()->routeIs('statistical.manage.payment-order') || 
                     request()->routeIs('statistical.admin.payment-order') || 
                     request()->routeIs('statistical.manage.on-leave') ||
-                    request()->routeIs('statistical.admin.on-leave') ? 'show' : config('constants.value.empty') 
+                    request()->routeIs('statistical.admin.on-leave') ||
+                    request()->routeIs('statistical.manage.additional-work') ||
+                    request()->routeIs('statistical.admin.additional-work') ? 'show' : config('constants.value.empty') 
                 }}"
                 aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -44,6 +50,8 @@
                         href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.payment-order') : route('statistical.manage.payment-order') }}">Đề nghị thanh toán</a>
                     <a class="collapse-item {{ request()->routeIs('statistical.admin.on-leave') || request()->routeIs('statistical.manage.on-leave') ? 'active' : config('constants.value.empty') }}"
                         href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.on-leave') : route('statistical.manage.on-leave') }}">Nghỉ phép</a>
+                    <a class="collapse-item {{ request()->routeIs('statistical.admin.additional-work') || request()->routeIs('statistical.manage.additional-work') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.additional-work') : route('statistical.manage.additional-work') }}">Bổ xung công</a>
                 </div>
             </div>
         </li>

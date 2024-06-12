@@ -52,6 +52,21 @@ $(document).ready(function () {
                     icon: success.status,
                     title: success.msg,
                 });
+                $('#username_c').val('');
+                $('#name_c').val('');
+                $('#email_c').val('');
+                $('#company_c option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                $('#role_code_c option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                $('#department_code_c option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                $('#status_id_c option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                $('#gender_id_c option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                $('#EmployeeCode_c').val('');
+                $('#password_c').val('');
+                $('#re_password_c').val('');
+                $('#avatar_c').val('');
+                if (!$('#delete_avatar').length) {
+                    $('#delete_avatar').parent().remove();
+                }
                 listUser.ajax.reload();
             },
             error: function (error) {
