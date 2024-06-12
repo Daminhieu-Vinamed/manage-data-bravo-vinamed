@@ -10,33 +10,33 @@
         <div class="modal-body">
             <div class="row" id="body_create">
                 <div class="form-group col-md-4">
-                    <label for="username_c" class="form-label small">Tên đăng nhập</label>
-                    <input type="text" class="form-control" name="username_c" id="username_c">
-                    <span class="text-danger small" id="username_error_c"></span>
+                    <label for="username" class="form-label small">Tên đăng nhập</label>
+                    <input type="text" class="form-control" name="username" id="username">
+                    <span class="text-danger small" id="username_error"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_c" class="form-label small">Họ và tên</label>
-                    <input type="text" class="form-control" name="name_c" id="name_c">
-                    <span class="text-danger small" id="name_error_c"></span>
+                    <label for="name" class="form-label small">Họ và tên</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                    <span class="text-danger small" id="name_error"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="email_c" class="form-label small">Email</label>
-                    <input type="text" class="form-control" name="email_c" id="email_c">
-                    <span class="text-danger small" id="email_error_c"></span>
+                    <label for="email" class="form-label small">Email</label>
+                    <input type="text" class="form-control" name="email" id="email">
+                    <span class="text-danger small" id="email_error"></span>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="company_c" class="form-label small">Công ty</label>
-                    <select class="form-control" name="company_c" id="company_c">
+                    <label for="company" class="form-label small">Công ty</label>
+                    <select class="form-control" name="company" id="company">
                         <option disabled selected>Chọn</option>
                         @foreach (config('constants.company') as $company)
                             <option value="{{$company}}">{{$company}}</option>
                         @endforeach
                     </select>
-                    <span class="text-danger small" id="company_error_c"></span>
+                    <span class="text-danger small" id="company_error"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="role_code_c" class="form-label small">Vai trò</label>
-                    <select class="form-control" name="role_code_c" id="role_code_c">
+                    <label for="role_code" class="form-label small">Vai trò</label>
+                    <select class="form-control" name="role_code" id="role_code">
                         <option disabled selected>Chọn</option>
                         @foreach (config('constants.role') as $item)
                             @if ($item['code'] !== config('constants.role.super_admin')['code'])
@@ -44,55 +44,55 @@
                             @endif
                         @endforeach
                     </select>
-                    <span class="text-danger small" id="role_code_error_c"></span>
+                    <span class="text-danger small" id="role_code_error"></span>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="department_code_c" class="form-label small">Phòng ban</label>
-                    <select class="form-control" name="department_code_c" id="department_code_c">
+                    <label for="department_code" class="form-label small">Phòng ban</label>
+                    <select class="form-control" name="department_code" id="department_code">
                         <option disabled selected>Chọn</option>
                         @foreach (config('constants.department') as $item)
                             <option value="{{ $item['code'] }}">{{ $item['name'] }}</option>
                         @endforeach
                     </select>
-                    <span class="text-danger small" id="department_code_error_c"></span>
+                    <span class="text-danger small" id="department_code_error"></span>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="status_id_c" class="form-label small">Trạng thái</label>
-                    <select name="status_id_c" class="form-control" id="status_id_c">
+                    <label for="status_id" class="form-label small">Trạng thái</label>
+                    <select name="status_id" class="form-control" id="status_id">
                         <option disabled selected>Chọn</option>
                         <option value="{{ config('constants.number.one') }}">Hoạt động</option>
                         <option value="{{ config('constants.number.two') }}">Dừng hoạt động</option>
                     </select>
-                    <span class="text-danger small" id="status_id_error_c"></span>
+                    <span class="text-danger small" id="status_id_error"></span>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="gender_id_c" class="form-label small">Giới tính</label>
-                    <select name="gender_id_c" class="form-control" id="gender_id_c">
+                    <label for="gender_id" class="form-label small">Giới tính</label>
+                    <select name="gender_id" class="form-control" id="gender_id">
                         <option disabled selected>Chọn</option>
                         <option value="{{ config('constants.number.one') }}">Nam</option>
                         <option value="{{ config('constants.number.two') }}">Nữ</option>
                     </select>
-                    <span class="text-danger small" id="gender_id_error_c"></span>
+                    <span class="text-danger small" id="gender_id_error"></span>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="EmployeeCode_c" class="form-label small">Mã nhân viên Bravo</label>
-                    <input type="text" class="form-control" name="EmployeeCode_c" id="EmployeeCode_c">
-                    <span class="text-danger small" id="EmployeeCode_error_c"></span>
+                    <label for="EmployeeCode" class="form-label small">Mã nhân viên Bravo</label>
+                    <input type="text" class="form-control" name="EmployeeCode" id="EmployeeCode">
+                    <span class="text-danger small" id="EmployeeCode_error"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="password_c" class="form-label small">Mật khẩu</label>
-                    <input type="password" class="form-control" name="password_c" id="password_c">
-                    <span class="text-danger small" id="password_error_c"></span>
+                    <label for="password" class="form-label small">Mật khẩu</label>
+                    <input type="password" class="form-control" name="password" id="password">
+                    <span class="text-danger small" id="password_error"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="re_password_c" class="form-label small">Nhập lại mật khẩu</label>
-                    <input type="password" class="form-control" name="re_password_c" id="re_password_c">
-                    <span class="text-danger small" id="re_password_error_c"></span>
+                    <label for="re_password" class="form-label small">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" name="re_password" id="re_password">
+                    <span class="text-danger small" id="re_password_error"></span>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="avatar_c" class="form-label small">Ảnh</label>
-                    <input type="file" class="form-control" name="avatar_c" id="avatar_c">
-                    <span class="text-danger small" id="avatar_error_c"></span>
+                    <label for="avatar" class="form-label small">Ảnh</label>
+                    <input type="file" class="form-control" name="avatar" id="avatar">
+                    <span class="text-danger small" id="avatar_error"></span>
                 </div>
             </div>
         </div>
@@ -102,108 +102,3 @@
       </div>
     </div>
 </div>
-
-<div class="modal fade bd-example-modal-lg" id="EditUserModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">CHỈNH SỬA TÀI KHOẢN</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="row" id="body_edit">
-                <div class="form-group col-md-4">
-                    <label for="username_e" class="form-label small">Tên đăng nhập</label>
-                    <input type="text" class="form-control" name="username_e" id="username_e">
-                    <span class="text-danger small" id="username_error_e"></span>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="name_e" class="form-label small">Họ và tên</label>
-                    <input type="text" class="form-control" name="name_e" id="name_e">
-                    <span class="text-danger small" id="name_error_e"></span>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="email_e" class="form-label small">Email</label>
-                    <input type="text" class="form-control" name="email_e" id="email_e">
-                    <span class="text-danger small" id="email_error_e"></span>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="company_e" class="form-label small">Công ty</label>
-                    <select class="form-control" name="company_e" id="company_e">
-                        <option disabled selected>Chọn</option>
-                        <option value="A11">A11</option>
-                        <option value="A12">A12</option>
-                        <option value="A14">A14</option>
-                    </select>
-                    <span class="text-danger small" id="company_error_e"></span>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="role_code_e" class="form-label small">Vai trò</label>
-                    <select class="form-control" name="role_code_e" id="role_code_e">
-                        <option disabled selected>Chọn</option>
-                        @foreach (config('constants.role') as $item)
-                            @if ($item['code'] !== config('constants.role.super_admin')['code'])
-                                <option value="{{ $item['code'] }}">{{ $item['name'] }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <span class="text-danger small" id="role_code_error_e"></span>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="department_code_e" class="form-label small">Phòng ban</label>
-                    <select class="form-control" name="department_code_e" id="department_code_e">
-                        <option disabled selected>Chọn</option>
-                        @foreach (config('constants.department') as $item)
-                            <option value="{{ $item['code'] }}">{{ $item['name'] }}</option>
-                        @endforeach
-                    </select>
-                    <span class="text-danger small" id="department_code_error_e"></span>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="status_id_e" class="form-label small">Trạng thái</label>
-                    <select name="status_id_e" class="form-control" id="status_id_e">
-                        <option disabled selected>Chọn</option>
-                        <option value="{{ config('constants.number.one') }}">Hoạt động</option>
-                        <option value="{{ config('constants.number.two') }}">Dừng hoạt động</option>
-                    </select>
-                    <span class="text-danger small" id="status_id_error_e"></span>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="gender_id_e" class="form-label small">Giới tính</label>
-                    <select name="gender_id_e" class="form-control" id="gender_id_e">
-                        <option disabled selected>Chọn</option>
-                        <option value="{{ config('constants.number.one') }}">Nam</option>
-                        <option value="{{ config('constants.number.two') }}">Nữ</option>
-                    </select>
-                    <span class="text-danger small" id="gender_id_error_e"></span>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="EmployeeCode_e" class="form-label small">ID user Bravo</label>
-                    <input type="text" class="form-control" name="EmployeeCode_e" id="EmployeeCode_e">
-                    <span class="text-danger small" id="EmployeeCode_error_e"></span>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="password_e" class="form-label small">Mật khẩu</label>
-                    <input type="password" class="form-control" name="password_e" id="password_e">
-                    <span class="text-danger small" id="password_error_e"></span>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="re_password_e" class="form-label small">Nhập lại mật khẩu</label>
-                    <input type="password" class="form-control" name="re_password_e" id="re_password_e">
-                    <span class="text-danger small" id="re_password_error_e"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="avatar_e" class="form-label small">Ảnh</label>
-                    <input type="file" class="form-control" name="avatar_e" id="avatar_e">
-                    <span class="text-danger small" id="avatar_error_e"></span>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary shadow-sm" id="update_user">Cập nhật</button>
-        </div>
-      </div>
-    </div>
-  </div>
