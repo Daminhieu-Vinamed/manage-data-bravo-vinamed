@@ -15,7 +15,7 @@ $(document).ready(function () {
         },
         noEventsMessage: "Không có sự kiện để hiển thị",
         timeFormat: 'H(:mm) A',
-        events: linkStatisticalManage + 'on-leave',
+        events: linkStatisticalManage + 'additional-work',
         nowIndicator: trueValue,
         selectable: trueValue,
         navLinks: trueValue,
@@ -26,7 +26,7 @@ $(document).ready(function () {
         displayEventTime: falseValue,
         eventRender: function (event, element, view) {
             var popover = {
-                title: 'CHI TIẾT NGHỈ PHÉP',
+                title: 'CHI TIẾT BỔ XUNG CÔNG',
                 trigger: 'hover',
                 placement: 'top',
                 container: 'body',

@@ -45,7 +45,7 @@ var calendar = $("#calendar").fullCalendar({
             // element.css({'background-color': '#e74a3b', 'border': '1px solid #e74a3b'});
         // }
         element.css({'background-color': '#4e73df', 'border': '1px solid #4e73df'});
-        popover.content = moment(event.start).format('LLLL');
+        popover.content = moment(event.start).format('dddd, D MMMM [năm] YYYY HH:mm:ss');
         element.popover(popover);
         element.find('.fc-title').remove();
     },

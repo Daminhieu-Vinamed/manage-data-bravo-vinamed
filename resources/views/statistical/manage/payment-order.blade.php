@@ -20,7 +20,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A06</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A06" data="{{ $statistical['countA06'] }}">{{ $statistical['countA06'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A06" data="{{ $statistical['count']['A06'] }}">{{ $statistical['count']['A06'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A06</h3>
@@ -35,7 +35,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-pink text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A11</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A11" data="{{ $statistical['countA11'] }}">{{ $statistical['countA11'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A11" data="{{ $statistical['count']['A11'] }}">{{ $statistical['count']['A11'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A11</h3>
@@ -50,7 +50,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-red text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A12</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A12" data="{{ $statistical['countA12'] }}">{{ $statistical['countA12'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A12" data="{{ $statistical['count']['A12'] }}">{{ $statistical['count']['A12'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A12</h3>
@@ -65,7 +65,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-orange text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A14</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A14" data="{{ $statistical['countA14'] }}">{{ $statistical['countA14'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A14" data="{{ $statistical['count']['A14'] }}">{{ $statistical['count']['A14'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A14</h3>
@@ -80,7 +80,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-yellow text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A18</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A18" data="{{ $statistical['countA18'] }}">{{ $statistical['countA18'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A18" data="{{ $statistical['count']['A18'] }}">{{ $statistical['count']['A18'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A18</h3>
@@ -95,7 +95,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-green text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A19</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A19" data="{{ $statistical['countA19'] }}">{{ $statistical['countA19'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A19" data="{{ $statistical['count']['A19'] }}">{{ $statistical['count']['A19'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A19</h3>
@@ -110,7 +110,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A21</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A21" data="{{ $statistical['countA21'] }}">{{ $statistical['countA21'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A21" data="{{ $statistical['count']['A21'] }}">{{ $statistical['count']['A21'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A21</h3>
@@ -125,7 +125,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-cyan text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A22</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A22" data="{{ $statistical['countA22'] }}">{{ $statistical['countA22'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A22" data="{{ $statistical['count']['A22'] }}">{{ $statistical['count']['A22'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A22</h3>
@@ -140,7 +140,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-gray text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A25</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A25" data="{{ $statistical['countA25'] }}">{{ $statistical['countA25'] }} phiếu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="A25" data="{{ $statistical['count']['A25'] }}">{{ $statistical['count']['A25'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
                                 <h3 class="mb-0 fa-2x text-gray-400">A25</h3>
@@ -171,7 +171,7 @@
                     <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                         <canvas id="myPieChart" width="301" height="306" style="display: block; height: 245px; width: 241px;" class="chartjs-render-monitor"></canvas>
                     </div>
-                    <div class="mt-4 text-center small">Tổng: {{ $statistical['countAll'] }} phiếu</div>
+                    <div class="mt-4 text-center small">Tổng: {{ $statistical['count-total'] }} phiếu</div>
                 </div>
             </div>
         </div>

@@ -15,14 +15,19 @@ class StatisticalService extends StatisticalRepository
 
     public function paymentOrder()
     {
-        $statisticalHead = $this->statisticalRepository->paymentOrder();
-        $countAll = array_sum($statisticalHead);
-        $statisticalHead['countAll'] = $countAll;
-        return $statisticalHead;
+        $paymentOrder = $this->statisticalRepository->paymentOrder();
+        $countAll = array_sum($paymentOrder['count']);
+        $paymentOrder['count-total'] = $countAll;
+        return $paymentOrder;
     }
     
     public function onLeave()
     {
         return $this->statisticalRepository->onLeave();
+    }
+
+    public function additionalWork()
+    {
+        return $this->statisticalRepository->additionalWork();
     }
 }

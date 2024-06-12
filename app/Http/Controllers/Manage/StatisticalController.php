@@ -29,4 +29,13 @@ class StatisticalController extends Controller
         }
         return view('statistical.manage.on-leave');
     }
+
+    public function additionalWork() 
+    {
+        $additionalWork = $this->statisticalService->additionalWork();
+        if(request()->ajax()) {
+            return Response::json($additionalWork);
+        }
+        return view('statistical.manage.additional-work');
+    }
 }

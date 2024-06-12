@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,10 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'EmployeeCode' => 'required|string|max|unique:users,EmployeeCode',
-            'username' => 'required|string|min:6|max:255|unique:users,username',
+            'EmployeeCode' => 'required|string|max|unique:users,EmployeeCode,'.$this->id,
+            'username' => 'required|string|min:6|max:255|unique:users,username,'.$this->id,
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
+            'email' => 'required|email|max:255|unique:users,email,'.$this->id,
             'password' => 'required|min:6|max:255',
             're_password' => 'required_with:password|same:password',
             'department_code' => 'required|string',

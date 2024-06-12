@@ -26,7 +26,7 @@ $(document).ready(function () {
         displayEventTime: falseValue,
         eventRender: function (event, element, view) {
             var popover = {
-                title: 'Nghỉ phép ' + event.title,
+                title: 'CHI TIẾT NGHỈ PHÉP',
                 trigger: 'hover',
                 placement: 'top',
                 container: 'body',
@@ -34,9 +34,9 @@ $(document).ready(function () {
             }
             element.css({'background-color': '#4e73df', 'border': '1px solid #4e73df'});
             if (event.end) {
-                popover.content = 'Bắt đầu: ' + moment(event.start).format('LLLL') + '<br>Kết thúc: ' + moment(event.end).format('LLLL');
+                popover.content = 'Phòng ban: ' + event.department + '<br>Mã nhân viên: ' + event.code + '<br>Họ và tên: ' + event.title + '<br>Bắt đầu: ' + moment(event.start).format('dddd, D MMMM [năm] YYYY') + '<br>Kết thúc: ' + moment(event.end).format('dddd, D MMMM [năm] YYYY');
             }else{
-                popover.content = moment(event.start).format('LLLL');
+                popover.content = 'Phòng ban: ' + event.department + '<br>Mã nhân viên: ' + event.code + '<br>Họ và tên: ' + event.title + '<br>' + moment(event.start).format('dddd, D MMMM [năm] YYYY');
             }
             element.popover(popover);
         },

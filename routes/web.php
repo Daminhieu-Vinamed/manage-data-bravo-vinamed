@@ -18,10 +18,12 @@ Route::prefix('/')->group(function () {
             Route::middleware('checkRoleAdmin')->prefix('admin')->name('admin.')->group(function () {
                 Route::get('payment-order', [StatisticalAdmin::class, 'paymentOrder'])->name('payment-order'); 
                 Route::get('on-leave', [StatisticalAdmin::class, 'onLeave'])->name('on-leave'); 
+                Route::get('additional-work', [StatisticalAdmin::class, 'additionalWork'])->name('additional-work'); 
             });
             Route::middleware('checkRoleManage')->prefix('manage')->name('manage.')->group(function () {
                 Route::get('payment-order', [StatisticalManage::class, 'paymentOrder'])->name('payment-order'); 
                 Route::get('on-leave', [StatisticalManage::class, 'onLeave'])->name('on-leave'); 
+                Route::get('additional-work', [StatisticalManage::class, 'additionalWork'])->name('additional-work');
             });
         });
         

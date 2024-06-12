@@ -5,15 +5,15 @@
 @endsection
 @section('title-manage')
     <div class="mb-4">
-        <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ CHẤM CÔNG</h1>
+        <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ CÔNG</h1>
     </div>
 @endsection
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lịch chấm công</h6>
-            <button class="btn btn-primary shadow-sm btn-circle" data-toggle="modal" data-target="#timekeepingModal"
-                title="Chấm công"><i class="fas fa-clock"></i></button>
+            <h6 class="m-0 font-weight-bold text-primary">Lịch công</h6>
+            <button class="btn btn-primary shadow-sm" data-toggle="modal" data-target="#timekeepingModal"
+                title="Chấm công">Chấm công</button>
         </div>
         <div class="card-body">
             <div id='calendar'></div>

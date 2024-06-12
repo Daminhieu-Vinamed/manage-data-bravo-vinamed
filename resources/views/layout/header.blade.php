@@ -186,7 +186,7 @@
                 </a>
                 <a class="dropdown-item" href="{{ route('timekeeping.list') }}">
                     <i class="fas fa-calendar-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Chấm công
+                    Quản lý công
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
