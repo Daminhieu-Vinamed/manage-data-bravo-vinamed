@@ -8,7 +8,7 @@ var listUser = $("#users").DataTable({
     scrollX: trueValue,
     ordering: falseValue,
     columns: [
-        { data: "id", name: "id" },
+        { data: "EmployeeCode", name: "EmployeeCode" },
         { data: "username", name: "username" },
         { data: "name", name: "name" },
         { data: "email", name: "email" },
@@ -16,10 +16,10 @@ var listUser = $("#users").DataTable({
         { data: "status", name: "status" },
         { data: "action", name: "action" },
         { data: "company", name: "company" },
-        { data: "EmployeeCode", name: "EmployeeCode" },
         { data: "avatar", name: "avatar" },
         { data: "gender", name: "gender" },
         { data: "deptCode", name: "deptCode" },
+        { data: "id", name: "id" },
     ],
     language: {
         paginate: {

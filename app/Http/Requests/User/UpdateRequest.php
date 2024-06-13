@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'EmployeeCode' => 'required|string|max|unique:users,EmployeeCode,'.$this->id,
+            'EmployeeCode' => 'required|max:255|unique:users,EmployeeCode,'.$this->id,
             'username' => 'required|string|min:6|max:255|unique:users,username,'.$this->id,
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,'.$this->id,

@@ -4,13 +4,14 @@ namespace App\Services\Admin;
 
 use App\Repositories\Admin\UserRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserService
 {
     protected UserRepository $userRepository;
-    public $storePath = 'public/images/user_images/';
-    public $imagePath = 'storage/images/user_images/';
+    public $storePath = 'public/images/user/';
+    public $imagePath = 'storage/images/user/';
     
     public function __construct(UserRepository $userRepository)
     {
@@ -39,7 +40,7 @@ class UserService
             return '<img class="w-25 img-thumbnail" src="'. $user->avatar .'" />';
         })
         ->addColumn('action', function ($user) {
-            return '<button id="'. $user->id .'" title="Chỉnh sửa tài khoản" data-toggle="modal" data-target="#EditUserModal" class="btn btn-info shadow-sm btn-circle edit_user"><i class="fas fa-user-edit"></i></button> ' .
+            return  '<a href="'. route('user.edit', ['id' => $user->id]) .'" title="Chỉnh sửa tài khoản" class="btn btn-info shadow-sm btn-circle edit_user"><i class="fas fa-user-edit"></i></a>' .
                     ' <button id="'. $user->id .'" title="Xóa tài khoản" class="btn btn-danger shadow-sm btn-circle delete_user"><i class="fas fa-trash-alt"></i></button>';
         })
         ->rawColumns(['avatar', 'action'])
@@ -62,10 +63,10 @@ class UserService
             }
             $this->userRepository->store($data);
             DB::commit();
-            return response()->json(['status' => 'success', 'msg' => 'Tạo tài khoản thành công !'], 200);
+            return response()->json(['status' => 'success', 'msg' => 'Tạo tài khoản thành công'], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['status' => 'error', 'msg' => 'Tạo tài khoản thất bại !'], 401);
+            return response()->json(['status' => 'error', 'msg' => 'Tạo tài khoản thất bại'], 401);
         }
     }
 
@@ -75,19 +76,40 @@ class UserService
         try {
             $this->userRepository->destroy($id);
             DB::commit();
-            return response()->json(['status' => 'success', 'msg' => 'Xóa tài khoản thành công !'], 200);
+            return response()->json(['status' => 'success', 'msg' => 'Xóa tài khoản thành công'], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đang xảy ra lỗi !'], 401);
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đang xảy ra lỗi'], 401);
         }
     }
     
     public function edit($id)
-    { 
+    {
+        return $this->userRepository->edit($id);
+    }
+    
+    public function updateUser($request)
+    {
+        DB::beginTransaction();
         try {
-            return $this->userRepository->edit($id);
+            $data = $request->all();
+            unset($data['re_password']);
+            $ImageUrl = $this->userRepository->getImageUrl($request->id);
+            if (empty($request->file('avatar'))) {
+                $data['avatar'] = $ImageUrl;
+            }else{
+                Storage::delete(str_replace("storage", "public", $ImageUrl));
+                $imageName = $request->file('avatar')->hashName();
+                unset($data['avatar']);
+                $data['avatar'] = $this->imagePath . $imageName;
+                $request->avatar->storeAs($this->storePath, $imageName);
+            }
+            $this->userRepository->updateUser($request->id, $data);
+            DB::commit();
+            return response()->json(['status' => 'success', 'msg' => 'Cập nhật tài khoản thành công'], 200);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'msg' => 'Tài khoản này đang xảy ra lỗi !'], 401);
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Cập nhật tài khoản thất bại'], 401);
         }
     }
 }

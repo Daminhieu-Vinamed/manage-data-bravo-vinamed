@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,12 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        return $this->userService->edit($request->id);
+        $user = $this->userService->edit($request->id);
+        return view('user.edit', compact('user'));
+    }
+    
+    public function update(UpdateRequest $request)
+    {
+        return $this->userService->updateUser($request);
     }
 }
