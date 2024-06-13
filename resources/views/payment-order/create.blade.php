@@ -238,7 +238,7 @@
                 </div>
             </div>
             <div class="py-3 row justify-content-center">
-                <button class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" id="add-row">TẠO MỚI</button>
+                <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="add-row">TẠO MỚI</button>
             </div>
         </div>
     </div>

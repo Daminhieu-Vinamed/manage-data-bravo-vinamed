@@ -31,7 +31,7 @@ $(document).ready(function () {
                 $(document).on("click", "#clock_out", function () {
                     clockOutApi(runRealtimeFunc, $(this).attr("id"))
                 });
-                $("#timekeeping-in").text(success.clockIn);
+                $("#timekeeping-in").text(success.data);
                 calendar.fullCalendar("refetchEvents");
             },
             error: function (error) {

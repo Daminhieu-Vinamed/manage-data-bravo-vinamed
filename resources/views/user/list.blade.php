@@ -20,7 +20,7 @@
                 <table class="table table-bordered" id="users" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Mã nhân viên</th>
                             <th>Tên đăng nhập</th>
                             <th>Họ và tên</th>
                             <th>Email</th>
@@ -28,15 +28,15 @@
                             <th>Trạng thái</th>
                             <th>Hành động</th>
                             <th>Công ty</th>
-                            <th>Mã nhân viên Bravo</th>
                             <th>Ảnh</th>
                             <th>Giới tính</th>
                             <th>Bộ phận</th>
+                            <th>STT</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>ID</th>
+                            <th>Mã nhân viên</th>
                             <th>Tên đăng nhập</th>
                             <th>Họ và tên</th>
                             <th>Email</th>
@@ -44,10 +44,10 @@
                             <th>Trạng thái</th>
                             <th>Hành động</th>
                             <th>Công ty</th>
-                            <th>Mã nhân viên Bravo</th>
                             <th>Ảnh</th>
                             <th>Giới tính</th>
                             <th>Bộ phận</th>
+                            <th>STT</th>
                         </tr>
                     </tfoot>
                     <tbody></tbody>
@@ -58,11 +58,11 @@
     @include('user.popup')
 @endsection
 @push('js')
-     <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-     <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-     <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
-     <script src="{{ asset('assets/js/user/list.js') }}"></script>
-     <script src="{{ asset('assets/js/user/create.js') }}"></script>
-     <script src="{{ asset('assets/js/user/edit.js') }}"></script>
-     <script src="{{ asset('assets/js/user/delete.js') }}"></script>
+    <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/js/user/list.js') }}"></script>
+    <script src="{{ asset('assets/js/user/create.js') }}"></script>
+    <script src="{{ asset('assets/js/user/edit.js') }}"></script>
+    <script src="{{ asset('assets/js/user/delete.js') }}"></script>
 @endpush

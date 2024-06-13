@@ -113,7 +113,7 @@ function clockOutApi(realTime, id) {
                         icon: success.status,
                         title: success.msg,
                     });
-                    $("#timekeeping-out").text(success.clockOut);
+                    $("#timekeeping-out").text(success.data);
                     clearInterval(realTime);
                     calendar.fullCalendar("refetchEvents");
                 },

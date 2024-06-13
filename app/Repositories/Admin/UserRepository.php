@@ -31,4 +31,13 @@ class UserRepository extends AbstractRepository
         $users = $this->find($id);
         return $users;
     }
+    
+    public function updateUser($id, $data) {
+        return $this->update($id, $data);
+    }
+
+    public function getImageUrl($id) {
+        $users = $this->find($id);
+        return $users->avatar;
+    }
 }

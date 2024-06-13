@@ -37,11 +37,12 @@ Route::prefix('/')->group(function () {
             Route::get('get-data-create', [PaymentOrderController::class, 'getDataCreate']);
         });
 
-        Route::prefix('user')->name('user.')->group(function () {
+        Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {
             Route::get('/', [UserController::class, 'list'])->name('list');
             Route::get('get-data', [UserController::class, 'getData']);
             Route::post('create', [UserController::class, 'create']);
-            Route::get('edit', [UserController::class, 'edit']);
+            Route::get('edit', [UserController::class, 'edit'])->name('edit');
+            Route::post('update', [UserController::class, 'update']);
             Route::delete('delete', [UserController::class, 'delete']);
         });
 

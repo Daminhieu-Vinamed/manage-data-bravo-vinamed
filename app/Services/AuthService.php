@@ -10,9 +10,9 @@ class AuthService
     public function postLogin($request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công !'], 200);
+            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công'], 200);
         } else {
-            return response()->json(['status' => 'error', 'msg' => 'Sai tên đăng nhập hoặc mật khẩu !'], 401);
+            return response()->json(['status' => 'error', 'msg' => 'Sai tên đăng nhập hoặc mật khẩu'], 401);
         }
     }
 
