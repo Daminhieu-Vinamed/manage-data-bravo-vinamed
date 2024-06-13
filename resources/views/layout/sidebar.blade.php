@@ -80,8 +80,10 @@
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Hành động:</h6>
-                <a class="collapse-item {{ request()->routeIs('payment-order.list') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('payment-order.list') }}">Danh sách</a>
+                @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two'))
+                    <a class="collapse-item {{ request()->routeIs('payment-order.list') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('payment-order.list') }}">Danh sách</a>
+                @endif
                 <a class="collapse-item {{ request()->routeIs('payment-order.choose-company') || request()->routeIs('payment-order.create') ? 'active' : config('constants.value.empty') }}"
                     href="{{ route('payment-order.choose-company') }}">Tạo mới</a>
             </div>
