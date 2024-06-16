@@ -90,9 +90,11 @@
                     <div class="form-group col-md-4">
                         <label for="avatar" class="form-label small">Ảnh đại diện</label>
                         <input type="file" class="form-control" name="avatar" id="avatar">
+                        <input type="hidden" name="old_avatar" value="{{$user->avatar}}">
                         <span class="text-danger small" id="avatar_error"></span>
                     </div>
                     <div class="form-group col-md-6">
+                        <button type="button" id="delete_avatar" class="btn btn-danger btn-circle position-absolute m-3" style="z-index: 1"><i class="fas fa-trash-alt"></i></button>
                         <img id="flex_avatar" src="{{ asset($user->avatar) }}" class="img-thumbnail position-relative" alt="Đây không phải là file ảnh"/>
                     </div>
                 </div>

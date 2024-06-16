@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkRoleAdmin' => \App\Http\Middleware\CheckRoleAdminMiddleware::class,
             'checkRoleManage' => \App\Http\Middleware\CheckRoleManageMiddleware::class,
             'checkLogout' => \App\Http\Middleware\CheckLogoutMiddleware::class,
+            'checkRoleSuperAdmin' => \App\Http\Middleware\CheckRoleSuperAdminMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

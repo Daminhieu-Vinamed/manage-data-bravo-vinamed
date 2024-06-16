@@ -56,39 +56,39 @@
             </div>
         </li>
     @endif
-    <li
-        class="nav-item {{ 
-            request()->routeIs('payment-order.list') || 
-            request()->routeIs('payment-order.choose-company') || 
-            request()->routeIs('payment-order.create') ? 'active' : config('constants.value.empty') 
-        }}">
-        <a class="nav-link {{ 
-            request()->routeIs('payment-order.list') || 
-            request()->routeIs('payment-order.choose-company') || 
-            request()->routeIs('payment-order.create') ? config('constants.value.empty') : 'collapsed' 
-        }}"
-            data-toggle="collapse" data-target="#paymentOrder" aria-expanded="true" aria-controls="paymentOrder">
-            <i class="fas fa-file-invoice-dollar"></i>
-            <span>Đề nghị thanh toán</span>
-        </a>
-        <div id="paymentOrder"
-            class="collapse {{ 
+    @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two'))
+        <li
+            class="nav-item {{ 
                 request()->routeIs('payment-order.list') || 
                 request()->routeIs('payment-order.choose-company') || 
-                request()->routeIs('payment-order.create') ? 'show' : config('constants.value.empty') 
+                request()->routeIs('payment-order.create') ? 'active' : config('constants.value.empty') 
+            }}">
+            <a class="nav-link {{ 
+                request()->routeIs('payment-order.list') || 
+                request()->routeIs('payment-order.choose-company') || 
+                request()->routeIs('payment-order.create') ? config('constants.value.empty') : 'collapsed' 
             }}"
-            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Hành động:</h6>
-                @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two'))
+                data-toggle="collapse" data-target="#paymentOrder" aria-expanded="true" aria-controls="paymentOrder">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Đề nghị thanh toán</span>
+            </a>
+            <div id="paymentOrder"
+                class="collapse {{ 
+                    request()->routeIs('payment-order.list') || 
+                    request()->routeIs('payment-order.choose-company') || 
+                    request()->routeIs('payment-order.create') ? 'show' : config('constants.value.empty') 
+                }}"
+                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Hành động:</h6>
                     <a class="collapse-item {{ request()->routeIs('payment-order.list') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('payment-order.list') }}">Danh sách</a>
-                @endif
-                <a class="collapse-item {{ request()->routeIs('payment-order.choose-company') || request()->routeIs('payment-order.create') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('payment-order.choose-company') }}">Tạo mới</a>
+                    <a class="collapse-item {{ request()->routeIs('payment-order.choose-company') || request()->routeIs('payment-order.create') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('payment-order.choose-company') }}">Tạo mới</a>
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
+    @endif
     @if (Auth::user()->role->id === config('constants.number.one'))
         <li class="nav-item {{ request()->routeIs('user.list') || request()->routeIs('user.edit') ? 'active' : config('constants.value.empty') }}">
             <a class="nav-link" href="{{ route('user.list') }}">

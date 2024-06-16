@@ -27,7 +27,7 @@ Route::prefix('/')->group(function () {
             });
         });
         
-        Route::prefix('payment-order')->name('payment-order.')->group(function () {
+        Route::middleware('checkRoleAdmin')->prefix('payment-order')->name('payment-order.')->group(function () {
             Route::get('/', [PaymentOrderController::class, 'list'])->name('list');
             Route::get('get-data', [PaymentOrderController::class, 'getData']);
             Route::post('approve-payment-request', [PaymentOrderController::class, 'approve']);
@@ -37,7 +37,7 @@ Route::prefix('/')->group(function () {
             Route::get('get-data-create', [PaymentOrderController::class, 'getDataCreate']);
         });
 
-        Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {
+        Route::middleware('checkRoleSuperAdmin')->prefix('user')->name('user.')->group(function () {
             Route::get('/', [UserController::class, 'list'])->name('list');
             Route::get('get-data', [UserController::class, 'getData']);
             Route::post('create', [UserController::class, 'create']);

@@ -57,7 +57,6 @@ class UserService
                 $data['gender_id'] == config('constants.number.one') ? $data['avatar'] = 'assets/images/man.png' : $data['avatar'] = 'assets/images/woman.png';
             }else{
                 $imageName = $request->file('avatar')->hashName();
-                unset($data['avatar']);
                 $data['avatar'] = $this->imagePath . $imageName;
                 $request->avatar->storeAs($this->storePath, $imageName);
             }
@@ -94,16 +93,22 @@ class UserService
         try {
             $data = $request->all();
             unset($data['re_password']);
-            $ImageUrl = $this->userRepository->getImageUrl($request->id);
             if (empty($request->file('avatar'))) {
-                $data['avatar'] = $ImageUrl;
+                if ($data['old_avatar'] === config('constants.value.null')) {
+                    $data['gender_id'] == config('constants.number.one') ? $data['avatar'] = 'assets/images/man.png' : $data['avatar'] = 'assets/images/woman.png';
+                }else{
+                    $data['avatar'] = $data['old_avatar'];
+                }
             }else{
-                Storage::delete(str_replace("storage", "public", $ImageUrl));
+                $imageUrl = $this->userRepository->getImageUrl($request->id);
+                if (Storage::exists(str_replace("storage", "public", $imageUrl))) {
+                    Storage::delete(str_replace("storage", "public", $imageUrl));
+                }
                 $imageName = $request->file('avatar')->hashName();
-                unset($data['avatar']);
                 $data['avatar'] = $this->imagePath . $imageName;
                 $request->avatar->storeAs($this->storePath, $imageName);
             }
+            unset($data['old_avatar']);
             $this->userRepository->updateUser($request->id, $data);
             DB::commit();
             return response()->json(['status' => 'success', 'msg' => 'Cập nhật tài khoản thành công'], 200);
