@@ -49,6 +49,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#delete_avatar", function () {
         $('#avatar').val('');
+        $('input[name="old_avatar"]').val('')
         $(this).parent().remove();
     });
 
@@ -68,6 +69,7 @@ $(document).ready(function () {
         formData.append('gender_id', $('select[name="gender_id"]').val() !== nullValue ? $('select[name="gender_id"]').val() : '');
         formData.append('status_id', $('select[name="status_id"]').val() !== nullValue ? $('select[name="status_id"]').val() : '');
         formData.append('avatar', $('input[name="avatar"]')[0].files[0] !== undefinedValue ? $('input[name="avatar"]')[0].files[0] : '');
+        formData.append('old_avatar', $('input[name="old_avatar"]').val());   
         $.ajax({
             url: linkUser + "update",
             type: "POST",
@@ -80,7 +82,6 @@ $(document).ready(function () {
             processData: falseValue,
             contentType: falseValue,
             success: function (success) {
-                console.log(success.status);
                 ToastTopRight.fire({
                     icon: success.status,
                     title: success.msg,

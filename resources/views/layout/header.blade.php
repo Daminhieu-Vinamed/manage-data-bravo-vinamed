@@ -2,7 +2,7 @@
 
     <!-- Sidebar Toggle (Topbar) -->
     <div class="form-inline">
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <button id="sidebarToggleTop" class="btn btn-link shadow-sm d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
         </button>
     </div>
