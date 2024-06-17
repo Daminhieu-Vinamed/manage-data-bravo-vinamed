@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Đề nghị thanh toán')
+@section('title', 'Quản lý người dùng')
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
@@ -27,10 +27,9 @@
                             <th>Vai trò</th>
                             <th>Trạng thái</th>
                             <th>Hành động</th>
-                            <th>Công ty</th>
+                            <th>Khay</th>
                             <th>Ảnh</th>
                             <th>Giới tính</th>
-                            <th>Bộ phận</th>
                             <th>STT</th>
                         </tr>
                     </thead>
@@ -43,10 +42,9 @@
                             <th>Vai trò</th>
                             <th>Trạng thái</th>
                             <th>Hành động</th>
-                            <th>Công ty</th>
+                            <th>Khay</th>
                             <th>Ảnh</th>
                             <th>Giới tính</th>
-                            <th>Bộ phận</th>
                             <th>STT</th>
                         </tr>
                     </tfoot>
