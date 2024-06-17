@@ -49,8 +49,7 @@ class PaymentOrderController extends Controller
             $data = $this->paymentOrderService->create($request);
             return view('payment-order.create', compact('data'));
         } catch (\Exception $e) {
-            $route = 'dashboard';
-            return view('404', compact('route'));
+            return view('404');
         }
     }
 }

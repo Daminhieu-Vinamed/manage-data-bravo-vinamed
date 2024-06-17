@@ -88,8 +88,6 @@
                 </div>
             </div>
         </li>
-    @endif
-    @if (Auth::user()->role->id === config('constants.number.one'))
         <li class="nav-item {{ request()->routeIs('user.list') || request()->routeIs('user.edit') ? 'active' : config('constants.value.empty') }}">
             <a class="nav-link" href="{{ route('user.list') }}">
                 <i class="fas fa-users"></i>

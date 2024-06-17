@@ -17,11 +17,15 @@ class TimekeepingController extends Controller
 
     public function list()
     {
-        $data = $this->timekeepingService->list();
-        if(request()->ajax()) {
-            return Response::json($data['listTimekeeping']);
+        try {
+            $data = $this->timekeepingService->list();
+            if(request()->ajax()) {
+                return Response::json($data['listTimekeeping']);
+            }
+            return view('timekeeping.list', compact('data'));
+        } catch (\Exception $e) {
+            return view('404');
         }
-        return view('timekeeping.list', compact('data'));
     }
 
     public function clockIn() {

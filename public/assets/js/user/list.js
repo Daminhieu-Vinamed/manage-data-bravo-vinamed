@@ -18,7 +18,6 @@ var listUser = $("#users").DataTable({
         { data: "company", name: "company" },
         { data: "avatar", name: "avatar" },
         { data: "gender", name: "gender" },
-        { data: "deptCode", name: "deptCode" },
         { data: "id", name: "id" },
     ],
     language: {

@@ -31,11 +31,6 @@ class UserService
         ->editColumn('role', function ($user) {
             return $user->role->name; 
         })
-        ->editColumn('deptCode', function ($user) {
-            $arrayDeptCode = json_decode($user->department->DeptCode);
-            $department = DB::connection($user->company)->table('B20Dept')->select('Name')->whereIn('Code', $arrayDeptCode)->first();
-            return $department->Name;
-        })
         ->editColumn('avatar', function ($user) {
             return '<img class="w-25 img-thumbnail" src="'. $user->avatar .'" />';
         })
