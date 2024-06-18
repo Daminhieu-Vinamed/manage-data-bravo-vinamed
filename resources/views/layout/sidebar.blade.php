@@ -51,7 +51,7 @@
                     <a class="collapse-item {{ request()->routeIs('statistical.admin.on-leave') || request()->routeIs('statistical.manage.on-leave') ? 'active' : config('constants.value.empty') }}"
                         href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.on-leave') : route('statistical.manage.on-leave') }}">Nghỉ phép</a>
                     <a class="collapse-item {{ request()->routeIs('statistical.admin.additional-work') || request()->routeIs('statistical.manage.additional-work') ? 'active' : config('constants.value.empty') }}"
-                        href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.additional-work') : route('statistical.manage.additional-work') }}">Bổ xung công</a>
+                        href="{{ Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') ? route('statistical.admin.additional-work') : route('statistical.manage.additional-work') }}">Bổ sung công</a>
                 </div>
             </div>
         </li>
