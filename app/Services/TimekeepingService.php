@@ -52,5 +52,19 @@ class TimekeepingService extends TimekeepingRepository
             return response()->json(['status' => 'error', 'msg' => 'Kết thúc chấm công lỗi'], 401);
         }
     }
+    
+    public function additionalWork($request) {
+        $user = Auth::user();
+        $connectCompany = DB::connection($user->company);
+        $connectCompany->beginTransaction();
+        try {
+            $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?', [$user->EmployeeCode, $user->company, $request->type, $request->start, $request->end]);
+            $connectCompany->commit();
+            return response()->json(['status' => 'success', 'msg' => 'Đã bổ sung công'], 200);
+        } catch (\Exception $e) {
+            $connectCompany->rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Bổ sung công lỗi'], 401);
+        }
+    }
 
 }

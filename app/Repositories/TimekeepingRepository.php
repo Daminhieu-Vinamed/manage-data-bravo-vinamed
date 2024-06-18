@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Repositories;
-
-use App\Models\Timekeeping;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TimekeepingRepository

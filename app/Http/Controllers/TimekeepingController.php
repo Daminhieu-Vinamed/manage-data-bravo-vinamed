@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Timekeeping\additionalWork;
+use App\Http\Requests\Timekeeping\additionalWorkRequest;
 use App\Services\TimekeepingService;
 use Illuminate\Support\Facades\Response;
 
@@ -36,7 +36,7 @@ class TimekeepingController extends Controller
         return $this->timekeepingService->clockOut();
     }
 
-    public function additionalWork(additionalWork $request) {
-        dd($request->all());
+    public function additionalWork(additionalWorkRequest $request) {
+        return $this->timekeepingService->additionalWork($request);
     }
 }
