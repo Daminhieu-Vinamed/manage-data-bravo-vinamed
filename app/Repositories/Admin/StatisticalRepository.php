@@ -57,7 +57,7 @@ class StatisticalRepository
             $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
             ->where('IsActive', config('constants.number.one'))
             ->where('DocCode', 'BS')
-            ->whereIn('DocStatus', ['35','36','37'])
+            ->where('DocStatus', '51')
             ->get([
                 DB::raw("LEFT(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [start]"),
                 DB::raw("LEFT(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [end]"), 
