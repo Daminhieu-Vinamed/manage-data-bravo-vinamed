@@ -88,6 +88,25 @@
                 </div>
             </div>
         </li>
+        <li
+            class="nav-item {{ request()->routeIs('on-leave.list') || request()->routeIs('additional-work.list') ? 'active' : config('constants.value.empty') }}">
+            <a class="nav-link {{ request()->routeIs('on-leave.list') || request()->routeIs('additional-work.list') ? config('constants.value.empty') : 'collapsed' }}"
+                data-toggle="collapse" data-target="#approveOnleaveAdditionalWork" aria-expanded="true" aria-controls="approveOnleaveAdditionalWork">
+                <i class="fas fa-pencil-alt"></i>
+                <span>Phê duyệt</span>
+            </a>
+            <div id="approveOnleaveAdditionalWork"
+                class="collapse {{ request()->routeIs('on-leave.list') || request()->routeIs('additional-work.list') ? 'show' : config('constants.value.empty') }}"
+                aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Hành động:</h6>
+                    <a class="collapse-item {{ request()->routeIs('on-leave.list') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('on-leave.list') }}">Nghỉ phép</a>
+                    <a class="collapse-item {{ request()->routeIs('additional-work.list') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('additional-work.list') }}">Bổ sung</a>
+                </div>
+            </div>
+        </li>
         <li class="nav-item {{ request()->routeIs('user.list') || request()->routeIs('user.edit') ? 'active' : config('constants.value.empty') }}">
             <a class="nav-link" href="{{ route('user.list') }}">
                 <i class="fas fa-users"></i>

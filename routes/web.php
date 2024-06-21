@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdditionalWorkController;
+use App\Http\Controllers\Admin\OnLeaveController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PaymentOrderController;
 use App\Http\Controllers\AuthController;
@@ -43,7 +45,7 @@ Route::prefix('/')->group(function () {
             Route::post('create', [UserController::class, 'create']);
             Route::get('edit', [UserController::class, 'edit'])->name('edit');
             Route::post('update', [UserController::class, 'update']);
-            Route::delete('delete', [UserController::class, 'delete'])->middleware('checkRoleSuperAdmin');
+            Route::delete('delete', [UserController::class, 'delete']);
         });
 
         Route::prefix('timekeeping')->name('timekeeping.')->group(function () {
@@ -51,6 +53,20 @@ Route::prefix('/')->group(function () {
             Route::post('additional-work', [TimekeepingController::class, 'additionalWork']);
             Route::post('clock-in', [TimekeepingController::class, 'clockIn']);
             Route::put('clock-out', [TimekeepingController::class, 'clockOut']);
+        });
+
+        Route::middleware('checkRoleAdmin')->prefix('on-leave')->name('on-leave.')->group(function () {
+            Route::get('/', [OnLeaveController::class, 'list'])->name('list');
+            Route::get('get-data', [OnLeaveController::class, 'getData']);
+            Route::put('approve', [OnLeaveController::class, 'approve']);
+            Route::put('cancel', [OnLeaveController::class, 'cancel']);
+        });
+        
+        Route::middleware('checkRoleAdmin')->prefix('additional-work')->name('additional-work.')->group(function () {
+            Route::get('/', [AdditionalWorkController::class, 'list'])->name('list');
+            Route::get('get-data', [AdditionalWorkController::class, 'getData']);
+            Route::put('approve', [AdditionalWorkController::class, 'approve']);
+            Route::put('cancel', [AdditionalWorkController::class, 'cancel']);
         });
         
     });

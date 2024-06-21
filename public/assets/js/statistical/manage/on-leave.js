@@ -24,6 +24,7 @@ $(document).ready(function () {
         eventLimitClick: 'popover',
         editable: trueValue,
         displayEventTime: falseValue,
+        weekends: falseValue,
         eventRender: function (event, element, view) {
             var popover = {
                 title: 'CHI TIẾT NGHỈ PHÉP',

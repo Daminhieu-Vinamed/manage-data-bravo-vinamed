@@ -29,7 +29,7 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany->beginTransaction();
         $clockIn = new Carbon();
         try {
-            $connectCompany->update('EXEC usp_B30HrmCheckInOut_Tuandh ?, ?, ?', [$clockIn, $user->EmployeeCode, $user->company]);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockIn, $user->EmployeeCode, $user->company);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Đã chấm công', 'data' => $clockIn->format('H:i:s')], 200);
         } catch (\Exception $e) {
@@ -44,7 +44,7 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany->beginTransaction();
         $clockOut = new Carbon();
         try {
-            $connectCompany->update('EXEC usp_B30HrmCheckInOut_Tuandh ?, ?, ?', [$clockOut, $user->EmployeeCode, $user->company]);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockOut, $user->EmployeeCode, $user->company);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Kết thúc chấm công', 'data' => $clockOut->format('H:i:s')], 200);
         } catch (\Exception $e) {
@@ -53,12 +53,12 @@ class TimekeepingService extends TimekeepingRepository
         }
     }
     
-    public function additionalWork($request) {
+    public function additionalWorkOnLeave($request) {
         $user = Auth::user();
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();
         try {
-            $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?', [$user->EmployeeCode, $user->company, $request->type, $request->start, $request->end]);
+            $this->timekeepingRepository->additionalWork($connectCompany, $user->EmployeeCode, $user->company, $request->type, $request->start, $request->end);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Đã bổ sung công'], 200);
         } catch (\Exception $e) {

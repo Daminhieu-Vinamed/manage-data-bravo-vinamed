@@ -29,6 +29,7 @@ var calendar = $("#calendar").fullCalendar({
     eventLimit: trueValue,
     eventLimitClick: 'popover',
     editable: trueValue,
+    weekends: falseValue,
     eventRender: function (event, element, view) {
         var popover = {
             title: 'CHI TIẾT THỜI GIAN',

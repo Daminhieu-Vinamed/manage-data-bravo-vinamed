@@ -9,6 +9,8 @@ const linkHref = window.location.href;
 const linkPaymentOrder = window.location.origin + "/payment-order/";
 const linkUser = window.location.origin + "/user/";
 const linkTimekeeping = window.location.origin + "/timekeeping/";
+const linkOnLeave = window.location.origin + "/on-leave/";
+const linkAdditionalWork = window.location.origin + "/additional-work/";
 
 const linkStatisticalAdmin = window.location.origin + "/statistical/admin/";
 const linkStatisticalManage = window.location.origin + "/statistical/manage/";

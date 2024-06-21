@@ -22,4 +22,12 @@ class TimekeepingRepository
         }
         return $dataArr;
     }
+
+    public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company) {
+        return $connectCompany->update('EXEC usp_B30HrmCheckInOut_Tuandh ?, ?, ?', [$Timekeeping, $EmployeeCode, $company]);
+    }
+
+    public function additionalWork($connectCompany, $EmployeeCode, $company, $type, $start, $end) {
+        return $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?', [$EmployeeCode, $company, $type, $start, $end]);
+    }
 }

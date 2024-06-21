@@ -25,7 +25,7 @@
                     <span class="text-danger small" id="email_error"></span>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="company" class="form-label small">Công ty</label>
+                    <label for="company" class="form-label small">Khay</label>
                     <select class="form-control" name="company" id="company">
                         <option disabled selected>Chọn</option>
                         @foreach (config('constants.company') as $company)
@@ -75,7 +75,7 @@
                     <span class="text-danger small" id="gender_id_error"></span>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="EmployeeCode" class="form-label small">Mã nhân viên Bravo</label>
+                    <label for="EmployeeCode" class="form-label small">MNV Bravo</label>
                     <input type="text" class="form-control" name="EmployeeCode" id="EmployeeCode">
                     <span class="text-danger small" id="EmployeeCode_error"></span>
                 </div>
