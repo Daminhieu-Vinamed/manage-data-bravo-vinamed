@@ -23,7 +23,7 @@ class additionalWorkRequest extends FormRequest
     {
         return [
             "start" => "required",
-            "end" => "required",
+            "end" => "required|after_or_equal:start",
             // "reason" => "required",
             "type" => "required",
         ];
@@ -34,6 +34,7 @@ class additionalWorkRequest extends FormRequest
         return [
             // 'reason.required' => 'Chưa điền lý do',
             'end.required' => 'Chưa chọn thời gian kết thúc',
+            'end.after_or_equal' => 'Thời gian kết thúc không hợp lệ',
             'start.required' => 'Chưa chọn thời gian bắt đầu',
             'type.required' => 'Chưa chọn loại ngày công',
         ];

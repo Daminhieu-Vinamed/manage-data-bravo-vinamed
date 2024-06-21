@@ -52,6 +52,14 @@ var calendar = $("#calendar").fullCalendar({
     },
     select: function(start, end, jsEvent, view) {
         $('#additionalWork').modal('toggle');
+        $('#validate-type-error').text('');
+        $('#validate-start-error').text('');
+        $('#validate-end-error').text('');
+        $('#col-type-timekeeping option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+        if ($('#period').length) {
+            $('#period').remove();
+            $('#col-type-timekeeping').removeClass('col-md-8').addClass('col-md-12');
+        }
         $('#start').val(moment(start).format('YYYY-MM-DD'));
         $('#end').val(moment(end).subtract(oneConst, 'days').format('YYYY-MM-DD'));
         $('#type').on('change', function() {
