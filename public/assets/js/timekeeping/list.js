@@ -32,23 +32,27 @@ var calendar = $("#calendar").fullCalendar({
     weekends: falseValue,
     eventRender: function (event, element, view) {
         var popover = {
-            title: 'CHI TIẾT THỜI GIAN',
             trigger: 'hover',
             placement: 'top',
             container: 'body',
             html: trueValue
         }
-        // if (event.start == 2) {
-            // popover.content = 'Thời gian vào: ' + moment(event.start).format('LLLL');
-        //     element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
-        // }else{
-            // popover.content = 'Thời gian vào: ' + moment(event.start).format('LLLL');
-            // element.css({'background-color': '#e74a3b', 'border': '1px solid #e74a3b'});
-        // }
-        element.css({'background-color': '#4e73df', 'border': '1px solid #4e73df'});
-        popover.content = moment(event.start).format('dddd, D MMMM [năm] YYYY HH:mm:ss');
+        if (event.title) {
+            if (event.end) {
+                popover.content = 'Bắt đầu: ' + moment(event.start).format('dddd, D MMMM [năm] YYYY') + '<br>' + 'Kết thúc: ' + moment(event.end).format('dddd, D MMMM [năm] YYYY');
+            }else{
+                popover.content = moment(event.start).format('dddd, D MMMM [năm] YYYY');
+            }
+            element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
+            element.find('.fc-time').remove();
+            popover.title = event.type;
+        }else{
+            element.css({'background-color': '#4e73df', 'border': '1px solid #4e73df'});
+            popover.content = moment(event.start).format('dddd, D MMMM [năm] YYYY HH:mm');
+            popover.title = 'Chi tiết thời gian';
+            element.find('.fc-title').remove();
+        }
         element.popover(popover);
-        element.find('.fc-title').remove();
     },
     select: function(start, end, jsEvent, view) {
         $('#additionalWork').modal('toggle');

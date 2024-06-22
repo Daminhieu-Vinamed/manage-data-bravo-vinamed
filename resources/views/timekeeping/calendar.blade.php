@@ -28,5 +28,5 @@
     <script src="{{ asset('assets/js/timekeeping/func.js') }}"></script>
     <script src="{{ asset('assets/js/timekeeping/list.js') }}"></script>
     <script src="{{ asset('assets/js/timekeeping/realtime.js') }}"></script>
-    <script src="{{ asset('assets/js/timekeeping/additional-work.js') }}"></script>
+    <script src="{{ asset('assets/js/timekeeping/supplements-and-leave.js') }}"></script>
 @endpush

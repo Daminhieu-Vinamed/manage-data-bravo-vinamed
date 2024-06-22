@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    $(document).on("click", "#additional_work", function () {
+    $(document).on("click", "#supplements_and_leave", function () {
         const type = $('#type').val();
         const start = $('#start').val();
         const end = $('#end').val();
         const reason = $('#reason').val();
         $.ajax({
-            url: linkTimekeeping + "additional-work",
+            url: linkTimekeeping + "supplements-and-leave",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(

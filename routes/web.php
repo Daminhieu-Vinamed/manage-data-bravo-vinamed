@@ -49,8 +49,8 @@ Route::prefix('/')->group(function () {
         });
 
         Route::prefix('timekeeping')->name('timekeeping.')->group(function () {
-            Route::get('/', [TimekeepingController::class, 'list'])->name('list');
-            Route::post('additional-work', [TimekeepingController::class, 'additionalWorkOnLeave']);
+            Route::get('/', [TimekeepingController::class, 'calendar'])->name('calendar');
+            Route::post('supplements-and-leave', [TimekeepingController::class, 'supplementsAndLeave']);
             Route::post('clock-in', [TimekeepingController::class, 'clockIn']);
             Route::put('clock-out', [TimekeepingController::class, 'clockOut']);
         });
