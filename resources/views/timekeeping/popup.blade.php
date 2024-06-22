@@ -72,7 +72,7 @@
                     <label for="type" class="form-label small">Loại ngày công</label>
                     <select class="form-control" id="type">
                         <option selected disabled>Chọn loại ngày công</option>
-                        @foreach ($data['typeOfAdditionalWork'] as $item)
+                        @foreach ($data['npVsBs'] as $item)
                             <option value="{{$item->RowId}}" type="{{$item->WorkDay}}">{{ $item->Name }}</option>
                         @endforeach
                     </select>
@@ -100,7 +100,7 @@
             </div> --}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary shadow-sm" id="additional_work">Bổ sung</button>
+          <button type="button" class="btn btn-primary shadow-sm" id="supplements_and_leave">Bổ sung</button>
         </div>
       </div>
     </div>

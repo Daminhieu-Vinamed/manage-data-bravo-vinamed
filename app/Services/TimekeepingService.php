@@ -15,7 +15,7 @@ class TimekeepingService extends TimekeepingRepository
         $this->timekeepingRepository = $timekeepingRepository;
     }
 
-    public function list()
+    public function calendar()
     {
         $timeNow = new Carbon();
         $data = $this->timekeepingRepository->getData(Auth::user()->EmployeeCode, Auth::user()->company, $timeNow);
@@ -53,7 +53,7 @@ class TimekeepingService extends TimekeepingRepository
         }
     }
     
-    public function additionalWorkOnLeave($request) {
+    public function supplementsAndLeave($request) {
         $user = Auth::user();
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();

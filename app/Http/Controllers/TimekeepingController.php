@@ -15,14 +15,14 @@ class TimekeepingController extends Controller
         $this->timekeepingService = $timekeepingService;
     }
 
-    public function list()
+    public function calendar()
     {
         try {
-            $data = $this->timekeepingService->list();
+            $data = $this->timekeepingService->calendar();
             if(request()->ajax()) {
-                return Response::json($data['listTimekeeping']);
+                return Response::json($data['dataCalendar']);
             }
-            return view('timekeeping.list', compact('data'));
+            return view('timekeeping.calendar', compact('data'));
         } catch (\Exception $e) {
             return view('404');
         }
@@ -36,7 +36,7 @@ class TimekeepingController extends Controller
         return $this->timekeepingService->clockOut();
     }
 
-    public function additionalWorkOnLeave(additionalWorkRequest $request) {
-        return $this->timekeepingService->additionalWorkOnLeave($request);
+    public function supplementsAndLeave(additionalWorkRequest $request) {
+        return $this->timekeepingService->supplementsAndLeave($request);
     }
 }
