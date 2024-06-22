@@ -1,12 +1,12 @@
 @extends('layout.master')
-@section('title', 'Danh sách nghỉ phép')
+@section('title', 'Phê duyệt nghỉ phép')
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
 @endsection
 @section('title-manage')
     <div class="mb-4">
-        <h1 class="h3 mb-0 text-gray-800">DANH SÁCH NGHỈ PHÉP</h1>
+        <h1 class="h3 mb-0 text-gray-800">PHÊ DUYỆT NGHỈ PHÉP</h1>
     </div>
 @endsection
 @section('content')
@@ -51,5 +51,5 @@
      <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
-     <script src="{{ asset('assets/js/on-leave/admin.js') }}"></script>
+     <script src="{{ asset('assets/js/on-leave/list.js') }}"></script>
 @endpush

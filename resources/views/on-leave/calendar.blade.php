@@ -11,7 +11,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Biểu đồ nghỉ phép</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Lịch nghỉ phép</h6>
         </div>
         <div class="card-body">
             <div id='calendar'></div>
@@ -22,5 +22,5 @@
     <script src="{{ asset('assets/vendor/calendar/moment.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/calendar/locale.js') }}"></script>
     <script src="{{ asset('assets/vendor/calendar/fullcalendar.js') }}"></script>
-    <script src="{{ asset('assets/js/statistical/manage/on-leave.js') }}"></script>
+    <script src="{{ asset('assets/js/on-leave/calendar.js') }}"></script>
 @endpush

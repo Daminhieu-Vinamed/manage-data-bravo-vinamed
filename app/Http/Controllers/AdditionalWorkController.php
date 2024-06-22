@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Services\Admin\AdditionalWorkService;
+use App\Services\AdditionalWorkService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class AdditionalWorkController extends Controller
 {
@@ -17,7 +18,7 @@ class AdditionalWorkController extends Controller
 
     public function list()
     {
-        return view('additional-work.admin');
+        return view('additional-work.list');
     }
 
     public function getData()
@@ -33,5 +34,14 @@ class AdditionalWorkController extends Controller
     public function cancel(Request $request)
     {
         return $this->additionalWorkService->cancel($request);
+    }
+
+    public function calendar()
+    {
+        $onLeave = $this->additionalWorkService->calendar();
+        if(request()->ajax()) {
+            return Response::json($onLeave);
+        }
+        return view('additional-work.calendar');
     }
 }

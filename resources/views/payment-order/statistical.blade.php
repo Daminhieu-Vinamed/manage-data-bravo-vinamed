@@ -204,44 +204,46 @@
             </div>
         </div>
     </div> --}}
-    <div class="row">
-        @foreach ($statistical['part'] as $key => $arr)
-            <div class="col-xl-4 col-lg-6">
-                <div class="card shadow mb-4">
-                    <a href="#collapseCard{{$key}}Top" class="d-block card-header py-3" data-toggle="collapse"
-                        role="button" aria-expanded="true" aria-controls="collapseCard{{$key}}Top">
-                        <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các bộ phận {{$key}}</h6>
-                    </a>
-                    <div class="collapse show" id="collapseCard{{$key}}Top">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div class="d-sm-flex align-items-center justify-content-between" id="filterPart{{$key}}">
-                                    <div class="lengthInTable"></div>
-                                    <div class="searchInTable"></div>
-                                </div>
-                                <table class="table table-bordered" id="tablePart{{$key}}" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Bộ phận</th>
-                                            <th>Số lượng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($arr as $part)
+    @if (!empty($statistical['part']))
+        <div class="row">
+            @foreach ($statistical['part'] as $key => $arr)
+                <div class="col-xl-4 col-lg-6">
+                    <div class="card shadow mb-4">
+                        <a href="#collapseCard{{$key}}Top" class="d-block card-header py-3" data-toggle="collapse"
+                            role="button" aria-expanded="true" aria-controls="collapseCard{{$key}}Top">
+                            <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các bộ phận {{$key}}</h6>
+                        </a>
+                        <div class="collapse show" id="collapseCard{{$key}}Top">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="d-sm-flex align-items-center justify-content-between" id="filterPart{{$key}}">
+                                        <div class="lengthInTable"></div>
+                                        <div class="searchInTable"></div>
+                                    </div>
+                                    <table class="table table-bordered" id="tablePart{{$key}}" width="100%" cellspacing="0">
+                                        <thead>
                                             <tr>
-                                                <td>{{$part->DeptName}}</td>
-                                                <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                                <th>Bộ phận</th>
+                                                <th>Số lượng</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($arr as $part)
+                                                <tr>
+                                                    <td>{{$part->DeptName}}</td>
+                                                    <td>{{$part->QuantityPaymentOrder}} phiếu</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+    @endif
     <div class="row">
         @foreach ($statistical['staff'] as $key => $arr)
             <div class="col-xl-4 col-lg-6">
@@ -286,7 +288,7 @@
      <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
-     <script src="{{ asset('assets/js/statistical/dashboard/chart-pie.js') }}"></script>
-     <script src="{{ asset('assets/js/statistical/dashboard/chart-area.js') }}"></script>
-     <script src="{{ asset('assets/js/statistical/admin/payment-order.js') }}"></script>
+     <script src="{{ asset('assets/js/payment-order/dashboard/chart-pie.js') }}"></script>
+     <script src="{{ asset('assets/js/payment-order/dashboard/chart-area.js') }}"></script>
+     <script src="{{ asset('assets/js/payment-order/statistical.js') }}"></script>
 @endpush

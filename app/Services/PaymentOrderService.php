@@ -78,4 +78,16 @@ class PaymentOrderService extends PaymentOrderRepository
         $data =  $this->paymentOrderRepository->create($request->company);
         return $data;
     }
+
+    public function statistical()
+    {
+        if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
+            $paymentOrder = $this->paymentOrderRepository->statisticalAdmin();
+        } elseif (Auth::user()->role->id === config('constants.number.three')) {
+            $paymentOrder = $this->paymentOrderRepository->statisticalManage();
+        }
+        $countAll = array_sum($paymentOrder['count']);
+        $paymentOrder['count-total'] = $countAll;
+        return $paymentOrder;
+    }
 }

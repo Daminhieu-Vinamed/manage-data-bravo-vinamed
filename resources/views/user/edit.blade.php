@@ -58,16 +58,16 @@
                         <span class="text-danger small" id="department_code_error"></span>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="role_code" class="form-label small">Vai trò</label>
-                        <select class="form-control" name="role_code" id="role_code">
+                        <label for="role_id" class="form-label small">Vai trò</label>
+                        <select class="form-control" name="role_id" id="role_id">
                             <option disabled selected>Chọn</option>
                             @foreach (config('constants.role') as $item)
-                                @if ($item['code'] !== config('constants.role.super_admin')['code'])
-                                    <option value="{{ $item['code'] }}" {{$user->role_code === $item['code'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
+                                @if ($item['id'] !== config('constants.number.one'))
+                                    <option value="{{ $item['id'] }}" {{$user->role_id === $item['id'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
                                 @endif
                             @endforeach
                         </select>
-                        <span class="text-danger small" id="role_code_error"></span>
+                        <span class="text-danger small" id="role_id_error"></span>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="status_id" class="form-label small">Trạng thái</label>

@@ -32,7 +32,7 @@ $(document).ready(function () {
         formData.append('re_password', $('input[name="re_password"]').val());
         formData.append('department_code', $('select[name="department_code"]').val() !== nullValue ? $('select[name="department_code"]').val() : '');
         formData.append('company', $('select[name="company"]').val() !== nullValue ? $('select[name="company"]').val() : '');
-        formData.append('role_code', $('select[name="role_code"]').val() !== nullValue ? $('select[name="role_code"]').val() : '');
+        formData.append('role_id', $('select[name="role_id"]').val() !== nullValue ? $('select[name="role_id"]').val() : '');
         formData.append('gender_id', $('select[name="gender_id"]').val() !== nullValue ? $('select[name="gender_id"]').val() : '');
         formData.append('status_id', $('select[name="status_id"]').val() !== nullValue ? $('select[name="status_id"]').val() : '');
         formData.append('avatar', $('input[name="avatar"]')[0].files[0] !== undefinedValue ? $('input[name="avatar"]')[0].files[0] : '');
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 $('#name').val('');
                 $('#email').val('');
                 $('#company option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
-                $('#role_code option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                $('#role_id option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
                 $('#department_code option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
                 $('#status_id option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
                 $('#gender_id option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
@@ -81,7 +81,7 @@ $(document).ready(function () {
                 errors.name ? $('#name_error').text(errors.name[zeroConst]) : $('#name_error').text('');
                 errors.email ? $('#email_error').text(errors.email[zeroConst]) : $('#email_error').text('');
                 errors.company ? $('#company_error').text(errors.company[zeroConst]) : $('#company_error').text('');
-                errors.role_code ? $('#role_code_error').text(errors.role_code[zeroConst]) : $('#role_code_error').text('');
+                errors.role_id ? $('#role_id_error').text(errors.role_id[zeroConst]) : $('#role_id_error').text('');
                 errors.department_code ? $('#department_code_error').text(errors.department_code[zeroConst]) : $('#department_code_error').text('');
                 errors.status_id ? $('#status_id_error').text(errors.status_id[zeroConst]) : $('#status_id_error').text('');
                 errors.gender_id ? $('#gender_id_error').text(errors.gender_id[zeroConst]) : $('#gender_id_error').text('');
