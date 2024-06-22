@@ -4,7 +4,7 @@ namespace App\Http\Requests\Timekeeping;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class additionalWorkRequest extends FormRequest
+class SupplementsAndLeaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

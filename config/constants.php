@@ -20,11 +20,10 @@ return [
     ],
     
     'role' => [
-        'super_admin' => ['code' => 'SUPER_ADMIN', 'name' => 'Quản trị hệ thống'] ,
-        'admin' => ['code' => 'ADMIN', 'name' => 'Quản trị'],
-        'manage' => ['code' => 'MANAGER', 'name' => 'Trưởng phòng'],
-        'user_multi' => ['code' => 'USER_MULTI', 'name' => 'Nhân viên đa công ty'],
-        'user' => ['code' => 'USER', 'name' => 'Nhân viên']
+        'super_admin' => ['id' => 1, 'name' => 'Quản trị hệ thống'] ,
+        'admin' => ['id' => 2, 'name' => 'Quản trị'],
+        'manage' => ['id' => 3, 'name' => 'Trưởng phòng'],
+        'user' => ['id' => 4, 'name' => 'Nhân viên']
     ],
     
     'department' => [

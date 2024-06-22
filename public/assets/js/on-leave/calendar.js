@@ -15,7 +15,7 @@ $(document).ready(function () {
         },
         noEventsMessage: "Không có sự kiện để hiển thị",
         timeFormat: 'H(:mm) A',
-        events: linkStatisticalAdmin + 'additional-work',
+        events: linkOnLeave + 'calendar',
         nowIndicator: trueValue,
         selectable: trueValue,
         navLinks: trueValue,
@@ -27,7 +27,7 @@ $(document).ready(function () {
         weekends: falseValue,
         eventRender: function (event, element, view) {
             var popover = {
-                title: 'CHI TIẾT BỔ XUNG CÔNG',
+                title: 'CHI TIẾT NGHỈ PHÉP',
                 trigger: 'hover',
                 placement: 'top',
                 container: 'body',

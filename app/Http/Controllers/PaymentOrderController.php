@@ -33,7 +33,7 @@ class PaymentOrderController extends Controller
         return $this->paymentOrderService->approve($request);
     }
 
-    public function cancelPaymentRequest(PaymentOrderRequest $request)
+    public function cancel(PaymentOrderRequest $request)
     {
         return $this->paymentOrderService->cancel($request);
     }
@@ -48,6 +48,16 @@ class PaymentOrderController extends Controller
         try {
             $data = $this->paymentOrderService->create($request);
             return view('payment-order.create', compact('data'));
+        } catch (\Exception $e) {
+            return view('404');
+        }
+    }
+
+    public function statistical()
+    {
+        try {
+            $statistical = $this->paymentOrderService->statistical();
+            return view('payment-order.statistical', compact('statistical'));
         } catch (\Exception $e) {
             return view('404');
         }

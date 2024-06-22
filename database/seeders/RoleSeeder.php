@@ -14,11 +14,10 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['code' => 'SUPER_ADMIN', 'name' => 'Quản trị hệ thống'],
-            ['code' => 'ADMIN', 'name' => 'Quản trị'],
-            ['code' => 'MANAGER', 'name' => 'Trưởng phòng'],
-            ['code' => 'USER_MULTI', 'name' => 'Nhân viên đa công ty'],
-            ['code' => 'USER', 'name' => 'Nhân viên'],
+            ['name' => 'Quản trị hệ thống'],
+            ['name' => 'Quản trị'],
+            ['name' => 'Trưởng phòng'],
+            ['name' => 'Nhân viên'],
         ];
         DB::table('roles')->insert($data);
     }

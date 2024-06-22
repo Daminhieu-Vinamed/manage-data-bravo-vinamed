@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Admin;
+namespace App\Services;
 
-use App\Repositories\Admin\OnLeaveRepository;
+use App\Repositories\OnLeaveRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -53,5 +53,10 @@ class OnLeaveService extends OnLeaveRepository
             $connectCompany->rollBack();
             return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
         }
+    }
+    
+    public function calendar()
+    {
+        return $this->onLeaveRepository->calendar();
     }
 }

@@ -94,4 +94,35 @@ class PaymentOrderRepository
         ->get();
         return array('bill_detailed_object' => $B20Customer, 'bill_staff' => $B20Employee, 'base_items' => $B20ExpenseCatg, 'bill_part' => $B20Dept, 'bill_tax_category' => $B20Tax, 'currency' => $B20Currency, 'bill_purchase_order' => $vB30BizDoc, 'requests_for_advances' => $vB33AccDoc_ExploreJournalEntry);
     }
+
+    public function statisticalAdmin()
+    {           
+        foreach (config('constants.company') as $value) {
+            $count[$value] = DB::connection($value)->table('vB33AccDoc_ExploreJournalEntry_Web')->count();
+            $part[$value] = DB::connection($value)->table('vB33AccDoc_ExploreJournalEntry_Web')->select('DeptName', DB::raw('count(*) as QuantityPaymentOrder'))->groupBy('DeptName')->get();
+            $staff[$value] = DB::connection($value)->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->groupBy('EmployeeName')->get();
+        }
+        
+        return array(
+            'count' => $count,       
+            'staff' => $staff,
+            'part' => $part
+        );
+    }
+
+    public function statisticalManage()
+    {
+        $user = Auth::user();
+        $deptCode = json_decode($user->department->DeptCode);
+
+        foreach (config('constants.company') as $value) {
+            $count[$value] = DB::connection($value)->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $deptCode)->count();
+            $staff[$value] = DB::connection($value)->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->whereIn('Dept', $deptCode)->groupBy('EmployeeName')->get();
+        }
+
+        return array(
+            'count' => $count, 
+            'staff' => $staff
+        );
+    }
 }

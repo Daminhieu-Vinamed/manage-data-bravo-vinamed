@@ -1,48 +1,33 @@
 <?php
 
-namespace App\Repositories\Manage;
+namespace App\Repositories;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class StatisticalRepository
-{   
-    public function paymentOrder()
+class AdditionalWorkRepository
+{
+    public function getData($timeNow)
     {
-        $user = Auth::user();
-        $deptCode = json_decode($user->department->DeptCode);
-
-        foreach (config('constants.company') as $value) {
-            $count[$value] = DB::connection($value)->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $deptCode)->count();
-            $staff[$value] = DB::connection($value)->table('vB33AccDoc_ExploreJournalEntry_Web')->select('EmployeeName', DB::raw('count(*) as QuantityPaymentOrder'))->whereIn('Dept', $deptCode)->groupBy('EmployeeName')->get();
-        }
-
-        return array(
-            'count' => $count, 
-            'staff' => $staff
-        );
-    }
-
-    public function onLeave() {
-
-        $user = Auth::user();
-        $deptCode = json_decode($user->department->DeptCode);
-        
         foreach (config('constants.company') as $value) {
             $onLeave = DB::connection($value)->table('vB30HrmPTimesheet')
             ->where('IsActive', config('constants.number.one'))
-            ->where('DocCode', 'NP')
-            ->whereIn('DocStatus', ['35','36','37'])
-            ->whereIn('DeptCode', $deptCode)
+            ->where('DocCode', 'BS')
+            ->where('DocStatus', '50')
+            ->whereYear('FromDate',  $timeNow->format('Y'))
             ->get([
-                DB::raw("LEFT(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [start]"),
-                DB::raw("LEFT(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [end]"), 
-                'EmployeeName as title',
-                'EmployeeCode as code',
-                'DeptName as department',
+                'BranchCode',
+                'EmployeeCode', 
+                'EmployeeName', 
+                'DeptName', 
+                'TimesheetTypeName', 
+                DB::raw("FORMAT(FromDate, 'dd-MM-yyyy') AS [start]"),
+                DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
+                'DocStatusName',
+                'DocCode',
+                'RowId'
             ]);
             $onLeaveTotal[$value] = $onLeave->toArray();
-        }
+        };
         $total = array_merge(
             $onLeaveTotal['A06'],
             $onLeaveTotal['A11'],
@@ -57,17 +42,23 @@ class StatisticalRepository
         return $total;
     }
 
-    public function additionalWork() 
+    public function approveLeave($connectCompany, $RowId, $DocCode)
     {
-        $user = Auth::user();
-        $deptCode = json_decode($user->department->DeptCode);
-        
+        return $connectCompany->update('EXEC Usp_ApproveBSNP ?, ?', [$RowId, $DocCode]);
+    }
+    
+    public function cancelLeave($connectCompany, $RowId)
+    {
+        return $connectCompany->update('EXEC Usp_CancelBSNP ?', [$RowId]);
+    }
+
+    public function calendar() 
+    {
         foreach (config('constants.company') as $value) {
             $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
             ->where('IsActive', config('constants.number.one'))
             ->where('DocCode', 'BS')
             ->where('DocStatus', '51')
-            ->whereIn('DeptCode', $deptCode)
             ->get([
                 DB::raw("LEFT(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [start]"),
                 DB::raw("LEFT(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [end]"), 

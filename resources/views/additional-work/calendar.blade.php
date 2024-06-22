@@ -1,17 +1,17 @@
 @extends('layout.master')
-@section('title', 'Thống kê bổ sung công')
+@section('title', 'Thống kê bổ sung')
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/vendor/calendar/fullcalendar.css') }}" />
 @endsection
 @section('title-manage')
     <div class="mb-4">
-        <h1 class="h3 mb-0 text-gray-800">THỐNG KÊ BỔ SUNG CÔNG</h1>
+        <h1 class="h3 mb-0 text-gray-800">THỐNG KÊ BỔ SUNG</h1>
     </div>
 @endsection
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Biểu đồ bổ sung công</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Lịch bổ sung</h6>
         </div>
         <div class="card-body">
             <div id='calendar'></div>
@@ -22,5 +22,5 @@
     <script src="{{ asset('assets/vendor/calendar/moment.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/calendar/locale.js') }}"></script>
     <script src="{{ asset('assets/vendor/calendar/fullcalendar.js') }}"></script>
-    <script src="{{ asset('assets/js/statistical/admin/additional-work.js') }}"></script>
+    <script src="{{ asset('assets/js/additional-work/calendar.js') }}"></script>
 @endpush
