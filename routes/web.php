@@ -46,16 +46,16 @@ Route::prefix('/')->group(function () {
             Route::middleware('checkRoleManage')->get('/', [OnLeaveController::class, 'list'])->name('list');
             Route::get('calendar', [OnLeaveController::class, 'calendar'])->name('calendar');
             Route::get('get-data', [OnLeaveController::class, 'getData']);
-            Route::middleware('checkRoleAdmin')->put('approve', [OnLeaveController::class, 'approve']);
-            Route::middleware('checkRoleAdmin')->put('cancel', [OnLeaveController::class, 'cancel']);
+            Route::put('approve', [OnLeaveController::class, 'approve']);
+            Route::put('cancel', [OnLeaveController::class, 'cancel']);
         });
         
         Route::prefix('additional-work')->name('additional-work.')->group(function () {
             Route::middleware('checkRoleManage')->get('/', [AdditionalWorkController::class, 'list'])->name('list');
             Route::get('calendar', [AdditionalWorkController::class, 'calendar'])->name('calendar');
             Route::get('get-data', [AdditionalWorkController::class, 'getData']);
-            Route::middleware('checkRoleAdmin')->put('approve', [AdditionalWorkController::class, 'approve']);
-            Route::middleware('checkRoleAdmin')->put('cancel', [AdditionalWorkController::class, 'cancel']);
+            Route::put('approve', [AdditionalWorkController::class, 'approve']);
+            Route::put('cancel', [AdditionalWorkController::class, 'cancel']);
         });
         
     });
