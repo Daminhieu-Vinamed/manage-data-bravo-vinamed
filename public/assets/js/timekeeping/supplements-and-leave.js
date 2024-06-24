@@ -46,26 +46,26 @@ $(document).ready(function () {
 
                 if (errors.type) {
                     $('#validate-type-error').text(errors.type[zeroConst]);
-                    $('#type').addClass('is-invalid');
+                    $('#type').removeClass('is-valid').addClass('is-invalid');
                 } else {
                     $('#validate-type-error').text('');
-                    $('#type').addClass('is-valid');
+                    $('#type').removeClass('is-invalid').addClass('is-valid');
                 }
 
                 if (errors.start) {
                     $('#validate-start-error').text(errors.start[zeroConst]);
-                    $('#start').addClass('is-invalid');
+                    $('#start').removeClass('is-valid').addClass('is-invalid');
                 } else {
                     $('#validate-start-error').text('');
-                    $('#start').addClass('is-valid');
+                    $('#start').removeClass('is-invalid').addClass('is-valid');
                 }
 
                 if (errors.end) {
                     $('#validate-end-error').text(errors.end[zeroConst]);
-                    $('#end').addClass('is-invalid');
+                    $('#end').removeClass('is-valid').addClass('is-invalid');
                 } else {
                     $('#validate-end-error').text('');
-                    $('#end').addClass('is-valid');
+                    $('#end').removeClass('is-invalid').addClass('is-valid');
                 }
                 // errors.reason ? $('#validate-reason-error').text(errors.reason[zeroConst]) : $('#validate-reason-error').text('');
             },

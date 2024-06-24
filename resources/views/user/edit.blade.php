@@ -17,29 +17,29 @@
                 </div>
             @else
                 <div class="row" id="body_edit">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="username" class="form-label small">Tên đăng nhập</label>
-                        <input type="text" class="form-control" name="username" id="username" value="{{$user->username}}">
+                        <input type="text" class="form-control" id="username" value="{{$user->username}}">
                         <span class="text-danger small" id="username_error"></span>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="name" class="form-label small">Họ và tên</label>
-                        <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}">
+                        <input type="text" class="form-control" id="name" value="{{$user->name}}">
                         <span class="text-danger small" id="name_error"></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="email" class="form-label small">Email</label>
-                        <input type="text" class="form-control" name="email" id="email" value="{{$user->email}}">
+                        <input type="text" class="form-control" id="email" value="{{$user->email}}">
                         <span class="text-danger small" id="email_error"></span>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-4">
                         <label for="EmployeeCode" class="form-label small">Mã nhân viên Bravo</label>
-                        <input type="text" class="form-control" name="EmployeeCode" id="EmployeeCode" value="{{$user->EmployeeCode}}">
+                        <input type="text" class="form-control" id="EmployeeCode" value="{{$user->EmployeeCode}}">
                         <span class="text-danger small" id="EmployeeCode_error"></span>
                     </div>
-                    <div class="form-group col-md-1">
+                    <div class="form-group col-md-4">
                         <label for="company" class="form-label small">Công ty</label>
-                        <select class="form-control" name="company" id="company">
+                        <select class="custom-select" id="company">
                             <option disabled selected>Chọn</option>
                             @foreach (config('constants.company') as $company)
                                 <option value="{{$company}}" {{$user->company === $company ? 'selected' : '' }}>{{$company}}</option>
@@ -47,9 +47,9 @@
                         </select>
                         <span class="text-danger small" id="company_error"></span>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-4">
                         <label for="department_code" class="form-label small">Phòng ban</label>
-                        <select class="form-control" name="department_code" id="department_code">
+                        <select class="custom-select" id="department_code">
                             <option disabled selected>Chọn</option>
                             @foreach (config('constants.department') as $item)
                                 <option value="{{ $item['code'] }}" {{$user->department_code === $item['code'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
@@ -57,9 +57,9 @@
                         </select>
                         <span class="text-danger small" id="department_code_error"></span>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-4">
                         <label for="role_id" class="form-label small">Vai trò</label>
-                        <select class="form-control" name="role_id" id="role_id">
+                        <select class="custom-select" id="role_id">
                             <option disabled selected>Chọn</option>
                             @foreach (config('constants.role') as $item)
                                 @if ($item['id'] !== config('constants.number.one'))
@@ -69,18 +69,18 @@
                         </select>
                         <span class="text-danger small" id="role_id_error"></span>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-4">
                         <label for="status_id" class="form-label small">Trạng thái</label>
-                        <select name="status_id" class="form-control" id="status_id">
+                        <select class="custom-select" id="status_id">
                             <option disabled selected>Chọn</option>
                             <option value="{{ config('constants.number.one') }}" {{$user->status_id === config('constants.number.one') ? 'selected' : '' }}>Hoạt động</option>
                             <option value="{{ config('constants.number.two') }}" {{$user->status_id === config('constants.number.two') ? 'selected' : '' }}>Dừng hoạt động</option>
                         </select>
                         <span class="text-danger small" id="status_id_error"></span>
                     </div>
-                    <div class="form-group col-md-1">
+                    <div class="form-group col-md-4">
                         <label for="gender_id" class="form-label small">Giới tính</label>
-                        <select name="gender_id" class="form-control" id="gender_id">
+                        <select class="custom-select" id="gender_id">
                             <option disabled selected>Chọn</option>
                             <option value="{{ config('constants.number.one') }}" {{$user->gender_id === config('constants.number.one') ? 'selected' : '' }}>Nam</option>
                             <option value="{{ config('constants.number.two') }}" {{$user->gender_id === config('constants.number.two') ? 'selected' : '' }}>Nữ</option>
@@ -89,11 +89,11 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="avatar" class="form-label small">Ảnh đại diện</label>
-                        <input type="file" class="form-control" name="avatar" id="avatar">
-                        <input type="hidden" name="old_avatar" value="{{$user->avatar}}">
+                        <input type="file" class="form-control" id="avatar">
+                        <input type="hidden" id="old_avatar" value="{{$user->avatar}}">
                         <span class="text-danger small" id="avatar_error"></span>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <button type="button" id="delete_avatar" class="btn btn-danger btn-circle position-absolute m-3" style="z-index: 1"><i class="fas fa-trash-alt"></i></button>
                         <img id="flex_avatar" src="{{ asset($user->avatar) }}" class="img-thumbnail position-relative" alt="Đây không phải là file ảnh"/>
                     </div>
