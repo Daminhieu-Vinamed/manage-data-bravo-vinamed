@@ -27,7 +27,7 @@ $(document).ready(function () {
         weekends: falseValue,
         eventRender: function (event, element, view) {
             var popover = {
-                title: 'CHI TIẾT BỔ XUNG CÔNG',
+                title: 'CHI TIẾT BỔ SUNG CÔNG',
                 trigger: 'hover',
                 placement: 'top',
                 container: 'body',
