@@ -67,10 +67,10 @@
           </button>
         </div>
         <div class="modal-body">
-            <div class="d-sm-flex align-items-center justify-content-center" id="type-timekeeping">
+            <div class="row" id="type-timekeeping">
                 <div class="form-group col-md-12" id="col-type-timekeeping">
                     <label for="type" class="form-label small">Loại ngày công</label>
-                    <select class="form-control" id="type">
+                    <select class="custom-select" id="type">
                         <option selected disabled>Chọn loại ngày công</option>
                         @foreach ($data['npVsBs'] as $item)
                             <option value="{{$item->RowId}}" type="{{$item->WorkDay}}">{{ $item->Name }}</option>
@@ -79,7 +79,7 @@
                     <span id="validate-type-error" class="text-danger small"></span>
                 </div>
             </div>
-            <div class="d-sm-flex align-items-center justify-content-between">
+            <div class="row">
                 <div class="form-group col-md-6">
                     <label for="start" class="form-label small">Từ ngày</label>
                     <input type="date" class="form-control" id="start">

@@ -56,9 +56,9 @@ var calendar = $("#calendar").fullCalendar({
     },
     select: function(start, end, jsEvent, view) {
         $('#additionalWork').modal('toggle');
-        $('#validate-type-error').text('');
-        $('#validate-start-error').text('');
-        $('#validate-end-error').text('');
+        $('#validate-type-error, #validate-start-error, #validate-end-error').text('');
+        $('#type').removeClass().addClass('custom-select');
+        $('#start, #end').removeClass().addClass('form-control');
         $('#col-type-timekeeping option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
         if ($('#period').length) {
             $('#period').remove();

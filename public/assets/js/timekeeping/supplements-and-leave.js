@@ -23,6 +23,16 @@ $(document).ready(function () {
                     icon: success.status,
                     title: success.msg,
                 });
+
+                $('#additionalWork').modal('hide');
+                $('#validate-type-error, #validate-start-error, #validate-end-error').text('');
+                $('#type').removeClass().addClass('custom-select');
+                $('#start, #end').removeClass().addClass('form-control');
+                $('#col-type-timekeeping option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                if ($('#period').length) {
+                    $('#period').remove();
+                    $('#col-type-timekeeping').removeClass('col-md-8').addClass('col-md-12');
+                }
             },
             error: function (error) {
                 if (error.responseJSON.status || error.responseJSON.msg) {
@@ -31,10 +41,32 @@ $(document).ready(function () {
                         title: error.responseJSON.msg,
                     });
                 }
+
                 let errors = error.responseJSON.errors;
-                errors.type ? $('#validate-type-error').text(errors.type[zeroConst]) : $('#validate-type-error').text('');
-                errors.start ? $('#validate-start-error').text(errors.start[zeroConst]) : $('#validate-start-error').text('');
-                errors.end ? $('#validate-end-error').text(errors.end[zeroConst]) : $('#validate-end-error').text('');
+
+                if (errors.type) {
+                    $('#validate-type-error').text(errors.type[zeroConst]);
+                    $('#type').addClass('is-invalid');
+                } else {
+                    $('#validate-type-error').text('');
+                    $('#type').addClass('is-valid');
+                }
+
+                if (errors.start) {
+                    $('#validate-start-error').text(errors.start[zeroConst]);
+                    $('#start').addClass('is-invalid');
+                } else {
+                    $('#validate-start-error').text('');
+                    $('#start').addClass('is-valid');
+                }
+
+                if (errors.end) {
+                    $('#validate-end-error').text(errors.end[zeroConst]);
+                    $('#end').addClass('is-invalid');
+                } else {
+                    $('#validate-end-error').text('');
+                    $('#end').addClass('is-valid');
+                }
                 // errors.reason ? $('#validate-reason-error').text(errors.reason[zeroConst]) : $('#validate-reason-error').text('');
             },
         });
