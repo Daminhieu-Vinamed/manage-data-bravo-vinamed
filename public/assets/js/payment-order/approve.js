@@ -19,7 +19,7 @@ $(document).on("click", ".approve-payment-request", function () {
         preConfirm: async (description) => {
             $.ajax({
                 url: linkPaymentOrder + "approve-payment-request",
-                type: "POST",
+                type: "PUT",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                         "content"

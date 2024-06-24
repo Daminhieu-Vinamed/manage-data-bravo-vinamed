@@ -104,7 +104,7 @@ function clockOutApi(realTime, id) {
 
             $.ajax({
                 url: linkTimekeeping + "clock-out",
-                type: "PUT",
+                type: "POST",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
