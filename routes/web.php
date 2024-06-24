@@ -19,8 +19,8 @@ Route::prefix('/')->group(function () {
             Route::get('get-data', [PaymentOrderController::class, 'getData']);
             Route::middleware('checkRoleManage')->group(function () {
                 Route::get('statistical', [PaymentOrderController::class, 'statistical'])->name('statistical');
-                Route::post('approve-payment-request', [PaymentOrderController::class, 'approve']);
-                Route::post('cancel-payment-request', [PaymentOrderController::class, 'cancel']);
+                Route::put('approve-payment-request', [PaymentOrderController::class, 'approve']);
+                Route::put('cancel-payment-request', [PaymentOrderController::class, 'cancel']);
             });
             Route::get('choose-company', [PaymentOrderController::class, 'chooseCompany'])->name('choose-company');
             Route::get('create', [PaymentOrderController::class, 'create'])->name('create');
@@ -39,7 +39,7 @@ Route::prefix('/')->group(function () {
             Route::get('/', [TimekeepingController::class, 'calendar'])->name('calendar');
             Route::post('supplements-and-leave', [TimekeepingController::class, 'supplementsAndLeave']);
             Route::post('clock-in', [TimekeepingController::class, 'clockIn']);
-            Route::put('clock-out', [TimekeepingController::class, 'clockOut']);
+            Route::post('clock-out', [TimekeepingController::class, 'clockOut']);
         });
 
         Route::prefix('on-leave')->name('on-leave.')->group(function () {
