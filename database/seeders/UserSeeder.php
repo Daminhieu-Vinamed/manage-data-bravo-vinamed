@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             
             //MANAGER
             //A14
+            ['EmployeeCode' => '140035', 'department_code' => 'PURCHASE', 'company' => 'A14', 'username' => 'linh.dangthuy', 'name' => 'Đặng Thùy Linh', 'email' => 'linh.dangthuy@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.two'), 'role_id' => config('constants.number.three'), 'avatar' => 'assets/images/woman.png'],
             ['EmployeeCode' => '140116', 'department_code' => 'PURCHASE', 'company' => 'A14', 'username' => 'lieu.doanthikim', 'name' => 'Đoàn Thị Kim Liễu', 'email' => 'lieu.doanthikim@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.two'), 'role_id' => config('constants.number.three'), 'avatar' => 'assets/images/woman.png'],
             ['EmployeeCode' => '140022', 'department_code' => 'PURCHASE', 'company' => 'A14', 'username' => 'lan.nguyenthi', 'name' => 'Nguyễn Thị Lan', 'email' => 'lan.nguyenthi@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.two'), 'role_id' => config('constants.number.three'), 'avatar' => 'assets/images/woman.png'],
             //A12
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
             
             //USER
             //A14
+            ['EmployeeCode' => '140064', 'department_code' => 'PURCHASE', 'company' => 'A14', 'username' => 'ngoc.phamthivan', 'name' => 'Phạm Thị Vân Ngọc', 'email' => 'ngoc.phamthivan@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.two'), 'role_id' => config('constants.number.four'), 'avatar' => 'assets/images/woman.png'],
             ['EmployeeCode' => '140081', 'department_code' => 'PURCHASE', 'company' => 'A14', 'username' => 'hieu.damminh', 'name' => 'Đàm Minh Hiếu', 'email' => 'hieu.damminh@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.one'), 'role_id' => config('constants.number.four'), 'avatar' => 'assets/images/man.png'],
             ['EmployeeCode' => '140070', 'department_code' => 'PURCHASE', 'company' => 'A14', 'username' => 'tuan.dinhhuy', 'name' => 'Đinh Huy Tuân', 'email' => 'tuan.dinhhuy@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.one'), 'role_id' => config('constants.number.four'), 'avatar' => 'assets/images/man.png'],
             ['EmployeeCode' => '140059', 'department_code' => 'PURCHASE', 'company' => 'A14', 'username' => 'tien.duongminh', 'name' => 'Dương Minh Tiến', 'email' => 'tien.duongminh@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.one'), 'role_id' => config('constants.number.four'), 'avatar' => 'assets/images/man.png'],
