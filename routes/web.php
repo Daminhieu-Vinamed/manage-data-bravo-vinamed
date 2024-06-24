@@ -19,8 +19,8 @@ Route::prefix('/')->group(function () {
             Route::get('get-data', [PaymentOrderController::class, 'getData']);
             Route::middleware('checkRoleManage')->group(function () {
                 Route::get('statistical', [PaymentOrderController::class, 'statistical'])->name('statistical');
-                Route::middleware('checkRoleAdmin')->post('approve-payment-request', [PaymentOrderController::class, 'approve']);
-                Route::middleware('checkRoleAdmin')->post('cancel-payment-request', [PaymentOrderController::class, 'cancel']);
+                Route::post('approve-payment-request', [PaymentOrderController::class, 'approve']);
+                Route::post('cancel-payment-request', [PaymentOrderController::class, 'cancel']);
             });
             Route::get('choose-company', [PaymentOrderController::class, 'chooseCompany'])->name('choose-company');
             Route::get('create', [PaymentOrderController::class, 'create'])->name('create');
