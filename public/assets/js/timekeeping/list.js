@@ -43,7 +43,18 @@ var calendar = $("#calendar").fullCalendar({
             }else{
                 popover.content = moment(event.start).format('dddd, D MMMM [năm] YYYY');
             }
-            element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
+
+            if (event.status === "35" || event.status === "36" || event.status === "37" || event.status === "51") {
+                popover.content = popover.content + '<br>' + "Trạng thái: đã duyệt"
+                element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
+            }else if (event.status === "19" || event.status === "50") {
+                popover.content = popover.content + '<br>' + "Trạng thái: chờ duyệt"
+                element.css({'background-color': '#f6c23e', 'border': '1px solid #f6c23e'});
+            }else if(event.status === "9") {
+                popover.content = popover.content + '<br>' + "Trạng thái: hủy duyệt"
+                element.css({'background-color': '#e74a3b', 'border': '1px solid #e74a3b'});
+            }
+
             element.find('.fc-time').remove();
             popover.title = event.type;
         }else{
