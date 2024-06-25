@@ -33,6 +33,8 @@ $(document).ready(function () {
                     $('#period').remove();
                     $('#col-type-timekeeping').removeClass('col-md-8').addClass('col-md-12');
                 }
+
+                calendar.fullCalendar("refetchEvents");
             },
             error: function (error) {
                 if (error.responseJSON.status || error.responseJSON.msg) {
