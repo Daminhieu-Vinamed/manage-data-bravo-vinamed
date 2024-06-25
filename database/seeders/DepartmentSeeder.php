@@ -14,8 +14,9 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['code' => 'PURCHASE', 'name' => 'Mua hàng', 'DeptCode' => '["164", "197"]'],
-            ['code' => 'ADMIN', 'name' => 'Quản lý hệ thống', 'DeptCode' => '["164", "197"]'],
+            ['code' => 'PURCHASE', 'name' => 'Phòng mua hàng và Dịch vụ', 'DeptCode' => '["167", "168", "169", "197"]'],
+            ['code' => 'ACCOUNTANT', 'name' => 'Phòng kế toán', 'DeptCode' => '["179"]'],
+            ['code' => 'ADMIN', 'name' => 'Quản lý hệ thống', 'DeptCode' => '["167", "168", "169", "197", "179"]'],
         ];
         DB::table('departments')->insert($data);
     }

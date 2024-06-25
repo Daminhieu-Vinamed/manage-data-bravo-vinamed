@@ -2,44 +2,59 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdditionalWorkRepository
 {
     public function getData($timeNow)
     {
-        foreach (config('constants.company') as $value) {
-            $onLeave = DB::connection($value)->table('vB30HrmPTimesheet')
-            ->where('IsActive', config('constants.number.one'))
-            ->where('DocCode', 'BS')
-            ->where('DocStatus', '50')
-            ->whereYear('FromDate',  $timeNow->format('Y'))
-            ->get([
-                'BranchCode',
-                'EmployeeCode', 
-                'EmployeeName', 
-                'DeptName', 
-                'TimesheetTypeName', 
-                DB::raw("FORMAT(FromDate, 'dd-MM-yyyy') AS [start]"),
-                DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
-                'DocStatusName',
-                'DocCode',
-                'RowId'
-            ]);
-            $onLeaveTotal[$value] = $onLeave->toArray();
-        };
-        $total = array_merge(
-            $onLeaveTotal['A06'],
-            $onLeaveTotal['A11'],
-            $onLeaveTotal['A12'],
-            $onLeaveTotal['A14'],
-            $onLeaveTotal['A18'],
-            $onLeaveTotal['A19'],
-            $onLeaveTotal['A21'],
-            $onLeaveTotal['A22'],
-            $onLeaveTotal['A25'],
-        );
-        return $total;
+        if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
+            foreach (config('constants.company') as $value) {
+                $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
+                ->where('IsActive', config('constants.number.one'))
+                ->where('DocCode', 'BS')
+                ->where('DocStatus', '50')
+                ->whereYear('FromDate',  $timeNow->format('Y'))
+                ->get([
+                    'BranchCode',
+                    'EmployeeCode', 
+                    'EmployeeName', 
+                    'DeptName', 
+                    'TimesheetTypeName', 
+                    DB::raw("FORMAT(FromDate, 'dd-MM-yyyy') AS [start]"),
+                    DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
+                    'DocStatusName',
+                    'DocCode',
+                    'RowId'
+                ]);
+                $additionalWorkTotal[$value] = $additionalWork->toArray();
+            };
+        }elseif (Auth::user()->role->id === config('constants.number.three')) {
+            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
+            foreach (config('constants.company') as $value) {
+                $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
+                ->where('IsActive', config('constants.number.one'))
+                ->where('DocCode', 'BS')
+                ->where('DocStatus', '50')
+                ->whereIn('DeptCode', $arrayDeptCode)
+                ->whereYear('FromDate',  $timeNow->format('Y'))
+                ->get([
+                    'BranchCode',
+                    'EmployeeCode', 
+                    'EmployeeName', 
+                    'DeptName', 
+                    'TimesheetTypeName', 
+                    DB::raw("FORMAT(FromDate, 'dd-MM-yyyy') AS [start]"),
+                    DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
+                    'DocStatusName',
+                    'DocCode',
+                    'RowId'
+                ]);
+                $additionalWorkTotal[$value] = $additionalWork->toArray();
+            };
+        }
+        return $additionalWorkTotal;
     }
 
     public function approveLeave($connectCompany, $RowId, $DocCode)

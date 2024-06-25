@@ -10,38 +10,18 @@ class PaymentOrderRepository
     public function getData()
     {
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
-            $A06 = DB::connection('A06')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A18 = DB::connection('A18')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A19 = DB::connection('A19')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A21 = DB::connection('A21')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A22 = DB::connection('A22')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
-            $A25 = DB::connection('A25')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+            foreach (config('constants.company') as $company) {
+                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+                $paymentOrderTotal[$company] = $paymentOrder->toArray();
+            }
         }elseif (Auth::user()->role->id === config('constants.number.three')) {
             $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
-            $A06 = DB::connection('A06')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A18 = DB::connection('A18')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A19 = DB::connection('A19')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A21 = DB::connection('A21')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A22 = DB::connection('A22')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-            $A25 = DB::connection('A25')->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
-        }else{
-            $A06 = DB::connection('A06')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->orderBy('DocDate', 'desc')->get();
-            $A11 = DB::connection('A11')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A12 = DB::connection('A12')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A14 = DB::connection('A14')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A18 = DB::connection('A18')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A19 = DB::connection('A19')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A21 = DB::connection('A21')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A22 = DB::connection('A22')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
-            $A25 = DB::connection('A25')->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->where('CreatedBy', '1194')->get();
+            foreach (config('constants.company') as $company) {
+                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
+                $paymentOrderTotal[$company] = $paymentOrder->toArray();
+            }
         }
-        return array('A06' => $A06, 'A11' => $A11, 'A12' => $A12, 'A14' => $A14, 'A18' => $A18, 'A19' => $A19, 'A21' => $A21, 'A22' => $A22, 'A25' => $A25);
+        return  $paymentOrderTotal;
     }
 
     public function approvePaymentOrder($connectCompany, $Stt, $nUserId, $description, $username)

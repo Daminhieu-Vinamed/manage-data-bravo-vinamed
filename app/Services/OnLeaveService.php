@@ -20,7 +20,18 @@ class OnLeaveService extends OnLeaveRepository
     {
         $timeNow = new Carbon();
         $onLeave = $this->onLeaveRepository->getData($timeNow);
-        return DataTables::of($onLeave)
+        $onLeaveTotal = array_merge(
+            $onLeave['A06'],
+            $onLeave['A11'],
+            $onLeave['A12'],
+            $onLeave['A14'],
+            $onLeave['A18'],
+            $onLeave['A19'],
+            $onLeave['A21'],
+            $onLeave['A22'],
+            $onLeave['A25'],
+        );
+        return DataTables::of($onLeaveTotal)
         ->addColumn('action', function ($onLeave) {
             return  '<button BranchCode="'.$onLeave->BranchCode.'" DocCode="'.$onLeave->DocCode.'" RowId="'.$onLeave->RowId.'" title="Phê duyệt nghỉ phép" class="btn btn-info shadow-sm btn-circle" id="approve"><i class="fas fa-check"></i></button>' .
                     ' <button BranchCode="'.$onLeave->BranchCode.'" RowId="'.$onLeave->RowId.'" title="Từ chối nghỉ phép" class="btn btn-danger shadow-sm btn-circle" id="cancel"><i class="fas fa-ban"></i></button>';

@@ -10,24 +10,24 @@ class TimekeepingRepository
         $np = DB::connection($company)->table('vB30HrmPTimesheet')
         ->where('IsActive', config('constants.number.one'))
         ->where('DocCode', 'NP')
-        ->whereIn('DocStatus', ['35','36','37'])
         ->where('EmployeeCode', $EmployeeCode)
         ->get([
             DB::raw("LEFT(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [start]"),
             DB::raw("LEFT(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [end]"), 
             'VAC_Name as title',
             'TimesheetTypeName as type',
+            'DocStatus as status'
         ]);
         $bs = DB::connection($company)->table('vB30HrmPTimesheet')
         ->where('IsActive', config('constants.number.one'))
         ->where('DocCode', 'BS')
-        ->where('DocStatus', '51')
         ->where('EmployeeCode', $EmployeeCode)
         ->get([
             DB::raw("LEFT(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(FromDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [start]"),
             DB::raw("LEFT(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [end]"), 
             'VAC_Name as title',
             'TimesheetTypeName as type',
+            'DocStatus as status'
         ]);
         $labour = DB::connection($company)->table('vB30HrmCheckInOut')->where('EmployeeCodeCC', $EmployeeCode)->where('IsActive', config('constants.number.one'))->get(['CheckTime as start']);
         $dataCalendar = array_merge($bs->toArray(), $np->toArray(), $labour->toArray());
