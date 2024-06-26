@@ -1,6 +1,4 @@
-$(document).on("click", "#login", function () {
-    const username = $("input[name='username']").val();
-    const password = $("input[name='password']").val();
+function login(username, password) {
     $.ajax({
         url: linkOrigin + "/login",
         type: "POST",
@@ -30,4 +28,15 @@ $(document).on("click", "#login", function () {
             notification.errors.password ? $('.password-notification').text(notification.errors.password[zero]) : $('.password-notification').text('');
         },
     });
+}
+$(document).on("click", "#login", function () {
+    const username = $("#username").val();
+    const password = $("#password").val();
+    login(username, password);
+});
+
+$(document).on("keypress", "#username, #password", function () {
+    const username = $("#username").val();
+    const password = $("#password").val();
+    login(username, password);
 });

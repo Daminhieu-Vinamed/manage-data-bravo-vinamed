@@ -1,5 +1,5 @@
 @extends('layout.base')
-@section('title', 'Login')
+@section('title', 'Đăng nhập')
 @section('screen')
     <div class="container">
         <div class="row min-vh-100 d-flex align-items-center justify-content-center">
@@ -12,11 +12,11 @@
                             </div>
                             <div class="user">
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control form-control-user" placeholder="Điền tên đăng nhập...">
+                                    <input type="text" id="username" class="form-control form-control-user" placeholder="Điền tên đăng nhập...">
                                     <small class="text-danger pl-2 username-notification"></small>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control form-control-user" placeholder="Mật khẩu">
+                                    <input type="password" id="password" class="form-control form-control-user" placeholder="Mật khẩu">
                                     <small class="text-danger pl-2 password-notification"></small>
                                 </div>
                                 <button class="btn btn-primary btn-user btn-block shadow-sm" id="login">Đăng nhập</button>
