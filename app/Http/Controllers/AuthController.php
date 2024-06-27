@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AuthRequest;
+use App\Http\Requests\Auth\ChangePasswordRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function postLogin(AuthRequest $request)
+    public function postLogin(LoginRequest $request)
     {
         return $this->authService->postLogin($request);
     }
@@ -33,5 +34,10 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         return $this->authService->logout($request);
+    }
+    
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        return $this->authService->changePassword($request);
     }
 }

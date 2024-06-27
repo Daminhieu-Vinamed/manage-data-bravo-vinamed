@@ -2,11 +2,19 @@
 
 namespace App\Services;
 
+use App\Repositories\Admin\UserRepository;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
+    protected UserRepository $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }    
+    
     public function postLogin($request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
@@ -23,5 +31,13 @@ class AuthService
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login.get');
+    }
+    
+    public function changePassword($request)
+    {
+        $id = Auth::user()->id;
+        $data['password'] = Hash::make($request->new_password);
+        $this->userRepository->updateUser($id, $data);
+        return response()->json(['status' => 'success', 'msg' => 'Đổi mật khẩu thành công'], 200);
     }
 }

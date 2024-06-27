@@ -79,10 +79,39 @@
                         </p>
                     </div>
                 </div>
-                {{-- <div class="modal-footer">
-                    <a class="btn btn-primary shadow-sm" href="{{ route('logout') }}">Đăng xuất</a>
-                </div> --}}
             </div>
         </div>
     </div>
+    <div class="modal fade bd-example-modal-sm" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">THAY ĐỔI MẬT KHẨU</h5>
+                <button class="close" type="button" id="close-change-password" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <div class="form-group col-md-12">
+                        <label for="old_password" class="form-label small">Mật khẩu cũ</label>
+                        <input type="password" class="form-control" id="old_password">
+                        <span id="validate-old-password-error" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="new_password" class="form-label small">Mật khẩu mới</label>
+                        <input type="password" class="form-control" id="new_password">
+                        <span id="validate-new-password-error" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="re_new_password" class="form-label small">Nhập lại mật khẩu mới</label>
+                        <input type="password" class="form-control" id="re_new_password">
+                        <span id="validate-re-new-password-error" class="text-danger small"></span>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary shadow-sm" id="change_password">Đổi mật khẩu</button>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
