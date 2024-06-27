@@ -24,6 +24,7 @@
     <script src="{{ asset('assets/vendor/swalalert2@11.js') }}"></script>
     <script src="{{ asset('assets/js/script.min.js') }}"></script>
     <script src="{{ asset('assets/js/constants.js') }}"></script>
+    <script src="{{ asset('assets/js/change-password.js') }}"></script>
     <script src="{{ asset('assets/js/notification.js') }}"></script>
     @stack('js')
 </body>

@@ -14,6 +14,8 @@ Route::prefix('/')->group(function () {
 
         Route::get('welcome', [AuthController::class, 'welcome']);
         
+        Route::put('change-password', [AuthController::class, 'changePassword']);
+        
         Route::prefix('payment-order')->name('payment-order.')->group(function () {
             Route::get('/', [PaymentOrderController::class, 'list'])->name('list');
             Route::get('get-data', [PaymentOrderController::class, 'getData']);
@@ -43,19 +45,23 @@ Route::prefix('/')->group(function () {
         });
 
         Route::prefix('on-leave')->name('on-leave.')->group(function () {
-            Route::middleware('checkRoleManage')->get('/', [OnLeaveController::class, 'list'])->name('list');
+            Route::middleware('checkRoleManage')->group(function () {
+                Route::get('/', [OnLeaveController::class, 'list'])->name('list');
+                Route::get('get-data', [OnLeaveController::class, 'getData']);
+                Route::put('approve', [OnLeaveController::class, 'approve']);
+                Route::put('cancel', [OnLeaveController::class, 'cancel']);
+            });
             Route::get('calendar', [OnLeaveController::class, 'calendar'])->name('calendar');
-            Route::get('get-data', [OnLeaveController::class, 'getData']);
-            Route::put('approve', [OnLeaveController::class, 'approve']);
-            Route::put('cancel', [OnLeaveController::class, 'cancel']);
         });
         
         Route::prefix('additional-work')->name('additional-work.')->group(function () {
-            Route::middleware('checkRoleManage')->get('/', [AdditionalWorkController::class, 'list'])->name('list');
+            Route::middleware('checkRoleManage')->group(function () {
+                Route::get('/', [AdditionalWorkController::class, 'list'])->name('list');
+                Route::get('get-data', [AdditionalWorkController::class, 'getData']);
+                Route::put('approve', [AdditionalWorkController::class, 'approve']);
+                Route::put('cancel', [AdditionalWorkController::class, 'cancel']);
+            });
             Route::get('calendar', [AdditionalWorkController::class, 'calendar'])->name('calendar');
-            Route::get('get-data', [AdditionalWorkController::class, 'getData']);
-            Route::put('approve', [AdditionalWorkController::class, 'approve']);
-            Route::put('cancel', [AdditionalWorkController::class, 'cancel']);
         });
         
     });

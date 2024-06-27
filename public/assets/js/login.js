@@ -10,10 +10,6 @@ function login(username, password) {
             password: password,
         },
         success: function (success) {
-            // ToastTopRight.fire({
-            //     icon: success.status,
-            //     title: success.msg,
-            // });
             location.href = linkOrigin + '/welcome'
         },
         error: function (error) {
@@ -35,8 +31,10 @@ $(document).on("click", "#login", function () {
     login(username, password);
 });
 
-$(document).on("keypress", "#username, #password", function () {
-    const username = $("#username").val();
-    const password = $("#password").val();
-    login(username, password);
+$(document).keypress(function (e) {
+    if (e.which === 13) {
+        const username = $("#username").val();
+        const password = $("#password").val();
+        login(username, password);
+    }
 });

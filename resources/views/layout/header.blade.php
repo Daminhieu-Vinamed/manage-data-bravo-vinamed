@@ -177,7 +177,7 @@
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Thông tin cá nhân
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePasswordModal">
                     <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
                     Đổi mật khẩu
                 </a>
