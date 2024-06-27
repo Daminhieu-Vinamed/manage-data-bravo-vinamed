@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Chấm công')
+@section('title', 'Quản lý công')
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/vendor/calendar/fullcalendar.css') }}" />
 @endsection

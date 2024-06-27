@@ -1,4 +1,4 @@
-<div class="modal fade" id="timekeepingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="timekeepingModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="additionalWork" tabindex="-1" role="dialog" aria-labelledby="additionalWorkTitle" aria-hidden="true">
+<div class="modal fade" id="additionalWork" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="additionalWorkTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
