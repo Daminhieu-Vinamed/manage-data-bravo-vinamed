@@ -1,10 +1,6 @@
 function refreshModal() {
-    $('#old_password').val('');
-        $('#new_password').val('');
-        $('#re_new_password').val('');
-        $('#validate-old-password-error').text('');
-        $('#validate-new-password-error').text('');
-        $('#validate-re-new-password-error').text('');
+    $('#old_password, #new_password, #re_new_password').val('');
+    $('#validate-old-password-error, #validate-new-password-error, #validate-re-new-password-error').text('');
 }
 
 $(document).on("click", "#change_password", function () {

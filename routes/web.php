@@ -12,7 +12,7 @@ Route::prefix('/')->group(function () {
     
     Route::middleware('checkLogin')->group(function () {
 
-        Route::get('welcome', [AuthController::class, 'welcome']);
+        Route::get('welcome', [AuthController::class, 'welcome'])->name('welcome');
         
         Route::put('change-password', [AuthController::class, 'changePassword']);
         

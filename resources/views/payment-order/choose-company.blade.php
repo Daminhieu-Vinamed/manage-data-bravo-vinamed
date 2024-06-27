@@ -18,9 +18,9 @@
                 <form action="{{ route('payment-order.create') }}" method="GET">
                     <select name="company" class="form-control">
                         <option disabled selected>chọn công ty</option>
-                        <option value="A11">A11 TMVM</option>
-                        <option value="A12">A12 PPVM</option>
-                        <option value="A14">A14 VMPP</option>
+                        @foreach (config('constants.company') as $company)
+                            <option value="{{$company}}">{{ $company }}</option>
+                        @endforeach
                     </select>
                     @error('company')
                         <div class="text-center">
