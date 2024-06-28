@@ -26,6 +26,7 @@ Route::prefix('/')->group(function () {
             });
             Route::get('choose-company', [PaymentOrderController::class, 'chooseCompany'])->name('choose-company');
             Route::get('create', [PaymentOrderController::class, 'create'])->name('create');
+            Route::post('store', [PaymentOrderController::class, 'store'])->name('store');
         });
 
         Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {
