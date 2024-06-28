@@ -19,13 +19,13 @@ $(document).ready(function () {
 
         $("#th-name-vat").text("Giá trị " + valueCurrency + " chưa VAT");
         if (valueCurrency !== "VND" && !$("#th-name-money-vnd1").length) {
-            $("#ExchangeRate").val(zeroConst).removeAttr("disabled");
+            $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
             $("thead tr #th-name-vat").after(
                 '<th id="th-name-money-vnd1">Tiền VND</th>'
             );
             $("tbody tr #OriginalAmount9").parent()
                 .after(`<td id="td-name-money-vnd1">
-                <input type="number" class="form-control" name="Amount9[]" id="Amount9" disabled/>
+                <input type="number" class="form-control" name="Amount9[]" id="Amount9" readonly/>
             </td>`);
             $("tbody tr #TaxRate")
                 .parent()
@@ -34,7 +34,7 @@ $(document).ready(function () {
                 <label for="OriginalAmount3" class="form-label small">Tiền ` +
                         valueCurrency +
                         `</label>
-                <input type="number" class="form-control" name="OriginalAmount3[]" id="OriginalAmount3" disabled/>
+                <input type="number" class="form-control" name="OriginalAmount3[]" id="OriginalAmount3" readonly/>
             </td>`
                 );
             $("thead tr #th-name-value-added-tax-vat").attr(
@@ -42,13 +42,13 @@ $(document).ready(function () {
                 fourConst
             );
             $(".form-group-into-money").append(
-                '<input type="number" class="form-control mt-2" name="TotalAmount0" id="TotalAmount0" disabled>'
+                '<input type="number" class="form-control mt-2" name="TotalAmount0" id="TotalAmount0" readonly>'
             );
             $(".form-group-tax-money").append(
-                '<input type="number" class="form-control mt-2" name="TotalAmount3" id="TotalAmount3" disabled>'
+                '<input type="number" class="form-control mt-2" name="TotalAmount3" id="TotalAmount3" readonly>'
             );
             $(".form-group-total").append(
-                '<input type="number" class="form-control mt-2" name="TotalAmount" id="TotalAmount" disabled>'
+                '<input type="number" class="form-control mt-2" name="TotalAmount" id="TotalAmount" readonly>'
             );
 
             var OriginalAmount3 = $("input[name='OriginalAmount3[]']");
@@ -71,7 +71,7 @@ $(document).ready(function () {
                 "colspan",
                 threeConst
             );
-            $("#ExchangeRate").val(oneConst).attr("disabled", trueValue);
+            $("#ExchangeRate").val(oneConst).attr("readonly", trueValue);
             $(
                 "thead tr #th-name-money-vnd1, tbody tr #td-name-money-vnd1, tbody tr #td-name-value-added-tax-vat"
             ).remove();
@@ -106,15 +106,15 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("blur", "#bill_detailed_object", function () {
+    $(document).on("blur", "#CustomerCode2", function () {
         const valueSelected = $(this).val();
-        var this_bill_detailed_object = $(this).val(nullValue);
+        var CustomerCode2 = $(this).val(nullValue);
         $(this)
-            .next("#list_detailed_object")
+            .next("#listCustomerCode2")
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
-                    return this_bill_detailed_object.val(valueSelected);
+                    return CustomerCode2.val(valueSelected);
                 }
             });
     });
@@ -132,11 +132,11 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on("blur", "#CustomerCode", function () {
+    $(document).on("blur", "#CustomerCode1", function () {
         const valueSelected = $(this).val();
         var CustomerCode = $(this).val(nullValue);
         $(this)
-            .next("#listCustomerCode")
+            .next("#listCustomerCode1")
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
@@ -175,15 +175,15 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on("blur", "#base_items", function () {
+    $(document).on("blur", "#ExpenseCatgCode", function () {
         const valueSelected = $(this).val();
-        var this_base_items = $(this).val(nullValue);
+        var thisExpenseCatgCode = $(this).val(nullValue);
         $(this)
-            .next("#list_base_items")
+            .next("#listExpenseCatgCode")
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
-                    return this_base_items.val(valueSelected);
+                    return thisExpenseCatgCode.val(valueSelected);
                 }
             });
     });
@@ -221,15 +221,15 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on("blur", "#bill_purchase_order", function () {
+    $(document).on("blur", "#BizDocId_PO", function () {
         const valueSelected = $(this).val();
-        var this_bill_purchase_order = $(this).val(nullValue);
+        var this_BizDocId_PO = $(this).val(nullValue);
         $(this)
-            .next("#list_bill_purchase_order")
+            .next("#list_BizDocId_PO")
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
-                    return this_bill_purchase_order.val(valueSelected);
+                    return this_BizDocId_PO.val(valueSelected);
                 }
             });
     });
@@ -259,5 +259,79 @@ $(document).ready(function () {
             }
         }
         total_payment_order();
+    });
+
+    $(document).on("click", "#create-payment-order", function () {
+        const BranchCode = $('#BranchCode').val();
+        const DocStatus = $('#DocStatus').val();
+        const DocDate = $('#DocDate').val();
+        const DocNo = $('#DocNo').val();
+        const DocCode = $('#DocCode').val();
+        const EmployeeCode = $('#EmployeeCode').val();
+        const CustomerCode1 = $('#CustomerCode1').val();
+        const AmountTT = $('#AmountTT').val();
+        const Stt_TU = $('#Stt_TU').val();
+        const AmountTU = $('#AmountTU').val();
+        const Hinh_Thuc_TT = $('#Hinh_Thuc_TT').val();
+        const CurrencyCode = $('#CurrencyCode').val();
+        const ExchangeRate = $('#ExchangeRate').val();
+        const TotalOriginalAmount0 = $('#TotalOriginalAmount0').val();
+        const TotalOriginalAmount3 = $('#TotalOriginalAmount3').val();
+        const TotalOriginalAmount = $('#TotalOriginalAmount').val();
+        const BankName = $('#BankName').val();
+        const BankAccountNo = $('#BankAccountNo').val();
+        const Ten_Chu_TK = $('#Ten_Chu_TK').val();
+        const Description1 = $('#Description1').val();
+
+        const So_Hd = $("input[name='So_Hd[]']").map(function(){return $(this).val();}).get();
+        const Ngay_Hd = $("input[name='Ngay_Hd[]']").map(function(){return $(this).val();}).get();
+        const Description = $("textarea[name='Description[]']").map(function(){return $(this).val();}).get();
+        const Invoice = $("input[name='Invoice[]']").map(function(){return $(this).val();}).get();
+        const So_Van_Don = $("input[name='So_Van_Don[]']").map(function(){return $(this).val();}).get();
+        const Trong_Luong = $("input[name='Trong_Luong[]']").map(function(){return $(this).val();}).get();
+        const DV_Trong_Luong = $("input[name='DV_Trong_Luong[]']").map(function(){return $(this).val();}).get();
+        const CustomerCode2 = $("input[name='CustomerCode2[]']").map(function(){return $(this).val();}).get();
+        const ExpenseCatgCode = $("input[name='ExpenseCatgCode[]']").map(function(){return $(this).val();}).get();
+        const EmployeeCode1 = $("input[name='EmployeeCode1[]']").map(function(){return $(this).val();}).get();
+        const DeptCode = $("input[name='DeptCode[]']").map(function(){return $(this).val();}).get();
+        const BizDocId_PO = $("input[name='BizDocId_PO[]']").map(function(){return $(this).val();}).get();
+        const Hang_SX = $("input[name='Hang_SX[]']").map(function(){return $(this).val();}).get();
+        const OriginalAmount9 = $("input[name='OriginalAmount9[]']").map(function(){return $(this).val();}).get();
+        const TaxCode = $("input[name='TaxCode[]']").map(function(){return $(this).val();}).get();
+        const TaxRate = $("input[name='TaxRate[]']").map(function(){return $(this).val();}).get();
+        const Amount3 = $("input[name='Amount3[]']").map(function(){return $(this).val();}).get();
+        const Note = $("textarea[name='Note[]']").map(function(){return $(this).val();}).get();
+
+        $.ajax({
+            url: linkPaymentOrder + "store",
+            type: "POST",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                    "content"
+                ),
+            },
+            data: {
+                Stt: Stt,
+                description: description,
+                BranchCode: BranchCode,
+            },
+            success: function (success) {
+                ToastTopRight.fire({
+                    icon: success.status,
+                    title: success.msg,
+                });
+                listPaymentOrder.ajax.reload();
+            },
+            error: function (error) {
+                let notification = error.responseJSON;
+                ToastErrorCenter.fire({
+                    icon: notification.status,
+                    text:
+                        notification.msg !== undefinedValue
+                            ? notification.msg
+                            : notification.responseJSON?.errors.description,
+                });
+            },
+        });
     });
 });

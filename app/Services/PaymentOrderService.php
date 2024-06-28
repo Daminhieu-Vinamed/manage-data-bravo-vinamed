@@ -78,6 +78,11 @@ class PaymentOrderService extends PaymentOrderRepository
         $data =  $this->paymentOrderRepository->create($request->company);
         return $data;
     }
+    
+    public function store($request)
+    {
+        return $this->paymentOrderRepository->store($request);
+    }
 
     public function statistical()
     {

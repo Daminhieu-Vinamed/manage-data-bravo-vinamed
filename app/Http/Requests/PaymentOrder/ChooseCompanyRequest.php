@@ -23,6 +23,7 @@ class ChooseCompanyRequest extends FormRequest
     {
         return [
             "company" => "required",
+            "DocCode" => "required",
         ];
     }
 
@@ -30,6 +31,7 @@ class ChooseCompanyRequest extends FormRequest
     {
         return [
             'company.required' => 'Chưa chọn công ty',
+            'DocCode.required' => 'Chưa chọn kiểu đề nghị',
         ];
     }
 }

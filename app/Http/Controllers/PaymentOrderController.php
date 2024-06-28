@@ -53,6 +53,11 @@ class PaymentOrderController extends Controller
         }
     }
 
+    public function store(Request $request)
+    {
+        $this->paymentOrderService->store($request);
+    }
+
     public function statistical()
     {
         try {
