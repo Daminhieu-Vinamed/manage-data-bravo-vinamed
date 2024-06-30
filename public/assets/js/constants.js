@@ -6,7 +6,7 @@ const undefinedValue = undefined;
 const linkOrigin = window.location.origin;
 const linkHref = window.location.href;
 
-const linkPaymentOrder = window.location.origin + "/payment-order/";
+const linkSuggestion = window.location.origin + "/suggestion/";
 const linkUser = window.location.origin + "/user/";
 const linkTimekeeping = window.location.origin + "/timekeeping/";
 const linkOnLeave = window.location.origin + "/on-leave/";

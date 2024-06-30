@@ -13,78 +13,77 @@
 
     <!-- Nav Item - Tables -->
     <li
-        class="nav-item {{ 
-            request()->routeIs('payment-order.statistical') ||
-            request()->routeIs('payment-order.list') || 
-            request()->routeIs('payment-order.choose-company') || 
-            request()->routeIs('payment-order.create') ? 'active' : config('constants.value.empty') 
-        }}">
-        <a class="nav-link {{ 
-            request()->routeIs('payment-order.statistical') ||
-            request()->routeIs('payment-order.list') || 
-            request()->routeIs('payment-order.choose-company') || 
-            request()->routeIs('payment-order.create') ? config('constants.value.empty') : 'collapsed' 
-        }}"
+        class="nav-item {{ request()->routeIs('suggestion.statistical') ||
+        request()->routeIs('suggestion.list') ||
+        request()->routeIs('suggestion.choose-company') ||
+        request()->routeIs('suggestion.payment-order')
+            ? 'active'
+            : config('constants.value.empty') }}">
+        <a class="nav-link {{ request()->routeIs('suggestion.statistical') ||
+        request()->routeIs('suggestion.list') ||
+        request()->routeIs('suggestion.choose-company') ||
+        request()->routeIs('suggestion.payment-order')
+            ? config('constants.value.empty')
+            : 'collapsed' }}"
             data-toggle="collapse" data-target="#paymentOrder" aria-expanded="true" aria-controls="paymentOrder">
             <i class="fas fa-file-invoice-dollar"></i>
-            <span>Đề nghị thanh toán</span>
+            <span>Đề nghị</span>
         </a>
         <div id="paymentOrder"
-            class="collapse {{
-                request()->routeIs('payment-order.statistical') ||
-                request()->routeIs('payment-order.list') || 
-                request()->routeIs('payment-order.choose-company') || 
-                request()->routeIs('payment-order.create') ? 'show' : config('constants.value.empty') 
-            }}"
+            class="collapse {{ request()->routeIs('suggestion.statistical') ||
+            request()->routeIs('suggestion.list') ||
+            request()->routeIs('suggestion.choose-company') ||
+            request()->routeIs('suggestion.payment-order') ||
+            request()->routeIs('suggestion.requests-for-advances')
+                ? 'show'
+                : config('constants.value.empty') }}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Hành động:</h6>
-                @if (
-                    Auth::user()->role->id === config('constants.number.one') || 
-                    Auth::user()->role->id === config('constants.number.two') || 
-                    Auth::user()->role->id === config('constants.number.three')
-                )
-                    <a class="collapse-item {{ request()->routeIs('payment-order.statistical') ? 'active' : config('constants.value.empty') }}"
-                        href="{{ route('payment-order.statistical') }}">Thống kê</a>
+                @if (Auth::user()->role->id === config('constants.number.one') ||
+                        Auth::user()->role->id === config('constants.number.two') ||
+                        Auth::user()->role->id === config('constants.number.three'))
+                    <a class="collapse-item {{ request()->routeIs('suggestion.statistical') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('suggestion.statistical') }}">Thống kê</a>
                 @endif
-                <a class="collapse-item {{ request()->routeIs('payment-order.list') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('payment-order.list') }}">Danh sách</a>
-                <a class="collapse-item {{ request()->routeIs('payment-order.choose-company') || request()->routeIs('payment-order.create') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('payment-order.choose-company') }}">Tạo mới</a>
+                <a class="collapse-item {{ request()->routeIs('suggestion.list') ? 'active' : config('constants.value.empty') }}"
+                    href="{{ route('suggestion.list') }}">Danh sách</a>
+                <a class="collapse-item {{ request()->routeIs('suggestion.choose-company') || request()->routeIs('suggestion.payment-order') || request()->routeIs('suggestion.requests-for-advances') ? 'active' : config('constants.value.empty') }}"
+                    href="{{ route('suggestion.choose-company') }}">Tạo mới</a>
             </div>
         </div>
     </li>
     <li
-        class="nav-item {{ 
-            request()->routeIs('on-leave.list') || 
-            request()->routeIs('additional-work.list') ||
-            request()->routeIs('on-leave.calendar') ||
-            request()->routeIs('additional-work.calendar') ? 'active' : config('constants.value.empty') 
-        }}">
-        <a class="nav-link {{ 
-            request()->routeIs('on-leave.list') || 
-            request()->routeIs('additional-work.list') ||
-            request()->routeIs('on-leave.calendar') ||
-            request()->routeIs('additional-work.calendar') ? config('constants.value.empty') : 'collapsed' 
-        }}"
-            data-toggle="collapse" data-target="#supplementsAndLeave" aria-expanded="true" aria-controls="supplementsAndLeave">
+        class="nav-item {{ request()->routeIs('on-leave.list') ||
+        request()->routeIs('additional-work.list') ||
+        request()->routeIs('on-leave.calendar') ||
+        request()->routeIs('additional-work.calendar')
+            ? 'active'
+            : config('constants.value.empty') }}">
+        <a class="nav-link {{ request()->routeIs('on-leave.list') ||
+        request()->routeIs('additional-work.list') ||
+        request()->routeIs('on-leave.calendar') ||
+        request()->routeIs('additional-work.calendar')
+            ? config('constants.value.empty')
+            : 'collapsed' }}"
+            data-toggle="collapse" data-target="#supplementsAndLeave" aria-expanded="true"
+            aria-controls="supplementsAndLeave">
             <i class="fas fa-pencil-alt"></i>
             <span>Nghỉ phép/bổ sung</span>
         </a>
         <div id="supplementsAndLeave"
-            class="collapse {{ 
-            request()->routeIs('on-leave.list') || 
+            class="collapse {{ request()->routeIs('on-leave.list') ||
             request()->routeIs('additional-work.list') ||
             request()->routeIs('on-leave.calendar') ||
-            request()->routeIs('additional-work.calendar')  ? 'show' : config('constants.value.empty') }}"
+            request()->routeIs('additional-work.calendar')
+                ? 'show'
+                : config('constants.value.empty') }}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Hành động:</h6>
-                @if (
-                    Auth::user()->role->id === config('constants.number.one') || 
-                    Auth::user()->role->id === config('constants.number.two') || 
-                    Auth::user()->role->id === config('constants.number.three')
-                )
+                @if (Auth::user()->role->id === config('constants.number.one') ||
+                        Auth::user()->role->id === config('constants.number.two') ||
+                        Auth::user()->role->id === config('constants.number.three'))
                     <a class="collapse-item {{ request()->routeIs('on-leave.list') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('on-leave.list') }}">Danh sách nghỉ phép</a>
                     <a class="collapse-item {{ request()->routeIs('additional-work.list') ? 'active' : config('constants.value.empty') }}"
@@ -97,8 +96,10 @@
             </div>
         </div>
     </li>
-    @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two'))
-        <li class="nav-item {{ request()->routeIs('user.list') || request()->routeIs('user.edit') ? 'active' : config('constants.value.empty') }}">
+    @if (Auth::user()->role->id === config('constants.number.one') ||
+            Auth::user()->role->id === config('constants.number.two'))
+        <li
+            class="nav-item {{ request()->routeIs('user.list') || request()->routeIs('user.edit') ? 'active' : config('constants.value.empty') }}">
             <a class="nav-link" href="{{ route('user.list') }}">
                 <i class="fas fa-users"></i>
                 <span>Quản lý người dùng</span>

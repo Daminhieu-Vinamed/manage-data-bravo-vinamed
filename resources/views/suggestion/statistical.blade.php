@@ -288,7 +288,7 @@
      <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
      <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
-     <script src="{{ asset('assets/js/payment-order/dashboard/chart-pie.js') }}"></script>
-     <script src="{{ asset('assets/js/payment-order/dashboard/chart-area.js') }}"></script>
-     <script src="{{ asset('assets/js/payment-order/statistical.js') }}"></script>
+     <script src="{{ asset('assets/js/suggestion/dashboard/chart-pie.js') }}"></script>
+     <script src="{{ asset('assets/js/suggestion/dashboard/chart-area.js') }}"></script>
+     <script src="{{ asset('assets/js/suggestion/statistical.js') }}"></script>
 @endpush
