@@ -3,30 +3,33 @@
 use App\Http\Controllers\AdditionalWorkController;
 use App\Http\Controllers\OnLeaveController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\PaymentOrderController;
+use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TimekeepingController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
-    
+
     Route::middleware('checkLogin')->group(function () {
 
         Route::get('welcome', [AuthController::class, 'welcome'])->name('welcome');
-        
+
         Route::put('change-password', [AuthController::class, 'changePassword']);
-        
-        Route::prefix('payment-order')->name('payment-order.')->group(function () {
-            Route::get('/', [PaymentOrderController::class, 'list'])->name('list');
-            Route::get('get-data', [PaymentOrderController::class, 'getData']);
+
+        Route::prefix('suggestion')->name('suggestion.')->group(function () {
+            Route::get('/', [SuggestionController::class, 'list'])->name('list');
+            Route::get('get-data', [SuggestionController::class, 'getData']);
             Route::middleware('checkRoleManage')->group(function () {
-                Route::get('statistical', [PaymentOrderController::class, 'statistical'])->name('statistical');
-                Route::put('approve-payment-request', [PaymentOrderController::class, 'approve']);
-                Route::put('cancel-payment-request', [PaymentOrderController::class, 'cancel']);
+                Route::get('statistical', [SuggestionController::class, 'statistical'])->name('statistical');
+                Route::put('approve-payment-request', [SuggestionController::class, 'approve']);
+                Route::put('cancel-payment-request', [SuggestionController::class, 'cancel']);
             });
-            Route::get('choose-company', [PaymentOrderController::class, 'chooseCompany'])->name('choose-company');
-            Route::get('create', [PaymentOrderController::class, 'create'])->name('create');
-            Route::post('store', [PaymentOrderController::class, 'store'])->name('store');
+            Route::get('choose-company', [SuggestionController::class, 'chooseCompany'])->name('choose-company');
+            Route::get('payment-order', [SuggestionController::class, 'paymentOrder'])->name('payment-order');
+            Route::get('directional', [SuggestionController::class, 'directional'])->name('directional');
+            Route::get('requests-for-advances', [SuggestionController::class, 'requestsForAdvances'])->name('requests-for-advances');
+            Route::get('suggested-per-diem', [SuggestionController::class, 'suggestedPerDiem'])->name('suggested-per-diem');
+            Route::post('store', [SuggestionController::class, 'store'])->name('store');
         });
 
         Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {
@@ -54,7 +57,7 @@ Route::prefix('/')->group(function () {
             });
             Route::get('calendar', [OnLeaveController::class, 'calendar'])->name('calendar');
         });
-        
+
         Route::prefix('additional-work')->name('additional-work.')->group(function () {
             Route::middleware('checkRoleManage')->group(function () {
                 Route::get('/', [AdditionalWorkController::class, 'list'])->name('list');
@@ -64,7 +67,6 @@ Route::prefix('/')->group(function () {
             });
             Route::get('calendar', [AdditionalWorkController::class, 'calendar'])->name('calendar');
         });
-        
     });
 
     Route::middleware('checkLogout')->name('login.')->group(function () {
@@ -73,5 +75,4 @@ Route::prefix('/')->group(function () {
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-    
 });

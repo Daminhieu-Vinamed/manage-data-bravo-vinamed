@@ -8,20 +8,20 @@ $(document).on("click", ".cancel-payment-request", function () {
             autocapitalize: "off",
         },
         showCancelButton: trueValue,
-        confirmButtonText: 'Gửi',
-        cancelButtonText: 'Hủy',
+        confirmButtonText: "Gửi",
+        cancelButtonText: "Hủy",
         showLoaderOnConfirm: trueValue,
         buttonsStyling: falseValue,
         customClass: {
-            confirmButton: 'btn btn-primary shadow-sm m-2',
-            cancelButton: 'btn btn-danger shadow-sm m-2',
+            confirmButton: "btn btn-primary shadow-sm m-2",
+            cancelButton: "btn btn-danger shadow-sm m-2",
         },
         preConfirm: async (description) => {
             if (!description || description.length === zero) {
                 return Swal.showValidationMessage("Chưa điền nội dung");
             }
             $.ajax({
-                url: linkPaymentOrder + "cancel-payment-request",
+                url: linkSuggestion + "cancel-payment-request",
                 type: "PUT",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(

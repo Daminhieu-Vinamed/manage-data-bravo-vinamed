@@ -2,23 +2,23 @@
 
 namespace App\Services;
 
-use App\Repositories\PaymentOrderRepository;
+use App\Repositories\SuggestionRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
-class PaymentOrderService extends PaymentOrderRepository
+class SuggestionService extends SuggestionRepository
 {
-    protected PaymentOrderRepository $paymentOrderRepository;
+    protected SuggestionRepository $suggestionRepository;
 
-    public function __construct(PaymentOrderRepository $paymentOrderRepository)
+    public function __construct(SuggestionRepository $suggestionRepository)
     {
-        $this->paymentOrderRepository = $paymentOrderRepository;
+        $this->suggestionRepository = $suggestionRepository;
     }
 
     public function getData()
     {
-        $arrayDataCollect = $this->paymentOrderRepository->getData();
+        $arrayDataCollect = $this->suggestionRepository->getData();
         $arrayData = array_merge(
             $arrayDataCollect["A06"],
             $arrayDataCollect["A11"],
@@ -50,7 +50,7 @@ class PaymentOrderService extends PaymentOrderRepository
         $connectCompany = DB::connection($request->BranchCode);
         $connectCompany->beginTransaction();
         try {
-            $this->paymentOrderRepository->approvePaymentOrder($connectCompany, $request->Stt,  Auth::user()->nUserId, $request->description, Auth::user()->username);
+            $this->suggestionRepository->approvePaymentOrder($connectCompany, $request->Stt,  Auth::user()->nUserId, $request->description, Auth::user()->username);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Duyệt phiếu thành công'], 200);
         } catch (\Exception $e) {
@@ -64,7 +64,7 @@ class PaymentOrderService extends PaymentOrderRepository
         $connectCompany = DB::connection($request->BranchCode);
         $connectCompany->beginTransaction();
         try {
-            $this->paymentOrderRepository->cancelPaymentOrder($connectCompany, $request->Stt,  Auth::user()->nUserId, $request->description, Auth::user()->username);
+            $this->suggestionRepository->cancelPaymentOrder($connectCompany, $request->Stt,  Auth::user()->nUserId, $request->description, Auth::user()->username);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Từ chối duyệt phiếu thành công'], 200);
         } catch (\Exception $e) {
@@ -75,21 +75,21 @@ class PaymentOrderService extends PaymentOrderRepository
 
     public function create($request)
     {
-        $data =  $this->paymentOrderRepository->create($request->company);
+        $data =  $this->suggestionRepository->create($request);
         return $data;
     }
     
     public function store($request)
     {
-        return $this->paymentOrderRepository->store($request);
+        return $this->suggestionRepository->store($request);
     }
 
     public function statistical()
     {
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
-            $paymentOrder = $this->paymentOrderRepository->statisticalAdmin();
+            $paymentOrder = $this->suggestionRepository->statisticalAdmin();
         } elseif (Auth::user()->role->id === config('constants.number.three')) {
-            $paymentOrder = $this->paymentOrderRepository->statisticalManage();
+            $paymentOrder = $this->suggestionRepository->statisticalManage();
         }
         $countAll = array_sum($paymentOrder['count']);
         $paymentOrder['count-total'] = $countAll;

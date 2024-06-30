@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class PaymentOrderRepository
+class SuggestionRepository
 {
     public function getData()
     {
@@ -50,41 +50,47 @@ class PaymentOrderRepository
         );
     }
 
-    public function create($company)
+    public function create($request)
     {
-        $B20Customer = DB::connection($company)->table('B20Customer')->select('Code', 'Address', 'Person', 'TaxRegNo', 'Name2')
+        
+        $B20Customer = DB::connection($request->company)->table('B20Customer')->select('Code', 'Address', 'Person', 'TaxRegNo', 'Name2')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
-        $B20Employee = DB::connection($company)->table('B20Employee')->select('Code', 'Name', 'Email', 'DeptCode')
+        $B20Employee = DB::connection($request->company)->table('B20Employee')->select('Code', 'Name', 'Email', 'DeptCode')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
-        $B20ExpenseCatg = DB::connection($company)->table('B20ExpenseCatg')->select('Code', 'Name')
+        $B20ExpenseCatg = DB::connection($request->company)->table('B20ExpenseCatg')->select('Code', 'Name')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
-        $B20Dept = DB::connection($company)->table('B20Dept')->select('Code', 'Name2')
+        $B20Dept = DB::connection($request->company)->table('B20Dept')->select('Code', 'Name2')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
-        $B20Tax = DB::connection($company)->table('B20Tax')->select('Code', 'Name', 'Name2', 'Account', 'Rate')
+        $B20Tax = DB::connection($request->company)->table('B20Tax')->select('Code', 'Name', 'Name2', 'Account', 'Rate')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
-        $B20Currency = DB::connection($company)->table('B20Currency')->select('Code', 'Name')
+        $B20Currency = DB::connection($request->company)->table('B20Currency')->select('Code', 'Name')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
-        $vB30BizDoc = DB::connection($company)->table('vB30BizDoc')->select('BizDocId', 'DocNo', 'DocInfo', 'EmployeeName', 'DocDate')
+        $vB30BizDoc = DB::connection($request->company)->table('vB30BizDoc')->select('BizDocId', 'DocNo', 'DocInfo', 'EmployeeName', 'DocDate')
             ->where('DocCode', 'PO')
             ->where('DocDate', '<=', now())
             ->where('Post_TheKho', config('constants.number.one'))
             ->get();
-        $vB33AccDoc_ExploreJournalEntry = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry')->select('Stt', 'DocNo', 'TotalAmount0', 'CustomerName', 'DocDate')
+        $vB33AccDoc_ExploreJournalEntry = DB::connection($request->company)->table('vB33AccDoc_ExploreJournalEntry')->select('Stt', 'DocNo', 'TotalAmount0', 'CustomerName', 'DocDate')
             ->where('IsActive', config('constants.number.one'))
             ->get();
-        return array('bill_detailed_object' => $B20Customer, 'bill_staff' => $B20Employee, 'base_items' => $B20ExpenseCatg, 'bill_part' => $B20Dept, 'bill_tax_category' => $B20Tax, 'currency' => $B20Currency, 'bill_purchase_order' => $vB30BizDoc, 'requests_for_advances' => $vB33AccDoc_ExploreJournalEntry);
+        $B33AccDoc = DB::connection($request->company)->table('B33AccDoc')->select('DocNo')
+            ->where('IsActive', config('constants.number.one'))
+            ->where('DocCode', $request->DocCode)
+            ->orderBy('Id', 'DESC')
+            ->first();
+        return array('bill_detailed_object' => $B20Customer, 'bill_staff' => $B20Employee, 'base_items' => $B20ExpenseCatg, 'bill_part' => $B20Dept, 'bill_tax_category' => $B20Tax, 'currency' => $B20Currency, 'bill_purchase_order' => $vB30BizDoc, 'requests_for_advances' => $vB33AccDoc_ExploreJournalEntry, 'document_number' => $B33AccDoc->DocNo);
     }
 
     public function store($data)
@@ -109,18 +115,19 @@ class PaymentOrderRepository
             "BankName" => $data->BankName,
             "BankAccountNo" => $data->BankAccountNo,
             "Ten_Chu_TK" => $data->Ten_Chu_TK,
-            "TotalOriginalAmount" => $data->TotalOriginalAmount
+            "Description" => $data->Description1,
         ];
 
         DB::connection($data->company)->table('B33AccDoc')->insert($dataHeader);
         $header = DB::connection($data->company)->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
 
-        foreach ($data->So_Hd as $key => $value) {
+        foreach ($data->So_Hd as $key) {
             $number = $key + 1;
             $dataMain = [
                 "BranchCode" => $data->company,
                 'Stt' => $header->Stt,
                 "DocDate" => $data->DocDate,
+                "DocCode" => $data->DocCode,
                 'BuiltinOrder' => $number,
                 "So_Hd" => $data->So_Hd[$key],
                 "Ngay_Hd" => $data->Ngay_Hd[$key],

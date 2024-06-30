@@ -1,7 +1,7 @@
 var listPaymentOrder = $("#payment_order").DataTable({
     ajax: {
         type: "get",
-        url: linkPaymentOrder + "get-data",
+        url: linkSuggestion + "get-data",
     },
     responsive: trueValue,
     rowReorder: trueValue,
@@ -48,8 +48,8 @@ var listPaymentOrder = $("#payment_order").DataTable({
         var len = api.page.len();
         var numRows = api.rows().count();
         if (numRows <= len) {
-            $('#payment_order_wrapper').children('.row:last').remove();
-            $('#payment_order_wrapper').children('.row:first').remove();
+            $("#payment_order_wrapper").children(".row:last").remove();
+            $("#payment_order_wrapper").children(".row:first").remove();
         }
     },
 });

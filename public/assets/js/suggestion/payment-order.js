@@ -1,5 +1,22 @@
 $(document).ready(function () {
     $("#ExchangeRate").val(oneConst);
+    const docNo = $("input[name='DocNo']").val();
+    const sliced1 = parseInt(docNo.slice(docNo.lastIndexOf(".") + oneConst));
+    var docNoLast = sliced1.toString();
+    const lengthDocNo = docNo.slice(docNo.lastIndexOf(".") + oneConst).length;
+    const number = sliced1 + oneConst;
+    if (lengthDocNo > docNoLast.length) {
+        docNoLast = "0" + number.toString();
+    }
+    let firstDotIndex = docNo.indexOf(".");
+    if (firstDotIndex !== -1) {
+        let secondDotIndex = docNo.indexOf(".", firstDotIndex + oneConst);
+        if (secondDotIndex !== -1) {
+            const sliced2 = docNo.substring(zeroConst, secondDotIndex);
+            const docNoNew = sliced2 + "." + docNoLast;
+            $("input[name='DocNo']").val(docNoNew);
+        }
+    }
     $(document).on("change", "#CurrencyCode", function () {
         const valueCurrency = $(this).val();
 
@@ -88,7 +105,7 @@ $(document).ready(function () {
         if (!$("#th-action").length) {
             $("tbody tr:first").children("td:first").before("<td></td>");
             $trNew.children("td:first").before(`<td>
-                <button class="btn btn-danger btn-circle" id="delete-line">
+                <button class="btn btn-danger btn-circle" id="delete-line" type="button">
                     <i class="fas fa-times"></i>
                 </button>
             </td>`);
@@ -262,75 +279,214 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#create-payment-order", function () {
-        const BranchCode = $('#BranchCode').val();
-        const DocStatus = $('#DocStatus').val();
-        const DocDate = $('#DocDate').val();
-        const DocNo = $('#DocNo').val();
-        const DocCode = $('#DocCode').val();
-        const EmployeeCode = $('#EmployeeCode').val();
-        const CustomerCode1 = $('#CustomerCode1').val();
-        const AmountTT = $('#AmountTT').val();
-        const Stt_TU = $('#Stt_TU').val();
-        const AmountTU = $('#AmountTU').val();
-        const Hinh_Thuc_TT = $('#Hinh_Thuc_TT').val();
-        const CurrencyCode = $('#CurrencyCode').val();
-        const ExchangeRate = $('#ExchangeRate').val();
-        const TotalOriginalAmount0 = $('#TotalOriginalAmount0').val();
-        const TotalOriginalAmount3 = $('#TotalOriginalAmount3').val();
-        const TotalOriginalAmount = $('#TotalOriginalAmount').val();
-        const BankName = $('#BankName').val();
-        const BankAccountNo = $('#BankAccountNo').val();
-        const Ten_Chu_TK = $('#Ten_Chu_TK').val();
-        const Description1 = $('#Description1').val();
+        const BranchCode = $("input[name='company']").val();
+        const DocStatus = 45;
+        const DocDate = $("input[name='DocDate']").val();
+        const DocNo = $("input[name='DocNo']").val();
+        const DocCode = $("input[name='DocCode']").val();
+        const EmployeeCode = $("input[name='EmployeeCode']").val();
+        const CustomerCode1 = $("input[name='CustomerCode1']").val();
+        const AmountTT = $("input[name='AmountTT']").val();
+        const Stt_TU = $("input[name='Stt_TU']").val();
+        const AmountTU = $("input[name='AmountTU']").val();
+        const Hinh_Thuc_TT = $("input[name='Hinh_Thuc_TT']").val();
+        const CurrencyCode = $("input[name='CurrencyCode']").val();
+        const ExchangeRate = $("input[name='ExchangeRate']").val();
+        const TotalOriginalAmount0 = $("input[name='TotalOriginalAmount0']").val();
+        const TotalOriginalAmount3 = $("input[name='TotalOriginalAmount3']").val();
+        const TotalOriginalAmount = $("input[name='TotalOriginalAmount']").val();
+        const BankName = $("input[name='BankName']").val();
+        const BankAccountNo = $("input[name='BankAccountNo']").val();
+        const Ten_Chu_TK = $("input[name='Ten_Chu_TK']").val();
+        const Description1 = $("textarea[name='Description1']").val();
 
-        const So_Hd = $("input[name='So_Hd[]']").map(function(){return $(this).val();}).get();
-        const Ngay_Hd = $("input[name='Ngay_Hd[]']").map(function(){return $(this).val();}).get();
-        const Description = $("textarea[name='Description[]']").map(function(){return $(this).val();}).get();
-        const Invoice = $("input[name='Invoice[]']").map(function(){return $(this).val();}).get();
-        const So_Van_Don = $("input[name='So_Van_Don[]']").map(function(){return $(this).val();}).get();
-        const Trong_Luong = $("input[name='Trong_Luong[]']").map(function(){return $(this).val();}).get();
-        const DV_Trong_Luong = $("input[name='DV_Trong_Luong[]']").map(function(){return $(this).val();}).get();
-        const CustomerCode2 = $("input[name='CustomerCode2[]']").map(function(){return $(this).val();}).get();
-        const ExpenseCatgCode = $("input[name='ExpenseCatgCode[]']").map(function(){return $(this).val();}).get();
-        const EmployeeCode1 = $("input[name='EmployeeCode1[]']").map(function(){return $(this).val();}).get();
-        const DeptCode = $("input[name='DeptCode[]']").map(function(){return $(this).val();}).get();
-        const BizDocId_PO = $("input[name='BizDocId_PO[]']").map(function(){return $(this).val();}).get();
-        const Hang_SX = $("input[name='Hang_SX[]']").map(function(){return $(this).val();}).get();
-        const OriginalAmount9 = $("input[name='OriginalAmount9[]']").map(function(){return $(this).val();}).get();
-        const TaxCode = $("input[name='TaxCode[]']").map(function(){return $(this).val();}).get();
-        const TaxRate = $("input[name='TaxRate[]']").map(function(){return $(this).val();}).get();
-        const Amount3 = $("input[name='Amount3[]']").map(function(){return $(this).val();}).get();
-        const Note = $("textarea[name='Note[]']").map(function(){return $(this).val();}).get();
+        const So_Hd = $("input[name='So_Hd[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const Ngay_Hd = $("input[name='Ngay_Hd[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const Description = $("textarea[name='Description[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const Invoice = $("input[name='Invoice[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const So_Van_Don = $("input[name='So_Van_Don[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const Trong_Luong = $("input[name='Trong_Luong[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const DV_Trong_Luong = $("input[name='DV_Trong_Luong[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const CustomerCode2 = $("input[name='CustomerCode2[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const ExpenseCatgCode = $("input[name='ExpenseCatgCode[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const EmployeeCode1 = $("input[name='EmployeeCode1[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const DeptCode = $("input[name='DeptCode[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const BizDocId_PO = $("input[name='BizDocId_PO[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const Hang_SX = $("input[name='Hang_SX[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const OriginalAmount9 = $("input[name='OriginalAmount9[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const TaxCode = $("input[name='TaxCode[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const TaxRate = $("input[name='TaxRate[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const Amount3 = $("input[name='Amount3[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
+        const Note = $("textarea[name='Note[]']")
+            .map(function () {
+                return $(this).val();
+            })
+            .get();
 
         $.ajax({
-            url: linkPaymentOrder + "store",
+            url: linkSuggestion + "store",
             type: "POST",
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                    "content"
-                ),
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
-                Stt: Stt,
-                description: description,
                 BranchCode: BranchCode,
+                DocStatus: DocStatus,
+                DocDate: DocDate,
+                DocNo: DocNo,
+                DocCode: DocCode,
+                EmployeeCode: EmployeeCode,
+                CustomerCode1: CustomerCode1,
+                AmountTT: AmountTT,
+                Stt_TU: Stt_TU,
+                AmountTU: AmountTU,
+                Hinh_Thuc_TT: Hinh_Thuc_TT,
+                CurrencyCode: CurrencyCode,
+                ExchangeRate: ExchangeRate,
+                TotalOriginalAmount0: TotalOriginalAmount0,
+                TotalOriginalAmount3: TotalOriginalAmount3,
+                TotalOriginalAmount: TotalOriginalAmount,
+                BankName: BankName,
+                BankAccountNo: BankAccountNo,
+                Ten_Chu_TK: Ten_Chu_TK,
+                Description1: Description1,
+                So_Hd: So_Hd,
+                Ngay_Hd: Ngay_Hd,
+                Description: Description,
+                Invoice: Invoice,
+                So_Van_Don: So_Van_Don,
+                Trong_Luong: Trong_Luong,
+                DV_Trong_Luong: DV_Trong_Luong,
+                CustomerCode2: CustomerCode2,
+                ExpenseCatgCode: ExpenseCatgCode,
+                EmployeeCode1: EmployeeCode1,
+                DeptCode: DeptCode,
+                BizDocId_PO: BizDocId_PO,
+                Hang_SX: Hang_SX,
+                OriginalAmount9: OriginalAmount9,
+                TaxCode: TaxCode,
+                TaxRate: TaxRate,
+                Amount3: Amount3,
+                Note: Note,
             },
             success: function (success) {
                 ToastTopRight.fire({
                     icon: success.status,
                     title: success.msg,
                 });
-                listPaymentOrder.ajax.reload();
             },
             error: function (error) {
-                let notification = error.responseJSON;
-                ToastErrorCenter.fire({
-                    icon: notification.status,
-                    text:
-                        notification.msg !== undefinedValue
-                            ? notification.msg
-                            : notification.responseJSON?.errors.description,
-                });
+                let errors = error.responseJSON?.errors;
+                if (errors.EmployeeCode) {
+                    $('#EmployeeCode_error').text(errors.EmployeeCode[zeroConst]);
+                    $('#EmployeeCode').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#EmployeeCode_error').text('');
+                    $('#EmployeeCode').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.CustomerCode1) {
+                    $('#CustomerCode1_error').text(errors.CustomerCode1[zeroConst]);
+                    $('#CustomerCode1').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#CustomerCode1_error').text('');
+                    $('#CustomerCode1').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.AmountTT) {
+                    $('#AmountTT_error').text(errors.AmountTT[zeroConst]);
+                    $('#AmountTT').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#AmountTT_error').text('');
+                    $('#AmountTT').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.Stt_TU) {
+                    $('#Stt_TU_error').text(errors.Stt_TU[zeroConst]);
+                    $('#Stt_TU').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#Stt_TU_error').text('');
+                    $('#Stt_TU').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.AmountTU) {
+                    $('#AmountTU_error').text(errors.AmountTU[zeroConst]);
+                    $('#AmountTU').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#AmountTU_error').text('');
+                    $('#AmountTU').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.Hinh_Thuc_TT) {
+                    $('#Hinh_Thuc_TT_error').text(errors.Hinh_Thuc_TT[zeroConst]);
+                    $('#Hinh_Thuc_TT').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#Hinh_Thuc_TT_error').text('');
+                    $('#Hinh_Thuc_TT').removeClass('is-invalid').addClass('is-valid');
+                }
             },
         });
     });

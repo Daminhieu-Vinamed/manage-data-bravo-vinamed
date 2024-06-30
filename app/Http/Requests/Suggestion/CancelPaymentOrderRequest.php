@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\PaymentOrder;
+namespace App\Http\Requests\Suggestion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PaymentOrderRequest extends FormRequest
+class CancelPaymentOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
