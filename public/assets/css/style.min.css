@@ -2370,7 +2370,8 @@ textarea.form-control {
 .form-control.is-valid:focus,
 .was-validated .form-control:valid:focus {
     border-color: #1cc88a;
-    box-shadow: 0 0 0 .2rem rgba(28, 200, 138, .25)
+    outline: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3)
 }
 
 .was-validated textarea.form-control:valid,
@@ -2389,7 +2390,8 @@ textarea.form-control.is-valid {
 .custom-select.is-valid:focus,
 .was-validated .custom-select:valid:focus {
     border-color: #1cc88a;
-    box-shadow: 0 0 0 .2rem rgba(28, 200, 138, .25)
+    outline: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3)
 }
 
 .form-check-input.is-valid~.form-check-label,
@@ -2490,7 +2492,8 @@ textarea.form-control.is-valid {
 .form-control.is-invalid:focus,
 .was-validated .form-control:invalid:focus {
     border-color: #e74a3b;
-    box-shadow: 0 0 0 .2rem rgba(231, 74, 59, .25)
+    outline: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3)
 }
 
 .was-validated textarea.form-control:invalid,

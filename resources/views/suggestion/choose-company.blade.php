@@ -21,7 +21,7 @@
                             <select name="company" class="custom-select">
                                 <option disabled selected>chọn công ty</option>
                                 @foreach (config('constants.company') as $company)
-                                    <option value="{{$company}}">{{ $company }}</option>
+                                    <option value="{{ $company }}" {{ old('company') === $company ? 'selected' : '' }}>{{ $company }}</option>
                                 @endforeach
                             </select>
                             @error('company')
@@ -31,9 +31,9 @@
                         <div class="form-group col-md-6">
                             <select name="DocCode" class="custom-select">
                                 <option disabled selected>Chọn kiểu đề nghị</option>
-                                <option value="TT">Đề nghị thanh toán</option>
-                                <option value="TG">Đề nghị tạm ứng</option>
-                                <option value="CC">Đề nghị công tác phí</option>
+                                <option value="TT" {{ old('DocCode') === 'TT' ? 'selected' : '' }}>Đề nghị thanh toán</option>
+                                <option value="TG" {{ old('DocCode') === 'TG' ? 'selected' : '' }}>Đề nghị tạm ứng</option>
+                                <option value="CC" {{ old('DocCode') === 'CC' ? 'selected' : '' }}>Đề nghị công tác phí</option>
                             </select>
                             @error('DocCode')
                                 <span class="text-danger small">{{ $message }}</span>

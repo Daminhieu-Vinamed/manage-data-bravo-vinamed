@@ -36,7 +36,7 @@ class ChangePasswordRequest extends FormRequest
                 },
             ],
             "new_password" => "required|min:6|max:255|different:old_password",
-            "re_new_password" => "required|required_with:new_password|same:new_password",
+            "re_new_password" => "required|same:new_password",
         ];
     }
     public function messages()
@@ -47,6 +47,7 @@ class ChangePasswordRequest extends FormRequest
             'new_password.min' => 'Mật khẩu tối thiểu 6 ký tự',
             'new_password.max' => 'Mật khẩu tối đa 255 ký tự',
             're_new_password.required' => 'Chưa nhập lại mật khẩu mới',
+            're_new_password.same' => 'Xác nhận mật khẩu mới chưa đúng',
         ];
     }
 }

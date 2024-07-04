@@ -21,63 +21,57 @@ class CreatePaymentOrderRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "BranchCode" => "required",
-            "DocStatus" => "required",
-            "DocDate" => "required",
-            "DocNo" => "required",
-            "DocCode" => "required",
-            "EmployeeCode" => "required",
-            "CustomerCode1" => "required",
-            "AmountTT" => "required",
-            "Stt_TU" => "required",
-            "AmountTU" => "required",
-            "Hinh_Thuc_TT" => "required",
-            "CurrencyCode" => "required",
-            "ExchangeRate" => "required",
-            "TotalOriginalAmount0" => "required",
-            "TotalOriginalAmount3" => "required",
-            "TotalOriginalAmount" => "required",
-            "BankName" => "required",
-            "BankAccountNo" => "required",
-            "Ten_Chu_TK" => "required",
-            "So_Hd" => "array",
-            "So_Hd.*"  => "required",
-            "Ngay_Hd" => "array",
-            "Ngay_Hd.*"  => "required",
-            "Description" => "array",
-            "Description.*"  => "required",
-            "Invoice" => "array",
-            "Invoice.*"  => "required",
-            "So_Van_Don" => "array",
-            "So_Van_Don.*"  => "required",
-            "Trong_Luong" => "array",
-            "Trong_Luong.*"  => "required",
-            "DV_Trong_Luong" => "array",
-            "DV_Trong_Luong.*"  => "required",
-            "CustomerCode2" => "array",
-            "CustomerCode2.*"  => "required",
-            "ExpenseCatgCode" => "array",
-            "ExpenseCatgCode.*"  => "required",
-            "EmployeeCode1" => "array",
-            "EmployeeCode1.*"  => "required",
-            "DeptCode" => "array",
-            "DeptCode.*"  => "required",
-            "BizDocId_PO" => "array",
-            "BizDocId_PO.*"  => "required",
-            "Hang_SX" => "array",
-            "Hang_SX.*"  => "required",
-            "OriginalAmount9" => "array",
-            "OriginalAmount9.*"  => "required",
-            "TaxCode" => "array",
-            "TaxCode.*"  => "required",
-            "TaxRate" => "array",
-            "TaxRate.*"  => "required",
-            "Amount3" => "array",
-            "Amount3.*"  => "required",
-            "Note" => "array",
-            "Note.*"  => "required"
-        ];
+        if ($this->CurrencyCode === "VND") {
+            $arrValid = array(
+                "BranchCode" => "required",
+                "DocStatus" => "required",
+                "DocDate" => "required",
+                "DocNo" => "required",
+                "DocCode" => "required",
+                "EmployeeCode" => "required",
+                "CustomerCode1" => "required",
+                "AmountTT" => "required",
+                "Stt_TU" => "required",
+                "AmountTU" => "required",
+                "Hinh_Thuc_TT" => "required",
+                "CurrencyCode" => "required",
+                "ExchangeRate" => "required|gt:0",
+                "TotalOriginalAmount0" => "required|gt:0",
+                "TotalOriginalAmount3" => "required|gt:0",
+                "TotalOriginalAmount" => "required|gt:0",
+            );
+        } else {
+            $arrValid = array(
+                "BranchCode" => "required",
+                "DocStatus" => "required",
+                "DocDate" => "required",
+                "DocNo" => "required",
+                "DocCode" => "required",
+                "EmployeeCode" => "required",
+                "CustomerCode1" => "required",
+                "AmountTT" => "required",
+                "Stt_TU" => "required",
+                "AmountTU" => "required",
+                "Hinh_Thuc_TT" => "required",
+                "CurrencyCode" => "required",
+                "ExchangeRate" => "required|gt:0",
+                "TotalOriginalAmount0" => "required|gt:0",
+                "TotalAmount0" => "required|gt:0",
+                "TotalOriginalAmount3" => "required|gt:0",
+                "TotalAmount3" => "required|gt:0",
+                "TotalOriginalAmount" => "required|gt:0",
+                "TotalAmount" => "required|gt:0",
+            );
+        }
+
+        if ($this->Hinh_Thuc_TT === "CK") {
+            $arrValid["BankName"] = "required";
+            $arrValid["BankAccountNo"] = "required";
+            $arrValid["Ten_Chu_TK"] = "required";
+            $arrValid["Description1"] = "required";
+        }
+        
+        return $arrValid;
     }
 
     public function messages()
@@ -89,6 +83,19 @@ class CreatePaymentOrderRequest extends FormRequest
             'Stt_TU.required' => 'Chưa chọn đề nghị tạm ứng',
             'AmountTU.required' => 'Đã tạm ứng không được để trống',
             'Hinh_Thuc_TT.required' => 'Hình thức thanh toán không được để trống',
+            'CurrencyCode.required' => 'Loại tiền không được để trống',
+            'ExchangeRate.required' => 'Tỷ giá hạch toán không được để trống',
+            'ExchangeRate.gt' => 'Tỷ giá hạch toán phải lớn hơn 0',
+            'TotalOriginalAmount0.required' => 'Thành tiền đang trống',
+            'TotalOriginalAmount0.gt' => 'Thành tiền phải lớn hơn 0',
+            'TotalOriginalAmount3.required' => 'Tiền VAT đang trống',
+            'TotalOriginalAmount3.gt' => 'Tiền VAT phải lớn hơn 0',
+            'TotalOriginalAmount.required' => 'Tổng cộng đang trống',
+            'TotalOriginalAmount.gt' => 'Tổng cộng phải lớn hơn 0',
+            'BankName.required' => 'Tên ngân hàng không được để trống',
+            'BankAccountNo.required' => 'Số tài khoản không được để trống',
+            'Ten_Chu_TK.required' => 'Tên chủ tài khoản không được để trống',
+            'Description1.required' => 'Nội dung không được để trống',
         ];
     }
 }
