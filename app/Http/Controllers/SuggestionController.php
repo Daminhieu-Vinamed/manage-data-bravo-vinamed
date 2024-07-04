@@ -88,6 +88,7 @@ class SuggestionController extends Controller
 
     public function store(CreatePaymentOrderRequest $request)
     {
+        dd();
         return $this->suggestionService->store($request);
     }
 

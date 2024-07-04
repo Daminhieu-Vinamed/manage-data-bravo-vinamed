@@ -9,13 +9,13 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary text-center">Tạo mới đề nghị thanh toán cho {{ request()->get('company') }}</h6>
-            <div class="input-group input-group-sm col-md-2 p-0">
+            <div class="input-group input-group-sm col-md-3 p-0">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Ngày tạo</span>
                 </div>
                 <input type="date" class="form-control" name="DocDate" value="{{ date('Y-m-d') }}">
             </div>
-            <div class="input-group input-group-sm col-md-2 p-0">
+            <div class="input-group input-group-sm col-md-3 p-0">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Mã chứng từ</span>
                 </div>
@@ -78,8 +78,8 @@
                 <div class="form-group col-md-4">
                     <label for="Hinh_Thuc_TT" class="form-label small">Hình thức thanh toán</label>
                     <select class="custom-select" name="Hinh_Thuc_TT" id="Hinh_Thuc_TT">
-                        <option value="CK">Chuyển khoản</option>
                         <option value="TM">Tiền mặt</option>
+                        <option value="CK">Chuyển khoản</option>
                     </select>
                     <span class="text-danger small" id="Hinh_Thuc_TT_error"></span>
                 </div>
@@ -87,9 +87,7 @@
                     <label for="CurrencyCode" class="form-label small">Loại tiền</label>
                     <select class="custom-select" name="CurrencyCode" id="CurrencyCode">
                         @foreach ($data['currency'] as $item)
-                            <option value="{{ $item->Code }}"
-                                {{ $item->Code === 'VND' ? 'selected' : config('constants.value.empty') }}>
-                                {{ $item->Code . ' - ' . $item->Name }}</option>
+                            <option value="{{ $item->Code }}"{{ $item->Code === 'VND' ? 'selected' : config('constants.value.empty') }}>{{ $item->Name }}</option>
                         @endforeach
                     </select>
                     <span class="text-danger small" id="CurrencyCode_error"></span>
@@ -101,7 +99,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="table-payment-order" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Số hóa đơn</th>
@@ -123,34 +121,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="line-0" location="0">
+                        <tr id="line-0">
                             <td>
                                 <input type="text" class="form-control" name="So_Hd[]" id="So_Hd">
-                                <span class="text-danger small" id="So_Hd_error"></span>
                             </td>
                             <td>
                                 <input type="date" class="form-control" name="Ngay_Hd[]" id="Ngay_Hd">
-                                <span class="text-danger small" id="Ngay_Hd_error"></span>
                             </td>
                             <td>
                                 <textarea class="form-control" maxlength="255" name="Description[]" id="Description"></textarea>
-                                <span class="text-danger small" id="Description_error"></span>
                             </td>
                             <td>
                                 <input type="text" class="form-control" name="Invoice[]" id="Invoice">
-                                <span class="text-danger small" id="Invoice_error"></span>
                             </td>
                             <td>
                                 <input type="text" class="form-control" name="So_Van_Don[]" id="So_Van_Don">
-                                <span class="text-danger small" id="So_Van_Don_error"></span>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="Trong_Luong[]" id="Trong_Luong">
-                                <span class="text-danger small" id="Trong_Luong_error"></span>
+                                <input type="number" class="form-control" name="Trong_Luong[]" id="Trong_Luong" value="0">
                             </td>
                             <td>
                                 <input type="text" class="form-control" name="DV_Trong_Luong[]" id="DV_Trong_Luong">
-                                <span class="text-danger small" id="DV_Trong_Luong_error"></span>
                             </td>
                             <td>
                                 <input list="listCustomerCode2" class="form-control" name="CustomerCode2[]" id="CustomerCode2">
@@ -162,7 +153,6 @@
                                             {{ $item->TaxRegNo }} {{ $item->Name2 }}</option>
                                     @endforeach
                                 </datalist>
-                                <span class="text-danger small" id="CustomerCode2_error"></span>
                             </td>
                             <td>
                                 <input list="listExpenseCatgCode" class="form-control" name="ExpenseCatgCode[]" id="ExpenseCatgCode">
@@ -172,7 +162,6 @@
                                             {{ $item->Name }}</option>
                                     @endforeach
                                 </datalist>
-                                <span class="text-danger small" id="ExpenseCatgCode_error"></span>
                             </td>
                             <td>
                                 <input list="listEmployeeCode1" class="form-control" name="EmployeeCode1[]" id="EmployeeCode1">
@@ -185,7 +174,6 @@
                                         </option>
                                     @endforeach
                                 </datalist>
-                                <span class="text-danger small" id="EmployeeCode1_error"></span>
                             </td>
                             <td>
                                 <input list="listDeptCode" class="form-control" name="DeptCode[]" id="DeptCode">
@@ -195,7 +183,6 @@
                                             {{ $item->Name2 }}</option>
                                     @endforeach
                                 </datalist>
-                                <span class="text-danger small" id="DeptCode_error"></span>
                             </td>
                             <td>
                                 <input list="list_BizDocId_PO" class="form-control" name="BizDocId_PO[]" id="BizDocId_PO">
@@ -206,15 +193,12 @@
                                         </option>
                                     @endforeach
                                 </datalist>
-                                <span class="text-danger small" id="BizDocId_PO_error"></span>
                             </td>
                             <td>
                                 <input type="text" class="form-control" name="Hang_SX[]" id="Hang_SX">
-                                <span class="text-danger small" id="Hang_SX_error"></span>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="OriginalAmount9[]" id="OriginalAmount9">
-                                <span class="text-danger small" id="OriginalAmount9_error"></span>
+                                <input type="number" class="form-control" name="OriginalAmount9[]" id="OriginalAmount9" value="0">
                             </td>
                             <td>
                                 <label for="TaxCode" class="form-label small">Loại</label>
@@ -226,21 +210,17 @@
                                             {{ $item->Name . ' - ' . $item->Name2 . ' - ' . $item->Account }}</option>
                                     @endforeach
                                 </datalist>
-                                <span class="text-danger small" id="TaxCode_error"></span>
                             </td>
                             <td>
                                 <label for="TaxRate" class="form-label small">%</label>
                                 <input type="number" class="form-control" name="TaxRate[]" id="TaxRate" readonly>
-                                <span class="text-danger small" id="TaxRate_error"></span>
                             </td>
                             <td>
                                 <label for="Amount3" class="form-label small">Tiền VND</label>
-                                <input type="number" class="form-control" name="Amount3[]" id="Amount3" readonly>
-                                <span class="text-danger small" id="Amount3_error"></span>
+                                <input type="number" class="form-control" name="Amount3[]" id="Amount3" value="0" readonly>
                             </td>
                             <td>
                                 <textarea class="form-control" maxlength="255" name="Note[]" id="Note"></textarea>
-                                <span class="text-danger small" id="Note_error"></span>
                             </td>
                         </tr>
                     </tbody>
@@ -251,43 +231,21 @@
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
-            <div class="row">
+            <div class="row row-total-money">
                 <div class="form-group col-md-4 form-group-into-money">
                     <label for="into_money" class="form-label small">Thành tiền</label>
-                    <input type="number" class="form-control" name="TotalOriginalAmount0" id="TotalOriginalAmount0" readonly>
+                    <input type="number" class="form-control" name="TotalOriginalAmount0" id="TotalOriginalAmount0" value="0" readonly>
+                    <span class="text-danger small" id="TotalOriginalAmount0_error"></span>
                 </div>
                 <div class="form-group col-md-4 form-group-tax-money">
                     <label for="tax_money" class="form-label small">Tiền VAT</label>
-                    <input type="number" class="form-control" name="TotalOriginalAmount3" id="TotalOriginalAmount3" readonly>
+                    <input type="number" class="form-control" name="TotalOriginalAmount3" id="TotalOriginalAmount3" value="0" readonly>
+                    <span class="text-danger small" id="TotalOriginalAmount3_error"></span>
                 </div>
                 <div class="form-group col-md-4 form-group-total">
                     <label for="TotalOriginalAmount" class="form-label small">Tổng cộng</label>
-                    <input type="number" class="form-control" name="TotalOriginalAmount" id="TotalOriginalAmount" readonly>
-                </div>
-            </div>
-            <div class="py-3 row justify-content-center">
-                <h6 class="h6 mb-0 font-weight-bold text-primary">Thông tin ngân hàng</h6>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="BankName" class="form-label small">Tên ngân hàng</label>
-                    <input type="text" class="form-control" name="BankName" id="BankName">
-                    <span class="text-danger small" id="BankName_error"></span>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="BankAccountNo" class="form-label small">Số tài khoản</label>
-                    <input type="text" class="form-control" name="BankAccountNo" id="BankAccountNo">
-                    <span class="text-danger small" id="BankAccountNo_error"></span>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="Ten_Chu_TK" class="form-label small">Tên chủ tài khoản</label>
-                    <input type="text" class="form-control" name="Ten_Chu_TK" id="Ten_Chu_TK">
-                    <span class="text-danger small" id="Ten_Chu_TK_error"></span>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="Description1" class="form-label small">Nội dung</label>
-                    <textarea class="form-control" name="Description1" id="Description1"></textarea>
-                    <span class="text-danger small" id="Description1_error"></span>
+                    <input type="number" class="form-control" name="TotalOriginalAmount" id="TotalOriginalAmount" value="0" readonly>
+                    <span class="text-danger small" id="TotalOriginalAmount_error"></span>
                 </div>
             </div>
             <div class="py-3 row justify-content-center">

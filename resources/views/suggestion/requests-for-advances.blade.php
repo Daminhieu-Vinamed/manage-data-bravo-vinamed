@@ -31,8 +31,8 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="EmployeeCode" class="form-label small">Người đề nghị</label>
-                    <input list="listEmployeeCode" class="form-control" name="EmployeeCode" id="EmployeeCode">
-                    <datalist id="listEmployeeCode">
+                    <input list="listEmployeeCode1" class="form-control" name="EmployeeCode1" id="EmployeeCode1">
+                    <datalist id="listEmployeeCode1">
                         @foreach ($data['bill_staff'] as $item)
                             <option department="{{ $item->DeptCode }}" data-value="{{ $item->Code }}"
                                 value="{{ $item->Code }}">
@@ -102,27 +102,27 @@
                     <tbody>
                         <tr id="line-0" location="0">
                             <td>
-                                <textarea class="form-control" maxlength="255" name="Note[]" id="Note"></textarea>
+                                <textarea class="form-control" maxlength="255" name="Note1[]" id="Note1"></textarea>
                                 <span class="text-danger small" id="Note_error"></span>
                             </td>
                             <td>
-                                <input class="form-control" maxlength="255" name="Note[]" id="Note"/>
+                                <input class="form-control" maxlength="255" name="Note2[]" id="Note2"/>
                                 <span class="text-danger small" id="Note_error"></span>
                             </td>
                             <td>
-                                <input class="form-control" maxlength="255" name="Note[]" id="Note"/>
+                                <input class="form-control" maxlength="255" name="Note3[]" id="Note3"/>
                                 <span class="text-danger small" id="Note_error"></span>
                             </td>
                             <td>
-                                <input class="form-control" maxlength="255" name="Note[]" id="Note"/>
+                                <input class="form-control" maxlength="255" name="Note4[]" id="Note4"/>
                                 <span class="text-danger small" id="Note_error"></span>
                             </td>
                             <td>
-                                <input class="form-control" maxlength="255" name="Note[]" id="Note"/>
+                                <input class="form-control" maxlength="255" name="Note5[]" id="Note5"/>
                                 <span class="text-danger small" id="Note_error"></span>
                             </td>
                             <td>
-                                <textarea class="form-control" maxlength="255" name="Note[]" id="Note"></textarea>
+                                <textarea class="form-control" maxlength="255" name="Note6[]" id="Note6"></textarea>
                                 <span class="text-danger small" id="Note_error"></span>
                             </td>
                         </tr>
@@ -183,5 +183,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
     <script src="{{ asset('assets/js/suggestion/func.js') }}"></script>
-    <script src="{{ asset('assets/js/suggestion/create.js') }}"></script>
+    <script src="{{ asset('assets/js/suggestion/payment-order.js') }}"></script>
 @endpush

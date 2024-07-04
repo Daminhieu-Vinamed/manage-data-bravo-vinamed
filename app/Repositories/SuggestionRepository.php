@@ -97,7 +97,7 @@ class SuggestionRepository
     {
         $dataHeader = [
             "BranchCode" => $data->company,
-            "DocStatus" => "45",
+            "DocStatus" => $data->DocStatus,
             "DocDate" => $data->DocDate,
             "DocNo" => $data->DocNo,
             "DocCode" => $data->DocCode,
@@ -110,8 +110,11 @@ class SuggestionRepository
             "CurrencyCode" => $data->CurrencyCode,
             "ExchangeRate" => $data->ExchangeRate,
             "TotalOriginalAmount0" => $data->TotalOriginalAmount0,
+            "TotalAmount0" => isset($data->TotalAmount0) ? $data->TotalAmount0 : config("constants.number.zero"),
             "TotalOriginalAmount3" => $data->TotalOriginalAmount3,
+            "TotalAmount3" => isset($data->TotalAmount3) ? $data->TotalAmount3 : config("constants.number.zero"),
             "TotalOriginalAmount" => $data->TotalOriginalAmount,
+            "TotalAmount" => isset($data->TotalAmount) ? $data->TotalAmount : config("constants.number.zero"),
             "BankName" => $data->BankName,
             "BankAccountNo" => $data->BankAccountNo,
             "Ten_Chu_TK" => $data->Ten_Chu_TK,
@@ -122,7 +125,7 @@ class SuggestionRepository
         $header = DB::connection($data->company)->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
 
         foreach ($data->So_Hd as $key) {
-            $number = $key + 1;
+            $number = $key + config('constants.number.one');
             $dataMain = [
                 "BranchCode" => $data->company,
                 'Stt' => $header->Stt,
@@ -143,8 +146,10 @@ class SuggestionRepository
                 "BizDocId_PO" => $data->BizDocId_PO[$key],
                 "Hang_SX" => $data->Hang_SX[$key],
                 "OriginalAmount9" => $data->OriginalAmount9[$key],
+                "Amount9" => isset($data->Amount9[$key]) ? $data->Amount9[$key] : config("constants.number.zero"),
                 // "TaxCode" => $data->TaxCode[$key],
                 // "TaxRate" => $data->TaxRate[$key],
+                // "OriginalAmount3" => $data->OriginalAmount3[$key],
                 // "Amount3" => $data->Amount3[$key],
                 "Note" => $data->Note[$key]
             ];
