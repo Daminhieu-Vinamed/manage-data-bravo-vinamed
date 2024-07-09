@@ -40,9 +40,9 @@
                     <div class="form-group col-md-4">
                         <label for="company" class="form-label small">Công ty</label>
                         <select class="custom-select" id="company">
-                            <option disabled selected>Chọn</option>
+                            <option disabled selected>Chọn công ty</option>
                             @foreach (config('constants.company') as $company)
-                                <option value="{{$company}}" {{$user->company === $company ? 'selected' : '' }}>{{$company}}</option>
+                                <option value="{{$company}}" {{ $user->company === $company ? 'selected' : '' }}>{{$company}}</option>
                             @endforeach
                         </select>
                         <span class="text-danger small" id="company_error"></span>
@@ -50,9 +50,11 @@
                     <div class="form-group col-md-4">
                         <label for="department_code" class="form-label small">Phòng ban</label>
                         <select class="custom-select" id="department_code">
-                            <option disabled selected>Chọn</option>
-                            @foreach (config('constants.department') as $item)
-                                <option value="{{ $item['code'] }}" {{$user->department_code === $item['code'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
+                            <option disabled selected>Chọn phòng ban</option>
+                            @foreach ($departments as $item)
+                                @if ($item->code !== 'ADMIN')
+                                    <option value="{{ $item->code }}" {{ $user->department_code === $item['code'] ? 'selected' : '' }}>{{ $item->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                         <span class="text-danger small" id="department_code_error"></span>
@@ -60,10 +62,10 @@
                     <div class="form-group col-md-4">
                         <label for="role_id" class="form-label small">Vai trò</label>
                         <select class="custom-select" id="role_id">
-                            <option disabled selected>Chọn</option>
-                            @foreach (config('constants.role') as $item)
-                                @if ($item['id'] !== config('constants.number.one'))
-                                    <option value="{{ $item['id'] }}" {{$user->role_id === $item['id'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
+                            <option disabled selected>Chọn vai trò</option>
+                            @foreach ($roles as $item)
+                                @if ($item->id !== config('constants.number.one'))
+                                    <option value="{{ $item->code }}" {{$user->role_id === $item['id'] ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -72,7 +74,7 @@
                     <div class="form-group col-md-4">
                         <label for="status_id" class="form-label small">Trạng thái</label>
                         <select class="custom-select" id="status_id">
-                            <option disabled selected>Chọn</option>
+                            <option disabled selected>Chọn trạng thái</option>
                             <option value="{{ config('constants.number.one') }}" {{$user->status_id === config('constants.number.one') ? 'selected' : '' }}>Hoạt động</option>
                             <option value="{{ config('constants.number.two') }}" {{$user->status_id === config('constants.number.two') ? 'selected' : '' }}>Dừng hoạt động</option>
                         </select>
@@ -81,7 +83,7 @@
                     <div class="form-group col-md-4">
                         <label for="gender_id" class="form-label small">Giới tính</label>
                         <select class="custom-select" id="gender_id">
-                            <option disabled selected>Chọn</option>
+                            <option disabled selected>Chọn giới tính</option>
                             <option value="{{ config('constants.number.one') }}" {{$user->gender_id === config('constants.number.one') ? 'selected' : '' }}>Nam</option>
                             <option value="{{ config('constants.number.two') }}" {{$user->gender_id === config('constants.number.two') ? 'selected' : '' }}>Nữ</option>
                         </select>
