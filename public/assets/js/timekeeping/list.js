@@ -28,7 +28,6 @@ var calendar = $("#calendar").fullCalendar({
     weekNumbers: trueValue,
     eventLimit: trueValue,
     eventLimitClick: 'popover',
-    editable: trueValue,
     weekends: falseValue,
     eventRender: function (event, element, view) {
         var popover = {
