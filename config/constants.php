@@ -18,17 +18,6 @@ return [
         'four' => 4,
         'five' => 5
     ],
-    
-    'role' => [
-        'super_admin' => ['id' => 1, 'name' => 'Quản trị hệ thống'] ,
-        'admin' => ['id' => 2, 'name' => 'Quản trị'],
-        'manage' => ['id' => 3, 'name' => 'Trưởng phòng'],
-        'user' => ['id' => 4, 'name' => 'Nhân viên']
-    ],
-    
-    'department' => [
-        'purchase' => ['code' => 'PURCHASE', 'name' => 'Mua hàng']
-    ],
 
     'timekeeping' => [
         'clock_in' => '08:15:00',

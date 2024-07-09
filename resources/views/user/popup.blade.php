@@ -38,8 +38,8 @@
                     <label for="role_id" class="form-label small">Vai trò</label>
                     <select class="custom-select" id="role_id">
                         <option disabled selected>Chọn vai trò</option>
-                        @foreach (config('constants.role') as $item)
-                            @if ($item['id'] !== config('constants.number.one'))
+                        @foreach ($roles as $item)
+                            @if ($item->id !== config('constants.number.one'))
                                 <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                             @endif
                         @endforeach
@@ -50,8 +50,10 @@
                     <label for="department_code" class="form-label small">Phòng ban</label>
                     <select class="custom-select" id="department_code">
                         <option disabled selected>Chọn phòng ban</option>
-                        @foreach (config('constants.department') as $item)
-                            <option value="{{ $item['code'] }}">{{ $item['name'] }}</option>
+                        @foreach ($departments as $item)
+                            @if ($item->code !== 'ADMIN')
+                                <option value="{{ $item->code }}">{{ $item->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                     <span class="text-danger small" id="department_code_error"></span>

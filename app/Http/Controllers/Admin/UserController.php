@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Models\Department;
+use App\Models\Role;
 use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,9 @@ class UserController extends Controller
 
     public function list()
     {
-        return view('user.list');
+        $departments = Department::select('code', 'name')->get();
+        $roles = Role::select('id', 'name')->get();
+        return view('user.list', compact('departments', 'roles'));
     }
 
     public function getData()
@@ -40,7 +44,9 @@ class UserController extends Controller
     public function edit(Request $request)
     {
         $user = $this->userService->edit($request->id);
-        return view('user.edit', compact('user'));
+        $departments = Department::select('code', 'name')->get();
+        $roles = Role::select('id', 'name')->get();
+        return view('user.edit', compact('user', 'departments', 'roles'));
     }
     
     public function update(UpdateRequest $request)
