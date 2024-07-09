@@ -25,9 +25,9 @@ $(document).ready(function () {
                 });
 
                 $('#additionalWork').modal('hide');
-                $('#validate-type-error, #validate-start-error, #validate-end-error').text('');
+                $('#validate-type-error, #validate-start-error, #validate-end-error, #validate-description-error').text('');
                 $('#type').removeClass().addClass('custom-select');
-                $('#start, #end').removeClass().addClass('form-control');
+                $('#start, #end, #description').removeClass().addClass('form-control');
                 $('#col-type-timekeeping option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
                 if ($('#period').length) {
                     $('#period').remove();
