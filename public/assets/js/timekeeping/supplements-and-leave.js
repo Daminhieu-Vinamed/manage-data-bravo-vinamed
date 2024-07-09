@@ -3,7 +3,7 @@ $(document).ready(function () {
         const type = $('#type').val();
         const start = $('#start').val();
         const end = $('#end').val();
-        const reason = $('#reason').val();
+        const description = $('#description').val();
         $.ajax({
             url: linkTimekeeping + "supplements-and-leave",
             type: "POST",
@@ -16,7 +16,7 @@ $(document).ready(function () {
                 type: type,
                 start: start,
                 end: end,
-                reason: reason
+                description: description
             },
             success: function (success) {
                 ToastTopRight.fire({
@@ -69,7 +69,14 @@ $(document).ready(function () {
                     $('#validate-end-error').text('');
                     $('#end').removeClass('is-invalid').addClass('is-valid');
                 }
-                // errors.reason ? $('#validate-reason-error').text(errors.reason[zeroConst]) : $('#validate-reason-error').text('');
+
+                if (errors.description) {
+                    $('#validate-description-error').text(errors.description[zeroConst]);
+                    $('#description').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#validate-description-error').text('');
+                    $('#description').removeClass('is-invalid').addClass('is-valid');
+                }
             },
         });
     });

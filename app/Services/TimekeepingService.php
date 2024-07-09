@@ -58,7 +58,7 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();
         try {
-            $this->timekeepingRepository->additionalWork($connectCompany, $user->EmployeeCode, $user->company, $request->type, $request->start, $request->end);
+            $this->timekeepingRepository->additionalWork($connectCompany, $user->EmployeeCode, $user->company, $request->type, $request->start, $request->end, $request->description);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Đã bổ sung công'], 200);
         } catch (\Exception $e) {

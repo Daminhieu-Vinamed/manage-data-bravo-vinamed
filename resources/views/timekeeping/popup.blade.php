@@ -91,13 +91,13 @@
                     <span id="validate-end-error" class="text-danger small"></span>
                 </div>
             </div>
-            {{-- <div class="d-sm-flex align-items-center justify-content-center">
+            <div class="row">
                 <div class="form-group col-md-12">
-                    <label for="reason" class="form-label small">Lý do</label>
-                    <textarea class="form-control" id="reason" class="text-danger small"></textarea>
-                    <span id="validate-reason-error" class="text-danger small"></span>
+                    <label for="description" class="form-label small">Lý do</label>
+                    <textarea class="form-control" id="description" class="text-danger small"></textarea>
+                    <span id="validate-description-error" class="text-danger small"></span>
                 </div>
-            </div> --}}
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary shadow-sm" id="supplements_and_leave">Bổ sung</button>
