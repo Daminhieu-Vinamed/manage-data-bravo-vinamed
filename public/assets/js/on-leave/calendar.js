@@ -22,7 +22,6 @@ $(document).ready(function () {
         weekNumbers: trueValue,
         eventLimit: trueValue,
         eventLimitClick: 'popover',
-        editable: trueValue,
         displayEventTime: falseValue,
         weekends: falseValue,
         eventRender: function (event, element, view) {
