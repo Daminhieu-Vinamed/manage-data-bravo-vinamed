@@ -65,7 +65,7 @@
                             <option disabled selected>Chọn vai trò</option>
                             @foreach ($roles as $item)
                                 @if ($item->id !== config('constants.number.one'))
-                                    <option value="{{ $item->code }}" {{$user->role_id === $item['id'] ? 'selected' : '' }}>{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" {{$user->role_id === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endif
                             @endforeach
                         </select>

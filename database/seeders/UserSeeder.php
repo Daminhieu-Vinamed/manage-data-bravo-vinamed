@@ -29,7 +29,6 @@ class UserSeeder extends Seeder
             ['EmployeeCode' => '120042', 'department_code' => 'PURCHASE', 'company' => 'A12', 'username' => 'thao.nguyenphuong', 'name' => 'Nguyễn Phương Thảo', 'email' => 'thao.nguyenphuong@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.two'), 'role_id' => config('constants.number.three'), 'avatar' => 'assets/images/woman.png'],
             
             //USER
-            
             //A02
             //Mua hàng
             ['EmployeeCode' => '990329', 'department_code' => 'PURCHASE', 'company' => 'A02', 'username' => 'huong.luongthithanh', 'name' => 'Lương Thị Thanh Hương', 'email' => 'huong.luongthithanh@caotoc24.com', 'password' => bcrypt('abcd@123'), 'status_id' => config('constants.number.one'), 'gender_id' => config('constants.number.two'), 'role_id' => config('constants.number.four'), 'avatar' => 'assets/images/woman.png'],
