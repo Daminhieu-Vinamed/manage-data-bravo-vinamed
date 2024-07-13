@@ -14,23 +14,36 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['code' => 'IT', 'name' => 'Phòng IT', 'DeptCode' => '["174", "175", "176"]'],
-            ['code' => 'PERSONNEL', 'name' => 'Phòng nhân sự', 'DeptCode' => '["181", "182", "183", "184"]'],
-            ['code' => 'PURCHASE', 'name' => 'Phòng mua hàng', 'DeptCode' => '["167", "168", "169", "197", "221"]'],
-            ['code' => 'ACCOUNTANT', 'name' => 'Phòng kế toán', 'DeptCode' => '["179"]'],
-            ['code' => 'AM_NORTH_1', 'name' => 'AM MIỀN BẮC 1', 'DeptCode' => '["187"]'],
-            ['code' => 'AM_NORTH_2', 'name' => 'AM MIỀN BẮC 2', 'DeptCode' => '["188"]'],
-            ['code' => 'AM_SOUTHERN_1', 'name' => 'AM MIỀN NAM 1', 'DeptCode' => '["111"]'],
-            ['code' => 'AM_SOUTHERN_2', 'name' => 'AM MIỀN NAM 2', 'DeptCode' => '["112"]'],
-            ['code' => 'CONTRACT', 'name' => 'Hợp đồng', 'DeptCode' => '["193"]'],
-            ['code' => 'CONTRACTOR_&_BG', 'name' => 'Thầu & BG', 'DeptCode' => '["191"]'],
-            ['code' => 'NORTHERN_TECHNICAL_SERVICES', 'name' => 'Kỹ thuật dịch vụ Miền Bắc', 'DeptCode' => '["120"]'],
-            ['code' => 'SOUTHERN_TECHNICAL_SERVICE', 'name' => 'Kỹ thuật dịch vụ Miền Nam', 'DeptCode' => '["121"]'],
-            ['code' => 'SOUTHERN_BUSINESS_3_(CONSUMPTION)', 'name' => 'Kinh doanh miền Nam 3 (Tiêu hao)', 'DeptCode' => '["134"]'],
-            ['code' => 'SOUTHERN_BUSINESS_(KSNK)', 'name' => 'Kinh doanh miền Nam (KSNK)', 'DeptCode' => '["162"]'],
-            ['code' => 'CONSUMPTION BUSINESS_(CTNS)', 'name' => 'Kinh doanh tiêu hao (CTNS)', 'DeptCode' => '["158"]'],
-            ['code' => 'PROJECT_CONSULTATION_AND_MANAGEMENT', 'name' => 'Tư vấn và quản lý dự án', 'DeptCode' => '["208"]'],
-            ['code' => 'ADMIN', 'name' => 'Quản lý hệ thống', 'DeptCode' => '["174", "175", "176", "181", "182", "183", "184", "167", "168", "169", "197", "221", "179"]'],
+            ['code' => 'Information_technology', 'name' => 'Công nghệ thông tin', 'DeptCode' => '["173", "174", "175", "176"]'],
+            ['code' => 'Board_of_manager', 'name' => 'Ban giám đốc', 'DeptCode' => '["100", "145"]'],
+            ['code' => 'Industry_marketing', 'name' => 'Marketing ngành hàng', 'DeptCode' => '["101", "103", "104", "106", "107", "206"]'],
+            ['code' => 'Assistant_Secretary', 'name' => 'Trợ lý - Thư ký', 'DeptCode' => '["109", "185"]'],
+            ['code' => 'Equipment_trading', 'name' => 'Kinh doanh thiết bị', 'DeptCode' => '["111", "112", "187", "188"]'],
+            ['code' => 'QC_equipment', 'name' => 'QC thiết bị', 'DeptCode' => '["119"]'],
+            ['code' => 'Service_engineering', 'name' => 'Kỹ thuật dịch vụ', 'DeptCode' => '["120", "121"]'],
+            ['code' => 'KTDV_support', 'name' => 'Hỗ trợ KTDV', 'DeptCode' => '["124"]'],
+            ['code' => 'Consumable_Business', 'name' => 'Kinh Doanh Tiêu hao', 'DeptCode' => '["126", "129", "130", "131", "132", "133", "134", "136", "205", "214"]'],
+            ['code' => 'Business_Support', 'name' => 'Hỗ trợ kinh doanh', 'DeptCode' => '["138", "139"]'],
+            ['code' => 'Orthopedics_&_Spine', 'name' => 'Chỉnh hình & cột sống', 'DeptCode' => '["147", "148", "149", "150", "155"]'],
+            ['code' => 'Intervention_&_Endoscopy', 'name' => 'Can thiệp & Nội soi', 'DeptCode' => '["157", "158"]'],
+            ['code' => 'Infection_control_Consumption', 'name' => 'Kiểm soát nhiễm khuẩn Tiêu hao', 'DeptCode' => '["161", "162", "163"]'],
+            ['code' => 'Supply_chain', 'name' => 'Chuỗi cung ứng', 'DeptCode' => '["167", "168", "169"]'],
+            ['code' => 'Internal_control', 'name' => 'Kiểm soát nội bộ', 'DeptCode' => '["170", "171", "204"]'],
+            ['code' => 'Accountant', 'name' => 'Kế toán', 'DeptCode' => '["179"]'],
+            ['code' => 'Finance_Planning', 'name' => 'Tài chính - Kế hoạch', 'DeptCode' => '["180"]'],
+            ['code' => 'Operate', 'name' => 'Vận hành', 'DeptCode' => '["181", "182", "183", "184"]'],
+            ['code' => 'Business_operations', 'name' => 'Tác nghiệp kinh doanh', 'DeptCode' => '["190", "191", "192", "193", "199", "211"]'],
+            ['code' => 'Test', 'name' => 'Xét nghiệm', 'DeptCode' => '["221"]'],
+            ['code' => 'Marketing_(Onelab)', 'name' => 'Marketing (Onelab)', 'DeptCode' => '["223"]'],
+            ['code' => 'Business_(Onelab)', 'name' => 'Kinh doanh (Onelab)', 'DeptCode' => '["228", "229"]'],
+            ['code' => 'Purchase_&_Services', 'name' => 'Mua hàng & Dịch vụ', 'DeptCode' => '["197"]'],
+            ['code' => 'Consulting_and_Project_Management', 'name' => 'Tư vấn và Quản lý dự án', 'DeptCode' => '["208"]'],
+
+            [
+                'code' => 'Admin', 
+                'name' => 'Quản lý hệ thống', 
+                'DeptCode' => '["173", "174", "175", "176", "100", "145", "101", "103", "104", "106", "107", "206", "109", "185", "111", "112", "119", "120", "121", "124", "126", "129", "130", "131", "132", "133", "134", "136", "205", "214", "138", "139", "147", "148", "149", "150", "155", "157", "158", "161", "162", "163", "167", "168", "169", "170", "171", "204", "179", "180", "181", "182", "183", "184", "187", "188", "190", "191", "192", "193", "199", "211", "221", "223", "228", "229", "197", "208"]'
+            ],
         ];
         DB::table('departments')->insert($data);
     }
