@@ -28,6 +28,7 @@ $(document).ready(function () {
                 $('#validate-type-error, #validate-start-error, #validate-end-error, #validate-description-error').text('');
                 $('#type').removeClass().addClass('custom-select');
                 $('#start, #end, #description').removeClass().addClass('form-control');
+                $('#description').val(nullValue);
                 $('#col-type-timekeeping option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
                 if ($('#period').length) {
                     $('#period').remove();
