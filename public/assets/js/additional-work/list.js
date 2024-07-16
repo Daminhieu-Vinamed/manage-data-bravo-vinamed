@@ -47,8 +47,8 @@ var listOnLeave = $("#additional_work").DataTable({
         var len = api.page.len();
         var numRows = api.rows().count();
         if (numRows <= len) {
-            $('#on_leave_wrapper').children('.row:last').remove();
-            $('#on_leave_wrapper').children('.row:first').remove();
+            $('#additional_work_wrapper').children('.row:last').remove();
+            $('#additional_work_wrapper').children('.row:first').remove();
         }
     },
 });
