@@ -66,9 +66,9 @@ var calendar = $("#calendar").fullCalendar({
     },
     select: function(start, end, jsEvent, view) {
         $('#additionalWork').modal('toggle');
-        $('#validate-type-error, #validate-start-error, #validate-end-error').text('');
+        $('#validate-type-error, #validate-start-error, #validate-end-error, #validate-description-error').text('');
         $('#type').removeClass().addClass('custom-select');
-        $('#start, #end').removeClass().addClass('form-control');
+        $('#start, #end, #description').removeClass().addClass('form-control');
         $('#col-type-timekeeping option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
         if ($('#period').length) {
             $('#period').remove();
@@ -76,6 +76,7 @@ var calendar = $("#calendar").fullCalendar({
         }
         $('#start').val(moment(start).format('YYYY-MM-DD'));
         $('#end').val(moment(end).subtract(oneConst, 'days').format('YYYY-MM-DD'));
+        $('#description').val(nullValue);
         $('#type').on('change', function() {
             if ($(this).children('option:selected').attr('type') === '.50') {
                 if (!$('#period').length) {
