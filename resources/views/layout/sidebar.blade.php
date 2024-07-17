@@ -82,12 +82,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Hành động:</h6>
                 @if (Auth::user()->role->id === config('constants.number.one') ||
-                        Auth::user()->role->id === config('constants.number.two') ||
-                        Auth::user()->role->id === config('constants.number.three'))
+                    Auth::user()->role->id === config('constants.number.two') ||
+                    Auth::user()->role->id === config('constants.number.three') ||
+                    Auth::user()->role->id === config('constants.number.four'))
                     <a class="collapse-item {{ request()->routeIs('on-leave.list') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('on-leave.list') }}">Danh sách nghỉ phép</a>
                     <a class="collapse-item {{ request()->routeIs('additional-work.list') ? 'active' : config('constants.value.empty') }}"
-                        href="{{ route('additional-work.list') }}">Danh sách Bổ sung</a>
+                        href="{{ route('additional-work.list') }}">Danh sách bổ sung</a>
                 @endif
                 <a class="collapse-item {{ request()->routeIs('on-leave.calendar') ? 'active' : config('constants.value.empty') }}"
                     href="{{ route('on-leave.calendar') }}">Lịch nghỉ phép</a>
