@@ -26,6 +26,7 @@
                             <th>Loại nghỉ phép</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
+                            <th>Lý do</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -38,6 +39,7 @@
                             <th>Loại nghỉ phép</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
+                            <th>Lý do</th>
                             <th>Hành động</th>
                         </tr>
                     </tfoot>

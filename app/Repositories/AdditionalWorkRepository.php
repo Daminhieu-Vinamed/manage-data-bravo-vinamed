@@ -26,17 +26,45 @@ class AdditionalWorkRepository
                     DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
                     'DocStatusName',
                     'DocCode',
-                    'RowId'
+                    'RowId',
+                    'Description',
                 ]);
                 $additionalWorkTotal[$value] = $additionalWork->toArray();
             };
-        }elseif (Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four')) {
+        }elseif (Auth::user()->role->id === config('constants.number.three')) {
             $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
             foreach (config('constants.company') as $value) {
                 $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', 'BS')
                 ->where('DocStatus', '50')
+                ->where('IsTP', config('constants.number.one'))
+                ->whereIn('DeptCode', $arrayDeptCode)
+                ->whereYear('FromDate',  $timeNow->format('Y'))
+                ->get([
+                    'BranchCode',
+                    'EmployeeCode',
+                    'EmployeeName',
+                    'DeptName',
+                    'TimesheetTypeName',
+                    'DeptCode',
+                    DB::raw("FORMAT(FromDate, 'dd-MM-yyyy') AS [start]"),
+                    DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"),
+                    'DocStatusName',
+                    'DocCode',
+                    'RowId',
+                    'Description',
+                ]);
+                $additionalWorkTotal[$value] = $additionalWork->toArray();
+            };
+        }elseif (Auth::user()->role->id === config('constants.number.four')) {
+            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
+            foreach (config('constants.company') as $value) {
+                $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
+                ->where('IsActive', config('constants.number.one'))
+                ->where('DocCode', 'BS')
+                ->where('DocStatus', '50')
+                ->where('IsTP', '<>', config('constants.number.one'))
                 ->whereIn('DeptCode', $arrayDeptCode)
                 ->whereYear('FromDate',  $timeNow->format('Y'))
                 ->get([
@@ -49,7 +77,8 @@ class AdditionalWorkRepository
                     DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
                     'DocStatusName',
                     'DocCode',
-                    'RowId'
+                    'RowId',
+                    'Description',
                 ]);
                 $additionalWorkTotal[$value] = $additionalWork->toArray();
             };

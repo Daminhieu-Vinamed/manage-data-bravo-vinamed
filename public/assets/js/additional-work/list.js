@@ -14,6 +14,7 @@ var listOnLeave = $("#additional_work").DataTable({
         { data: "TimesheetTypeName", name: "TimesheetTypeName" },
         { data: "start", name: "start" },
         { data: "end", name: "end" },
+        { data: "Description", name: "Description" },
         { data: "action", name: "action" },
     ],
     ordering: falseValue,

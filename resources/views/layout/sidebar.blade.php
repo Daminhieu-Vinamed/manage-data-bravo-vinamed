@@ -91,9 +91,9 @@
                         href="{{ route('additional-work.list') }}">Danh sách bổ sung</a>
                 @endif
                 <a class="collapse-item {{ request()->routeIs('on-leave.calendar') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('on-leave.calendar') }}">Lịch nghỉ phép</a>
+                    href="{{ route('on-leave.calendar') }}">Lịch nghỉ phép tập đoàn</a>
                 <a class="collapse-item {{ request()->routeIs('additional-work.calendar') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('additional-work.calendar') }}">Lịch bổ sung</a>
+                    href="{{ route('additional-work.calendar') }}">Lịch bổ sung tập đoàn</a>
             </div>
         </div>
     </li>

@@ -26,17 +26,19 @@ class OnLeaveRepository
                     DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
                     'DocStatusName',
                     'DocCode',
-                    'RowId'
+                    'RowId',
+                    'Description',
                 ]);
                 $onLeaveTotal[$value] = $onLeave->toArray();
             };
-        }elseif (Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four')) {
+        }elseif (Auth::user()->role->id === config('constants.number.three')) {
             $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
             foreach (config('constants.company') as $value) {
                 $onLeave = DB::connection($value)->table('vB30HrmPTimesheet')
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', 'NP')
                 ->where('DocStatus', '19')
+                ->where('IsTP', config('constants.number.one'))
                 ->whereIn('DeptCode', $arrayDeptCode)
                 ->whereYear('FromDate',  $timeNow->format('Y'))
                 ->get([
@@ -49,7 +51,33 @@ class OnLeaveRepository
                     DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
                     'DocStatusName',
                     'DocCode',
-                    'RowId'
+                    'RowId',
+                    'Description',
+                ]);
+                $onLeaveTotal[$value] = $onLeave->toArray();
+            };
+        }elseif (Auth::user()->role->id === config('constants.number.four')) {
+            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
+            foreach (config('constants.company') as $value) {
+                $onLeave = DB::connection($value)->table('vB30HrmPTimesheet')
+                ->where('IsActive', config('constants.number.one'))
+                ->where('DocCode', 'NP')
+                ->where('DocStatus', '19')
+                ->where('IsTP', '<>', config('constants.number.one'))
+                ->whereIn('DeptCode', $arrayDeptCode)
+                ->whereYear('FromDate',  $timeNow->format('Y'))
+                ->get([
+                    'BranchCode',
+                    'EmployeeCode', 
+                    'EmployeeName', 
+                    'DeptName', 
+                    'TimesheetTypeName', 
+                    DB::raw("FORMAT(FromDate, 'dd-MM-yyyy') AS [start]"),
+                    DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
+                    'DocStatusName',
+                    'DocCode',
+                    'RowId',
+                    'Description',
                 ]);
                 $onLeaveTotal[$value] = $onLeave->toArray();
             };
