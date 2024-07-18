@@ -4,6 +4,7 @@ namespace App\Repositories\Admin;
 
 use App\Models\User;
 use App\Repositories\BaseRepository\AbstractRepository;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository extends AbstractRepository
 {
@@ -13,7 +14,7 @@ class UserRepository extends AbstractRepository
     }
     
     public function getData() {
-        $users = $this->builder()->where('role_id', '<>', config('constants.number.one'))->get();
+        $users = $this->builder()->where('role_id', '<>', config('constants.number.one'))->where('id', '<>', Auth::user()->id)->get();
         return $users;
     }
     

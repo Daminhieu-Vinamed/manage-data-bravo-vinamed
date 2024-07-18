@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Phê duyệt nghỉ phép')
+@section('title', 'Phê duyệt bổ sung')
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
@@ -26,6 +26,7 @@
                             <th>Loại bổ sung</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
+                            <th>Lý do</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -38,6 +39,7 @@
                             <th>Loại bổ sung</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
+                            <th>Lý do</th>
                             <th>Hành động</th>
                         </tr>
                     </tfoot>
