@@ -77,7 +77,7 @@ class SuggestionService extends SuggestionRepository
     {
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
             $paymentOrder = $this->suggestionRepository->statisticalAdmin();
-        } elseif (Auth::user()->role->id === config('constants.number.three')) {
+        } elseif (Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four')) {
             $paymentOrder = $this->suggestionRepository->statisticalManage();
         }
         $countAll = array_sum($paymentOrder['count']);
