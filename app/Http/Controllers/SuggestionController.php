@@ -21,12 +21,8 @@ class SuggestionController extends Controller
 
     public function list()
     {
-        return view('suggestion.list');
-    }
-
-    public function getData()
-    {
-        return $this->suggestionService->getData();
+        $data = $this->suggestionService->getData();
+        return view('suggestion.list', compact('data'));
     }
 
     public function approve(Request $request)
@@ -88,7 +84,6 @@ class SuggestionController extends Controller
 
     public function store(CreatePaymentOrderRequest $request)
     {
-        dd();
         return $this->suggestionService->store($request);
     }
 

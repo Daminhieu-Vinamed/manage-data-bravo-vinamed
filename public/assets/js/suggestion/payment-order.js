@@ -1,11 +1,11 @@
 $(document).ready(function () {
     $("#ExchangeRate").val(oneConst);
-    const docNo = $("input[name='DocNo']").val();
+    const docNo = $("#DocNo").val();
     const numberLastBefore = parseInt(docNo.slice(docNo.lastIndexOf(".") + oneConst));
     const lengthDocNoBefore = docNo.slice(docNo.lastIndexOf(".") + oneConst).length;
     var numberLastAfter = (numberLastBefore + oneConst).toString();
-    if (numberLastAfter.length < lengthDocNoBefore) {
-        for (let index = zeroConst; index < lengthDocNoBefore; index++) {
+    for (let index = zeroConst; index < lengthDocNoBefore; index++) {    
+        if (numberLastAfter.length < lengthDocNoBefore) {
             numberLastAfter = "0" + numberLastAfter
         }
     }
@@ -15,7 +15,7 @@ $(document).ready(function () {
         if (secondDotIndex !== -oneConst) {
             const sliced2 = docNo.substring(zeroConst, secondDotIndex);
             const docNoNew = sliced2 + "." + numberLastAfter;
-            $("input[name='DocNo']").val(docNoNew);
+            $("#DocNo").val(docNoNew);
         }
     }
     $(document).on("change", "#Hinh_Thuc_TT", function () {
@@ -28,22 +28,22 @@ $(document).ready(function () {
             <div class="row row-info-bank">
                 <div class="form-group col-md-4">
                     <label for="BankName" class="form-label small">Tên ngân hàng</label>
-                    <input type="text" class="form-control" name="BankName" id="BankName">
+                    <input type="text" class="form-control" id="BankName">
                     <span class="text-danger small" id="BankName_error"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="BankAccountNo" class="form-label small">Số tài khoản</label>
-                    <input type="text" class="form-control" name="BankAccountNo" id="BankAccountNo">
+                    <input type="text" class="form-control" id="BankAccountNo">
                     <span class="text-danger small" id="BankAccountNo_error"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Ten_Chu_TK" class="form-label small">Tên chủ tài khoản</label>
-                    <input type="text" class="form-control" name="Ten_Chu_TK" id="Ten_Chu_TK">
+                    <input type="text" class="form-control" id="Ten_Chu_TK">
                     <span class="text-danger small" id="Ten_Chu_TK_error"></span>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="Description1" class="form-label small">Nội dung</label>
-                    <textarea class="form-control" name="Description1" id="Description1"></textarea>
+                    <textarea class="form-control" id="Description1"></textarea>
                     <span class="text-danger small" id="Description1_error"></span>
                 </div>
             </div>`);
@@ -94,13 +94,13 @@ $(document).ready(function () {
                 fourConst
             );
             $(".form-group-into-money #TotalOriginalAmount0").after(
-                '<input type="number" class="form-control mt-2" name="TotalAmount0" id="TotalAmount0" readonly>'
+                '<input type="number" class="form-control mt-2" id="TotalAmount0" readonly>'
             );
             $(".form-group-tax-money #TotalOriginalAmount3").after(
-                '<input type="number" class="form-control mt-2" name="TotalAmount3" id="TotalAmount3" readonly>'
+                '<input type="number" class="form-control mt-2" id="TotalAmount3" readonly>'
             );
             $(".form-group-total #TotalOriginalAmount").after(
-                '<input type="number" class="form-control mt-2" name="TotalAmount" id="TotalAmount" readonly>'
+                '<input type="number" class="form-control mt-2" id="TotalAmount" readonly>'
             );
 
             var OriginalAmount3 = $("input[name='OriginalAmount3[]']");
@@ -316,143 +316,63 @@ $(document).ready(function () {
 
     $(document).on("click", "#create-payment-order", function () {
         formData = new FormData();
-        formData.append('BranchCode', $("input[name='company']").val());
+        formData.append('DocDate', $("#DocDate").val());
+        formData.append('DocNo', $("#DocNo").val());
+        formData.append('BranchCode', $("#company").val());
+        formData.append('DocCode', $("#DocCode").val());
         formData.append('DocStatus', fortyFiveConst);
-        formData.append('DocDate', $("input[name='DocDate']").val());
-        formData.append('DocNo', $("input[name='DocNo']").val());
-        formData.append('DocCode', $("input[name='DocCode']").val());
-        formData.append('EmployeeCode', $("input[name='EmployeeCode']").val());
-        formData.append('CustomerCode1', $("input[name='CustomerCode1']").val());
-        formData.append('AmountTT', $("input[name='AmountTT']").val());
-        formData.append('Stt_TU', $("input[name='Stt_TU']").val());
-        formData.append('AmountTU', $("input[name='AmountTU']").val());
-        formData.append('Hinh_Thuc_TT', $("select[name='Hinh_Thuc_TT']").val());
-        formData.append('CurrencyCode', $("select[name='CurrencyCode']").val());
-        formData.append('ExchangeRate', $("input[name='ExchangeRate']").val());
-        formData.append('TotalOriginalAmount0', $("input[name='TotalOriginalAmount0']").val());
-        if ($("input[name='TotalAmount0']").length) {
-            formData.append('TotalAmount0', $("input[name='TotalAmount0']").val());
+        formData.append('EmployeeCode', $("#EmployeeCode").val());
+        formData.append('CustomerCode1', $("#CustomerCode1").val());
+        formData.append('AmountTT', $("#AmountTT").val());
+        formData.append('Stt_TU', $("#Stt_TU").val());
+        formData.append('AmountTU', $("#AmountTU").val());
+        formData.append('Hinh_Thuc_TT', $("#Hinh_Thuc_TT").val());
+        formData.append('CurrencyCode', $("#CurrencyCode").val());
+        formData.append('ExchangeRate', $("#ExchangeRate").val());
+        formData.append('TotalOriginalAmount0', $("#TotalOriginalAmount0").val());
+        formData.append('TotalOriginalAmount3', $("#TotalOriginalAmount3").val());
+        formData.append('TotalOriginalAmount', $("#TotalOriginalAmount").val());
+        formData.append('So_Hd', $("input[name='So_Hd[]']").map(function () { return $(this).val() }).get());
+        formData.append('Ngay_Hd', $("input[name='Ngay_Hd[]']").map(function () { return $(this).val() }).get());
+        formData.append('Description', $("textarea[name='Description[]']").map(function () { return $(this).val() }).get()); 
+        formData.append('Invoice', $("input[name='Invoice[]']").map(function () { return $(this).val() }).get());
+        formData.append('So_Van_Don', $("input[name='So_Van_Don[]']").map(function () { return $(this).val() }).get());
+        formData.append('Trong_Luong', $("input[name='Trong_Luong[]']").map(function () { return $(this).val() }).get());
+        formData.append('DV_Trong_Luong', $("input[name='DV_Trong_Luong[]']").map(function () { return $(this).val() }).get());
+        formData.append('CustomerCode2', $("input[name='CustomerCode2[]']").map(function () { return $(this).val() }).get());
+        formData.append('ExpenseCatgCode', $("input[name='ExpenseCatgCode[]']").map(function () { return $(this).val() }).get());
+        formData.append('EmployeeCode1', $("input[name='EmployeeCode1[]']").map(function () { return $(this).val() }).get());
+        formData.append('DeptCode', $("input[name='DeptCode[]']").map(function () { return $(this).val() }).get());
+        formData.append('BizDocId_PO', $("input[name='BizDocId_PO[]']").map(function () { return $(this).val() }).get());
+        formData.append('Hang_SX', $("input[name='Hang_SX[]']").map(function () { return $(this).val() }).get());
+        formData.append('OriginalAmount9', $("input[name='OriginalAmount9[]']").map(function () { return $(this).val() }).get());
+        formData.append('Amount9', $("input[name='Amount9[]']").map(function () {return $(this).val() }).get());
+        formData.append('TaxCode', $("input[name='TaxCode[]']").map(function () { return $(this).val() }).get());
+        formData.append('TaxRate', $("input[name='TaxRate[]']").map(function () { return $(this).val() }).get());
+        formData.append('Amount3', $("input[name='Amount3[]']").map(function () { return $(this).val() }).get());
+        formData.append('OriginalAmount3', $("input[name='OriginalAmount3[]']").map(function () { return $(this).val() }).get());
+        formData.append('Note', $("textarea[name='Note[]']").map(function () { return $(this).val() }).get());
+        if ($("#TotalAmount0").length) {
+            formData.append('TotalAmount0', $("#TotalAmount0").val());
         }
-        formData.append('TotalOriginalAmount3', $("input[name='TotalOriginalAmount3']").val());
-        if ($("input[name='TotalAmount3']").length) {
-            formData.append('TotalAmount3', $("input[name='TotalAmount3']").val());
+        if ($("#TotalAmount3").length) {
+            formData.append('TotalAmount3', $("#TotalAmount3").val());
         }
-        formData.append('TotalOriginalAmount', $("input[name='TotalOriginalAmount']").val());
-        if ($("input[name='TotalAmount']").length) {
-            formData.append('TotalAmount', $("input[name='TotalAmount']").val());
+        if ($("#TotalAmount").length) {
+            formData.append('TotalAmount', $("#TotalAmount").val());
         }
-        if ($("input[name='BankName']").length) {
-            formData.append('BankName', $("input[name='BankName']").val());
+        if ($("#BankName").length) {
+            formData.append('BankName', $("#BankName").val());
         }
-        if ($("input[name='BankAccountNo']").length) {
-            formData.append('BankAccountNo', $("input[name='BankAccountNo']").val());
+        if ($("#BankAccountNo").length) {
+            formData.append('BankAccountNo', $("#BankAccountNo").val());
         }
-        if ($("input[name='Ten_Chu_TK']").length) {
-            formData.append('Ten_Chu_TK', $("input[name='Ten_Chu_TK']").val());
+        if ($("#Ten_Chu_TK").length) {
+            formData.append('Ten_Chu_TK', $("#Ten_Chu_TK").val());
         }
-        if ($("textarea[name='Description1']").length) {
-            formData.append('Description1', $("textarea[name='Description1']").val());
+        if ($("#Description1").length) {
+            formData.append('Description1', $("#Description1").val());
         }
-        formData.append('So_Hd', $("input[name='So_Hd[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('Ngay_Hd', $("input[name='Ngay_Hd[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('Description', $("textarea[name='Description[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get()); 
-        formData.append('Invoice', $("input[name='Invoice[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('So_Van_Don', $("input[name='So_Van_Don[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('Trong_Luong', $("input[name='Trong_Luong[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('DV_Trong_Luong', $("input[name='DV_Trong_Luong[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('CustomerCode2', $("input[name='CustomerCode2[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('ExpenseCatgCode', $("input[name='ExpenseCatgCode[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('EmployeeCode1', $("input[name='EmployeeCode1[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('DeptCode', $("input[name='DeptCode[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('BizDocId_PO', $("input[name='BizDocId_PO[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('Hang_SX', $("input[name='Hang_SX[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('OriginalAmount9', $("input[name='OriginalAmount9[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('Amount9', $("input[name='Amount9[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('TaxCode', $("input[name='TaxCode[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('TaxRate', $("input[name='TaxRate[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('Amount3', $("input[name='Amount3[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('OriginalAmount3', $("input[name='OriginalAmount3[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
-        formData.append('Note', $("textarea[name='Note[]']")
-        .map(function () {
-            return $(this).val();
-        })
-        .get());
 
         $.ajax({
             url: linkSuggestion + "store",

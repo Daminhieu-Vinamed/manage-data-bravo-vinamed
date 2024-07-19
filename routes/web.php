@@ -18,11 +18,10 @@ Route::prefix('/')->group(function () {
 
         Route::prefix('suggestion')->name('suggestion.')->group(function () {
             Route::get('/', [SuggestionController::class, 'list'])->name('list');
-            Route::get('get-data', [SuggestionController::class, 'getData']);
             Route::middleware('checkRoleManage')->group(function () {
                 Route::get('statistical', [SuggestionController::class, 'statistical'])->name('statistical');
-                Route::put('approve-payment-request', [SuggestionController::class, 'approve']);
-                Route::put('cancel-payment-request', [SuggestionController::class, 'cancel']);
+                Route::post('approve-payment-request', [SuggestionController::class, 'approve']);
+                Route::post('cancel-payment-request', [SuggestionController::class, 'cancel']);
             });
             Route::get('choose-company', [SuggestionController::class, 'chooseCompany'])->name('choose-company');
             Route::get('payment-order', [SuggestionController::class, 'paymentOrder'])->name('payment-order');

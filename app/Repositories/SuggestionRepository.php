@@ -11,17 +11,22 @@ class SuggestionRepository
     {
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
             foreach (config('constants.company') as $company) {
-                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')->orderBy('DocDate', 'desc')->get();
+                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')
+                ->where('IsActive', config('constants.number.one'))
+                ->orderBy('DocDate', 'desc')->get();
                 $paymentOrderTotal[$company] = $paymentOrder->toArray();
             }
-        } elseif (Auth::user()->role->id === config('constants.number.three')) {
+        } else {
             $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
             foreach (config('constants.company') as $company) {
-                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')->whereIn('Dept', $arrayDeptCode)->orderBy('DocDate', 'desc')->get();
+                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')
+                ->whereIn('Dept', $arrayDeptCode)
+                ->where('IsActive', config('constants.number.one'))
+                ->orderBy('DocDate', 'desc')->get();
                 $paymentOrderTotal[$company] = $paymentOrder->toArray();
             }
         }
-        return  $paymentOrderTotal;
+        return $paymentOrderTotal;
     }
 
     public function approvePaymentOrder($connectCompany, $Stt, $nUserId, $description, $username)
@@ -95,8 +100,9 @@ class SuggestionRepository
 
     public function store($data)
     {
+        dd($data);
         $dataHeader = [
-            "BranchCode" => $data->company,
+            "BranchCode" => $data->BranchCode,
             "DocStatus" => $data->DocStatus,
             "DocDate" => $data->DocDate,
             "DocNo" => $data->DocNo,
