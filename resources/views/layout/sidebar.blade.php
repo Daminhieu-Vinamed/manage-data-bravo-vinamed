@@ -40,9 +40,7 @@
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Hành động:</h6>
-                @if (Auth::user()->role->id === config('constants.number.one') ||
-                        Auth::user()->role->id === config('constants.number.two') ||
-                        Auth::user()->role->id === config('constants.number.three'))
+                @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four'))
                     <a class="collapse-item {{ request()->routeIs('suggestion.statistical') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('suggestion.statistical') }}">Thống kê</a>
                 @endif
