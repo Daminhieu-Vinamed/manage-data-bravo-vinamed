@@ -13,22 +13,22 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Ngày tạo</span>
                 </div>
-                <input type="date" class="form-control" name="DocDate" value="{{ date('Y-m-d') }}">
+                <input type="date" class="form-control" id="DocDate" value="{{ date('Y-m-d') }}">
             </div>
             <div class="input-group input-group-sm col-md-3 p-0">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Mã chứng từ</span>
                 </div>
-                <input type="text" class="form-control" name="DocNo" value="{{ $data['document_number'] }}">
+                <input type="text" class="form-control" id="DocNo" value="{{ $data['document_number'] }}">
             </div>
         </div>
-        <input type="hidden" value="{{ request()->get('company') }}" name="company">
-        <input type="hidden" value="{{ request()->get('DocCode') }}" name="DocCode">
+        <input type="hidden" value="{{ request()->get('company') }}" id="company">
+        <input type="hidden" value="{{ request()->get('DocCode') }}" id="DocCode">
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="EmployeeCode" class="form-label small">Người đề nghị</label>
-                    <input list="listEmployeeCode" class="form-control" name="EmployeeCode" id="EmployeeCode">
+                    <input list="listEmployeeCode" class="form-control" id="EmployeeCode">
                     <datalist id="listEmployeeCode">
                         @foreach ($data['bill_staff'] as $item)
                             <option department="{{ $item->DeptCode }}" data-value="{{ $item->Code }}"
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="CustomerCode" class="form-label small">Nhà cung cấp/Người nhận</label>
-                    <input list="listCustomerCode1" class="form-control" name="CustomerCode1" id="CustomerCode1">
+                    <input list="listCustomerCode1" class="form-control" id="CustomerCode1">
                     <datalist id="listCustomerCode1">
                         @foreach ($data['bill_detailed_object'] as $item)
                             <option data-value="{{ $item->Code }}" value="{{ $item->Code }}">
@@ -55,12 +55,12 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="AmountTT" class="form-label small">Đã trả trước cho NCC</label>
-                    <input type="number" class="form-control" name="AmountTT" id="AmountTT">
+                    <input type="number" class="form-control" id="AmountTT">
                     <span class="text-danger small" id="AmountTT_error"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Stt_TU" class="form-label small">Đề nghị tạm ứng</label>
-                    <input list="list_Stt_TU" class="form-control" name="Stt_TU" id="Stt_TU">
+                    <input list="list_Stt_TU" class="form-control" id="Stt_TU">
                     <datalist id="list_Stt_TU">
                         @foreach ($data['requests_for_advances'] as $item)
                             <option data-value="{{ $item->Stt }}" value="{{ $item->Stt }}">
@@ -72,12 +72,12 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="AmountTU" class="form-label small">Đã tạm ứng</label>
-                    <input type="number" class="form-control" name="AmountTU" id="AmountTU">
+                    <input type="number" class="form-control" id="AmountTU">
                     <span class="text-danger small" id="AmountTU_error"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Hinh_Thuc_TT" class="form-label small">Hình thức thanh toán</label>
-                    <select class="custom-select" name="Hinh_Thuc_TT" id="Hinh_Thuc_TT">
+                    <select class="custom-select" id="Hinh_Thuc_TT">
                         <option value="TM">Tiền mặt</option>
                         <option value="CK">Chuyển khoản</option>
                     </select>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="CurrencyCode" class="form-label small">Loại tiền</label>
-                    <select class="custom-select" name="CurrencyCode" id="CurrencyCode">
+                    <select class="custom-select" id="CurrencyCode">
                         @foreach ($data['currency'] as $item)
                             <option value="{{ $item->Code }}"{{ $item->Code === 'VND' ? 'selected' : config('constants.value.empty') }}>{{ $item->Name }}</option>
                         @endforeach
@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="ExchangeRate" class="form-label small">Tỷ giá hạch toán</label>
-                    <input type="number" class="form-control" name="ExchangeRate" id="ExchangeRate" readonly>
+                    <input type="number" class="form-control" id="ExchangeRate" readonly>
                     <span class="text-danger small" id="ExchangeRate_error"></span>
                 </div>
             </div>
@@ -234,17 +234,17 @@
             <div class="row row-total-money">
                 <div class="form-group col-md-4 form-group-into-money">
                     <label for="into_money" class="form-label small">Thành tiền</label>
-                    <input type="number" class="form-control" name="TotalOriginalAmount0" id="TotalOriginalAmount0" value="0" readonly>
+                    <input type="number" class="form-control" id="TotalOriginalAmount0" value="0" readonly>
                     <span class="text-danger small" id="TotalOriginalAmount0_error"></span>
                 </div>
                 <div class="form-group col-md-4 form-group-tax-money">
                     <label for="tax_money" class="form-label small">Tiền VAT</label>
-                    <input type="number" class="form-control" name="TotalOriginalAmount3" id="TotalOriginalAmount3" value="0" readonly>
+                    <input type="number" class="form-control" id="TotalOriginalAmount3" value="0" readonly>
                     <span class="text-danger small" id="TotalOriginalAmount3_error"></span>
                 </div>
                 <div class="form-group col-md-4 form-group-total">
                     <label for="TotalOriginalAmount" class="form-label small">Tổng cộng</label>
-                    <input type="number" class="form-control" name="TotalOriginalAmount" id="TotalOriginalAmount" value="0" readonly>
+                    <input type="number" class="form-control" id="TotalOriginalAmount" value="0" readonly>
                     <span class="text-danger small" id="TotalOriginalAmount_error"></span>
                 </div>
             </div>

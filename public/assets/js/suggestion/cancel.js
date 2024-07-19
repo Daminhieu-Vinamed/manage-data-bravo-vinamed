@@ -22,7 +22,7 @@ $(document).on("click", ".cancel-payment-request", function () {
             }
             $.ajax({
                 url: linkSuggestion + "cancel-payment-request",
-                type: "PUT",
+                type: "POST",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                         "content"

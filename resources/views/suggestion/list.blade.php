@@ -26,11 +26,34 @@
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
                             <th>Đơn vị</th>
-                            <th>Hành động</th>
+                            @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four'))
+                                <th>Hành động</th>
+                            @endif
                             <th>Ngày</th>
                             <th>Tình trạng</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($data as $item)
+                            <tr>
+                                <td>{{ $item->BranchCode }}</td>
+                                <td>{{ $item->DocNo }}</td>
+                                <td>{{ $item->CustomerName }}</td>
+                                <td>{{ $item->EmployeeName }}</td>
+                                <td>{{ number_format($item->TotalAmount, config('constants.number.zero'), ".", ".") }}</td>
+                                <td>{{ $item->CurrencyCode }}</td>
+                                @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four'))
+                                    <td>
+                                        {{-- <button title="Bước đề nghị thanh toán" class="btn btn-info shadow-sm btn-circle" data-toggle="modal" data-target="#paymentOrderModal"><i class="fas fa-walking"></i></button> --}}
+                                        <button title="Duyệt đề nghị thanh toán" type="button" class="btn btn-success shadow-sm btn-circle approve-payment-request" branch_code="{{ $item->BranchCode }}" stt="{{ $item->Stt }}"><i class="fas fa-check"></i></button>
+                                        <button title="Hủy đề nghị thanh toán" type="button" class="btn btn-danger shadow-sm btn-circle cancel-payment-request" branch_code="{{ $item->BranchCode }}" stt="{{ $item->Stt }}"><i class="fas fa-ban"></i></button>
+                                    </td>
+                                @endif
+                                <td>{{ date('d-m-Y', strtotime($item->DocDate)) }}</td>
+                                <td>{{ $item->_StatusTT }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                     <tfoot>
                         <tr>
                             <th>Mã công ty</th>
@@ -39,12 +62,13 @@
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
                             <th>Đơn vị</th>
-                            <th>Hành động</th>
+                            @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four'))
+                                <th>Hành động</th>
+                            @endif
                             <th>Ngày</th>
                             <th>Tình trạng</th>
                         </tr>
                     </tfoot>
-                    <tbody></tbody>
                 </table>
             </div>
         </div>
