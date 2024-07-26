@@ -18,3 +18,23 @@ var ToastErrorCenter = Swal.mixin({
   allowOutsideClick: falseValue,
   allowEscapeKey: falseValue,
 })
+
+let timerInterval
+var ToastSuccessCenterTime = Swal.mixin({
+    icon: 'success',
+    html: 'Hệ thống sẽ tự động điều hướng đến màn hình danh sách đề nghị thanh toán.\n Thời gian còn <b></b> milli giây',
+    timer: 3000,
+    timerProgressBar: true,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+        b.textContent = Swal.getTimerLeft()
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
+    }
+})

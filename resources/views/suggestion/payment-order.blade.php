@@ -123,7 +123,7 @@
                     <tbody>
                         <tr id="line-0">
                             <td>
-                                <input type="text" class="form-control" name="So_Hd[]" id="So_Hd">
+                                <input type="text" class="form-control" name="So_Hd[]">
                             </td>
                             <td>
                                 <input type="date" class="form-control" name="Ngay_Hd[]" id="Ngay_Hd">

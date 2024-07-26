@@ -52,8 +52,8 @@ Route::prefix('/')->group(function () {
                 Route::get('/', [OnLeaveController::class, 'list'])->name('list');
                 Route::get('get-data', [OnLeaveController::class, 'getData']);
                 Route::put('approve', [OnLeaveController::class, 'approve']);
-                Route::put('cancel', [OnLeaveController::class, 'cancel']);
             });
+            Route::put('cancel', [OnLeaveController::class, 'cancel']);
             Route::get('calendar', [OnLeaveController::class, 'calendar'])->name('calendar');
         });
 
@@ -62,8 +62,8 @@ Route::prefix('/')->group(function () {
                 Route::get('/', [AdditionalWorkController::class, 'list'])->name('list');
                 Route::get('get-data', [AdditionalWorkController::class, 'getData']);
                 Route::put('approve', [AdditionalWorkController::class, 'approve']);
-                Route::put('cancel', [AdditionalWorkController::class, 'cancel']);
             });
+            Route::put('cancel', [AdditionalWorkController::class, 'cancel']);
             Route::get('calendar', [AdditionalWorkController::class, 'calendar'])->name('calendar');
         });
     });

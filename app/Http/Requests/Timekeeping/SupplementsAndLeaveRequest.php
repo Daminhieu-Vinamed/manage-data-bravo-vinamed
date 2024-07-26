@@ -37,18 +37,22 @@ class SupplementsAndLeaveRequest extends FormRequest
                     ->where('EmployeeCode', $user->EmployeeCode)
                     ->whereDate('FromDate', '>=', $this->start)
                     ->whereDate('ToDate', '<=', $this->end)
-                    ->exists();
+                    ->first();
                     $bs = DB::connection($user->company)->table('vB30HrmPTimesheet')
                     ->where('IsActive', config('constants.number.one'))
                     ->where('DocCode', 'BS')
                     ->where('EmployeeCode', $user->EmployeeCode)
                     ->whereDate('FromDate', '>=', $this->start)
                     ->whereDate('ToDate', '<=', $this->end)
-                    ->exists();
-                    if ($np) {
+                    ->first();
+                    if ($np && $np->WorkDay == config('constants.number.one')) {
                         $fail('Đã đăng ký nghỉ phép trong khoảng thời gian này');
-                    }elseif($bs) {
+                    } elseif ($bs && $bs->WorkDay == config('constants.number.one')) {
                         $fail('Đã đăng ký bổ sung trong khoảng thời gian này');
+                    } elseif ($np && $this->valueType + $np->WorkDay > config('constants.number.one')) {
+                        $fail('Chỉ được đăng ký nghỉ phép tròn một ngày công');
+                    } elseif ($bs && $this->valueType + $bs->WorkDay > config('constants.number.one')) {
+                        $fail('Chỉ được đăng ký bổ sung tròn một ngày công');
                     }
                 },
             ],

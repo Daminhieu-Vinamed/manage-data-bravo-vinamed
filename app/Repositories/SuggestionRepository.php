@@ -91,7 +91,6 @@ class SuggestionRepository
             ->where('IsActive', config('constants.number.one'))
             ->get();
         $B33AccDoc = DB::connection($request->company)->table('B33AccDoc')->select('DocNo')
-            ->where('IsActive', config('constants.number.one'))
             ->where('DocCode', $request->DocCode)
             ->orderBy('Id', 'DESC')
             ->first();
@@ -100,14 +99,12 @@ class SuggestionRepository
 
     public function store($data)
     {
-        dd($data);
         $dataHeader = [
             "BranchCode" => $data->BranchCode,
             "DocStatus" => $data->DocStatus,
             "DocDate" => $data->DocDate,
             "DocNo" => $data->DocNo,
             "DocCode" => $data->DocCode,
-            // "EmployeeCode" => $data->EmployeeCode,
             "CustomerCode" => $data->CustomerCode1,
             "AmountTT" => $data->AmountTT,
             "Stt_TU" => $data->Stt_TU,
@@ -116,50 +113,50 @@ class SuggestionRepository
             "CurrencyCode" => $data->CurrencyCode,
             "ExchangeRate" => $data->ExchangeRate,
             "TotalOriginalAmount0" => $data->TotalOriginalAmount0,
-            "TotalAmount0" => isset($data->TotalAmount0) ? $data->TotalAmount0 : config("constants.number.zero"),
+            "TotalAmount0" => isset($data->TotalAmount0) ? $data->TotalAmount0 : $data->TotalOriginalAmount0,
             "TotalOriginalAmount3" => $data->TotalOriginalAmount3,
-            "TotalAmount3" => isset($data->TotalAmount3) ? $data->TotalAmount3 : config("constants.number.zero"),
+            "TotalAmount3" => isset($data->TotalAmount3) ? $data->TotalAmount3 : $data->TotalOriginalAmount3,
             "TotalOriginalAmount" => $data->TotalOriginalAmount,
-            "TotalAmount" => isset($data->TotalAmount) ? $data->TotalAmount : config("constants.number.zero"),
-            "BankName" => $data->BankName,
-            "BankAccountNo" => $data->BankAccountNo,
-            "Ten_Chu_TK" => $data->Ten_Chu_TK,
-            "Description" => $data->Description1,
+            "TotalAmount" => isset($data->TotalAmount) ? $data->TotalAmount : $data->TotalOriginalAmount,
+            "BankName" => isset($data->BankName) ? $data->BankName : config('constants.value.empty'),
+            "BankAccountNo" => isset($data->BankAccountNo) ? $data->BankAccountNo : config('constants.value.empty'),
+            "Ten_Chu_TK" => isset($data->Ten_Chu_TK) ? $data->Ten_Chu_TK : config('constants.value.empty'),
+            "Description1" => isset($data->Description1) ? $data->Description1 : config('constants.value.empty'),
         ];
 
-        DB::connection($data->company)->table('B33AccDoc')->insert($dataHeader);
-        $header = DB::connection($data->company)->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
-
-        foreach ($data->So_Hd as $key) {
-            $number = $key + config('constants.number.one');
+        DB::connection($data->BranchCode)->table('B33AccDoc')->insert($dataHeader);
+        $paymentOrder = DB::connection($data->BranchCode)->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
+        
+        for ($i = config('constants.number.zero'); $i < count($data->So_Hd); $i++) { 
             $dataMain = [
-                "BranchCode" => $data->company,
-                'Stt' => $header->Stt,
+                "BranchCode" => $data->BranchCode,
+                'Stt' => $paymentOrder->Stt,
+                "EmployeeCode" => $data->EmployeeCode,
                 "DocDate" => $data->DocDate,
                 "DocCode" => $data->DocCode,
-                'BuiltinOrder' => $number,
-                "So_Hd" => $data->So_Hd[$key],
-                "Ngay_Hd" => $data->Ngay_Hd[$key],
-                "Description" => $data->Description[$key],
-                "Invoice" => $data->Invoice[$key],
-                "So_Van_Don" => $data->So_Van_Don[$key],
-                "Trong_Luong" => $data->Trong_Luong[$key],
-                "DV_Trong_Luong" => $data->DV_Trong_Luong[$key],
-                "CustomerCode" => $data->CustomerCode2[$key],
-                "ExpenseCatgCode" => $data->ExpenseCatgCode[$key],
-                "EmployeeCode1" => $data->EmployeeCode1[$key],
-                "DeptCode" => $data->DeptCode[$key],
-                "BizDocId_PO" => $data->BizDocId_PO[$key],
-                "Hang_SX" => $data->Hang_SX[$key],
-                "OriginalAmount9" => $data->OriginalAmount9[$key],
-                "Amount9" => isset($data->Amount9[$key]) ? $data->Amount9[$key] : config("constants.number.zero"),
-                // "TaxCode" => $data->TaxCode[$key],
-                // "TaxRate" => $data->TaxRate[$key],
-                // "OriginalAmount3" => $data->OriginalAmount3[$key],
-                // "Amount3" => $data->Amount3[$key],
-                "Note" => $data->Note[$key]
+                'BuiltinOrder' => $i + config('constants.number.one'),
+                "So_Hd" => empty($data->So_Hd[$i]) ? config('constants.value.empty') : $data->So_Hd[$i],
+                "Ngay_Hd" => $data->Ngay_Hd[$i],
+                "Description" => empty($data->Description[$i]) ? config('constants.value.empty') : $data->Description[$i],
+                "Invoice" => empty($data->Invoice[$i]) ? config('constants.value.empty') : $data->Invoice[$i],
+                "So_Van_Don" => empty($data->So_Van_Don[$i]) ? config('constants.value.empty') : $data->So_Van_Don[$i],
+                "Trong_Luong" => empty($data->Trong_Luong[$i]) ? config("constants.number.zero") : $data->Trong_Luong[$i],
+                "DV_Trong_Luong" => empty($data->DV_Trong_Luong[$i]) ? config('constants.value.empty') : $data->DV_Trong_Luong[$i],
+                "CustomerCode" => empty($data->CustomerCode2[$i]) ? config('constants.value.empty') : $data->CustomerCode2[$i],
+                "ExpenseCatgCode" => empty($data->ExpenseCatgCode[$i]) ? config('constants.value.empty') : $data->ExpenseCatgCode[$i],
+                "EmployeeCode1" => empty($data->EmployeeCode1[$i]) ? config('constants.value.empty') : $data->EmployeeCode1[$i],
+                "DeptCode" => empty($data->DeptCode[$i]) ? config('constants.value.empty') : $data->DeptCode[$i],
+                "BizDocId_PO" => empty($data->BizDocId_PO[$i]) ? config('constants.value.empty') : $data->BizDocId_PO[$i],
+                "Hang_SX" => empty($data->Hang_SX[$i]) ? config('constants.value.empty') : $data->Hang_SX[$i],
+                "OriginalAmount9" => empty($data->OriginalAmount9[$i]) ? config('constants.value.empty') : $data->OriginalAmount9[$i],
+                "Amount9" => isset($data->Amount9[$i]) && empty($data->Amount9[$i]) ? $data->Amount9[$i] : config("constants.number.zero"),
+                // "TaxCode" => $data->TaxCode[$i],
+                // "TaxRate" => $data->TaxRate[$i],
+                // "OriginalAmount3" => $data->OriginalAmount3[$i],
+                // "Amount3" => $data->Amount3[$i],
+                "Note" => empty($data->Note[$i]) ? config('constants.value.empty') : $data->Note[$i],
             ];
-            DB::connection($data->company)->table('B33AccDocJournalEntry')->insert($dataMain);
+            DB::connection($data->BranchCode)->table('B33AccDocJournalEntry')->insert($dataMain);
         }
     }
 

@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <select name="company" class="custom-select">
-                                <option disabled selected>chọn công ty</option>
+                                <option disabled selected>Chọn công ty</option>
                                 @foreach (config('constants.company') as $company)
                                     <option value="{{ $company }}" {{ old('company') === $company ? 'selected' : '' }}>{{ $company }}</option>
                                 @endforeach
