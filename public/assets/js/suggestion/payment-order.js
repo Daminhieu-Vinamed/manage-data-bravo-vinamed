@@ -315,64 +315,49 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#create-payment-order", function () {
-        formData = new FormData();
-        formData.append('DocDate', $("#DocDate").val());
-        formData.append('DocNo', $("#DocNo").val());
-        formData.append('BranchCode', $("#company").val());
-        formData.append('DocCode', $("#DocCode").val());
-        formData.append('DocStatus', fortyFiveConst);
-        formData.append('EmployeeCode', $("#EmployeeCode").val());
-        formData.append('CustomerCode1', $("#CustomerCode1").val());
-        formData.append('AmountTT', $("#AmountTT").val());
-        formData.append('Stt_TU', $("#Stt_TU").val());
-        formData.append('AmountTU', $("#AmountTU").val());
-        formData.append('Hinh_Thuc_TT', $("#Hinh_Thuc_TT").val());
-        formData.append('CurrencyCode', $("#CurrencyCode").val());
-        formData.append('ExchangeRate', $("#ExchangeRate").val());
-        formData.append('TotalOriginalAmount0', $("#TotalOriginalAmount0").val());
-        formData.append('TotalOriginalAmount3', $("#TotalOriginalAmount3").val());
-        formData.append('TotalOriginalAmount', $("#TotalOriginalAmount").val());
-        formData.append('So_Hd', $("input[name='So_Hd[]']").map(function () { return $(this).val() }).get());
-        formData.append('Ngay_Hd', $("input[name='Ngay_Hd[]']").map(function () { return $(this).val() }).get());
-        formData.append('Description', $("textarea[name='Description[]']").map(function () { return $(this).val() }).get()); 
-        formData.append('Invoice', $("input[name='Invoice[]']").map(function () { return $(this).val() }).get());
-        formData.append('So_Van_Don', $("input[name='So_Van_Don[]']").map(function () { return $(this).val() }).get());
-        formData.append('Trong_Luong', $("input[name='Trong_Luong[]']").map(function () { return $(this).val() }).get());
-        formData.append('DV_Trong_Luong', $("input[name='DV_Trong_Luong[]']").map(function () { return $(this).val() }).get());
-        formData.append('CustomerCode2', $("input[name='CustomerCode2[]']").map(function () { return $(this).val() }).get());
-        formData.append('ExpenseCatgCode', $("input[name='ExpenseCatgCode[]']").map(function () { return $(this).val() }).get());
-        formData.append('EmployeeCode1', $("input[name='EmployeeCode1[]']").map(function () { return $(this).val() }).get());
-        formData.append('DeptCode', $("input[name='DeptCode[]']").map(function () { return $(this).val() }).get());
-        formData.append('BizDocId_PO', $("input[name='BizDocId_PO[]']").map(function () { return $(this).val() }).get());
-        formData.append('Hang_SX', $("input[name='Hang_SX[]']").map(function () { return $(this).val() }).get());
-        formData.append('OriginalAmount9', $("input[name='OriginalAmount9[]']").map(function () { return $(this).val() }).get());
-        formData.append('Amount9', $("input[name='Amount9[]']").map(function () {return $(this).val() }).get());
-        formData.append('TaxCode', $("input[name='TaxCode[]']").map(function () { return $(this).val() }).get());
-        formData.append('TaxRate', $("input[name='TaxRate[]']").map(function () { return $(this).val() }).get());
-        formData.append('Amount3', $("input[name='Amount3[]']").map(function () { return $(this).val() }).get());
-        formData.append('OriginalAmount3', $("input[name='OriginalAmount3[]']").map(function () { return $(this).val() }).get());
-        formData.append('Note', $("textarea[name='Note[]']").map(function () { return $(this).val() }).get());
-        if ($("#TotalAmount0").length) {
-            formData.append('TotalAmount0', $("#TotalAmount0").val());
-        }
-        if ($("#TotalAmount3").length) {
-            formData.append('TotalAmount3', $("#TotalAmount3").val());
-        }
-        if ($("#TotalAmount").length) {
-            formData.append('TotalAmount', $("#TotalAmount").val());
-        }
-        if ($("#BankName").length) {
-            formData.append('BankName', $("#BankName").val());
-        }
-        if ($("#BankAccountNo").length) {
-            formData.append('BankAccountNo', $("#BankAccountNo").val());
-        }
-        if ($("#Ten_Chu_TK").length) {
-            formData.append('Ten_Chu_TK', $("#Ten_Chu_TK").val());
-        }
-        if ($("#Description1").length) {
-            formData.append('Description1', $("#Description1").val());
-        }
+        const DocDate = $("#DocDate").val();
+        const DocNo = $("#DocNo").val();
+        const BranchCode = $("#company").val();
+        const DocCode = $("#DocCode").val();
+        const DocStatus = fortyFiveConst;
+        const EmployeeCode = $("#EmployeeCode").val();
+        const CustomerCode1 = $("#CustomerCode1").val();
+        const AmountTT = $("#AmountTT").val();
+        const Stt_TU = $("#Stt_TU").val();
+        const AmountTU = $("#AmountTU").val();
+        const Hinh_Thuc_TT = $("#Hinh_Thuc_TT").val();
+        const CurrencyCode = $("#CurrencyCode").val();
+        const ExchangeRate = $("#ExchangeRate").val();
+        const TotalOriginalAmount0 = $("#TotalOriginalAmount0").val();
+        const TotalOriginalAmount3 = $("#TotalOriginalAmount3").val();
+        const TotalOriginalAmount = $("#TotalOriginalAmount").val();
+        const So_Hd = $("input[name='So_Hd[]']").map(function () { return $(this).val() }).get();
+        const Ngay_Hd = $("input[name='Ngay_Hd[]']").map(function () { return $(this).val() }).get();
+        const Description = $("textarea[name='Description[]']").map(function () { return $(this).val() }).get();
+        const Invoice = $("input[name='Invoice[]']").map(function () { return $(this).val() }).get();
+        const So_Van_Don = $("input[name='So_Van_Don[]']").map(function () { return $(this).val() }).get();
+        const Trong_Luong = $("input[name='Trong_Luong[]']").map(function () { return $(this).val() }).get();
+        const DV_Trong_Luong = $("input[name='DV_Trong_Luong[]']").map(function () { return $(this).val() }).get();
+        const CustomerCode2 = $("input[name='CustomerCode2[]']").map(function () { return $(this).val() }).get();
+        const ExpenseCatgCode = $("input[name='ExpenseCatgCode[]']").map(function () { return $(this).val() }).get();
+        const EmployeeCode1 = $("input[name='EmployeeCode1[]']").map(function () { return $(this).val() }).get();
+        const DeptCode = $("input[name='DeptCode[]']").map(function () { return $(this).val() }).get();
+        const BizDocId_PO = $("input[name='BizDocId_PO[]']").map(function () { return $(this).val() }).get();
+        const Hang_SX = $("input[name='Hang_SX[]']").map(function () { return $(this).val() }).get();
+        const OriginalAmount9 = $("input[name='OriginalAmount9[]']").map(function () { return $(this).val() }).get();
+        const Amount9 = $("input[name='Amount9[]']").map(function () { return $(this).val() }).get();
+        const TaxCode = $("input[name='TaxCode[]']").map(function () { return $(this).val() }).get();
+        const TaxRate = $("input[name='TaxRate[]']").map(function () { return $(this).val() }).get();
+        const Amount3 = $("input[name='Amount3[]']").map(function () { return $(this).val() }).get();
+        const OriginalAmount3 = $("input[name='OriginalAmount3[]']").map(function () { return $(this).val() }).get();
+        const Note = $("textarea[name='Note[]']").map(function () { return $(this).val() }).get();
+        const TotalAmount0 = $("#TotalAmount0").val();
+        const TotalAmount3 = $("#TotalAmount3").val();
+        const TotalAmount = $("#TotalAmount").val();
+        const BankName = $("#BankName").val();
+        const BankAccountNo = $("#BankAccountNo").val();
+        const Ten_Chu_TK = $("#Ten_Chu_TK").val();
+        const Description1 = $("#Description1").val();
 
         $.ajax({
             url: linkSuggestion + "store",
@@ -380,19 +365,85 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
-            data: formData,
-            processData: falseValue,
-            contentType: falseValue,
+            data: {
+                DocDate: DocDate,
+                DocNo: DocNo,
+                BranchCode: BranchCode,
+                DocCode: DocCode,
+                DocStatus: DocStatus,
+                EmployeeCode: EmployeeCode,
+                CustomerCode1: CustomerCode1,
+                AmountTT: AmountTT,
+                Stt_TU: Stt_TU,
+                AmountTU: AmountTU,
+                Hinh_Thuc_TT: Hinh_Thuc_TT,
+                CurrencyCode: CurrencyCode,
+                ExchangeRate: ExchangeRate,
+                So_Hd: So_Hd,
+                Ngay_Hd: Ngay_Hd,
+                Description: Description,
+                Invoice: Invoice,
+                So_Van_Don: So_Van_Don,
+                Trong_Luong: Trong_Luong,
+                DV_Trong_Luong: DV_Trong_Luong,
+                CustomerCode2: CustomerCode2,
+                ExpenseCatgCode: ExpenseCatgCode,
+                EmployeeCode1: EmployeeCode1,
+                DeptCode: DeptCode,
+                BizDocId_PO: BizDocId_PO,
+                Hang_SX: Hang_SX,
+                OriginalAmount9: OriginalAmount9,
+                Amount9: Amount9,
+                TaxCode: TaxCode,
+                TaxRate: TaxRate,
+                Amount3: Amount3,
+                OriginalAmount3: OriginalAmount3,
+                Note: Note,
+                TotalOriginalAmount0: TotalOriginalAmount0,
+                TotalAmount0: TotalAmount0,
+                TotalOriginalAmount3: TotalOriginalAmount3,
+                TotalAmount3: TotalAmount3,
+                TotalOriginalAmount: TotalOriginalAmount,
+                TotalAmount: TotalAmount,
+                BankName: BankName,
+                BankAccountNo: BankAccountNo,
+                Ten_Chu_TK: Ten_Chu_TK,
+                Description1: Description1
+            },
             success: function (success) {
-                ToastTopRight.fire({
-                    icon: success.status,
-                    title: success.msg,
+                ToastSuccessCenterTime.fire({
+                    title: 'TẠO ĐỀ NGHỊ THANH TOÁN THÀNH CÔNG',
+                }).then((result) => {
+                    console.log(result);
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        location.href = window.location.origin + '/suggestion';
+                    }
                 });
             },
             error: function (error) {
                 let errors = error.responseJSON?.errors;
-                errors.DocDate ? $("input[name='DocDate']").removeClass('is-valid').addClass('is-invalid'): $("input[name='DocDate']").removeClass('is-invalid').addClass('is-valid');
-                errors.DocNo ? $("input[name='DocNo']").removeClass('is-valid').addClass('is-invalid'): $("input[name='DocNo']").removeClass('is-invalid').addClass('is-valid');
+                ToastErrorCenter.fire({
+                    icon: 'error',
+                    text: 'TẠO ĐỀ NGHỊ THANH TOÁN THẤT BẠI'
+                });
+                if (errors.DocDate) {
+                    ToastTopRight.fire({
+                        icon: 'error',
+                        title: errors.DocDate[zeroConst],
+                    });
+                    $("#DocDate").removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $("#DocDate").removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.DocNo) {
+                    ToastTopRight.fire({
+                        icon: 'error',
+                        title: errors.DocNo[zeroConst],
+                    })
+                    $("#DocNo").removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $("#DocNo").removeClass('is-invalid').addClass('is-valid');
+                }
                 if (errors.EmployeeCode) {
                     $('#EmployeeCode_error').text(errors.EmployeeCode[zeroConst]);
                     $('#EmployeeCode').removeClass('is-valid').addClass('is-invalid');

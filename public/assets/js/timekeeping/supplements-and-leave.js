@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $(document).on("click", "#supplements_and_leave", function () {
         const type = $('#type').val();
+        const valueType = $('#type option:selected').attr('type');
         const start = $('#start').val();
         const end = $('#end').val();
         const description = $('#description').val();
@@ -14,6 +15,7 @@ $(document).ready(function () {
             },
             data: {
                 type: type,
+                valueType: valueType,
                 start: start,
                 end: end,
                 description: description

@@ -96,7 +96,7 @@
                 },
                 210: function (e, t, n) {
                     n(0).defineLocale("vi", {
-                        months: "tháng 1_tháng 2_tháng 3_tháng 4_tháng 5_tháng 6_tháng 7_tháng 8_tháng 9_tháng 10_tháng 11_tháng 12".split(
+                        months: "Tháng 1_Tháng 2_Tháng 3_Tháng 4_Tháng 5_Tháng 6_Tháng 7_Tháng 8_Tháng 9_Tháng 10_Tháng 11_Tháng 12".split(
                             "_"
                         ),
                         monthsShort:

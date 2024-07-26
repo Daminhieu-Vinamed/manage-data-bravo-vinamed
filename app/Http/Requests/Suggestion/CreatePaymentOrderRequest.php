@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Suggestion;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 
 class CreatePaymentOrderRequest extends FormRequest
 {
@@ -21,47 +22,41 @@ class CreatePaymentOrderRequest extends FormRequest
      */
     public function rules(): array
     {
+        $arrValid = array(
+            "BranchCode" => "required",
+            "DocStatus" => "required",
+            "DocDate" => "required",
+            "DocNo" => [
+                "required",
+                function ($attribute, $value, $fail) {
+                    $paymentOrder = DB::connection($this->BranchCode)->table('B33AccDoc')->where("DocNo", $value)->first();
+                    if (!empty($paymentOrder)) {
+                        $fail('Mã chứng từ đã tồn tại');
+                    }
+                },
+            ],
+            "DocCode" => "required",
+            "EmployeeCode" => "required",
+            "CustomerCode1" => "required",
+            "AmountTT" => "required",
+            "Stt_TU" => "required",
+            "AmountTU" => "required",
+            "Hinh_Thuc_TT" => "required",
+            "CurrencyCode" => "required",
+            "ExchangeRate" => "required|gt:0",
+        );
+
         if ($this->CurrencyCode === "VND") {
-            $arrValid = array(
-                "BranchCode" => "required",
-                "DocStatus" => "required",
-                "DocDate" => "required",
-                "DocNo" => "required",
-                "DocCode" => "required",
-                "EmployeeCode" => "required",
-                "CustomerCode1" => "required",
-                "AmountTT" => "required",
-                "Stt_TU" => "required",
-                "AmountTU" => "required",
-                "Hinh_Thuc_TT" => "required",
-                "CurrencyCode" => "required",
-                "ExchangeRate" => "required|gt:0",
-                "TotalOriginalAmount0" => "required|gt:0",
-                "TotalOriginalAmount3" => "required|gt:0",
-                "TotalOriginalAmount" => "required|gt:0",
-            );
+            $arrValid['TotalOriginalAmount0'] = "required|gt:0";
+            $arrValid['TotalOriginalAmount3'] = "required|gt:0";
+            $arrValid['TotalOriginalAmount'] = "required|gt:0";
         } else {
-            $arrValid = array(
-                "BranchCode" => "required",
-                "DocStatus" => "required",
-                "DocDate" => "required",
-                "DocNo" => "required",
-                "DocCode" => "required",
-                "EmployeeCode" => "required",
-                "CustomerCode1" => "required",
-                "AmountTT" => "required",
-                "Stt_TU" => "required",
-                "AmountTU" => "required",
-                "Hinh_Thuc_TT" => "required",
-                "CurrencyCode" => "required",
-                "ExchangeRate" => "required|gt:0",
-                "TotalOriginalAmount0" => "required|gt:0",
-                "TotalAmount0" => "required|gt:0",
-                "TotalOriginalAmount3" => "required|gt:0",
-                "TotalAmount3" => "required|gt:0",
-                "TotalOriginalAmount" => "required|gt:0",
-                "TotalAmount" => "required|gt:0",
-            );
+            $arrValid['TotalOriginalAmount0'] = "required|gt:0";
+            $arrValid['TotalOriginalAmount3'] = "required|gt:0";
+            $arrValid['TotalOriginalAmount'] = "required|gt:0";
+            $arrValid['TotalAmount0'] = "required|gt:0";
+            $arrValid['TotalAmount3'] = "required|gt:0";
+            $arrValid['TotalAmount'] = "required|gt:0";
         }
 
         if ($this->Hinh_Thuc_TT === "CK") {
@@ -70,13 +65,14 @@ class CreatePaymentOrderRequest extends FormRequest
             $arrValid["Ten_Chu_TK"] = "required";
             $arrValid["Description1"] = "required";
         }
-        
+
         return $arrValid;
     }
 
     public function messages()
     {
         return [
+            'DocDate.required' => 'Ngày tạo không được để trống',
             'EmployeeCode.required' => 'Chưa chọn người đề nghị',
             'CustomerCode1.required' => 'Chưa chọn nhà cung cấp/người nhận',
             'AmountTT.required' => 'Đã trả trước cho NCC không được để trống',
