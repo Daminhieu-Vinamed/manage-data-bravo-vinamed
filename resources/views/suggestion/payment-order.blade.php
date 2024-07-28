@@ -127,6 +127,7 @@
                             </td>
                             <td>
                                 <input type="date" class="form-control" name="Ngay_Hd[]" id="Ngay_Hd">
+                                <span class="text-danger small" id="Ngay_Hd_error"></span>
                             </td>
                             <td>
                                 <textarea class="form-control" maxlength="255" name="Description[]" id="Description"></textarea>
@@ -216,8 +217,8 @@
                                 <input type="number" class="form-control" name="TaxRate[]" id="TaxRate" readonly>
                             </td>
                             <td>
-                                <label for="Amount3" class="form-label small">Tiền VND</label>
-                                <input type="number" class="form-control" name="Amount3[]" id="Amount3" value="0" readonly>
+                                <label for="OriginalAmount3" class="form-label small">Tiền VND</label>
+                                <input type="number" class="form-control" name="OriginalAmount3[]" id="OriginalAmount3" value="0" readonly>
                             </td>
                             <td>
                                 <textarea class="form-control" maxlength="255" name="Note[]" id="Note"></textarea>

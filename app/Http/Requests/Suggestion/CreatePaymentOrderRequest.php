@@ -44,6 +44,8 @@ class CreatePaymentOrderRequest extends FormRequest
             "Hinh_Thuc_TT" => "required",
             "CurrencyCode" => "required",
             "ExchangeRate" => "required|gt:0",
+            "Ngay_Hd" => "array",
+            "Ngay_Hd.*"  => "required",
         );
 
         if ($this->CurrencyCode === "VND") {
@@ -92,6 +94,7 @@ class CreatePaymentOrderRequest extends FormRequest
             'BankAccountNo.required' => 'Số tài khoản không được để trống',
             'Ten_Chu_TK.required' => 'Tên chủ tài khoản không được để trống',
             'Description1.required' => 'Nội dung không được để trống',
+            "Ngay_Hd.*.required" => 'Ngày hóa đơn không được để trống',
         ];
     }
 }

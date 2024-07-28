@@ -53,20 +53,25 @@ class SuggestionController extends Controller
         }
     }
 
-    public function paymentOrder(ChooseCompanyRequest $request)
+    public function getPaymentOrder(ChooseCompanyRequest $request)
     {
         try {
-            $data = $this->suggestionService->create($request);
+            $data = $this->suggestionService->getPaymentOrder($request);
             return view('suggestion.payment-order', compact('data'));
         } catch (\Exception $e) {
             return view('404');
         }
     }
 
+    public function postPaymentOrder(CreatePaymentOrderRequest $request)
+    {
+        return $this->suggestionService->postPaymentOrder($request);
+    }
+
     public function requestsForAdvances(ChooseCompanyRequest $request)
     {
         try {
-            $data = $this->suggestionService->create($request);
+            $data = $this->suggestionService->getPaymentOrder($request);
             return view('suggestion.requests-for-advances', compact('data'));
         } catch (\Exception $e) {
             return view('404');
@@ -75,16 +80,11 @@ class SuggestionController extends Controller
     public function suggestedPerDiem(ChooseCompanyRequest $request)
     {
         try {
-            $data = $this->suggestionService->create($request);
+            $data = $this->suggestionService->getPaymentOrder($request);
             return view('suggestion.suggested-per-diem', compact('data'));
         } catch (\Exception $e) {
             return view('404');
         }
-    }
-
-    public function store(CreatePaymentOrderRequest $request)
-    {
-        return $this->suggestionService->store($request);
     }
 
     public function statistical()

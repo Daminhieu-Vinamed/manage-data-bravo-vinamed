@@ -62,15 +62,24 @@ class SuggestionService extends SuggestionRepository
         }
     }
 
-    public function create($request)
+    public function getPaymentOrder($request)
     {
-        $data =  $this->suggestionRepository->create($request);
+        $data =  $this->suggestionRepository->getPaymentOrder($request);
         return $data;
     }
     
-    public function store($request)
+    public function postPaymentOrder($request)
     {
-        return $this->suggestionRepository->store($request);
+        $connectCompany = DB::connection($request->BranchCode);
+        $connectCompany->beginTransaction();
+        try {
+            $this->suggestionRepository->CreatePaymentOrder($connectCompany, $request);
+            $connectCompany->commit();
+            return response()->json(['status' => 'success', 'msg' => 'TẠO ĐỀ NGHỊ THANH TOÁN THÀNH CÔNG'], 200);
+        } catch (\Exception $e) {
+            $connectCompany->rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
+        }
     }
 
     public function statistical()

@@ -24,11 +24,11 @@ Route::prefix('/')->group(function () {
                 Route::post('cancel-payment-request', [SuggestionController::class, 'cancel']);
             });
             Route::get('choose-company', [SuggestionController::class, 'chooseCompany'])->name('choose-company');
-            Route::get('payment-order', [SuggestionController::class, 'paymentOrder'])->name('payment-order');
+            Route::get('payment-order', [SuggestionController::class, 'getPaymentOrder'])->name('payment-order');
+            Route::post('create-payment-order', [SuggestionController::class, 'postPaymentOrder']);
             Route::get('directional', [SuggestionController::class, 'directional'])->name('directional');
             Route::get('requests-for-advances', [SuggestionController::class, 'requestsForAdvances'])->name('requests-for-advances');
             Route::get('suggested-per-diem', [SuggestionController::class, 'suggestedPerDiem'])->name('suggested-per-diem');
-            Route::post('store', [SuggestionController::class, 'store'])->name('store');
         });
 
         Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {

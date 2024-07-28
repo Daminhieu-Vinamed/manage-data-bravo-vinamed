@@ -83,10 +83,10 @@ $(document).ready(function () {
                 .parent()
                 .after(
                     `<td id="td-name-value-added-tax-vat">
-                <label for="OriginalAmount3" class="form-label small">Tiền ` +
+                <label for="Amount3" class="form-label small">Tiền ` +
                         valueCurrency +
                         `</label>
-                <input type="number" class="form-control" name="OriginalAmount3[]" id="OriginalAmount3" readonly/>
+                <input type="number" class="form-control" name="Amount3[]" id="Amount3" readonly/>
             </td>`
                 );
             $("thead tr #th-name-value-added-tax-vat").attr(
@@ -103,7 +103,7 @@ $(document).ready(function () {
                 '<input type="number" class="form-control mt-2" id="TotalAmount" readonly>'
             );
 
-            var OriginalAmount3 = $("input[name='OriginalAmount3[]']");
+            var Amount3 = $("input[name='Amount3[]']");
 
             var Amount9 = $("input[name='Amount9[]']")
                 .map(function () {
@@ -112,7 +112,7 @@ $(document).ready(function () {
                 .get();
 
             for (let i = zeroConst; i < TaxRate.length; i++) {
-                OriginalAmount3[i].value = OriginalAmount9[i] * TaxRate[i];
+                Amount3[i].value = OriginalAmount9[i] * TaxRate[i];
                 Amount3[i].value = Amount9[i] * TaxRate[i];
             }
         } else if (valueCurrency === "VND" && $("#th-name-money-vnd1").length) {
@@ -136,7 +136,8 @@ $(document).ready(function () {
 
     $(document).on("click", "#add-row", function () {
         $trClone = $("tbody tr:last").clone();
-        $trNew = $trClone.attr("id", "line-" + one++);
+        const rowCount = $('tbody tr').length;
+        $trNew = $trClone.attr("id", "line-" + rowCount);
         if (!$("#th-action").length) {
             $("tbody tr:first").children("td:first").before("<td></td>");
             $trNew.children("td:first").before(`<td>
@@ -152,6 +153,11 @@ $(document).ready(function () {
 
     $(document).on("click", "#delete-line", function () {
         $(this).parents("tr").remove();
+        const rowCount = $('tbody tr').length;
+        for (let index = zeroConst; index <= rowCount; index++) {
+            $('tbody tr:eq('+ index +')').removeAttr('id').attr('id', "line-" + index);
+            
+        }
         if (!$("#delete-line").length) {
             $("tbody tr:first").children("td:first").remove();
             $("#th-action").remove();
@@ -315,6 +321,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#create-payment-order", function () {
+        const CountRow = $('#table-payment-order > tbody > tr').length;
         const DocDate = $("#DocDate").val();
         const DocNo = $("#DocNo").val();
         const BranchCode = $("#company").val();
@@ -360,12 +367,13 @@ $(document).ready(function () {
         const Description1 = $("#Description1").val();
 
         $.ajax({
-            url: linkSuggestion + "store",
+            url: linkSuggestion + "create-payment-order",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: {
+                CountRow: CountRow,
                 DocDate: DocDate,
                 DocNo: DocNo,
                 BranchCode: BranchCode,
@@ -411,8 +419,10 @@ $(document).ready(function () {
                 Description1: Description1
             },
             success: function (success) {
+                console.log(success);
                 ToastSuccessCenterTime.fire({
-                    title: 'TẠO ĐỀ NGHỊ THANH TOÁN THÀNH CÔNG',
+                    icon: success.status,
+                    title: success.msg,
                 }).then((result) => {
                     console.log(result);
                     if (result.dismiss === Swal.DismissReason.timer) {
@@ -422,10 +432,22 @@ $(document).ready(function () {
             },
             error: function (error) {
                 let errors = error.responseJSON?.errors;
-                ToastErrorCenter.fire({
-                    icon: 'error',
-                    text: 'TẠO ĐỀ NGHỊ THANH TOÁN THẤT BẠI'
-                });
+                if (error.responseJSON.status && error.responseJSON.msg) {
+                    ToastErrorCenter.fire({
+                        icon: error.responseJSON.status,
+                        text: error.responseJSON.msg,
+                        customClass: {
+                            confirmButton: "btn btn-primary shadow-sm m-2",
+                        },
+                    });
+                }
+                for (let i = zeroConst; i <= Ngay_Hd.length; i++) {
+                    errors['Ngay_Hd.'+ i] 
+                    ? 
+                    $('#line-' + i).find('#Ngay_Hd_error').html(errors['Ngay_Hd.'+ i][zeroConst]) 
+                    : 
+                    $('#line-' + i).find('#Ngay_Hd_error').html('')
+                }
                 if (errors.DocDate) {
                     ToastTopRight.fire({
                         icon: 'error',
