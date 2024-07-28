@@ -44,39 +44,33 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="bd-highlight d-sm-flex align-items-center justify-content-between">
-                        <p class="font-weight-bold">
-                            <b class="text-primary">Tên đăng nhập:</b>
-                            <b id="username">{{Auth::user()->username}}</b>
-                        </p>
-                        <p class="font-weight-bold">
-                            <b class="text-primary">Họ và tên:</b>
-                            <b id="name">{{Auth::user()->name}}</b>
-                        </p>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                        <i class="fas fa-user text-primary"></i> 
+                        <strong class="text-primary mx-2">Tên đăng nhập:</strong> {{Auth::user()->username}}
                     </div>
-                    <div class="bd-highlight d-sm-flex align-items-center justify-content-between">
-                        <p class="font-weight-bold">
-                            <b class="text-primary">Mã nhân viên:</b>
-                            <b id="EmployeeCode">{{Auth::user()->EmployeeCode}}</b>
-                        </p>
-                        <p class="font-weight-bold">
-                            <b class="text-primary">Email:</b>
-                            <b id="email">{{Auth::user()->email}}</b>
-                        </p>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                        <i class="fas fa-id-badge text-primary"></i> 
+                        <strong class="text-primary mx-2">Họ và tên:</strong> {{Auth::user()->name}}
                     </div>
-                    <div class="bd-highlight d-sm-flex align-items-center justify-content-between">
-                        <p class="font-weight-bold">
-                            <b class="text-primary">Phòng:</b>
-                            <b id="department">{{Auth::user()->department->name}}</b>
-                        </p>
-                        <p class="font-weight-bold">
-                            <b class="text-primary">Vai trò:</b>
-                            <b id="name">{{Auth::user()->role->name}}</b>
-                        </p>
-                        <p class="font-weight-bold">
-                            <b class="text-primary">Khay:</b>
-                            <b id="company">{{Auth::user()->company}}</b>
-                        </p>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                        <i class="fas fa-id-card text-primary"></i> 
+                        <strong class="text-primary mx-2">Mã nhân viên:</strong> {{Auth::user()->EmployeeCode}}
+                    </div>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                        <i class="fas fa-envelope text-primary"></i> 
+                        <strong class="text-primary mx-2">Email:</strong> {{Auth::user()->email}}
+                    </div>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                        <i class="fas fa-building text-primary"></i> 
+                        <strong class="text-primary mx-2">Phòng ban:</strong> {{Auth::user()->department->name}}
+                    </div>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                        <i class="fas fa-briefcase text-primary"></i> 
+                        <strong class="text-primary mx-2">Vai trò:</strong> {{Auth::user()->role->name}}
+                    </div>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                        <i class="fas fa-inbox text-primary"></i> 
+                        <strong class="text-primary mx-2">Khay:</strong> {{Auth::user()->company}}
                     </div>
                 </div>
             </div>
