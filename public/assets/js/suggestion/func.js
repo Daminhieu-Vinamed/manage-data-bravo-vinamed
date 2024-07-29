@@ -10,13 +10,13 @@ function total_payment_order() {
     }, zeroConst);
     $("#TotalOriginalAmount0").val(intoMoney1);
 
-    var Amount3 = $("input[name='Amount3[]']")
+    var OriginalAmount3 = $("input[name='OriginalAmount3[]']")
         .map(function () {
             return $(this).val();
         })
         .get();
-    Amount3 = Amount3.map(Number);
-    let taxMoneyVnd = Amount3.reduce(function (a, b) {
+    OriginalAmount3 = OriginalAmount3.map(Number);
+    let taxMoneyVnd = OriginalAmount3.reduce(function (a, b) {
         return a + b;
     }, zeroConst);
 
@@ -29,19 +29,19 @@ function total_payment_order() {
         }
         $("#TotalAmount0").val(intoMoney2);
 
-        var OriginalAmount3 = $("input[name='OriginalAmount3[]']")
+        var Amount3 = $("input[name='Amount3[]']")
             .map(function () {
                 return $(this).val();
             })
             .get();
-        OriginalAmount3 = OriginalAmount3.map(Number);
-        let taxMoneyMulti = OriginalAmount3.reduce(function (a, b) {
+        Amount3 = Amount3.map(Number);
+        let taxMoneyMulti = Amount3.reduce(function (a, b) {
             return a + b;
         }, zeroConst);
-        $("#TotalOriginalAmount3").val(taxMoneyMulti);
-        $("#TotalAmount3").val(taxMoneyVnd);
-        $("#TotalOriginalAmount").val(taxMoneyMulti + intoMoney1);
-        $("#TotalAmount").val(taxMoneyVnd + intoMoney2);
+        $("#TotalOriginalAmount3").val(taxMoneyVnd);
+        $("#TotalAmount3").val(taxMoneyMulti);
+        $("#TotalOriginalAmount").val(taxMoneyVnd + intoMoney1);
+        $("#TotalAmount").val(taxMoneyMulti + intoMoney2);
     } else {
         $("#TotalOriginalAmount3").val(taxMoneyVnd);
         $("#TotalOriginalAmount").val(taxMoneyVnd + intoMoney1);
@@ -50,27 +50,13 @@ function total_payment_order() {
 
 function vat_value_added_tax_calculation(percent, trId) {
     if ($("#Amount9").length) {
-        let value_OriginalAmount9 = $("#" + trId)
-            .find("#OriginalAmount9")
-            .val();
-        $("#" + trId)
-            .find("#OriginalAmount3")
-            .val(value_OriginalAmount9 * percent);
-        let value_Amount9 = $("#" + trId)
-            .find("#Amount9")
-            .val();
-        $("#" + trId)
-            .find("#Amount3")
-            .val(value_Amount9 * percent);
+        let value_OriginalAmount9 = $("#" + trId).find("#OriginalAmount9").val();
+        $("#" + trId).find("#OriginalAmount3").val(value_OriginalAmount9 * percent);
+        let value_Amount9 = $("#" + trId).find("#Amount9").val();
+        $("#" + trId).find("#Amount3").val(value_Amount9 * percent);
     } else {
-        let value_OriginalAmount9 = $("#" + trId)
-            .find("#OriginalAmount9")
-            .val();
-        $("#" + trId)
-            .find("#Amount3")
-            .val(value_OriginalAmount9 * percent);
+        let value_OriginalAmount9 = $("#" + trId).find("#OriginalAmount9").val();
+        $("#" + trId).find("#OriginalAmount3").val(value_OriginalAmount9 * percent);
     }
-    $("#" + trId)
-        .find("#TaxRate")
-        .val(percent);
+    $("#" + trId).find("#TaxRate").val(percent);
 }

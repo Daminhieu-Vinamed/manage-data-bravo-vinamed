@@ -58,7 +58,7 @@ class SuggestionRepository
     public function getPaymentOrder($request)
     {
         
-        $B20Customer = DB::connection($request->company)->table('B20Customer')->select('Code', 'Address', 'Person', 'TaxRegNo', 'Name2')
+        $B20Customer = DB::connection($request->company)->table('B20Customer')->select('Code', 'Address', 'Person', 'TaxRegNo', 'Name2', 'BankAccountNo', 'BankName', 'Name')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
@@ -179,6 +179,23 @@ class SuggestionRepository
             ];
             $connectCompany->table('B33AccDocAtchDoc')->insert($dataPODetailVAT);
         }
+    }
+
+    public function getRequestsForAdvances($request)
+    {
+        $B20Employee = DB::connection($request->company)->table('B20Employee')->select('Code', 'Name', 'Email', 'DeptCode')
+            ->where('IsActive', config('constants.number.one'))
+            ->where('IsGroup', config('constants.number.zero'))
+            ->get();
+        $B33AccDoc = DB::connection($request->company)->table('B33AccDoc')->select('DocNo')
+            ->where('DocCode', $request->DocCode)
+            ->orderBy('Id', 'DESC')
+            ->first();
+        $B20Currency = DB::connection($request->company)->table('B20Currency')->select('Code', 'Name')
+            ->where('IsActive', config('constants.number.one'))
+            ->where('IsGroup', config('constants.number.zero'))
+            ->get();
+        return array('bill_staff' => $B20Employee, 'document_number' => $B33AccDoc->DocNo, 'currency' => $B20Currency);
     }
 
     public function statisticalAdmin()

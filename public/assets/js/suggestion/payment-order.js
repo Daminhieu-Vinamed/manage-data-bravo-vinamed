@@ -70,52 +70,56 @@ $(document).ready(function () {
         var Amount3 = $("input[name='Amount3[]']");
 
         $("#th-name-vat").text("Giá trị " + valueCurrency + " chưa VAT");
-        if (valueCurrency !== "VND" && !$("#th-name-money-vnd1").length) {
-            $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
-            $("thead tr #th-name-vat").after(
-                '<th id="th-name-money-vnd1">Tiền VND</th>'
-            );
-            $("tbody tr #OriginalAmount9").parent()
-                .after(`<td id="td-name-money-vnd1">
-                <input type="number" class="form-control" name="Amount9[]" id="Amount9" readonly/>
-            </td>`);
-            $("tbody tr #TaxRate")
-                .parent()
-                .after(
-                    `<td id="td-name-value-added-tax-vat">
-                <label for="Amount3" class="form-label small">Tiền ` +
-                        valueCurrency +
-                        `</label>
-                <input type="number" class="form-control" name="Amount3[]" id="Amount3" readonly/>
-            </td>`
+        if (valueCurrency !== "VND") {
+            if (!$("#th-name-money-vnd1").length) {
+                $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
+                $("thead tr #th-name-vat").after(
+                    '<th id="th-name-money-vnd1">Tiền VND</th>'
                 );
-            $("thead tr #th-name-value-added-tax-vat").attr(
-                "colspan",
-                fourConst
-            );
-            $(".form-group-into-money #TotalOriginalAmount0").after(
-                '<input type="number" class="form-control mt-2" id="TotalAmount0" readonly>'
-            );
-            $(".form-group-tax-money #TotalOriginalAmount3").after(
-                '<input type="number" class="form-control mt-2" id="TotalAmount3" readonly>'
-            );
-            $(".form-group-total #TotalOriginalAmount").after(
-                '<input type="number" class="form-control mt-2" id="TotalAmount" readonly>'
-            );
+                $("tbody tr #OriginalAmount9").parent()
+                    .after(`<td id="td-name-money-vnd1">
+                    <input type="number" class="form-control" name="Amount9[]" id="Amount9" readonly/>
+                </td>`);
+                $("tbody tr #TaxRate")
+                    .parent()
+                    .after(
+                        `<td id="td-name-value-added-tax-vat">
+                    <label for="Amount3" class="form-label small">Tiền ` +
+                            valueCurrency +
+                            `</label>
+                    <input type="number" class="form-control" name="Amount3[]" id="Amount3" readonly/>
+                </td>`
+                    );
+                $("thead tr #th-name-value-added-tax-vat").attr(
+                    "colspan",
+                    fourConst
+                );
+                $(".form-group-into-money #TotalOriginalAmount0").after(
+                    '<input type="number" class="form-control mt-2" id="TotalAmount0" readonly>'
+                );
+                $(".form-group-tax-money #TotalOriginalAmount3").after(
+                    '<input type="number" class="form-control mt-2" id="TotalAmount3" readonly>'
+                );
+                $(".form-group-total #TotalOriginalAmount").after(
+                    '<input type="number" class="form-control mt-2" id="TotalAmount" readonly>'
+                );
 
-            var Amount3 = $("input[name='Amount3[]']");
+                var Amount3 = $("input[name='Amount3[]']");
 
-            var Amount9 = $("input[name='Amount9[]']")
-                .map(function () {
-                    return $(this).val();
-                })
-                .get();
+                var Amount9 = $("input[name='Amount9[]']")
+                    .map(function () {
+                        return $(this).val();
+                    })
+                    .get();
 
-            for (let i = zeroConst; i < TaxRate.length; i++) {
-                Amount3[i].value = OriginalAmount9[i] * TaxRate[i];
-                Amount3[i].value = Amount9[i] * TaxRate[i];
+                for (let i = zeroConst; i < TaxRate.length; i++) {
+                    Amount3[i].value = OriginalAmount9[i] * TaxRate[i];
+                    Amount3[i].value = Amount9[i] * TaxRate[i];
+                }
+            } else {
+                $('#td-name-value-added-tax-vat label').text('Tiền ' + valueCurrency);
             }
-        } else if (valueCurrency === "VND" && $("#th-name-money-vnd1").length) {
+        } else if (valueCurrency === "VND") {
             for (let i = zeroConst; i < TaxRate.length; i++) {
                 Amount3[i].value = OriginalAmount9[i] * TaxRate[i];
             }
@@ -199,6 +203,15 @@ $(document).ready(function () {
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
+                    if ($('#Ten_Chu_TK').length) {
+                        $('#Ten_Chu_TK').val($($(this)[zeroConst]).attr("name"));
+                    }
+                    if ($('#BankName').length) {
+                        $('#BankName').val($($(this)[zeroConst]).attr("BankName"));
+                    }
+                    if ($('#BankAccountNo').length) {
+                        $('#BankAccountNo').val($($(this)[zeroConst]).attr("BankAccountNo"));
+                    }
                     return CustomerCode.val(valueSelected);
                 }
             });
@@ -536,31 +549,49 @@ $(document).ready(function () {
                     $('#Description1_error').text('');
                     $('#Description1').removeClass('is-invalid').addClass('is-valid');
                 }
-                if (errors.TotalOriginalAmount0 || errors.TotalAmount0) {
+                if (errors.TotalOriginalAmount0) {
                     $('#TotalOriginalAmount0_error').text(errors.TotalOriginalAmount0[zeroConst]);
                     $('#TotalOriginalAmount0').removeClass('is-valid').addClass('is-invalid');
-                    $('#TotalAmount0').removeClass('is-valid').addClass('is-invalid');
                 } else {
                     $('#TotalOriginalAmount0_error').text('');
                     $('#TotalOriginalAmount0').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.TotalAmount0) {
+                    $('#TotalOriginalAmount0_error').text(errors.TotalAmount0[zeroConst]);
+                    $('#TotalAmount0').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#TotalOriginalAmount0_error').text('');
                     $('#TotalAmount0').removeClass('is-invalid').addClass('is-valid');
                 }
-                if (errors.TotalOriginalAmount3 || errors.TotalAmount3) {
+                if (errors.TotalOriginalAmount3) {
                     $('#TotalOriginalAmount3_error').text(errors.TotalOriginalAmount3[zeroConst]);
                     $('#TotalOriginalAmount3').removeClass('is-valid').addClass('is-invalid');
-                    $('#TotalAmount3').removeClass('is-valid').addClass('is-invalid');
                 } else {
                     $('#TotalOriginalAmount3_error').text('');
                     $('#TotalOriginalAmount3').removeClass('is-invalid').addClass('is-valid');
                     $('#TotalAmount3').removeClass('is-invalid').addClass('is-valid');
                 }
-                if (errors.TotalOriginalAmount || errors.TotalAmount) {
+                if (errors.TotalAmount3) {
+                    $('#TotalOriginalAmount3_error').text(errors.TotalAmount3[zeroConst]);
+                    $('#TotalAmount3').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#TotalOriginalAmount3_error').text('');
+                    $('#TotalAmount3').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.TotalOriginalAmount) {
                     $('#TotalOriginalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
                     $('#TotalOriginalAmount').removeClass('is-valid').addClass('is-invalid');
                     $('#TotalAmount').removeClass('is-valid').addClass('is-invalid');
                 } else {
                     $('#TotalOriginalAmount_error').text('');
                     $('#TotalOriginalAmount').removeClass('is-invalid').addClass('is-valid');
+                    $('#TotalAmount').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.TotalAmount) {
+                    $('#TotalOriginalAmount_error').text(errors.TotalAmount[zeroConst]);
+                    $('#TotalAmount').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#TotalOriginalAmount_error').text('');
                     $('#TotalAmount').removeClass('is-invalid').addClass('is-valid');
                 }
                 if (errors.CurrencyCode) {
