@@ -82,6 +82,12 @@ class SuggestionService extends SuggestionRepository
         }
     }
 
+    public function getRequestsForAdvances($request)
+    {
+        $data =  $this->suggestionRepository->getRequestsForAdvances($request);
+        return $data;
+    }
+
     public function statistical()
     {
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {

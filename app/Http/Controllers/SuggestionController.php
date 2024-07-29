@@ -71,7 +71,7 @@ class SuggestionController extends Controller
     public function requestsForAdvances(ChooseCompanyRequest $request)
     {
         try {
-            $data = $this->suggestionService->getPaymentOrder($request);
+            $data = $this->suggestionService->getRequestsForAdvances($request);
             return view('suggestion.requests-for-advances', compact('data'));
         } catch (\Exception $e) {
             return view('404');

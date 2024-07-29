@@ -41,11 +41,11 @@
                     <span class="text-danger small" id="EmployeeCode_error"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="CustomerCode" class="form-label small">Nhà cung cấp/Người nhận</label>
+                    <label for="CustomerCode1" class="form-label small">Nhà cung cấp/Người nhận</label>
                     <input list="listCustomerCode1" class="form-control" id="CustomerCode1">
                     <datalist id="listCustomerCode1">
                         @foreach ($data['bill_detailed_object'] as $item)
-                            <option data-value="{{ $item->Code }}" value="{{ $item->Code }}">
+                            <option data-value="{{ $item->Code }}" value="{{ $item->Code }}" BankAccountNo="{{ $item->BankAccountNo }}" BankName="{{ $item->BankName }}" Name="{{ $item->Name }}">
                                 {{ $item->Address }}
                                 {{ $item->Person !== config('constants.value.empty') ? ' - ' . $item->Person . ' - ' : config('constants.value.empty') }}
                                 {{ $item->TaxRegNo }} {{ $item->Name2 }}</option>

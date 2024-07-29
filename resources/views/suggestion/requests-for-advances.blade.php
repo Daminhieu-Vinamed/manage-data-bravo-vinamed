@@ -1,8 +1,5 @@
 @extends('layout.master')
 @section('title', 'Tạo mới')
-@section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
-@endsection
 @section('title-manage')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ ĐỀ NGHỊ</h1>
@@ -51,8 +48,8 @@
                 <div class="form-group col-md-4">
                     <label for="Hinh_Thuc_TT" class="form-label small">Phương thức thanh toán</label>
                     <select class="custom-select" name="Hinh_Thuc_TT" id="Hinh_Thuc_TT">
-                        <option value="CK">Chuyển khoản</option>
                         <option value="TM">Tiền mặt</option>
+                        <option value="CK">Chuyển khoản</option>
                     </select>
                     <span class="text-danger small" id="Hinh_Thuc_TT_error"></span>
                 </div>
@@ -180,8 +177,6 @@
     </div>
 @endsection
 @push('js')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
     <script src="{{ asset('assets/js/suggestion/func.js') }}"></script>
-    <script src="{{ asset('assets/js/suggestion/payment-order.js') }}"></script>
+    <script src="{{ asset('assets/js/suggestion/requests-for-advances.js') }}"></script>
 @endpush
