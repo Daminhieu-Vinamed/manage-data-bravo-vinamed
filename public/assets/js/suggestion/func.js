@@ -48,7 +48,7 @@ function total_payment_order() {
     }
 }
 
-function vat_value_added_tax_calculation(percent, trId) {
+function vat_value_added_tax_calculation(percentFormat, percent, trId) {
     if ($("#Amount9").length) {
         let value_OriginalAmount9 = $("#" + trId).find("#OriginalAmount9").val();
         $("#" + trId).find("#OriginalAmount3").val(value_OriginalAmount9 * percent);
@@ -58,5 +58,5 @@ function vat_value_added_tax_calculation(percent, trId) {
         let value_OriginalAmount9 = $("#" + trId).find("#OriginalAmount9").val();
         $("#" + trId).find("#OriginalAmount3").val(value_OriginalAmount9 * percent);
     }
-    $("#" + trId).find("#TaxRate").val(percent);
+    $("#" + trId).find("#TaxRate").val(percentFormat).attr('percent', percent);
 }

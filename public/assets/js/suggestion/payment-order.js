@@ -55,45 +55,22 @@ $(document).ready(function () {
     $(document).on("change", "#CurrencyCode", function () {
         const valueCurrency = $(this).val();
 
-        var TaxRate = $("input[name='TaxRate[]']")
-            .map(function () {
-                return $(this).val();
-            })
-            .get();
-
-        var OriginalAmount9 = $("input[name='OriginalAmount9[]']")
-            .map(function () {
-                return $(this).val();
-            })
-            .get();
-
-        var Amount3 = $("input[name='Amount3[]']");
-
-        $("#th-name-vat").text("Giá trị " + valueCurrency + " chưa VAT");
+        $("#th_OriginalAmount9").text("Giá trị " + valueCurrency + " chưa VAT");
+        $('label[for="OriginalAmount3"]').text("Tiền " + valueCurrency);
         if (valueCurrency !== "VND") {
-            if (!$("#th-name-money-vnd1").length) {
+            if (!$("#th_Amount9").length) {
                 $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
-                $("thead tr #th-name-vat").after(
-                    '<th id="th-name-money-vnd1">Tiền VND</th>'
+                $("thead tr #th_OriginalAmount9").after(
+                    '<th id="th_Amount9">Tiền VND</th>'
                 );
-                $("tbody tr #OriginalAmount9").parent()
-                    .after(`<td id="td-name-money-vnd1">
+                $("tbody tr #OriginalAmount9").parent().after(`<td id="td_Amount9">
                     <input type="number" class="form-control" name="Amount9[]" id="Amount9" readonly/>
                 </td>`);
-                $("tbody tr #TaxRate")
-                    .parent()
-                    .after(
-                        `<td id="td-name-value-added-tax-vat">
-                    <label for="Amount3" class="form-label small">Tiền ` +
-                            valueCurrency +
-                            `</label>
+                $("tbody tr #OriginalAmount3").parent().after(`<td id="td_Amount3">
+                    <label for="Amount3" class="form-label small">Tiền VND</label>
                     <input type="number" class="form-control" name="Amount3[]" id="Amount3" readonly/>
-                </td>`
-                    );
-                $("thead tr #th-name-value-added-tax-vat").attr(
-                    "colspan",
-                    fourConst
-                );
+                </td>`);
+                $("thead tr #th_value_added_tax_vat").attr("colspan", fourConst);
                 $(".form-group-into-money #TotalOriginalAmount0").after(
                     '<input type="number" class="form-control mt-2" id="TotalAmount0" readonly>'
                 );
@@ -103,37 +80,12 @@ $(document).ready(function () {
                 $(".form-group-total #TotalOriginalAmount").after(
                     '<input type="number" class="form-control mt-2" id="TotalAmount" readonly>'
                 );
-
-                var Amount3 = $("input[name='Amount3[]']");
-
-                var Amount9 = $("input[name='Amount9[]']")
-                    .map(function () {
-                        return $(this).val();
-                    })
-                    .get();
-
-                for (let i = zeroConst; i < TaxRate.length; i++) {
-                    Amount3[i].value = OriginalAmount9[i] * TaxRate[i];
-                    Amount3[i].value = Amount9[i] * TaxRate[i];
-                }
-            } else {
-                $('#td-name-value-added-tax-vat label').text('Tiền ' + valueCurrency);
             }
         } else if (valueCurrency === "VND") {
-            for (let i = zeroConst; i < TaxRate.length; i++) {
-                Amount3[i].value = OriginalAmount9[i] * TaxRate[i];
-            }
-            $("thead tr #th-name-value-added-tax-vat").attr(
-                "colspan",
-                threeConst
-            );
+            $("thead tr #th_value_added_tax_vat").attr("colspan", threeConst);
             $("#ExchangeRate").val(oneConst).attr("readonly", trueValue);
-            $(
-                "thead tr #th-name-money-vnd1, tbody tr #td-name-money-vnd1, tbody tr #td-name-value-added-tax-vat"
-            ).remove();
-            $(
-                ".form-group-into-money #TotalAmount0, .form-group-tax-money #TotalAmount3, .form-group-total #TotalAmount"
-            ).remove();
+            $("thead tr #th_Amount9, tbody tr #td_Amount9, tbody tr #td_Amount3").remove();
+            $(".form-group-into-money #TotalAmount0, .form-group-tax-money #TotalAmount3, .form-group-total #TotalAmount").remove();
         }
         total_payment_order();
     });
@@ -285,8 +237,9 @@ $(document).ready(function () {
             .each(function () {
                 if ($(this).val() === valueSelected) {
                     const percent = $(this).attr("percent");
+                    const percentFormat = Math.ceil(percent * oneHundredConst);
                     const trId = $(this).parents("tr").attr("id");
-                    vat_value_added_tax_calculation(percent, trId);
+                    vat_value_added_tax_calculation(percentFormat, percent, trId);
                     total_payment_order();
                     return this_TaxCode.val(valueSelected);
                 }
@@ -307,9 +260,10 @@ $(document).ready(function () {
     });
 
     $(document).on("change keyup paste", "#OriginalAmount9", function () {
-        const percent = $(this).parents("tr").find("#TaxRate").val();
+        const percentFormat = $(this).parents("tr").find("#TaxRate").val();
+        const percent = $(this).parents("tr").find("#TaxRate").attr("percent");
         const trId = $(this).parents("tr").attr("id");
-        vat_value_added_tax_calculation(percent, trId);
+        vat_value_added_tax_calculation(percentFormat, percent, trId);
         total_payment_order();
     });
 
