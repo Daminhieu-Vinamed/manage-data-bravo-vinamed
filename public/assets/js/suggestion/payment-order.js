@@ -229,6 +229,8 @@ $(document).ready(function () {
         const valueSelected = $(this).val();
         if (!valueSelected) {
             $(this).parents("tr").find("#TaxRate").val(nullValue);
+            $(this).parents("tr").find("#OriginalAmount3").val(nullValue);
+            $(this).parents("tr").find("#Amount3").val(nullValue)
         }
         var this_TaxCode = $(this).val(nullValue);
         $(this)
@@ -244,6 +246,7 @@ $(document).ready(function () {
                     return this_TaxCode.val(valueSelected);
                 }
             });
+        total_payment_order();
     });
 
     $(document).on("blur", "#BizDocId_PO", function () {
