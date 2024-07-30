@@ -115,8 +115,8 @@
                             <th>Bộ phận</th>
                             <th>Đơn hàng mua</th>
                             <th>Hãng cung cấp</th>
-                            <th id="th-name-vat">Giá trị VND chưa VAT</th>
-                            <th colspan="3" id="th-name-value-added-tax-vat">Thuế giá trị gia tăng (VAT)</th>
+                            <th id="th_OriginalAmount9">Giá trị VND chưa VAT</th>
+                            <th colspan="3" id="th_value_added_tax_vat">Thuế giá trị gia tăng (VAT)</th>
                             <th>Ghi chú</th>
                         </tr>
                     </thead>
