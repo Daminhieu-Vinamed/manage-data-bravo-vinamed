@@ -48,6 +48,28 @@ function total_payment_order() {
     }
 }
 
+function total_requests_for_advances() {
+    var OriginalAmount9 = $("input[name='OriginalAmount9[]']")
+        .map(function () {
+            return $(this).val();
+        })
+        .get();
+    OriginalAmount9 = OriginalAmount9.map(Number);
+    let totalOriginalAmount9 = OriginalAmount9.reduce(function (a, b) {
+        return a + b;
+    }, zeroConst);
+    if ($("input[name='Amount9[]']").length) {
+        let TotalAmount = zeroConst;
+        for (let i = zeroConst; i < OriginalAmount9.length; i++) {
+            const moneyVnd = OriginalAmount9[i] * $("#ExchangeRate").val();
+            $("input[name='Amount9[]']")[i].value = moneyVnd;
+            TotalAmount += moneyVnd;
+        }
+        $("#TotalAmount").val(TotalAmount);
+    }
+    $('#TotalOriginalAmount').val(totalOriginalAmount9);
+}
+
 function vat_value_added_tax_calculation(percentFormat, percent, trId) {
     if ($("#Amount9").length) {
         let value_OriginalAmount9 = $("#" + trId).find("#OriginalAmount9").val();

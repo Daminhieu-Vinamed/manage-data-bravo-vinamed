@@ -38,22 +38,37 @@ class CreatePaymentOrderRequest extends FormRequest
             "DocCode" => "required",
             "EmployeeCode" => "required",
             "CustomerCode1" => "required",
-            "AmountTT" => "required|numeric|gt:0",
-            "Stt_TU" => "required",
-            "AmountTU" => "required|numeric|gt:0",
+            "AmountTT" => "nullable|numeric|min:0",
+            "AmountTU" => "nullable|numeric|min:0",
             "Hinh_Thuc_TT" => "required",
             "CurrencyCode" => "required",
-            "ExchangeRate" => "required|numeric|gt:0",
+            "ExchangeRate" => "nullable|numeric|min:0",
+            "So_Hd" => "array",
+            "So_Hd.*"  => [
+                function ($attribute, $value, $fail) {
+                    $number = (int)substr($attribute, config('constants.number.negative_one'));
+                    if ($this->TaxCode[$number] !== config('constants.value.null') && $value === config('constants.value.null')) {
+                        $fail('Số hóa đơn không được để trống');
+                    }
+                },
+            ],
             "Ngay_Hd" => "array",
-            "Ngay_Hd.*"  => "required",
+            "Ngay_Hd.*"  => [
+                function ($attribute, $value, $fail) {
+                    $number = (int)substr($attribute, config('constants.number.negative_one'));
+                    if ($this->TaxCode[$number] !== config('constants.value.null') && $value === config('constants.value.null')) {
+                        $fail('Ngày hóa đơn không được để trống');
+                    }
+                },
+            ],
             'TotalOriginalAmount0' => "required|numeric|gt:0",
-            'TotalOriginalAmount3' => "required|numeric|gt:0",
+            'TotalOriginalAmount3' => "nullable|numeric|min:0",
             'TotalOriginalAmount' => "required|numeric|gt:0",
         );
 
         if ($this->CurrencyCode !== "VND") {
             $arrValid['TotalAmount0'] = "required|numeric|gt:0";
-            $arrValid['TotalAmount3'] = "required|numeric|gt:0";
+            $arrValid['TotalAmount3'] = "nullable|numeric|min:0";
             $arrValid['TotalAmount'] = "required|numeric|gt:0";
         }
 
@@ -73,25 +88,20 @@ class CreatePaymentOrderRequest extends FormRequest
             'DocDate.required' => 'Ngày tạo không được để trống',
             'EmployeeCode.required' => 'Chưa chọn người đề nghị',
             'CustomerCode1.required' => 'Chưa chọn nhà cung cấp/người nhận',
-            'AmountTT.required' => 'Đã trả trước cho NCC không được để trống',
-            'AmountTT.gt' => 'Giá trị đã trả trước cho NCC phải lớn hơn 0',
-            'Stt_TU.required' => 'Chưa chọn đề nghị tạm ứng',
-            'AmountTU.required' => 'Đã tạm ứng không được để trống',
-            'AmountTU.gt' => 'Giá trị đã tạm ứng phải lớn hơn 0',
+            'AmountTT.min' => 'Giá trị đã trả trước cho NCC không được nhỏ hơn 0',
+            'AmountTU.min' => 'Giá trị đã tạm ứng không được nhỏ hơn 0',
             'Hinh_Thuc_TT.required' => 'Hình thức thanh toán không được để trống',
             'CurrencyCode.required' => 'Loại tiền không được để trống',
             'ExchangeRate.required' => 'Tỷ giá hạch toán không được để trống',
-            'ExchangeRate.gt' => 'Giá trị tỷ giá hạch toán phải lớn hơn 0',
+            'ExchangeRate.min' => 'Giá trị tỷ giá hạch toán không được nhỏ hơn 0',
             
             'TotalOriginalAmount0.required' => 'Thành tiền đang trống',
             'TotalOriginalAmount0.gt' => 'Thành tiền phải lớn hơn 0',
             'TotalAmount0.required' => 'Thành tiền đang trống',
             'TotalAmount0.gt' => 'Thành tiền phải lớn hơn 0',
             
-            'TotalOriginalAmount3.required' => 'Tiền VAT đang trống',
-            'TotalOriginalAmount3.gt' => 'Tiền VAT phải lớn hơn 0',
-            'TotalAmount3.required' => 'Tiền VAT đang trống',
-            'TotalAmount3.gt' => 'Tiền VAT phải lớn hơn 0',
+            'TotalOriginalAmount3.min' => 'Tiền VAT không được nhỏ hơn 0',
+            'TotalAmount3.min' => 'Tiền VAT không được nhỏ hơn 0',
             
             'TotalOriginalAmount.required' => 'Tổng cộng đang trống',
             'TotalOriginalAmount.gt' => 'Tổng cộng phải lớn hơn 0',
@@ -102,7 +112,6 @@ class CreatePaymentOrderRequest extends FormRequest
             'BankAccountNo.required' => 'Số tài khoản không được để trống',
             'Ten_Chu_TK.required' => 'Tên chủ tài khoản không được để trống',
             'Description1.required' => 'Nội dung không được để trống',
-            "Ngay_Hd.*.required" => 'Ngày hóa đơn không được để trống',
         ];
     }
 }

@@ -33,6 +33,7 @@ class SupplementsAndLeaveRequest extends FormRequest
                     $user = Auth::user();
                     $np = DB::connection($user->company)->table('vB30HrmPTimesheet')
                     ->where('IsActive', config('constants.number.one'))
+                    ->where('DocStatus', '<>', config('constants.number.nine'))
                     ->where('DocCode', 'NP')
                     ->where('EmployeeCode', $user->EmployeeCode)
                     ->whereDate('FromDate', '>=', $this->start)
@@ -40,6 +41,7 @@ class SupplementsAndLeaveRequest extends FormRequest
                     ->first();
                     $bs = DB::connection($user->company)->table('vB30HrmPTimesheet')
                     ->where('IsActive', config('constants.number.one'))
+                    ->where('DocStatus', '<>', config('constants.number.nine'))
                     ->where('DocCode', 'BS')
                     ->where('EmployeeCode', $user->EmployeeCode)
                     ->whereDate('FromDate', '>=', $this->start)

@@ -22,8 +22,8 @@ class UserService
     {
         $users = $this->userRepository->getData();
         return DataTables::of($users)
-        ->editColumn('status', function ($user) {
-            return $user->status->name; 
+        ->editColumn('department', function ($user) {
+            return $user->department->name;
         })
         ->editColumn('gender', function ($user) {
             return $user->gender->name; 

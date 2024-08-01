@@ -87,6 +87,20 @@ class SuggestionService extends SuggestionRepository
         $data =  $this->suggestionRepository->getRequestsForAdvances($request);
         return $data;
     }
+    
+    public function postRequestsForAdvances($request)
+    {
+        $connectCompany = DB::connection($request->BranchCode);
+        $connectCompany->beginTransaction();
+        try {
+            $this->suggestionRepository->CreateRequestsForAdvances($connectCompany, $request);
+            $connectCompany->commit();
+            return response()->json(['status' => 'success', 'msg' => 'TẠO ĐỀ NGHỊ TẠM ỨNG THÀNH CÔNG'], 200);
+        } catch (\Exception $e) {
+            $connectCompany->rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
+        }
+    }
 
     public function statistical()
     {

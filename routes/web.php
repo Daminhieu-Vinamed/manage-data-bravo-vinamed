@@ -24,10 +24,11 @@ Route::prefix('/')->group(function () {
                 Route::post('cancel-payment-request', [SuggestionController::class, 'cancel']);
             });
             Route::get('choose-company', [SuggestionController::class, 'chooseCompany'])->name('choose-company');
+            Route::get('directional', [SuggestionController::class, 'directional'])->name('directional');
             Route::get('payment-order', [SuggestionController::class, 'getPaymentOrder'])->name('payment-order');
             Route::post('create-payment-order', [SuggestionController::class, 'postPaymentOrder']);
-            Route::get('directional', [SuggestionController::class, 'directional'])->name('directional');
-            Route::get('requests-for-advances', [SuggestionController::class, 'requestsForAdvances'])->name('requests-for-advances');
+            Route::get('requests-for-advances', [SuggestionController::class, 'getRequestsForAdvances'])->name('requests-for-advances');
+            Route::post('create-requests-for-advances', [SuggestionController::class, 'postRequestsForAdvances']);
             Route::get('suggested-per-diem', [SuggestionController::class, 'suggestedPerDiem'])->name('suggested-per-diem');
         });
 

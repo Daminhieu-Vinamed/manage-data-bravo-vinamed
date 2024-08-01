@@ -31,11 +31,7 @@
                     <input list="listEmployeeCode" class="form-control" id="EmployeeCode">
                     <datalist id="listEmployeeCode">
                         @foreach ($data['bill_staff'] as $item)
-                            <option department="{{ $item->DeptCode }}" data-value="{{ $item->Code }}"
-                                value="{{ $item->Code }}">
-                                {{ $item->Name }}
-                                {{ $item->Email !== config('constants.value.empty') ? ' - ' . $item->Email : config('constants.value.empty') }}
-                            </option>
+                            <option data-value="{{ $item->Code }}" value="{{ $item->Code . ": " . $item->Name }}">{{ $item->Email }}</option>
                         @endforeach
                     </datalist>
                     <span class="text-danger small" id="EmployeeCode_error"></span>
@@ -45,10 +41,9 @@
                     <input list="listCustomerCode1" class="form-control" id="CustomerCode1">
                     <datalist id="listCustomerCode1">
                         @foreach ($data['bill_detailed_object'] as $item)
-                            <option data-value="{{ $item->Code }}" value="{{ $item->Code }}" BankAccountNo="{{ $item->BankAccountNo }}" BankName="{{ $item->BankName }}" Name="{{ $item->Name }}">
-                                {{ $item->Address }}
-                                {{ $item->Person !== config('constants.value.empty') ? ' - ' . $item->Person . ' - ' : config('constants.value.empty') }}
-                                {{ $item->TaxRegNo }} {{ $item->Name2 }}</option>
+                            <option data-value="{{ $item->Code }}" value="{{ $item->Code . ": " . $item->Name }}" 
+                                BankAccountNo="{{ $item->BankAccountNo }}" BankName="{{ $item->BankName }}" Name="{{ $item->Name }}">{{ $item->TaxRegNo }}
+                            </option>
                         @endforeach
                     </datalist>
                     <span class="text-danger small" id="CustomerCode1_error"></span>
@@ -56,15 +51,15 @@
                 <div class="form-group col-md-4">
                     <label for="AmountTT" class="form-label small">Đã trả trước cho NCC</label>
                     <input type="number" class="form-control" id="AmountTT">
-                    <span class="text-danger small" id="AmountTT_error"></span>
+                    {{-- <span class="text-danger small" id="AmountTT_error"></span> --}}
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Stt_TU" class="form-label small">Đề nghị tạm ứng</label>
                     <input list="list_Stt_TU" class="form-control" id="Stt_TU">
                     <datalist id="list_Stt_TU">
                         @foreach ($data['requests_for_advances'] as $item)
-                            <option data-value="{{ $item->Stt }}" value="{{ $item->Stt }}">
-                                {{ $item->DocNo . ' - ' . $item->TotalAmount0 . ' - ' . $item->CustomerName . ' - ' . $item->DocDate }}
+                            <option data-value="{{ $item->Stt }}" value="{{ $item->Stt }}" TotalAmount0="{{ $item->TotalAmount0 }}">
+                                {{ $item->DocNo . ' - ' . $item->CustomerName }}
                             </option>
                         @endforeach
                     </datalist>
@@ -123,7 +118,8 @@
                     <tbody>
                         <tr id="line-0">
                             <td>
-                                <input type="text" class="form-control" name="So_Hd[]">
+                                <input type="text" class="form-control" name="So_Hd[]" id="So_Hd">
+                                <span class="text-danger small" id="So_Hd_error"></span>
                             </td>
                             <td>
                                 <input type="date" class="form-control" name="Ngay_Hd[]" id="Ngay_Hd">
