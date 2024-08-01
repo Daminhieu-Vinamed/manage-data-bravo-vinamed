@@ -38,7 +38,6 @@ class OnLeaveRepository
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', 'NP')
                 ->where('DocStatus', '19')
-                ->where('IsTP', config('constants.number.one'))
                 ->whereIn('DeptCode', $arrayDeptCode)
                 ->whereYear('FromDate',  $timeNow->format('Y'))
                 ->get([
