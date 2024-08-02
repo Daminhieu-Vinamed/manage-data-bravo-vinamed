@@ -31,7 +31,7 @@
                     <input list="listCustomerCode1" class="form-control" id="CustomerCode">
                     <datalist id="listCustomerCode1">
                         @foreach ($data['B20Customer'] as $item)
-                            <option data-value="{{ $item->Code }}" value="{{ $item->Code }}" BankAccountNo="{{ $item->BankAccountNo }}" BankName="{{ $item->BankName }}" Name="{{ $item->Name }}">{{ $item->Name }}</option>
+                            <option data-value="{{ $item->Code }}" value="{{ $item->Code . ": " . $item->Name }}" BankAccountNo="{{ $item->BankAccountNo }}" BankName="{{ $item->BankName }}" Name="{{ $item->Name }}">{{ $item->TaxRegNo }}</option>
                         @endforeach
                     </datalist>
                     <span class="text-danger small" id="CustomerCode_error"></span>
