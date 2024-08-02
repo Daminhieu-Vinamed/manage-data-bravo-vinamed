@@ -128,8 +128,8 @@ class SuggestionRepository
         $paymentOrder = $connectCompany->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
         
         for ($i = config('constants.number.zero'); $i < $data->CountRow; $i++) { 
-            $OriginalAmount9 = empty($data->OriginalAmount9[$i]) ? config('constants.value.zero') : $data->OriginalAmount9[$i];
-            $OriginalAmount3 = empty($data->OriginalAmount3[$i]) ? config('constants.value.zero') : $data->OriginalAmount3[$i];
+            $OriginalAmount9 = empty($data->OriginalAmount9[$i]) ? config('constants.number.zero') : $data->OriginalAmount9[$i];
+            $OriginalAmount3 = empty($data->OriginalAmount3[$i]) ? config('constants.number.zero') : $data->OriginalAmount3[$i];
             $dataPODetail = [
                 "BranchCode" => $data->BranchCode,
                 'Stt' => $paymentOrder->Stt,
@@ -169,7 +169,7 @@ class SuggestionRepository
                     "DocCode" => $data->DocCode,
                     "DocDate" => $data->DocDate,
                     'AtchDocDate' => $data->Ngay_Hd[$i],
-                    'AtchDocNo' => empty($data->So_Hd[$i]) ? config('constants.value.empty') : $data->So_Hd[$i],
+                    'AtchDocNo' => $data->So_Hd[$i],
                     'OriginalAmountBeforeTax' => $OriginalAmount9,
                     'AmountBeforeTax' => isset($data->Amount9[$i]) && empty($data->Amount9[$i]) ? $data->Amount9[$i] : $OriginalAmount9,
                     'TaxCode' => $data->TaxCode[$i],
