@@ -136,20 +136,20 @@ $(document).ready(function () {
 
     $(document).on("blur", "#EmployeeCode", function () {
         const valueSelected = $(this).val();
-        var EmployeeCode = $(this).val(nullValue);
+        var EmployeeCode = $(this).val(nullValue).removeAttr('data-value');
         $(this)
             .next("#listEmployeeCode")
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
-                    return EmployeeCode.val(valueSelected);
+                    return EmployeeCode.val(valueSelected).attr("data-value", $(this).attr('data-value'));
                 }
             });
     });
 
     $(document).on("blur", "#CustomerCode1", function () {
         const valueSelected = $(this).val();
-        var CustomerCode = $(this).val(nullValue);
+        var CustomerCode = $(this).val(nullValue).removeAttr('data-value');
         $(this)
             .next("#listCustomerCode1")
             .children("option")
@@ -164,7 +164,7 @@ $(document).ready(function () {
                     if ($('#BankAccountNo').length) {
                         $('#BankAccountNo').val($($(this)[zeroConst]).attr("BankAccountNo"));
                     }
-                    return CustomerCode.val(valueSelected);
+                    return CustomerCode.val(valueSelected).attr("data-value", $(this).attr('data-value'));
                 }
             });
     });
@@ -194,6 +194,7 @@ $(document).ready(function () {
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
+                    $('#AmountTU').val($(this).attr("TotalAmount0"));
                     return Stt_TU.val(valueSelected);
                 }
             });
@@ -297,8 +298,8 @@ $(document).ready(function () {
         const BranchCode = $("#company").val();
         const DocCode = $("#DocCode").val();
         const DocStatus = fortyFiveConst;
-        const EmployeeCode = $("#EmployeeCode").val();
-        const CustomerCode1 = $("#CustomerCode1").val();
+        const EmployeeCode = $("#EmployeeCode").attr('data-value');
+        const CustomerCode1 = $("#CustomerCode1").attr('data-value');
         const AmountTT = $("#AmountTT").val();
         const Stt_TU = $("#Stt_TU").val();
         const AmountTU = $("#AmountTU").val();
@@ -412,29 +413,38 @@ $(document).ready(function () {
                     });
                 }
                 for (let i = zeroConst; i <= Ngay_Hd.length; i++) {
-                    errors['Ngay_Hd.'+ i] 
-                    ? 
-                    $('#line-' + i).find('#Ngay_Hd_error').html(errors['Ngay_Hd.'+ i][zeroConst]) 
-                    : 
-                    $('#line-' + i).find('#Ngay_Hd_error').html('')
+                    if (errors['Ngay_Hd.'+ i]) {
+                        $('#line-' + i).find('#Ngay_Hd_error').html(errors['Ngay_Hd.'+ i][zeroConst])
+                        $('#line-' + i).find('#Ngay_Hd').addClass('is-invalid')
+                    } else {
+                        $('#line-' + i).find('#Ngay_Hd_error').html('')  
+                        $('#line-' + i).find('#Ngay_Hd').removeClass('is-invalid')
+                    } 
+                    if (errors['So_Hd.'+ i]) {
+                        $('#line-' + i).find('#So_Hd_error').html(errors['So_Hd.'+ i][zeroConst]) 
+                        $('#line-' + i).find('#So_Hd').addClass('is-invalid')
+                    } else {
+                        $('#line-' + i).find('#So_Hd_error').html('')
+                        $('#line-' + i).find('#So_Hd').removeClass('is-invalid')
+                    }
                 }
                 if (errors.DocDate) {
                     ToastTopRight.fire({
                         icon: 'error',
                         title: errors.DocDate[zeroConst],
                     });
-                    $("#DocDate").removeClass('is-valid').addClass('is-invalid');
+                    $("#DocDate").addClass('is-invalid');
                 } else {
-                    $("#DocDate").removeClass('is-invalid').addClass('is-valid');
+                    $("#DocDate").removeClass('is-invalid');
                 }
                 if (errors.DocNo) {
                     ToastTopRight.fire({
                         icon: 'error',
                         title: errors.DocNo[zeroConst],
                     })
-                    $("#DocNo").removeClass('is-valid').addClass('is-invalid');
+                    $("#DocNo").addClass('is-invalid');
                 } else {
-                    $("#DocNo").removeClass('is-invalid').addClass('is-valid');
+                    $("#DocNo").removeClass('is-invalid');
                 }
                 if (errors.EmployeeCode) {
                     $('#EmployeeCode_error').text(errors.EmployeeCode[zeroConst]);
@@ -452,31 +462,31 @@ $(document).ready(function () {
                 }
                 if (errors.AmountTT) {
                     $('#AmountTT_error').text(errors.AmountTT[zeroConst]);
-                    $('#AmountTT').removeClass('is-valid').addClass('is-invalid');
+                    $('#AmountTT').addClass('is-invalid');
                 } else {
                     $('#AmountTT_error').text('');
-                    $('#AmountTT').removeClass('is-invalid').addClass('is-valid');
+                    $('#AmountTT').removeClass('is-invalid');
                 }
                 if (errors.Stt_TU) {
                     $('#Stt_TU_error').text(errors.Stt_TU[zeroConst]);
-                    $('#Stt_TU').removeClass('is-valid').addClass('is-invalid');
+                    $('#Stt_TU').addClass('is-invalid');
                 } else {
                     $('#Stt_TU_error').text('');
-                    $('#Stt_TU').removeClass('is-invalid').addClass('is-valid');
+                    $('#Stt_TU').removeClass('is-invalid');
                 }
                 if (errors.AmountTU) {
                     $('#AmountTU_error').text(errors.AmountTU[zeroConst]);
-                    $('#AmountTU').removeClass('is-valid').addClass('is-invalid');
+                    $('#AmountTU').addClass('is-invalid');
                 } else {
                     $('#AmountTU_error').text('');
-                    $('#AmountTU').removeClass('is-invalid').addClass('is-valid');
+                    $('#AmountTU').removeClass('is-invalid');
                 }
                 if (errors.Hinh_Thuc_TT) {
                     $('#Hinh_Thuc_TT_error').text(errors.Hinh_Thuc_TT[zeroConst]);
-                    $('#Hinh_Thuc_TT').removeClass('is-valid').addClass('is-invalid');
+                    $('#Hinh_Thuc_TT').addClass('is-invalid');
                 } else {
                     $('#Hinh_Thuc_TT_error').text('');
-                    $('#Hinh_Thuc_TT').removeClass('is-invalid').addClass('is-valid');
+                    $('#Hinh_Thuc_TT').removeClass('is-invalid');
                 }
                 if (errors.BankName) {
                     $('#BankName_error').text(errors.BankName[zeroConst]);
@@ -522,18 +532,17 @@ $(document).ready(function () {
                 }
                 if (errors.TotalOriginalAmount3) {
                     $('#TotalOriginalAmount3_error').text(errors.TotalOriginalAmount3[zeroConst]);
-                    $('#TotalOriginalAmount3').removeClass('is-valid').addClass('is-invalid');
+                    $('#TotalOriginalAmount3').addClass('is-invalid');
                 } else {
                     $('#TotalOriginalAmount3_error').text('');
-                    $('#TotalOriginalAmount3').removeClass('is-invalid').addClass('is-valid');
-                    $('#TotalAmount3').removeClass('is-invalid').addClass('is-valid');
+                    $('#TotalOriginalAmount3').removeClass('is-invalid');
                 }
                 if (errors.TotalAmount3) {
                     $('#TotalOriginalAmount3_error').text(errors.TotalAmount3[zeroConst]);
-                    $('#TotalAmount3').removeClass('is-valid').addClass('is-invalid');
+                    $('#TotalAmount3').addClass('is-invalid');
                 } else {
                     $('#TotalOriginalAmount3_error').text('');
-                    $('#TotalAmount3').removeClass('is-invalid').addClass('is-valid');
+                    $('#TotalAmount3').removeClass('is-invalid');
                 }
                 if (errors.TotalOriginalAmount) {
                     $('#TotalOriginalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
@@ -553,17 +562,17 @@ $(document).ready(function () {
                 }
                 if (errors.CurrencyCode) {
                     $('#CurrencyCode_error').text(errors.CurrencyCode[zeroConst]);
-                    $('#CurrencyCode').removeClass('is-valid').addClass('is-invalid');
+                    $('#CurrencyCode').addClass('is-invalid');
                 } else {
                     $('#CurrencyCode_error').text('');
-                    $('#CurrencyCode').removeClass('is-invalid').addClass('is-valid');
+                    $('#CurrencyCode').removeClass('is-invalid');
                 }
                 if (errors.ExchangeRate) {
                     $('#ExchangeRate_error').text(errors.ExchangeRate[zeroConst]);
-                    $('#ExchangeRate').removeClass('is-valid').addClass('is-invalid');
+                    $('#ExchangeRate').addClass('is-invalid');
                 } else {
                     $('#ExchangeRate_error').text('');
-                    $('#ExchangeRate').removeClass('is-invalid').addClass('is-valid');
+                    $('#ExchangeRate').removeClass('is-invalid');
                 }
             },
         });

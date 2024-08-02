@@ -25,7 +25,7 @@
                             <th>Họ và tên</th>
                             <th>Email</th>
                             <th>Vai trò</th>
-                            <th>Trạng thái</th>
+                            <th>Phòng ban</th>
                             <th>Hành động</th>
                             <th>Khay</th>
                             <th>Ảnh</th>
@@ -40,7 +40,7 @@
                             <th>Họ và tên</th>
                             <th>Email</th>
                             <th>Vai trò</th>
-                            <th>Trạng thái</th>
+                            <th>Phòng ban</th>
                             <th>Hành động</th>
                             <th>Khay</th>
                             <th>Ảnh</th>

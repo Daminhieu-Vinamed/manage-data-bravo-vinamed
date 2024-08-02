@@ -68,7 +68,7 @@ class SuggestionController extends Controller
         return $this->suggestionService->postPaymentOrder($request);
     }
 
-    public function requestsForAdvances(ChooseCompanyRequest $request)
+    public function getRequestsForAdvances(ChooseCompanyRequest $request)
     {
         try {
             $data = $this->suggestionService->getRequestsForAdvances($request);
@@ -77,6 +77,12 @@ class SuggestionController extends Controller
             return view('404');
         }
     }
+    
+    public function postRequestsForAdvances(Request $request)
+    {
+        return $this->suggestionService->postRequestsForAdvances($request);
+    }
+    
     public function suggestedPerDiem(ChooseCompanyRequest $request)
     {
         try {

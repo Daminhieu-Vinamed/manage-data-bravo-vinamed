@@ -11,12 +11,14 @@ return [
     ],
     
     'number' => [
+        'negative_one' => -1,
         'zero' => 0,
         'one' => 1,
         'two' => 2,
         'three' => 3,
         'four' => 4,
-        'five' => 5
+        'five' => 5,
+        'nine' => 9
     ],
 
     'timekeeping' => [

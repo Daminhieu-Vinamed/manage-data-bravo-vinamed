@@ -106,12 +106,12 @@ class SuggestionRepository
             "DocNo" => $data->DocNo,
             "DocCode" => $data->DocCode,
             "CustomerCode" => $data->CustomerCode1,
-            "AmountTT" => $data->AmountTT,
-            "Stt_TU" => $data->Stt_TU,
-            "AmountTU" => $data->AmountTU,
+            "AmountTT" => empty($data->AmountTT) ? config('constants.number.zero') : $data->AmountTT,
+            "Stt_TU" => empty($data->Stt_TU) ? config('constants.value.empty') : $data->Stt_TU,
+            "AmountTU" => empty($data->AmountTU) ? config('constants.number.zero') : $data->AmountTU,
             "Hinh_Thuc_TT" => $data->Hinh_Thuc_TT,
             "CurrencyCode" => $data->CurrencyCode,
-            "ExchangeRate" => $data->ExchangeRate,
+            "ExchangeRate" => empty($data->ExchangeRate) ? config('constants.number.zero') : $data->ExchangeRate,
             "TotalOriginalAmount0" => $data->TotalOriginalAmount0,
             "TotalAmount0" => isset($data->TotalAmount0) ? $data->TotalAmount0 : $data->TotalOriginalAmount0,
             "TotalOriginalAmount3" => $data->TotalOriginalAmount3,
@@ -157,32 +157,39 @@ class SuggestionRepository
             ];
             
             $connectCompany->table('B33AccDocJournalEntry')->insert($dataPODetail);
-            $paymentOrderDetail = $connectCompany->table('B33AccDocJournalEntry')
-            ->where("Stt", $paymentOrder->Stt)->where("BuiltinOrder", $i + config('constants.number.one'))->first();
-            
-            $dataPODetailVAT = [
-                'Stt' => $paymentOrder->Stt,
-                'RowId_SourceDoc' => $paymentOrderDetail->RowId,
-                'BuiltinOrder' => $i + config('constants.number.one'),
-                "BranchCode" => $data->BranchCode,
-                "DocCode" => $data->DocCode,
-                "DocDate" => $data->DocDate,
-                'AtchDocDate' => $data->Ngay_Hd[$i],
-                'AtchDocNo' => empty($data->So_Hd[$i]) ? config('constants.value.empty') : $data->So_Hd[$i],
-                'OriginalAmountBeforeTax' => $OriginalAmount9,
-                'AmountBeforeTax' => isset($data->Amount9[$i]) && empty($data->Amount9[$i]) ? $data->Amount9[$i] : $OriginalAmount9,
-                'TaxCode' => $data->TaxCode[$i],
-                'TaxRate' => $data->TaxRate[$i],
-                'OriginalAmount' => $OriginalAmount3,
-                'Amount' => isset($data->Amount3[$i]) && !empty($data->Amount3[$i]) ? $data->Amount3[$i] : $OriginalAmount3,
-                'AtchDocType' => 'E3'
-            ];
-            $connectCompany->table('B33AccDocAtchDoc')->insert($dataPODetailVAT);
+
+            if (!empty($data->TaxCode[$i])) {
+                $paymentOrderDetail = $connectCompany->table('B33AccDocJournalEntry')
+                ->where("Stt", $paymentOrder->Stt)->where("BuiltinOrder", $i + config('constants.number.one'))->first();
+                $dataPODetailVAT = [
+                    'Stt' => $paymentOrder->Stt,
+                    'RowId_SourceDoc' => $paymentOrderDetail->RowId,
+                    'BuiltinOrder' => $i + config('constants.number.one'),
+                    "BranchCode" => $data->BranchCode,
+                    "DocCode" => $data->DocCode,
+                    "DocDate" => $data->DocDate,
+                    'AtchDocDate' => $data->Ngay_Hd[$i],
+                    'AtchDocNo' => empty($data->So_Hd[$i]) ? config('constants.value.empty') : $data->So_Hd[$i],
+                    'OriginalAmountBeforeTax' => $OriginalAmount9,
+                    'AmountBeforeTax' => isset($data->Amount9[$i]) && empty($data->Amount9[$i]) ? $data->Amount9[$i] : $OriginalAmount9,
+                    'TaxCode' => $data->TaxCode[$i],
+                    'TaxRate' => $data->TaxRate[$i],
+                    'OriginalAmount' => $OriginalAmount3,
+                    'Amount' => isset($data->Amount3[$i]) && !empty($data->Amount3[$i]) ? $data->Amount3[$i] : $OriginalAmount3,
+                    'AtchDocType' => 'E3'
+                ];
+                $connectCompany->table('B33AccDocAtchDoc')->insert($dataPODetailVAT);
+            }
         }
     }
 
     public function getRequestsForAdvances($request)
     {
+        $B20Customer = DB::connection($request->company)->table('B20Customer')->select('Code', 'Address', 'Person', 'TaxRegNo', 'Name2', 'BankAccountNo', 'BankName', 'Name')
+            ->where('IsActive', config('constants.number.one'))
+            ->where('IsGroup', config('constants.number.zero'))
+            ->where('IsGroup', config('constants.number.zero'))
+            ->get();
         $B20Employee = DB::connection($request->company)->table('B20Employee')->select('Code', 'Name', 'Email', 'DeptCode')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
@@ -195,7 +202,60 @@ class SuggestionRepository
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
             ->get();
-        return array('bill_staff' => $B20Employee, 'document_number' => $B33AccDoc->DocNo, 'currency' => $B20Currency);
+        $vB20Temporary = DB::connection($request->company)->table('vB20Temporary')->select('Code', 'Name')
+            ->where('IsActive', config('constants.number.one'))
+            ->where('IsGroup', config('constants.number.zero'))
+            ->get();
+        return array('B20Customer' => $B20Customer, 'B20Employee' => $B20Employee, 'DocNo' => $B33AccDoc->DocNo, 'B20Currency' => $B20Currency, 'vB20Temporary' => $vB20Temporary);
+    }
+
+    public function CreateRequestsForAdvances($connectCompany, $data)
+    {
+        $TotalAmount = isset($data->TotalAmount) ? $data->TotalAmount : $data->TotalOriginalAmount;
+        $dataRFA = [
+            "BranchCode" => $data->BranchCode,
+            "DocStatus" => $data->DocStatus,
+            "DocDate" => $data->DocDate,
+            "DocNo" => $data->DocNo,
+            "DocCode" => $data->DocCode,
+            "CustomerCode" => $data->CustomerCode,
+            "Description" => $data->Description,
+            "Hinh_Thuc_TT" => $data->Hinh_Thuc_TT,
+            "CurrencyCode" => $data->CurrencyCode,
+            "ExchangeRate" => $data->ExchangeRate,
+            "TotalOriginalAmount0" => $data->TotalOriginalAmount,
+            "TotalAmount0" => $TotalAmount,
+            "TotalOriginalAmount" => $data->TotalOriginalAmount,
+            "TotalAmount" => $TotalAmount,
+            "BankName" => isset($data->BankName) ? $data->BankName : config('constants.value.empty'),
+            "BankAccountNo" => isset($data->BankAccountNo) ? $data->BankAccountNo : config('constants.value.empty'),
+            "Ten_Chu_TK" => isset($data->Ten_Chu_TK) ? $data->Ten_Chu_TK : config('constants.value.empty'),
+            "Description1" => isset($data->Description1) ? $data->Description1 : config('constants.value.empty'),
+        ];
+        $connectCompany->table('B33AccDoc')->insert($dataRFA);
+        $RequestsForAdvances = $connectCompany->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
+        
+        for ($i = config('constants.number.zero'); $i < $data->CountRow; $i++) { 
+            $OriginalAmount9 = empty($data->OriginalAmount9[$i]) ? config('constants.value.zero') : $data->OriginalAmount9[$i];
+            $dataRFADetail = [
+                "BranchCode" => $data->BranchCode,
+                'Stt' => $RequestsForAdvances->Stt,
+                "EmployeeCode" => $data->EmployeeCode,
+                "DocDate" => $data->DocDate,
+                "DocCode" => $data->DocCode,
+                'BuiltinOrder' => $i + config('constants.number.one'),
+                "Description" => empty($data->DescriptionDetail[$i]) ? config('constants.value.empty') : $data->DescriptionDetail[$i],
+                "CustomerCode" => empty($data->CustomerCodeDetail[$i]) ? config('constants.value.empty') : $data->CustomerCodeDetail[$i],
+                "TemporaryCode" => empty($data->TemporaryCode[$i]) ? config('constants.value.empty') : $data->TemporaryCode[$i],
+                "Area" => empty($data->Area[$i]) ? config('constants.value.empty') : $data->Area[$i],
+                "OriginalAmount9" => $OriginalAmount9,
+                "Amount9" => isset($data->Amount9[$i]) && !empty($data->Amount9[$i]) ? $data->Amount9[$i] : $OriginalAmount9,
+                "Note" => empty($data->Note[$i]) ? config('constants.value.empty') : $data->Note[$i],
+                'BookingExchangeRate' => $data->ExchangeRate,
+            ];
+            
+            $connectCompany->table('B33AccDocJournalEntry')->insert($dataRFADetail);
+        }
     }
 
     public function statisticalAdmin()
