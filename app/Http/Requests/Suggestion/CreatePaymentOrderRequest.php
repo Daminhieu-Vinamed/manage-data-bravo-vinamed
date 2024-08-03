@@ -92,21 +92,27 @@ class CreatePaymentOrderRequest extends FormRequest
             'AmountTU.min' => 'Giá trị đã tạm ứng không được nhỏ hơn 0',
             'Hinh_Thuc_TT.required' => 'Hình thức thanh toán không được để trống',
             'CurrencyCode.required' => 'Loại tiền không được để trống',
-            'ExchangeRate.required' => 'Tỷ giá hạch toán không được để trống',
+            'ExchangeRate.numeric' => 'Tỷ giá hạch toán phải là ký tự số',
             'ExchangeRate.min' => 'Giá trị tỷ giá hạch toán không được nhỏ hơn 0',
             
             'TotalOriginalAmount0.required' => 'Thành tiền đang trống',
             'TotalOriginalAmount0.gt' => 'Thành tiền phải lớn hơn 0',
+            'TotalOriginalAmount0.numeric' => 'Thành tiền phải là ký tự số',
             'TotalAmount0.required' => 'Thành tiền đang trống',
             'TotalAmount0.gt' => 'Thành tiền phải lớn hơn 0',
+            'TotalAmount0.numeric' => 'Thành tiền phải là ký tự số',
             
             'TotalOriginalAmount3.min' => 'Tiền VAT không được nhỏ hơn 0',
+            'TotalOriginalAmount3.numeric' => 'Tiền VAT phải là ký tự số',
             'TotalAmount3.min' => 'Tiền VAT không được nhỏ hơn 0',
+            'TotalAmount3.numeric' => 'Tiền VAT phải là ký tự số',
             
             'TotalOriginalAmount.required' => 'Tổng cộng đang trống',
             'TotalOriginalAmount.gt' => 'Tổng cộng phải lớn hơn 0',
+            'TotalOriginalAmount.numeric' => 'Tổng cộng phải là ký tự số',
             'TotalAmount.required' => 'Tổng cộng đang trống',
             'TotalAmount.gt' => 'Tổng cộng phải lớn hơn 0',
+            'TotalAmount.numeric' => 'Tổng cộng phải là ký tự số',
             
             'BankName.required' => 'Tên ngân hàng không được để trống',
             'BankAccountNo.required' => 'Số tài khoản không được để trống',

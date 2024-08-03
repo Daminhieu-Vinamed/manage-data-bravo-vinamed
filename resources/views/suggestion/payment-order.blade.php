@@ -51,7 +51,7 @@
                 <div class="form-group col-md-4">
                     <label for="AmountTT" class="form-label small">Đã trả trước cho NCC</label>
                     <input type="number" class="form-control" id="AmountTT">
-                    {{-- <span class="text-danger small" id="AmountTT_error"></span> --}}
+                    <span class="text-danger small" id="AmountTT_error"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Stt_TU" class="form-label small">Đề nghị tạm ứng</label>
@@ -229,20 +229,26 @@
                 </button>
             </div>
             <div class="row row-total-money">
-                <div class="form-group col-md-4 form-group-into-money">
-                    <label for="into_money" class="form-label small">Thành tiền</label>
-                    <input type="number" class="form-control" id="TotalOriginalAmount0" value="0" readonly>
-                    <span class="text-danger small" id="TotalOriginalAmount0_error"></span>
+                <div class="col-md-4 form-group-into-money">
+                    <div class="form-group">
+                        <label for="into_money" class="form-label small">Thành tiền</label>
+                        <input type="number" class="form-control" id="TotalOriginalAmount0" value="0" readonly>
+                        <span class="text-danger small" id="TotalOriginalAmount0_error"></span>
+                    </div>
                 </div>
-                <div class="form-group col-md-4 form-group-tax-money">
-                    <label for="tax_money" class="form-label small">Tiền VAT</label>
-                    <input type="number" class="form-control" id="TotalOriginalAmount3" value="0" readonly>
-                    <span class="text-danger small" id="TotalOriginalAmount3_error"></span>
+                <div class="col-md-4 form-group-tax-money">
+                    <div class="form-group">
+                        <label for="tax_money" class="form-label small">Tiền VAT</label>
+                        <input type="number" class="form-control" id="TotalOriginalAmount3" value="0" readonly>
+                        <span class="text-danger small" id="TotalOriginalAmount3_error"></span>
+                    </div>
                 </div>
-                <div class="form-group col-md-4 form-group-total">
-                    <label for="TotalOriginalAmount" class="form-label small">Tổng cộng</label>
-                    <input type="number" class="form-control" id="TotalOriginalAmount" value="0" readonly>
-                    <span class="text-danger small" id="TotalOriginalAmount_error"></span>
+                <div class="col-md-4 form-group-total">
+                    <div class="form-group">
+                        <label for="TotalOriginalAmount" class="form-label small">Tổng cộng</label>
+                        <input type="number" class="form-control" id="TotalOriginalAmount" value="0" readonly>
+                        <span class="text-danger small" id="TotalOriginalAmount_error"></span>
+                    </div>
                 </div>
             </div>
             <div class="py-3 row justify-content-center">

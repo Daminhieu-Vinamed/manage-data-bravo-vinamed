@@ -30,7 +30,12 @@ $(document).ready(function () {
             $("tbody tr #OriginalAmount9").parent().after(`<td id="td_Amount9">
                 <input type="number" class="form-control" name="Amount9[]" readonly/>
             </td>`);
-            $(".form-group-total #TotalOriginalAmount").after('<input type="number" class="form-control mt-2" id="TotalAmount" readonly>');
+            $(".form-group-total").append(`
+                <div class="form-group">
+                    <input type="number" class="form-control mt-2" id="TotalAmount" readonly>
+                    <span class="text-danger small" id="TotalAmount_error"></span>
+                <div/>
+            `);
         } else if (valueCurrency === "VND") {
             $("#ExchangeRate").val(oneConst).attr("readonly", trueValue);
             $("thead tr #th_Amount9, tbody tr #td_Amount9, .form-group-total #TotalAmount").remove();
@@ -41,9 +46,9 @@ $(document).ready(function () {
         total_requests_for_advances();
     });
 
-    $(document).on("blur", "#CustomerCode1", function () {
+    $(document).on("blur", "#CustomerCode", function () {
         const valueSelected = $(this).val();
-        var CustomerCode = $(this).val(nullValue);
+        var CustomerCode = $(this).val(nullValue).removeAttr('data-value');
         $(this)
             .next("#listCustomerCode1")
             .children("option")
@@ -58,7 +63,20 @@ $(document).ready(function () {
                     if ($('#BankAccountNo').length) {
                         $('#BankAccountNo').val($($(this)[zeroConst]).attr("BankAccountNo"));
                     }
-                    return CustomerCode.val(valueSelected);
+                    return CustomerCode.val(valueSelected).attr("data-value", $(this).attr('data-value'));
+                }
+            });
+    });
+
+    $(document).on("blur", "#EmployeeCode", function () {
+        const valueSelected = $(this).val();
+        var EmployeeCode = $(this).val(nullValue).removeAttr('data-value');
+        $(this)
+            .next("#listEmployeeCode")
+            .children("option")
+            .each(function () {
+                if ($(this).val() === valueSelected) {
+                    return EmployeeCode.val(valueSelected).attr("data-value", $(this).attr('data-value'));
                 }
             });
     });
@@ -135,11 +153,11 @@ $(document).ready(function () {
         const DocNo = $("#DocNo").val();
         const BranchCode = $("#company").val();
         const DocCode = $("#DocCode").val();
-        const DocStatus = 40;
-        const CustomerCode = $("#CustomerCode").val();
+        const DocStatus = fortyConst;
+        const CustomerCode = $("#CustomerCode").attr('data-value');
         const Description = $("#Description").val();
         const Hinh_Thuc_TT = $("#Hinh_Thuc_TT").val();
-        const EmployeeCode = $("#EmployeeCode").val();
+        const EmployeeCode = $("#EmployeeCode").attr('data-value');
         const CurrencyCode = $("#CurrencyCode").val();
         const ExchangeRate = $("#ExchangeRate").val();
 
@@ -191,16 +209,14 @@ $(document).ready(function () {
                 Description1: Description1,
             },
             success: function (success) {
-                console.log(success);
-                // ToastSuccessCenterTime.fire({
-                //     icon: success.status,
-                //     title: success.msg,
-                // }).then((result) => {
-                //     console.log(result);
-                //     if (result.dismiss === Swal.DismissReason.timer) {
-                //         location.href = window.location.origin + '/suggestion';
-                //     }
-                // });
+                ToastSuccessCenterTime.fire({
+                    icon: success.status,
+                    title: success.msg,
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        location.href = window.location.origin + '/suggestion';
+                    }
+                });
             },
             error: function (error) {
                 let errors = error.responseJSON?.errors;
@@ -213,30 +229,37 @@ $(document).ready(function () {
                         },
                     });
                 }
-                for (let i = zeroConst; i <= Ngay_Hd.length; i++) {
-                    errors['Ngay_Hd.'+ i] 
-                    ? 
-                    $('#line-' + i).find('#Ngay_Hd_error').html(errors['Ngay_Hd.'+ i][zeroConst]) 
-                    : 
-                    $('#line-' + i).find('#Ngay_Hd_error').html('')
-                }
                 if (errors.DocDate) {
                     ToastTopRight.fire({
                         icon: 'error',
                         title: errors.DocDate[zeroConst],
                     });
-                    $("#DocDate").removeClass('is-valid').addClass('is-invalid');
+                    $("#DocDate").addClass('is-invalid');
                 } else {
-                    $("#DocDate").removeClass('is-invalid').addClass('is-valid');
+                    $("#DocDate").removeClass('is-invalid');
                 }
                 if (errors.DocNo) {
                     ToastTopRight.fire({
                         icon: 'error',
                         title: errors.DocNo[zeroConst],
                     })
-                    $("#DocNo").removeClass('is-valid').addClass('is-invalid');
+                    $("#DocNo").addClass('is-invalid');
                 } else {
-                    $("#DocNo").removeClass('is-invalid').addClass('is-valid');
+                    $("#DocNo").removeClass('is-invalid');
+                }
+                if (errors.CustomerCode) {
+                    $('#CustomerCode_error').text(errors.CustomerCode[zeroConst]);
+                    $('#CustomerCode').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#CustomerCode_error').text('');
+                    $('#CustomerCode').removeClass('is-invalid').addClass('is-valid');
+                }
+                if (errors.Hinh_Thuc_TT) {
+                    $('#Hinh_Thuc_TT_error').text(errors.Hinh_Thuc_TT[zeroConst]);
+                    $('#Hinh_Thuc_TT').addClass('is-invalid');
+                } else {
+                    $('#Hinh_Thuc_TT_error').text('');
+                    $('#Hinh_Thuc_TT').removeClass('is-invalid');
                 }
                 if (errors.EmployeeCode) {
                     $('#EmployeeCode_error').text(errors.EmployeeCode[zeroConst]);
@@ -245,40 +268,33 @@ $(document).ready(function () {
                     $('#EmployeeCode_error').text('');
                     $('#EmployeeCode').removeClass('is-invalid').addClass('is-valid');
                 }
-                if (errors.CustomerCode1) {
-                    $('#CustomerCode1_error').text(errors.CustomerCode1[zeroConst]);
-                    $('#CustomerCode1').removeClass('is-valid').addClass('is-invalid');
+                if (errors.CurrencyCode) {
+                    $('#CurrencyCode_error').text(errors.CurrencyCode[zeroConst]);
+                    $('#CurrencyCode').addClass('is-invalid');
                 } else {
-                    $('#CustomerCode1_error').text('');
-                    $('#CustomerCode1').removeClass('is-invalid').addClass('is-valid');
+                    $('#CurrencyCode_error').text('');
+                    $('#CurrencyCode').removeClass('is-invalid');
                 }
-                if (errors.AmountTT) {
-                    $('#AmountTT_error').text(errors.AmountTT[zeroConst]);
-                    $('#AmountTT').removeClass('is-valid').addClass('is-invalid');
+                if (errors.ExchangeRate) {
+                    $('#ExchangeRate_error').text(errors.ExchangeRate[zeroConst]);
+                    $('#ExchangeRate').addClass('is-invalid');
                 } else {
-                    $('#AmountTT_error').text('');
-                    $('#AmountTT').removeClass('is-invalid').addClass('is-valid');
+                    $('#ExchangeRate_error').text('');
+                    $('#ExchangeRate').removeClass('is-invalid');
                 }
-                if (errors.Stt_TU) {
-                    $('#Stt_TU_error').text(errors.Stt_TU[zeroConst]);
-                    $('#Stt_TU').removeClass('is-valid').addClass('is-invalid');
+                if (errors.TotalOriginalAmount) {
+                    $('#TotalOriginalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
+                    $('#TotalOriginalAmount').removeClass('is-valid').addClass('is-invalid');
                 } else {
-                    $('#Stt_TU_error').text('');
-                    $('#Stt_TU').removeClass('is-invalid').addClass('is-valid');
+                    $('#TotalOriginalAmount_error').text('');
+                    $('#TotalOriginalAmount').removeClass('is-invalid').addClass('is-valid');
                 }
-                if (errors.AmountTU) {
-                    $('#AmountTU_error').text(errors.AmountTU[zeroConst]);
-                    $('#AmountTU').removeClass('is-valid').addClass('is-invalid');
+                if (errors.TotalAmount) {
+                    $('#TotalAmount_error').text(errors.TotalAmount[zeroConst]);
+                    $('#TotalAmount').removeClass('is-valid').addClass('is-invalid');
                 } else {
-                    $('#AmountTU_error').text('');
-                    $('#AmountTU').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.Hinh_Thuc_TT) {
-                    $('#Hinh_Thuc_TT_error').text(errors.Hinh_Thuc_TT[zeroConst]);
-                    $('#Hinh_Thuc_TT').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#Hinh_Thuc_TT_error').text('');
-                    $('#Hinh_Thuc_TT').removeClass('is-invalid').addClass('is-valid');
+                    $('#TotalAmount_error').text('');
+                    $('#TotalAmount').removeClass('is-invalid').addClass('is-valid');
                 }
                 if (errors.BankName) {
                     $('#BankName_error').text(errors.BankName[zeroConst]);
@@ -307,65 +323,6 @@ $(document).ready(function () {
                 } else {
                     $('#Description1_error').text('');
                     $('#Description1').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.TotalOriginalAmount0) {
-                    $('#TotalOriginalAmount0_error').text(errors.TotalOriginalAmount0[zeroConst]);
-                    $('#TotalOriginalAmount0').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#TotalOriginalAmount0_error').text('');
-                    $('#TotalOriginalAmount0').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.TotalAmount0) {
-                    $('#TotalOriginalAmount0_error').text(errors.TotalAmount0[zeroConst]);
-                    $('#TotalAmount0').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#TotalOriginalAmount0_error').text('');
-                    $('#TotalAmount0').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.TotalOriginalAmount3) {
-                    $('#TotalOriginalAmount3_error').text(errors.TotalOriginalAmount3[zeroConst]);
-                    $('#TotalOriginalAmount3').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#TotalOriginalAmount3_error').text('');
-                    $('#TotalOriginalAmount3').removeClass('is-invalid').addClass('is-valid');
-                    $('#TotalAmount3').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.TotalAmount3) {
-                    $('#TotalOriginalAmount3_error').text(errors.TotalAmount3[zeroConst]);
-                    $('#TotalAmount3').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#TotalOriginalAmount3_error').text('');
-                    $('#TotalAmount3').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.TotalOriginalAmount) {
-                    $('#TotalOriginalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
-                    $('#TotalOriginalAmount').removeClass('is-valid').addClass('is-invalid');
-                    $('#TotalAmount').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#TotalOriginalAmount_error').text('');
-                    $('#TotalOriginalAmount').removeClass('is-invalid').addClass('is-valid');
-                    $('#TotalAmount').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.TotalAmount) {
-                    $('#TotalOriginalAmount_error').text(errors.TotalAmount[zeroConst]);
-                    $('#TotalAmount').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#TotalOriginalAmount_error').text('');
-                    $('#TotalAmount').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.CurrencyCode) {
-                    $('#CurrencyCode_error').text(errors.CurrencyCode[zeroConst]);
-                    $('#CurrencyCode').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#CurrencyCode_error').text('');
-                    $('#CurrencyCode').removeClass('is-invalid').addClass('is-valid');
-                }
-                if (errors.ExchangeRate) {
-                    $('#ExchangeRate_error').text(errors.ExchangeRate[zeroConst]);
-                    $('#ExchangeRate').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#ExchangeRate_error').text('');
-                    $('#ExchangeRate').removeClass('is-invalid').addClass('is-valid');
                 }
             },
         });

@@ -36,12 +36,11 @@ class CreateRequestsForAdvancesRequest extends FormRequest
                 },
             ],
             "DocCode" => "required",
-            
             "CustomerCode" => "required",
-            "Description" => "required",
-            "Hinh_Thuc_TT" => "required",
+            "EmployeeCode" => "required",
             "CurrencyCode" => "required",
-            "ExchangeRate" => "required|numeric|gt:0",
+            "Hinh_Thuc_TT" => "required",
+            "ExchangeRate" => "nullable|numeric|min:0",
             'TotalOriginalAmount' => "required|numeric|gt:0",
         );
         if ($this->CurrencyCode !== "VND") {
@@ -55,5 +54,28 @@ class CreateRequestsForAdvancesRequest extends FormRequest
             $arrValid["Description1"] = "required";
         }
         return $arrValid;
+    }
+    
+    public function messages()
+    {
+        return [
+            'DocDate.required' => 'Ngày tạo không được để trống',
+            'CustomerCode.required' => 'Chưa chọn người đề nghị',
+            'EmployeeCode.required' => 'Chưa chọn nhân viên',
+            'CurrencyCode.required' => 'Chưa chọn loại tiền',
+            'Hinh_Thuc_TT.required' => 'Chưa chọn phương thức thanh toán',
+            'ExchangeRate.numeric' => 'Tỷ giá hạch toán phải là ký tự số',
+            'ExchangeRate.min' => 'Giá trị tỷ giá hạch toán không được nhỏ hơn 0',
+            'TotalOriginalAmount.required' => 'Tổng cộng đang trống',
+            'TotalOriginalAmount.gt' => 'Tổng cộng phải lớn hơn 0',
+            'TotalOriginalAmount.numeric' => 'Tổng cộng phải là ký tự số',
+            'TotalAmount.required' => 'Tổng cộng đang trống',
+            'TotalAmount.gt' => 'Tổng cộng phải lớn hơn 0',
+            'TotalAmount.numeric' => 'Tổng cộng phải là ký tự số',
+            'BankName.required' => 'Tên ngân hàng không được để trống',
+            'BankAccountNo.required' => 'Số tài khoản không được để trống',
+            'Ten_Chu_TK.required' => 'Tên chủ tài khoản không được để trống',
+            'Description1.required' => 'Nội dung không được để trống',
+        ];
     }
 }

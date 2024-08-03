@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Suggestion\ChooseCompanyRequest;
 use App\Http\Requests\Suggestion\CancelPaymentOrderRequest;
 use App\Http\Requests\Suggestion\CreatePaymentOrderRequest;
+use App\Http\Requests\Suggestion\CreateRequestsForAdvancesRequest;
 use App\Services\SuggestionService;
 use Illuminate\Http\Request;
 
@@ -78,7 +79,7 @@ class SuggestionController extends Controller
         }
     }
     
-    public function postRequestsForAdvances(Request $request)
+    public function postRequestsForAdvances(CreateRequestsForAdvancesRequest $request)
     {
         return $this->suggestionService->postRequestsForAdvances($request);
     }
