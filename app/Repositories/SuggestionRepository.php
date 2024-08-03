@@ -219,10 +219,10 @@ class SuggestionRepository
             "DocNo" => $data->DocNo,
             "DocCode" => $data->DocCode,
             "CustomerCode" => $data->CustomerCode,
-            "Description" => $data->Description,
+            "Description" => empty($data->Description) ? config('constants.value.empty') : $data->Description,
             "Hinh_Thuc_TT" => $data->Hinh_Thuc_TT,
             "CurrencyCode" => $data->CurrencyCode,
-            "ExchangeRate" => $data->ExchangeRate,
+            "ExchangeRate" => empty($data->ExchangeRate) ? config('constants.number.zero') : $data->ExchangeRate,
             "TotalOriginalAmount0" => $data->TotalOriginalAmount,
             "TotalAmount0" => $TotalAmount,
             "TotalOriginalAmount" => $data->TotalOriginalAmount,
@@ -236,7 +236,7 @@ class SuggestionRepository
         $RequestsForAdvances = $connectCompany->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
         
         for ($i = config('constants.number.zero'); $i < $data->CountRow; $i++) { 
-            $OriginalAmount9 = empty($data->OriginalAmount9[$i]) ? config('constants.value.zero') : $data->OriginalAmount9[$i];
+            $OriginalAmount9 = empty($data->OriginalAmount9[$i]) ? config('constants.number.zero') : $data->OriginalAmount9[$i];
             $dataRFADetail = [
                 "BranchCode" => $data->BranchCode,
                 'Stt' => $RequestsForAdvances->Stt,

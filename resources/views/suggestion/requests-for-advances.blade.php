@@ -31,7 +31,13 @@
                     <input list="listCustomerCode1" class="form-control" id="CustomerCode">
                     <datalist id="listCustomerCode1">
                         @foreach ($data['B20Customer'] as $item)
-                            <option data-value="{{ $item->Code }}" value="{{ $item->Code . ": " . $item->Name }}" BankAccountNo="{{ $item->BankAccountNo }}" BankName="{{ $item->BankName }}" Name="{{ $item->Name }}">{{ $item->TaxRegNo }}</option>
+                            <option data-value="{{ $item->Code }}" 
+                                value="{{ $item->Code . ": " . $item->Name }}" 
+                                BankAccountNo="{{ $item->BankAccountNo }}" 
+                                BankName="{{ $item->BankName }}" 
+                                Name="{{ $item->Name }}">
+                                {{ $item->TaxRegNo }}
+                            </option>
                         @endforeach
                     </datalist>
                     <span class="text-danger small" id="CustomerCode_error"></span>
@@ -39,7 +45,6 @@
                 <div class="form-group col-md-4">
                     <label for="Description" class="form-label small">Nội dung</label>
                     <textarea class="form-control" id="Description"></textarea>
-                    <span class="text-danger small" id="Description_error"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Hinh_Thuc_TT" class="form-label small">Phương thức thanh toán</label>
@@ -47,17 +52,14 @@
                         <option value="TM">Tiền mặt</option>
                         <option value="CK">Chuyển khoản</option>
                     </select>
+                    <span class="text-danger small" id="Hinh_Thuc_TT_error"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="EmployeeCode" class="form-label small">Nhân viên</label>
                     <input list="listEmployeeCode" class="form-control" id="EmployeeCode">
                     <datalist id="listEmployeeCode">
                         @foreach ($data['B20Employee'] as $item)
-                            <option department="{{ $item->DeptCode }}" data-value="{{ $item->Code }}"
-                                value="{{ $item->Code }}">
-                                {{ $item->Name }}
-                                {{ $item->Email !== config('constants.value.empty') ? ' - ' . $item->Email : config('constants.value.empty') }}
-                            </option>
+                            <option data-value="{{ $item->Code }}" value="{{ $item->Code . ": " . $item->Name }}">{{ $item->Email }}</option>
                         @endforeach
                     </datalist>
                     <span class="text-danger small" id="EmployeeCode_error"></span>
@@ -140,10 +142,12 @@
             </div>
             <div class="row row-total-money">
                 <div class="col-md-4"></div>
-                <div class="form-group col-md-4 form-group-total">
-                    <label for="TotalOriginalAmount" class="form-label small">Tổng cộng</label>
-                    <input type="number" class="form-control" id="TotalOriginalAmount" readonly>
-                    <span class="text-danger small" id="TotalOriginalAmount_error"></span>
+                <div class="col-md-4 form-group-total">
+                    <div class="form-group">
+                        <label for="TotalOriginalAmount" class="form-label small">Tổng cộng</label>
+                        <input type="number" class="form-control" id="TotalOriginalAmount" readonly>
+                        <span class="text-danger small" id="TotalOriginalAmount_error"></span>
+                    </div>
                 </div>
                 <div class="col-md-4"></div>
             </div>

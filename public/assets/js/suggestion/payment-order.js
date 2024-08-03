@@ -71,15 +71,24 @@ $(document).ready(function () {
                     <input type="number" class="form-control" name="Amount3[]" id="Amount3" readonly/>
                 </td>`);
                 $("thead tr #th_value_added_tax_vat").attr("colspan", fourConst);
-                $(".form-group-into-money #TotalOriginalAmount0").after(
-                    '<input type="number" class="form-control mt-2" id="TotalAmount0" readonly>'
-                );
-                $(".form-group-tax-money #TotalOriginalAmount3").after(
-                    '<input type="number" class="form-control mt-2" id="TotalAmount3" readonly>'
-                );
-                $(".form-group-total #TotalOriginalAmount").after(
-                    '<input type="number" class="form-control mt-2" id="TotalAmount" readonly>'
-                );
+                $(".form-group-into-money").append(`
+                    <div class="form-group">
+                        <input type="number" class="form-control mt-2" id="TotalAmount0" readonly>
+                        <span class="text-danger small" id="TotalAmount0_error"></span>
+                    <div/>
+                `);
+                $(".form-group-tax-money").append(`
+                    <div class="form-group">
+                        <input type="number" class="form-control mt-2" id="TotalAmount3" readonly>
+                        <span class="text-danger small" id="TotalAmount3_error"></span>
+                    <div/>
+                `);
+                $(".form-group-total").append(`
+                    <div class="form-group">
+                        <input type="number" class="form-control mt-2" id="TotalAmount" readonly>
+                        <span class="text-danger small" id="TotalAmount_error"></span>
+                    <div/>
+                `);
             }
         } else if (valueCurrency === "VND") {
             $("thead tr #th_value_added_tax_vat").attr("colspan", threeConst);
@@ -390,12 +399,10 @@ $(document).ready(function () {
                 Description1: Description1
             },
             success: function (success) {
-                console.log(success);
                 ToastSuccessCenterTime.fire({
                     icon: success.status,
                     title: success.msg,
                 }).then((result) => {
-                    console.log(result);
                     if (result.dismiss === Swal.DismissReason.timer) {
                         location.href = window.location.origin + '/suggestion';
                     }
@@ -524,10 +531,10 @@ $(document).ready(function () {
                     $('#TotalOriginalAmount0').removeClass('is-invalid').addClass('is-valid');
                 }
                 if (errors.TotalAmount0) {
-                    $('#TotalOriginalAmount0_error').text(errors.TotalAmount0[zeroConst]);
+                    $('#TotalAmount0_error').text(errors.TotalAmount0[zeroConst]);
                     $('#TotalAmount0').removeClass('is-valid').addClass('is-invalid');
                 } else {
-                    $('#TotalOriginalAmount0_error').text('');
+                    $('#TotalAmount0_error').text('');
                     $('#TotalAmount0').removeClass('is-invalid').addClass('is-valid');
                 }
                 if (errors.TotalOriginalAmount3) {
@@ -538,20 +545,18 @@ $(document).ready(function () {
                     $('#TotalOriginalAmount3').removeClass('is-invalid');
                 }
                 if (errors.TotalAmount3) {
-                    $('#TotalOriginalAmount3_error').text(errors.TotalAmount3[zeroConst]);
+                    $('#TotalAmount3_error').text(errors.TotalAmount3[zeroConst]);
                     $('#TotalAmount3').addClass('is-invalid');
                 } else {
-                    $('#TotalOriginalAmount3_error').text('');
+                    $('#TotalAmount3_error').text('');
                     $('#TotalAmount3').removeClass('is-invalid');
                 }
                 if (errors.TotalOriginalAmount) {
-                    $('#TotalOriginalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
+                    $('#TotalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
                     $('#TotalOriginalAmount').removeClass('is-valid').addClass('is-invalid');
-                    $('#TotalAmount').removeClass('is-valid').addClass('is-invalid');
                 } else {
-                    $('#TotalOriginalAmount_error').text('');
+                    $('#TotalAmount_error').text('');
                     $('#TotalOriginalAmount').removeClass('is-invalid').addClass('is-valid');
-                    $('#TotalAmount').removeClass('is-invalid').addClass('is-valid');
                 }
                 if (errors.TotalAmount) {
                     $('#TotalOriginalAmount_error').text(errors.TotalAmount[zeroConst]);
