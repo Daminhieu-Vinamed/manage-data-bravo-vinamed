@@ -17,7 +17,7 @@
             </div>
             <div class="input-group input-group-sm col-md-3 p-0">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Mã chứng từ</span>
+                    <span class="input-group-text">Số chứng từ</span>
                 </div>
                 <input type="text" class="form-control" id="DocNo" value="{{ $data['DocNo'] }}">
             </div>

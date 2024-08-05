@@ -29,7 +29,8 @@ Route::prefix('/')->group(function () {
             Route::post('create-payment-order', [SuggestionController::class, 'postPaymentOrder']);
             Route::get('requests-for-advances', [SuggestionController::class, 'getRequestsForAdvances'])->name('requests-for-advances');
             Route::post('create-requests-for-advances', [SuggestionController::class, 'postRequestsForAdvances']);
-            Route::get('suggested-per-diem', [SuggestionController::class, 'suggestedPerDiem'])->name('suggested-per-diem');
+            Route::get('suggested-per-diem', [SuggestionController::class, 'getSuggestedPerDiem'])->name('suggested-per-diem');
+            Route::post('create-suggested-per-diem', [SuggestionController::class, 'postSuggestedPerDiem']);
         });
 
         Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {

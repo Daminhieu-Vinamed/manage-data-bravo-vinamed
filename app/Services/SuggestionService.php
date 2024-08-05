@@ -102,6 +102,26 @@ class SuggestionService extends SuggestionRepository
         }
     }
 
+    public function getSuggestedPerDiem($request)
+    {
+        $data =  $this->suggestionRepository->getSuggestedPerDiem($request);
+        return $data;
+    }
+
+    public function postSuggestedPerDiem($request)
+    {
+        $connectCompany = DB::connection($request->BranchCode);
+        $connectCompany->beginTransaction();
+        try {
+            $this->suggestionRepository->createSuggestedPerDiem($connectCompany, $request);
+            $connectCompany->commit();
+            return response()->json(['status' => 'success', 'msg' => 'TẠO ĐỀ NGHỊ CÔNG TÁC PHÍ THÀNH CÔNG'], 200);
+        } catch (\Exception $e) {
+            $connectCompany->rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
+        }
+    }
+
     public function statistical()
     {
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {

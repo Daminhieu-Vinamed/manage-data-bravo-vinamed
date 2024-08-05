@@ -5,7 +5,7 @@ namespace App\Http\Requests\Suggestion;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 
-class CreatePaymentOrderRequest extends FormRequest
+class CreateSuggestedPerDiemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,7 @@ class CreatePaymentOrderRequest extends FormRequest
             "DocNo" => [
                 "required",
                 function ($attribute, $value, $fail) {
-                    $paymentOrder = DB::connection($this->BranchCode)->table('B33AccDoc')->where("DocCode", $this->DocCode)->where("DocNo", $value)->first();
+                    $paymentOrder = DB::connection($this->BranchCode)->table('B33AccDoc')->where("DocNo", $value)->first();
                     if (!empty($paymentOrder)) {
                         $fail('Mã chứng từ đã tồn tại');
                     }
