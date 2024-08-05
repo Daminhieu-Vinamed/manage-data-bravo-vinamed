@@ -35,6 +35,8 @@ class CreateSuggestedPerDiemRequest extends FormRequest
                     }
                 },
             ],
+            "FromDate" => "nullable|date",
+            'ToDate' => 'nullable|date|after:FromDate',
             "DocCode" => "required",
             "EmployeeCode" => "required",
             "CustomerCode1" => "required",
@@ -118,6 +120,10 @@ class CreateSuggestedPerDiemRequest extends FormRequest
             'BankAccountNo.required' => 'Số tài khoản không được để trống',
             'Ten_Chu_TK.required' => 'Tên chủ tài khoản không được để trống',
             'Description1.required' => 'Nội dung không được để trống',
+
+            'ToDate.after' => 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu',
+            'ToDate.date' => 'Không đúng định dạng ngày tháng năm',
+            'FromDate.date' => 'Không đúng định dạng ngày tháng năm',
         ];
     }
 }

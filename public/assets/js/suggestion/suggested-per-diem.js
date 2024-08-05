@@ -497,6 +497,20 @@ $(document).ready(function () {
                     $('#Stt_TU_error').text('');
                     $('#Stt_TU').removeClass('is-invalid');
                 }
+                if (errors.ToDate) {
+                    $('#ToDate_error').text(errors.ToDate[zeroConst]);
+                    $('#ToDate').addClass('is-invalid');
+                } else {
+                    $('#ToDate_error').text('');
+                    $('#ToDate').removeClass('is-invalid');
+                }
+                if (errors.FromDate) {
+                    $('#FromDate_error').text(errors.FromDate[zeroConst]);
+                    $('#FromDate').addClass('is-invalid');
+                } else {
+                    $('#FromDate_error').text('');
+                    $('#FromDate').removeClass('is-invalid');
+                }
                 if (errors.AmountTU) {
                     $('#AmountTU_error').text(errors.AmountTU[zeroConst]);
                     $('#AmountTU').addClass('is-invalid');
