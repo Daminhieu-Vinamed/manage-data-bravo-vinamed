@@ -316,8 +316,6 @@ class SuggestionRepository
             "CustomerCode" => $data->CustomerCode1,
             "Vehicle" => empty($data->Vehicle) ? config('constants.value.empty') : $data->Vehicle,
             "Description" => empty($data->Description) ? config('constants.value.empty') : $data->Description,
-            "FromDate" => empty($data->FromDate) ? config('constants.value.empty') : $data->FromDate,
-            "ToDate" => empty($data->ToDate) ? config('constants.value.empty') : $data->ToDate,
             "TypeWork" => empty($data->TypeWork) ? config('constants.value.empty') : $data->TypeWork,
             "Phan_Bo" => empty($data->Phan_Bo) ? config('constants.value.empty') : $data->Phan_Bo,
             "Stt_TU" => empty($data->Stt_TU) ? config('constants.value.empty') : $data->Stt_TU,
@@ -336,6 +334,13 @@ class SuggestionRepository
             "Ten_Chu_TK" => isset($data->Ten_Chu_TK) ? $data->Ten_Chu_TK : config('constants.value.empty'),
             "Description1" => isset($data->Description1) ? $data->Description1 : config('constants.value.empty'),
         ];
+
+        if (!empty($data->FromDate)) {
+            $dataSPD['FromDate'] = $data->FromDate;
+        }
+        if (!empty($data->ToDate)) {
+            $dataSPD['ToDate'] = $data->ToDate;
+        }
 
         $connectCompany->table('B33AccDoc')->insert($dataSPD);
         $SuggestedPerDiem = $connectCompany->table('B33AccDoc')->where("DocNo", $data->DocNo)->first();
