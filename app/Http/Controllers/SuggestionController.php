@@ -7,6 +7,7 @@ use App\Http\Requests\Suggestion\ChooseCompanyRequest;
 use App\Http\Requests\Suggestion\CancelPaymentOrderRequest;
 use App\Http\Requests\Suggestion\CreatePaymentOrderRequest;
 use App\Http\Requests\Suggestion\CreateRequestsForAdvancesRequest;
+use App\Http\Requests\Suggestion\CreateSuggestedPerDiemRequest;
 use App\Services\SuggestionService;
 use Illuminate\Http\Request;
 
@@ -84,14 +85,19 @@ class SuggestionController extends Controller
         return $this->suggestionService->postRequestsForAdvances($request);
     }
     
-    public function suggestedPerDiem(ChooseCompanyRequest $request)
+    public function getSuggestedPerDiem(ChooseCompanyRequest $request)
     {
         try {
-            $data = $this->suggestionService->getPaymentOrder($request);
+            $data = $this->suggestionService->getSuggestedPerDiem($request);
             return view('suggestion.suggested-per-diem', compact('data'));
         } catch (\Exception $e) {
             return view('404');
         }
+    }
+    
+    public function postSuggestedPerDiem(CreateSuggestedPerDiemRequest $request)
+    {   
+        return $this->suggestionService->postSuggestedPerDiem($request);
     }
 
     public function statistical()

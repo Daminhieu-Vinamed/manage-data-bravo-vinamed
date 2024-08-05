@@ -18,7 +18,12 @@ return [
         'three' => 3,
         'four' => 4,
         'five' => 5,
-        'nine' => 9
+        'six' => 6,
+        'seven' => 7,
+        'eight' => 9,
+        'nine' => 9,
+        'ten' => 10,
+        'eleven' => 11,
     ],
 
     'timekeeping' => [

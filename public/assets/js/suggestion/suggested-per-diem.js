@@ -143,6 +143,19 @@ $(document).ready(function () {
             });
     });
 
+    $(document).on("blur", "#TerritoryCode", function () {
+        const valueSelected = $(this).val();
+        var TerritoryCode = $(this).val(nullValue);
+        $(this)
+            .next("#listTerritoryCode")
+            .children("option")
+            .each(function () {
+                if ($(this).val() === valueSelected) {
+                    return TerritoryCode.val(valueSelected);
+                }
+            });
+    });
+
     $(document).on("blur", "#EmployeeCode", function () {
         const valueSelected = $(this).val();
         var EmployeeCode = $(this).val(nullValue).removeAttr('data-value');
@@ -300,16 +313,21 @@ $(document).ready(function () {
         total_payment_order();
     });
 
-    $(document).on("click", "#create-payment-order", function () {
+    $(document).on("click", "#create-suggested-per-diem", function () {
         const CountRow = $('#table-payment-order > tbody > tr').length;
         const DocDate = $("#DocDate").val();
         const DocNo = $("#DocNo").val();
         const BranchCode = $("#company").val();
         const DocCode = $("#DocCode").val();
-        const DocStatus = fortyFiveConst;
+        const DocStatus = fiftyThreeConst;
         const EmployeeCode = $("#EmployeeCode").attr('data-value');
         const CustomerCode1 = $("#CustomerCode1").attr('data-value');
-        const AmountTT = $("#AmountTT").val();
+        const Vehicle = $("#Vehicle").val();
+        const Description = $("#Description").val();
+        const FromDate = $("#FromDate").val();
+        const ToDate = $("#ToDate").val();
+        const TypeWork = $("#TypeWork").val();
+        const Phan_Bo = $("#Phan_Bo").val();
         const Stt_TU = $("#Stt_TU").val();
         const AmountTU = $("#AmountTU").val();
         const Hinh_Thuc_TT = $("#Hinh_Thuc_TT").val();
@@ -320,7 +338,7 @@ $(document).ready(function () {
         const TotalOriginalAmount = $("#TotalOriginalAmount").val();
         const So_Hd = $("input[name='So_Hd[]']").map(function () { return $(this).val() }).get();
         const Ngay_Hd = $("input[name='Ngay_Hd[]']").map(function () { return $(this).val() }).get();
-        const Description = $("textarea[name='Description[]']").map(function () { return $(this).val() }).get();
+        const DescriptionDetail = $("textarea[name='Description[]']").map(function () { return $(this).val() }).get();
         const Invoice = $("input[name='Invoice[]']").map(function () { return $(this).val() }).get();
         const So_Van_Don = $("input[name='So_Van_Don[]']").map(function () { return $(this).val() }).get();
         const Trong_Luong = $("input[name='Trong_Luong[]']").map(function () { return $(this).val() }).get();
@@ -347,7 +365,7 @@ $(document).ready(function () {
         const Description1 = $("#Description1").val();
 
         $.ajax({
-            url: linkSuggestion + "create-payment-order",
+            url: linkSuggestion + "create-suggested-per-diem",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -361,7 +379,12 @@ $(document).ready(function () {
                 DocStatus: DocStatus,
                 EmployeeCode: EmployeeCode,
                 CustomerCode1: CustomerCode1,
-                AmountTT: AmountTT,
+                Vehicle: Vehicle,
+                Description: Description,
+                FromDate: FromDate,
+                ToDate: ToDate,
+                TypeWork: TypeWork,
+                Phan_Bo: Phan_Bo,
                 Stt_TU: Stt_TU,
                 AmountTU: AmountTU,
                 Hinh_Thuc_TT: Hinh_Thuc_TT,
@@ -369,7 +392,7 @@ $(document).ready(function () {
                 ExchangeRate: ExchangeRate,
                 So_Hd: So_Hd,
                 Ngay_Hd: Ngay_Hd,
-                Description: Description,
+                DescriptionDetail: DescriptionDetail,
                 Invoice: Invoice,
                 So_Van_Don: So_Van_Don,
                 Trong_Luong: Trong_Luong,
@@ -467,13 +490,6 @@ $(document).ready(function () {
                     $('#CustomerCode1_error').text('');
                     $('#CustomerCode1').removeClass('is-invalid').addClass('is-valid');
                 }
-                if (errors.AmountTT) {
-                    $('#AmountTT_error').text(errors.AmountTT[zeroConst]);
-                    $('#AmountTT').addClass('is-invalid');
-                } else {
-                    $('#AmountTT_error').text('');
-                    $('#AmountTT').removeClass('is-invalid');
-                }
                 if (errors.Stt_TU) {
                     $('#Stt_TU_error').text(errors.Stt_TU[zeroConst]);
                     $('#Stt_TU').addClass('is-invalid');
@@ -552,17 +568,17 @@ $(document).ready(function () {
                     $('#TotalAmount3').removeClass('is-invalid');
                 }
                 if (errors.TotalOriginalAmount) {
-                    $('#TotalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
+                    $('#TotalOriginalAmount_error').text(errors.TotalOriginalAmount[zeroConst]);
                     $('#TotalOriginalAmount').removeClass('is-valid').addClass('is-invalid');
                 } else {
-                    $('#TotalAmount_error').text('');
+                    $('#TotalOriginalAmount_error').text('');
                     $('#TotalOriginalAmount').removeClass('is-invalid').addClass('is-valid');
                 }
                 if (errors.TotalAmount) {
-                    $('#TotalOriginalAmount_error').text(errors.TotalAmount[zeroConst]);
+                    $('#TotalAmount_error').text(errors.TotalAmount[zeroConst]);
                     $('#TotalAmount').removeClass('is-valid').addClass('is-invalid');
                 } else {
-                    $('#TotalOriginalAmount_error').text('');
+                    $('#TotalAmount_error').text('');
                     $('#TotalAmount').removeClass('is-invalid').addClass('is-valid');
                 }
                 if (errors.CurrencyCode) {

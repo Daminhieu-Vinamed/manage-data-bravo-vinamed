@@ -20,6 +20,7 @@ var oneHundred = 100;
 const zeroConst = 0;
 const fortyConst = 40;
 const fortyFiveConst = 45;
+const fiftyThreeConst = 53;
 const oneConst = 1;
 const threeConst = 3;
 const fourConst = 4;
