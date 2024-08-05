@@ -29,7 +29,7 @@ class CreateRequestsForAdvancesRequest extends FormRequest
             "DocNo" => [
                 "required",
                 function ($attribute, $value, $fail) {
-                    $requestsForAdvances = DB::connection($this->BranchCode)->table('B33AccDoc')->where("DocNo", $value)->first();
+                    $requestsForAdvances = DB::connection($this->BranchCode)->table('B33AccDoc')->where("DocCode", $this->DocCode)->where("DocNo", $value)->first();
                     if (!empty($requestsForAdvances)) {
                         $fail('Mã chứng từ đã tồn tại');
                     }
