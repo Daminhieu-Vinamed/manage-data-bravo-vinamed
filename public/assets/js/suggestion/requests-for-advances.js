@@ -23,19 +23,21 @@ $(document).ready(function () {
         const valueCurrency = $(this).val();
         $("#th_OriginalAmount9").text("Giá trị " + valueCurrency);
         if (valueCurrency !== "VND") {
-            $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
-            $("thead tr #th_OriginalAmount9").after(
-                '<th id="th_Amount9">Tiền VND</th>'
-            );
-            $("tbody tr #OriginalAmount9").parent().after(`<td id="td_Amount9">
-                <input type="number" class="form-control" name="Amount9[]" readonly/>
-            </td>`);
-            $(".form-group-total").append(`
-                <div class="form-group">
-                    <input type="number" class="form-control mt-2" id="TotalAmount" readonly>
-                    <span class="text-danger small" id="TotalAmount_error"></span>
-                <div/>
-            `);
+            if (!$("#th_Amount9").length) {
+                $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
+                $("thead tr #th_OriginalAmount9").after(
+                    '<th id="th_Amount9">Tiền VND</th>'
+                );
+                $("tbody tr #OriginalAmount9").parent().after(`<td id="td_Amount9">
+                    <input type="number" class="form-control" name="Amount9[]" readonly/>
+                </td>`);
+                $(".form-group-total").append(`
+                    <div class="form-group">
+                        <input type="number" class="form-control mt-2" id="TotalAmount" readonly>
+                        <span class="text-danger small" id="TotalAmount_error"></span>
+                    <div/>
+                `);
+            }
         } else if (valueCurrency === "VND") {
             $("#ExchangeRate").val(oneConst).attr("readonly", trueValue);
             $("thead tr #th_Amount9, tbody tr #td_Amount9, .form-group-total #TotalAmount").remove();
