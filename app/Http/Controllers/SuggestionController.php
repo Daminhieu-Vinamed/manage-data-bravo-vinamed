@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Suggestion\ChooseCompanyRequest;
 use App\Http\Requests\Suggestion\CancelPaymentOrderRequest;
+use App\Http\Requests\Suggestion\ChooseCompanyCreateRequest;
+use App\Http\Requests\Suggestion\ChooseCompanyListRequest;
 use App\Http\Requests\Suggestion\CreatePaymentOrderRequest;
 use App\Http\Requests\Suggestion\CreateRequestsForAdvancesRequest;
 use App\Http\Requests\Suggestion\CreateSuggestedPerDiemRequest;
+use App\Models\User;
+use App\Notifications\CreateSuggestionNotification;
 use App\Services\SuggestionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuggestionController extends Controller
 {
@@ -21,9 +25,9 @@ class SuggestionController extends Controller
         $this->suggestionService = $suggestionService;
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        $data = $this->suggestionService->getData();
+        $data = $this->suggestionService->getData($request->DocCode);
         return view('suggestion.list', compact('data'));
     }
 
@@ -37,12 +41,26 @@ class SuggestionController extends Controller
         return $this->suggestionService->cancel($request);
     }
 
-    public function chooseCompany()
+    public function chooseCompanyList()
     {
-        return view('suggestion.choose-company');
+        return view('suggestion.choose-company-list');
     }
 
-    public function directional(ChooseCompanyRequest $request)
+    public function directionalList(ChooseCompanyListRequest $request)
+    {
+        if ($request->DocCode === "TT" || $request->DocCode === "TG" || $request->DocCode === "CC") {
+            return redirect()->route('suggestion.list', ['DocCode' => $request->DocCode]);
+        }else{
+            return view('404');
+        }
+    }
+    
+    public function chooseCompanyCreate()
+    {
+        return view('suggestion.choose-company-create');
+    }
+    
+    public function directionalCreate(ChooseCompanyCreateRequest $request)
     {
         if ($request->DocCode === "TT") {
             return redirect()->route('suggestion.payment-order', ['company' => $request->company, 'DocCode' => $request->DocCode]);
@@ -55,7 +73,7 @@ class SuggestionController extends Controller
         }
     }
 
-    public function getPaymentOrder(ChooseCompanyRequest $request)
+    public function getPaymentOrder(ChooseCompanyCreateRequest $request)
     {
         try {
             $data = $this->suggestionService->getPaymentOrder($request);
@@ -70,7 +88,7 @@ class SuggestionController extends Controller
         return $this->suggestionService->postPaymentOrder($request);
     }
 
-    public function getRequestsForAdvances(ChooseCompanyRequest $request)
+    public function getRequestsForAdvances(ChooseCompanyCreateRequest $request)
     {
         try {
             $data = $this->suggestionService->getRequestsForAdvances($request);
@@ -85,7 +103,7 @@ class SuggestionController extends Controller
         return $this->suggestionService->postRequestsForAdvances($request);
     }
     
-    public function getSuggestedPerDiem(ChooseCompanyRequest $request)
+    public function getSuggestedPerDiem(ChooseCompanyCreateRequest $request)
     {
         try {
             $data = $this->suggestionService->getSuggestedPerDiem($request);

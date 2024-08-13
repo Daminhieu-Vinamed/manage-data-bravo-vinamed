@@ -2,17 +2,20 @@
 
 namespace App\Repositories;
 
+use App\Models\User;
+use App\Notifications\CreateSuggestionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SuggestionRepository
 {
-    public function getData()
+    public function getData($DocCode)
     {
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
             foreach (config('constants.company') as $company) {
                 $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')
                 ->where('IsActive', config('constants.number.one'))
+                ->where('DocCode', $DocCode)
                 ->orderBy('DocDate', 'desc')->get();
                 $paymentOrderTotal[$company] = $paymentOrder->toArray();
             }
@@ -22,6 +25,7 @@ class SuggestionRepository
                 $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')
                 ->whereIn('Dept', $arrayDeptCode)
                 ->where('IsActive', config('constants.number.one'))
+                ->where('DocCode', $DocCode)
                 ->orderBy('DocDate', 'desc')->get();
                 $paymentOrderTotal[$company] = $paymentOrder->toArray();
             }
@@ -181,6 +185,10 @@ class SuggestionRepository
                 $connectCompany->table('B33AccDocAtchDoc')->insert($dataPODetailVAT);
             }
         }
+
+        $user = Auth::user();
+        $userManager = User::where('department_code', $user->department_code)->where('role_id', config('constants.number.four'))->first();
+        $userManager->notify(new CreateSuggestionNotification($user));
     }
 
     public function getRequestsForAdvances($request)
@@ -256,6 +264,10 @@ class SuggestionRepository
             
             $connectCompany->table('B33AccDocJournalEntry')->insert($dataRFADetail);
         }
+
+        $user = Auth::user();
+        $userManager = User::where('department_code', $user->department_code)->where('role_id', config('constants.number.four'))->first();
+        $userManager->notify(new CreateSuggestionNotification($user));
     }
 
     public function getSuggestedPerDiem($request)
@@ -399,6 +411,10 @@ class SuggestionRepository
                 $connectCompany->table('B33AccDocAtchDoc')->insert($dataSPDDetailVAT);
             }
         }
+        
+        $user = Auth::user();
+        $userManager = User::where('department_code', $user->department_code)->where('role_id', config('constants.number.four'))->first();
+        $userManager->notify(new CreateSuggestionNotification($user));
     }
 
     public function statisticalAdmin()

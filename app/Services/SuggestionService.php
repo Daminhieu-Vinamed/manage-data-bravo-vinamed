@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Repositories\SuggestionRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\Facades\DataTables;
 
 class SuggestionService extends SuggestionRepository
 {
@@ -16,9 +15,9 @@ class SuggestionService extends SuggestionRepository
         $this->suggestionRepository = $suggestionRepository;
     }
 
-    public function getData()
+    public function getData($DocCode)
     {
-        $arrayDataCollect = $this->suggestionRepository->getData();
+        $arrayDataCollect = $this->suggestionRepository->getData($DocCode);
         $arrayData = array_merge(
             $arrayDataCollect["A06"],
             $arrayDataCollect["A11"],

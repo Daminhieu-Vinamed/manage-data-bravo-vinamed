@@ -15,7 +15,8 @@
     <li
         class="nav-item {{ request()->routeIs('suggestion.statistical') ||
         request()->routeIs('suggestion.list') ||
-        request()->routeIs('suggestion.choose-company') ||
+        request()->routeIs('suggestion.choose-company-list') ||
+        request()->routeIs('suggestion.choose-company-create') ||
         request()->routeIs('suggestion.payment-order') ||
         request()->routeIs('suggestion.requests-for-advances') ||
         request()->routeIs('suggestion.suggested-per-diem')
@@ -23,7 +24,8 @@
             : config('constants.value.empty') }}">
         <a class="nav-link {{ request()->routeIs('suggestion.statistical') ||
         request()->routeIs('suggestion.list') ||
-        request()->routeIs('suggestion.choose-company') ||
+        request()->routeIs('suggestion.choose-company-list') ||
+        request()->routeIs('suggestion.choose-company-create') ||
         request()->routeIs('suggestion.payment-order') ||
         request()->routeIs('suggestion.requests-for-advances') ||
         request()->routeIs('suggestion.suggested-per-diem')
@@ -36,7 +38,8 @@
         <div id="paymentOrder"
             class="collapse {{ request()->routeIs('suggestion.statistical') ||
             request()->routeIs('suggestion.list') ||
-            request()->routeIs('suggestion.choose-company') ||
+            request()->routeIs('suggestion.choose-company-list') ||
+            request()->routeIs('suggestion.choose-company-create') ||
             request()->routeIs('suggestion.payment-order') ||
             request()->routeIs('suggestion.requests-for-advances') ||
              request()->routeIs('suggestion.suggested-per-diem')
@@ -49,10 +52,10 @@
                     <a class="collapse-item {{ request()->routeIs('suggestion.statistical') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('suggestion.statistical') }}">Thống kê</a>
                 @endif
-                <a class="collapse-item {{ request()->routeIs('suggestion.list') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('suggestion.list') }}">Danh sách</a>
-                <a class="collapse-item {{ request()->routeIs('suggestion.choose-company') || request()->routeIs('suggestion.payment-order') || request()->routeIs('suggestion.requests-for-advances') || request()->routeIs('suggestion.suggested-per-diem') ? 'active' : config('constants.value.empty') }}"
-                    href="{{ route('suggestion.choose-company') }}">Tạo mới</a>
+                <a class="collapse-item {{ request()->routeIs('suggestion.choose-company-list') || request()->routeIs('suggestion.list') ? 'active' : config('constants.value.empty') }}"
+                    href="{{ route('suggestion.choose-company-list') }}">Danh sách</a>
+                <a class="collapse-item {{ request()->routeIs('suggestion.choose-company-create') || request()->routeIs('suggestion.payment-order') || request()->routeIs('suggestion.requests-for-advances') || request()->routeIs('suggestion.suggested-per-diem') ? 'active' : config('constants.value.empty') }}"
+                    href="{{ route('suggestion.choose-company-create') }}">Tạo mới</a>
             </div>
         </div>
     </li>
