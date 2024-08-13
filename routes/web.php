@@ -16,15 +16,19 @@ Route::prefix('/')->group(function () {
 
         Route::put('change-password', [AuthController::class, 'changePassword']);
 
+        Route::get('mark-as-read/{id}', [AuthController::class, 'markAsRead'])->name('mark-as-read');
+
         Route::prefix('suggestion')->name('suggestion.')->group(function () {
             Route::get('/', [SuggestionController::class, 'list'])->name('list');
+            Route::get('choose-company-list', [SuggestionController::class, 'chooseCompanyList'])->name('choose-company-list');
+            Route::get('directional-list', [SuggestionController::class, 'directionalList'])->name('directional-list');
             Route::middleware('checkRoleManage')->group(function () {
                 Route::get('statistical', [SuggestionController::class, 'statistical'])->name('statistical');
                 Route::post('approve-payment-request', [SuggestionController::class, 'approve']);
                 Route::post('cancel-payment-request', [SuggestionController::class, 'cancel']);
             });
-            Route::get('choose-company', [SuggestionController::class, 'chooseCompany'])->name('choose-company');
-            Route::get('directional', [SuggestionController::class, 'directional'])->name('directional');
+            Route::get('choose-company-create', [SuggestionController::class, 'chooseCompanyCreate'])->name('choose-company-create');
+            Route::get('directional-create', [SuggestionController::class, 'directionalCreate'])->name('directional-create');
             Route::get('payment-order', [SuggestionController::class, 'getPaymentOrder'])->name('payment-order');
             Route::post('create-payment-order', [SuggestionController::class, 'postPaymentOrder']);
             Route::get('requests-for-advances', [SuggestionController::class, 'getRequestsForAdvances'])->name('requests-for-advances');

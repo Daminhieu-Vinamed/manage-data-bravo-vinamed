@@ -40,4 +40,12 @@ class AuthService
         $this->userRepository->updateUser($id, $data);
         return response()->json(['status' => 'success', 'msg' => 'Đổi mật khẩu thành công'], 200);
     }
+
+    public function markAsRead($id) 
+    {
+        if ($id) {
+            Auth::user()->unreadNotifications->where('id', $id)->markAsRead();
+        }
+        return back();
+    }
 }

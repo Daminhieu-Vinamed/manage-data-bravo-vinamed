@@ -10,25 +10,14 @@
 @endsection
 @section('content')
     <div class="d-flex justify-content-center">
-        <div class="card shadow mb-4" style="width: 30rem">
+        <div class="card shadow mb-4" style="width: 17rem">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary text-center">Chọn công ty để tạo mới đề nghị</h6>
+                <h6 class="m-0 font-weight-bold text-primary text-center">Chọn công ty để duyệt đề nghị</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('suggestion.directional') }}" method="GET">
+                <form action="{{ route('suggestion.directional-list') }}" method="GET">
                     <div class="row">
-                        <div class="form-group col-md-6">
-                            <select name="company" class="custom-select">
-                                <option disabled selected>Chọn công ty</option>
-                                @foreach (config('constants.company') as $company)
-                                    <option value="{{ $company }}" {{ old('company') === $company ? 'selected' : '' }}>{{ $company }}</option>
-                                @endforeach
-                            </select>
-                            @error('company')
-                                <span class="text-danger small">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <select name="DocCode" class="custom-select">
                                 <option disabled selected>Chọn kiểu đề nghị</option>
                                 <option value="TT" {{ old('DocCode') === 'TT' ? 'selected' : '' }}>Đề nghị thanh toán</option>
