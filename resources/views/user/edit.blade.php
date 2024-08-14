@@ -53,7 +53,7 @@
                             <option disabled selected>Chọn phòng ban</option>
                             @foreach ($departments as $item)
                                 @if ($item->code !== 'ADMIN')
-                                    <option value="{{ $item->code }}" {{ $user->department_code === $item['code'] ? 'selected' : '' }}>{{ $item->name }}</option>
+                                    <option value="{{ $item->code }}" {{ $user->department_code === $item['code'] ? 'selected' : '' }}>{{ $item->name . " -> " . $item->code }}</option>
                                 @endif
                             @endforeach
                         </select>
