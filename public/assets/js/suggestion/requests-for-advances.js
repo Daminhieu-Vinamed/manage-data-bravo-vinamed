@@ -83,6 +83,32 @@ $(document).ready(function () {
             });
     });
 
+    $(document).on("blur", "input[name='CustomerCode[]']", function () {
+        const valueSelected = $(this).val();
+        var CustomerCode = $(this).val(nullValue);
+        $(this)
+            .next("#listCustomerCode2")
+            .children("option")
+            .each(function () {
+                if ($(this).val() === valueSelected) {
+                    return CustomerCode.val(valueSelected);
+                }
+            });
+    });
+
+    $(document).on("blur", "input[name='TemporaryCode[]']", function () {
+        const valueSelected = $(this).val();
+        var CustomerCode = $(this).val(nullValue);
+        $(this)
+            .next("#listTemporaryCode")
+            .children("option")
+            .each(function () {
+                if ($(this).val() === valueSelected) {
+                    return CustomerCode.val(valueSelected);
+                }
+            });
+    });
+
     $(document).on("change", "#Hinh_Thuc_TT", function () {
         const value_Hinh_Thuc_TT = $(this).val();
         const row_total_money = $('.row-total-money');

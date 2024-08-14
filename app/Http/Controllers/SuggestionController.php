@@ -9,11 +9,8 @@ use App\Http\Requests\Suggestion\ChooseCompanyListRequest;
 use App\Http\Requests\Suggestion\CreatePaymentOrderRequest;
 use App\Http\Requests\Suggestion\CreateRequestsForAdvancesRequest;
 use App\Http\Requests\Suggestion\CreateSuggestedPerDiemRequest;
-use App\Models\User;
-use App\Notifications\CreateSuggestionNotification;
 use App\Services\SuggestionService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SuggestionController extends Controller
 {
