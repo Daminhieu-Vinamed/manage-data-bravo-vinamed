@@ -1,10 +1,6 @@
 <?php
 
 namespace App\Repositories;
-
-use App\Models\User;
-use App\Notifications\AdditionalWorkAndOnLeaveNotification;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TimekeepingRepository
@@ -80,9 +76,6 @@ class TimekeepingRepository
     }
 
     public function additionalWork($connectCompany, $EmployeeCode, $company, $type, $start, $end, $description) {
-        $user = Auth::user();
-        $userManager = User::where('department_code', $user->department_code)->where('role_id', config('constants.number.four'))->first();
-        $userManager->notify(new AdditionalWorkAndOnLeaveNotification($user));
         return $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?, ?', [$EmployeeCode, $company, $type, $start, $end, $description]);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
-use App\Notifications\CreateSuggestionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -185,10 +183,6 @@ class SuggestionRepository
                 $connectCompany->table('B33AccDocAtchDoc')->insert($dataPODetailVAT);
             }
         }
-
-        $user = Auth::user();
-        $userManager = User::where('department_code', $user->department_code)->where('role_id', config('constants.number.four'))->first();
-        $userManager->notify(new CreateSuggestionNotification($user));
     }
 
     public function getRequestsForAdvances($request)
@@ -264,10 +258,6 @@ class SuggestionRepository
             
             $connectCompany->table('B33AccDocJournalEntry')->insert($dataRFADetail);
         }
-
-        $user = Auth::user();
-        $userManager = User::where('department_code', $user->department_code)->where('role_id', config('constants.number.four'))->first();
-        $userManager->notify(new CreateSuggestionNotification($user));
     }
 
     public function getSuggestedPerDiem($request)
@@ -411,10 +401,6 @@ class SuggestionRepository
                 $connectCompany->table('B33AccDocAtchDoc')->insert($dataSPDDetailVAT);
             }
         }
-        
-        $user = Auth::user();
-        $userManager = User::where('department_code', $user->department_code)->where('role_id', config('constants.number.four'))->first();
-        $userManager->notify(new CreateSuggestionNotification($user));
     }
 
     public function statisticalAdmin()
