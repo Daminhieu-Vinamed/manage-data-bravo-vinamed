@@ -7,7 +7,7 @@
 @endsection
 @section('title-manage')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">THỐNG KÊ ĐỀ NGHỊ THANH TOÁN</h1>
+        <h1 class="h3 mb-0 text-gray-800">THỐNG KÊ ĐỀ NGHỊ</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
 @endsection
@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A06</div>
+                                <div class="text-xs font-weight-bold text-purple text-uppercase mb-1">Đề nghị chờ duyệt A06</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A06" data="{{ $statistical['count']['A06'] }}">{{ $statistical['count']['A06'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-pink text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A11</div>
+                                <div class="text-xs font-weight-bold text-pink text-uppercase mb-1">Đề nghị chờ duyệt A11</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A11" data="{{ $statistical['count']['A11'] }}">{{ $statistical['count']['A11'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -49,7 +49,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-red text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A12</div>
+                                <div class="text-xs font-weight-bold text-red text-uppercase mb-1">Đề nghị chờ duyệt A12</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A12" data="{{ $statistical['count']['A12'] }}">{{ $statistical['count']['A12'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -64,7 +64,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-orange text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A14</div>
+                                <div class="text-xs font-weight-bold text-orange text-uppercase mb-1">Đề nghị chờ duyệt A14</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A14" data="{{ $statistical['count']['A14'] }}">{{ $statistical['count']['A14'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -79,7 +79,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-yellow text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A18</div>
+                                <div class="text-xs font-weight-bold text-yellow text-uppercase mb-1">Đề nghị chờ duyệt A18</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A18" data="{{ $statistical['count']['A18'] }}">{{ $statistical['count']['A18'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -94,7 +94,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-green text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A19</div>
+                                <div class="text-xs font-weight-bold text-green text-uppercase mb-1">Đề nghị chờ duyệt A19</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A19" data="{{ $statistical['count']['A19'] }}">{{ $statistical['count']['A19'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -109,7 +109,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A21</div>
+                                <div class="text-xs font-weight-bold text-blue text-uppercase mb-1">Đề nghị chờ duyệt A21</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A21" data="{{ $statistical['count']['A21'] }}">{{ $statistical['count']['A21'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -124,7 +124,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-cyan text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A22</div>
+                                <div class="text-xs font-weight-bold text-cyan text-uppercase mb-1">Đề nghị chờ duyệt A22</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A22" data="{{ $statistical['count']['A22'] }}">{{ $statistical['count']['A22'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -139,7 +139,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-gray text-uppercase mb-1">Đề nghị thanh toán chờ duyệt của A25</div>
+                                <div class="text-xs font-weight-bold text-gray text-uppercase mb-1">Đề nghị chờ duyệt A25</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800" id="A25" data="{{ $statistical['count']['A25'] }}">{{ $statistical['count']['A25'] }} phiếu</div>
                             </div>
                             <div class="col-auto">
@@ -153,7 +153,7 @@
         <div class="col-xl-4 col-lg-6">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán biểu đồ tròn </h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Đề nghị biểu đồ tròn </h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -211,7 +211,7 @@
                     <div class="card shadow mb-4">
                         <a href="#collapseCard{{$key}}Top" class="d-block card-header py-3" data-toggle="collapse"
                             role="button" aria-expanded="true" aria-controls="collapseCard{{$key}}Top">
-                            <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các bộ phận {{$key}}</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Đề nghị các bộ phận {{$key}}</h6>
                         </a>
                         <div class="collapse show" id="collapseCard{{$key}}Top">
                             <div class="card-body">
@@ -250,7 +250,7 @@
                 <div class="card shadow mb-4">
                     <a href="#collapseCard{{$key}}Bottom" class="d-block card-header py-3" data-toggle="collapse"
                         role="button" aria-expanded="true" aria-controls="collapseCard{{$key}}Bottom">
-                        <h6 class="m-0 font-weight-bold text-primary">Đề nghị thanh toán các nhân viên {{$key}}</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Đề nghị các nhân viên {{$key}}</h6>
                     </a>
                     <div class="collapse show" id="collapseCard{{$key}}Bottom">
                         <div class="card-body">

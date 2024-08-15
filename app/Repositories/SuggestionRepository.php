@@ -190,7 +190,6 @@ class SuggestionRepository
         $B20Customer = DB::connection($request->company)->table('B20Customer')->select('Code', 'Address', 'Person', 'TaxRegNo', 'Name2', 'BankAccountNo', 'BankName', 'Name')
             ->where('IsActive', config('constants.number.one'))
             ->where('IsGroup', config('constants.number.zero'))
-            ->where('IsGroup', config('constants.number.zero'))
             ->get();
         $B20Employee = DB::connection($request->company)->table('B20Employee')->select('Code', 'Name', 'Email', 'DeptCode')
             ->where('IsActive', config('constants.number.one'))

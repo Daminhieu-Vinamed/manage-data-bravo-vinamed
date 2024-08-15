@@ -404,7 +404,7 @@ $(document).ready(function () {
                     title: success.msg,
                 }).then((result) => {
                     if (result.dismiss === Swal.DismissReason.timer) {
-                        location.href = window.location.origin + '/suggestion';
+                        location.href = window.location.origin + '/suggestion?DocCode=TT';
                     }
                 });
             },

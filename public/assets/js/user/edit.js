@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    var department_code = $("#department_code");
+    department_code.next("#list_department_code").children("option").each(function () {
+        if ($(this).attr("data-value") === department_code.attr("data-value")) {
+            return department_code.val($(this).val()).attr("data-value", $(this).attr("data-value"));
+        }
+    });
+
     $(document).on("click", "#change-password", function () {
         $('#avatar').parent().after(`<div class="form-group col-md-4">
             <label for="password" class="form-label small">Mật khẩu</label>
@@ -53,6 +60,19 @@ $(document).ready(function () {
         $(this).parent().remove();
     });
 
+    $(document).on("blur", "#department_code", function () {
+        const valueSelected = $(this).val();
+        var department_code = $(this).val(nullValue).removeAttr('data-value');
+        $(this)
+            .next("#list_department_code")
+            .children("option")
+            .each(function () {
+                if ($(this).val() === valueSelected) {
+                    return department_code.val(valueSelected).attr("data-value", $(this).attr('data-value'));
+                }
+            });
+    });
+
     $(document).on("click", "#update_user", function () {
         let id = new URLSearchParams(window.location.search).get('id')
         formData = new FormData();
@@ -65,7 +85,7 @@ $(document).ready(function () {
             formData.append('password', $('#password').val());
             formData.append('re_password', $('#re_password').val());
         }
-        formData.append('department_code', $('#department_code').val() !== nullValue ? $('#department_code').val() : '');
+        formData.append('department_code', $('#department_code').attr('data-value') !== nullValue ? $('#department_code').attr('data-value') : '');
         formData.append('company', $('#company').val() !== nullValue ? $('#company').val() : '');
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
         formData.append('gender_id', $('#gender_id').val() !== nullValue ? $('#gender_id').val() : '');

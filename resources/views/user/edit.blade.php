@@ -49,14 +49,14 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="department_code" class="form-label small">Phòng ban</label>
-                        <select class="custom-select" id="department_code">
-                            <option disabled selected>Chọn phòng ban</option>
+                        <input list="list_department_code" class="form-control" id="department_code" data-value="{{$user->department_code}}">
+                        <datalist id="list_department_code">
                             @foreach ($departments as $item)
                                 @if ($item->code !== 'ADMIN')
-                                    <option value="{{ $item->code }}" {{ $user->department_code === $item['code'] ? 'selected' : '' }}>{{ $item->name . " -> " . $item->code }}</option>
+                                    <option data-value="{{ $item->code }}" value="{{ $item->name . ' -> ' . $item->code }}"></option>
                                 @endif
                             @endforeach
-                        </select>
+                        </datalist>
                         <span class="text-danger small" id="department_code_error"></span>
                     </div>
                     <div class="form-group col-md-4">
