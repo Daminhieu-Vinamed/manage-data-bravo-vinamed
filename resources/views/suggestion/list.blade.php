@@ -7,13 +7,13 @@
 @endsection
 @section('title-manage')
     <div class="mb-4">
-        <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ ĐỀ NGHỊ THANH TOÁN</h1>
+        <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ ĐỀ NGHỊ</h1>
     </div>
 @endsection
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Danh sách đề nghị thanh toán</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách đề nghị</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">

@@ -10,9 +10,9 @@
 @endsection
 @section('content')
     <div class="d-flex justify-content-center">
-        <div class="card shadow mb-4" style="width: 17rem">
+        <div class="card shadow mb-4" style="width: 15.1rem">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary text-center">Chọn công ty để duyệt đề nghị</h6>
+                <h6 class="m-0 font-weight-bold text-primary text-center">Chọn kiểu để duyệt đề nghị</h6>
             </div>
             <div class="card-body">
                 <form action="{{ route('suggestion.directional-list') }}" method="GET">

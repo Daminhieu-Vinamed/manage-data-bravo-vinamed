@@ -12,7 +12,7 @@
     <div class="d-flex justify-content-center">
         <div class="card shadow mb-4" style="width: 30rem">
             <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary text-center">Chọn công ty để tạo mới đề nghị</h6>
+                <h6 class="m-0 font-weight-bold text-primary text-center">Chọn công ty và kiểu để tạo mới đề nghị</h6>
             </div>
             <div class="card-body">
                 <form action="{{ route('suggestion.directional-create') }}" method="GET">
