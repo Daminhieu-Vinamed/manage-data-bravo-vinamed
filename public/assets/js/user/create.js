@@ -22,6 +22,19 @@ $(document).ready(function () {
         $(this).parent().remove();
     });
 
+    $(document).on("blur", "#department_code", function () {
+        const valueSelected = $(this).val();
+        var department_code = $(this).val(nullValue).removeAttr('data-value');
+        $(this)
+            .next("#list_department_code")
+            .children("option")
+            .each(function () {
+                if ($(this).val() === valueSelected) {
+                    return department_code.val(valueSelected).attr("data-value", $(this).attr('data-value'));
+                }
+            });
+    });
+
     $(document).on("click", "#create_user", function () {
         formData = new FormData();
         formData.append('EmployeeCode', $('#EmployeeCode').val());
@@ -35,7 +48,7 @@ $(document).ready(function () {
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
         formData.append('gender_id', $('#gender_id').val() !== nullValue ? $('#gender_id').val() : '');
         formData.append('status_id', $('#status_id').val() !== nullValue ? $('#status_id').val() : '');
-        formData.append('avatar', $('#avatar')[0].files[0] !== undefinedValue ? $('#avatar')[0].files[0] : '');
+        formData.append('avatar', $('#avatar')[zeroConst].files[zeroConst] !== undefinedValue ? $('#avatar')[zeroConst].files[zeroConst] : '');
         $.ajax({
             url: linkUser + "create",
             type: "POST",

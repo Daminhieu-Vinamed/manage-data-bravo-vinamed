@@ -25,16 +25,6 @@ class OnLeaveController extends Controller
     {
         return $this->onLeaveService->listData();
     }
-    
-    public function approve(Request $request)
-    {
-        return $this->onLeaveService->approve($request);
-    }
-    
-    public function cancel(Request $request)
-    {
-        return $this->onLeaveService->cancel($request);
-    }
 
     public function calendar()
     {

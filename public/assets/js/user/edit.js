@@ -90,7 +90,7 @@ $(document).ready(function () {
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
         formData.append('gender_id', $('#gender_id').val() !== nullValue ? $('#gender_id').val() : '');
         formData.append('status_id', $('#status_id').val() !== nullValue ? $('#status_id').val() : '');
-        formData.append('avatar', $('#avatar')[0].files[0] !== undefinedValue ? $('#avatar')[0].files[0] : '');
+        formData.append('avatar', $('#avatar')[zeroConst].files[zeroConst] !== undefinedValue ? $('#avatar')[zeroConst].files[zeroConst] : '');
         formData.append('old_avatar', $('#old_avatar').val());   
         $.ajax({
             url: linkUser + "update",

@@ -85,16 +85,6 @@ class AdditionalWorkRepository
         return $additionalWorkTotal;
     }
 
-    public function approveLeave($connectCompany, $RowId, $DocCode)
-    {
-        return $connectCompany->update('EXEC Usp_ApproveBSNP ?, ?', [$RowId, $DocCode]);
-    }
-    
-    public function cancelLeave($connectCompany, $RowId)
-    {
-        return $connectCompany->update('EXEC Usp_CancelBSNP ?', [$RowId]);
-    }
-
     public function calendar() 
     {
         foreach (config('constants.company') as $value) {

@@ -25,16 +25,6 @@ class AdditionalWorkController extends Controller
     {
         return $this->additionalWorkService->listData();
     }
-    
-    public function approve(Request $request)
-    {
-        return $this->additionalWorkService->approve($request);
-    }
-    
-    public function cancel(Request $request)
-    {
-        return $this->additionalWorkService->cancel($request);
-    }
 
     public function calendar()
     {

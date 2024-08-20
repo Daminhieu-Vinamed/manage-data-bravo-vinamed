@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Timekeeping\SupplementsAndLeaveRequest;
 use App\Services\TimekeepingService;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Request;
 
 class TimekeepingController extends Controller
 {
@@ -38,5 +39,15 @@ class TimekeepingController extends Controller
 
     public function supplementsAndLeave(SupplementsAndLeaveRequest $request) {
         return $this->timekeepingService->supplementsAndLeave($request);
+    }
+
+    public function approve(Request $request)
+    {
+        return $this->timekeepingService->approve($request);
+    }
+    
+    public function cancel(Request $request)
+    {
+        return $this->timekeepingService->cancel($request);
     }
 }

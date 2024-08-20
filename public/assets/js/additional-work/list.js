@@ -72,7 +72,7 @@ $(document).on("click", "#approve", function () {
         },
         preConfirm: async () => {
             $.ajax({
-                url: linkOnLeave + "approve",
+                url: linkTimekeeping + "approve",
                 type: "PUT",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -118,7 +118,7 @@ $(document).on("click", "#cancel", function () {
         },
         preConfirm: async () => {
             $.ajax({
-                url: linkOnLeave + "cancel",
+                url: linkTimekeeping + "cancel",
                 type: "PUT",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
