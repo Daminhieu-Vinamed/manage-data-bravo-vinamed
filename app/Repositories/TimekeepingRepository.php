@@ -16,7 +16,9 @@ class TimekeepingRepository
             DB::raw("LEFT(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [end]"), 
             'VAC_Name as title',
             'TimesheetTypeName as type',
-            'DocStatus as status'
+            'DocStatus as status',
+            'RowId as RowId',
+            'BranchCode as BranchCode'
         ]);
         $bs = DB::connection($company)->table('vB30HrmPTimesheet')
         ->where('IsActive', config('constants.number.one'))
@@ -27,7 +29,9 @@ class TimekeepingRepository
             DB::raw("LEFT(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt'), LEN(FORMAT(ToDate, 'yyyy-MM-dd hh:mm:ss tt')) - 3) AS [end]"), 
             'VAC_Name as title',
             'TimesheetTypeName as type',
-            'DocStatus as status'
+            'DocStatus as status',
+            'RowId as RowId',
+            'BranchCode as BranchCode'
         ]);
         $labour = DB::connection($company)->table('vB30HrmCheckInOut')->where('EmployeeCodeCC', $EmployeeCode)->where('IsActive', config('constants.number.one'))->get(['CheckTime as start']);
         $dataCalendar = array_merge($bs->toArray(), $np->toArray(), $labour->toArray());
@@ -77,5 +81,15 @@ class TimekeepingRepository
 
     public function additionalWork($connectCompany, $EmployeeCode, $company, $type, $start, $end, $description) {
         return $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?, ?', [$EmployeeCode, $company, $type, $start, $end, $description]);
+    }
+
+    public function approveLeave($connectCompany, $RowId, $DocCode)
+    {
+        return $connectCompany->update('EXEC Usp_ApproveBSNP ?, ?', [$RowId, $DocCode]);
+    }
+    
+    public function cancelLeave($connectCompany, $RowId)
+    {
+        return $connectCompany->update('EXEC Usp_CancelBSNP ?', [$RowId]);
     }
 }

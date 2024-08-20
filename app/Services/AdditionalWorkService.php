@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\AdditionalWorkRepository;
+use App\Repositories\TimekeepingRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -10,10 +11,12 @@ use Yajra\DataTables\Facades\DataTables;
 class AdditionalWorkService extends AdditionalWorkRepository
 {
     protected AdditionalWorkRepository $additionalWorkRepository;
+    protected TimekeepingRepository $timekeepingRepository;
 
-    public function __construct(AdditionalWorkRepository $additionalWorkRepository)
+    public function __construct(AdditionalWorkRepository $additionalWorkRepository, TimekeepingRepository $timekeepingRepository)
     {
         $this->additionalWorkRepository = $additionalWorkRepository;
+        $this->timekeepingRepository = $timekeepingRepository;
     }
 
     public function listData()
@@ -36,34 +39,6 @@ class AdditionalWorkService extends AdditionalWorkRepository
             return  '<button BranchCode="'.$additionalWork->BranchCode.'" DocCode="'.$additionalWork->DocCode.'" RowId="'.$additionalWork->RowId.'" title="Phê duyệt bổ sung" class="btn btn-info shadow-sm btn-circle" id="approve"><i class="fas fa-check"></i></button>' .
                     ' <button BranchCode="'.$additionalWork->BranchCode.'" RowId="'.$additionalWork->RowId.'" title="Từ chối bổ sung" class="btn btn-danger shadow-sm btn-circle" id="cancel"><i class="fas fa-ban"></i></button>';
         })->make(true);
-    }
-
-    public function approve($request)
-    {
-        $connectCompany = DB::connection($request->BranchCode);
-        $connectCompany->beginTransaction();
-        try {
-            $this->additionalWorkRepository->approveLeave($connectCompany, $request->RowId, $request->DocCode);
-            $connectCompany->commit();
-            return response()->json(['status' => 'success', 'msg' => 'Phê duyệt bổ xung thành công'], 200);
-        } catch (\Exception $e) {
-            $connectCompany->rollBack();
-            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
-        }
-    }
-    
-    public function cancel($request)
-    {
-        $connectCompany = DB::connection($request->BranchCode);
-        $connectCompany->beginTransaction();
-        try {
-            $this->additionalWorkRepository->cancelLeave($connectCompany, $request->RowId);
-            $connectCompany->commit();
-            return response()->json(['status' => 'success', 'msg' => 'Phê duyệt bổ xung thành công'], 200);
-        } catch (\Exception $e) {
-            $connectCompany->rollBack();
-            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
-        }
     }
 
     public function calendar()

@@ -67,4 +67,31 @@ class TimekeepingService extends TimekeepingRepository
         }
     }
 
+    public function approve($request)
+    {
+        $connectCompany = DB::connection($request->BranchCode);
+        $connectCompany->beginTransaction();
+        try {
+            $this->timekeepingRepository->approveLeave($connectCompany, $request->RowId, $request->DocCode);
+            $connectCompany->commit();
+            return response()->json(['status' => 'success', 'msg' => 'Phê duyệt nghỉ phép/bổ sung thành công'], 200);
+        } catch (\Exception $e) {
+            $connectCompany->rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
+        }
+    }
+    
+    public function cancel($request)
+    {
+        $connectCompany = DB::connection($request->BranchCode);
+        $connectCompany->beginTransaction();
+        try {
+            $this->timekeepingRepository->cancelLeave($connectCompany, $request->RowId);
+            $connectCompany->commit();
+            return response()->json(['status' => 'success', 'msg' => 'Hủy bỏ nghỉ phép/bổ sung thành công'], 200);
+        } catch (\Exception $e) {
+            $connectCompany->rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
+        }
+    }
 }

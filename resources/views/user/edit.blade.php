@@ -53,7 +53,7 @@
                         <datalist id="list_department_code">
                             @foreach ($departments as $item)
                                 @if ($item->code !== 'ADMIN')
-                                    <option data-value="{{ $item->code }}" value="{{ $item->name . ' -> ' . $item->code }}"></option>
+                                    <option data-value="{{ $item->code }}" value="{{ $item->name }}"></option>
                                 @endif
                             @endforeach
                         </datalist>

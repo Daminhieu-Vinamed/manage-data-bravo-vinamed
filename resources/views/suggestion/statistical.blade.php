@@ -3,7 +3,6 @@
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/subStyle.css') }}" rel="stylesheet">
 @endsection
 @section('title-manage')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
