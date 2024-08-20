@@ -62,50 +62,50 @@ var calendar = $("#calendar").fullCalendar({
         element.popover(popover);
     },
     eventClick:  function(arg) {
-        const RowId = arg.RowId;
-        const BranchCode = arg.BranchCode;
-        console.log(RowId, BranchCode);
-        
-        Swal.fire({
-            showCancelButton: trueValue,
-            showLoaderOnConfirm: trueValue,
-            buttonsStyling: falseValue,
-            confirmButtonText: 'Đồng ý',
-            cancelButtonText: 'Hủy',
-            width: "22%",
-            html: 'Huỷ bỏ nghỉ phép/bổ sung công ?',
-            customClass: {
-                confirmButton: 'btn btn-primary shadow-sm m-2',
-                cancelButton: 'btn btn-danger shadow-sm m-2',
-            },
-            preConfirm: async () => {
-                $.ajax({
-                    url: linkTimekeeping + "cancel",
-                    type: "PUT",
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                    },
-                    data: {
-                        RowId: RowId,
-                        BranchCode: BranchCode
-                    },
-                    success: function (success) {
-                        ToastTopRight.fire({
-                            icon: success.status,
-                            title: success.msg,
-                        });
-                        calendar.fullCalendar("refetchEvents");
-                    },
-                    error: function (error) {
-                        let errors = error.responseJSON.errors;
-                        ToastTopRight.fire({
-                            icon: errors.status,
-                            title: errors.msg,
-                        });
-                    },
-                });
-            },
-        });
+        if (arg.status !== "9") {
+            const RowId = arg.RowId;
+            const BranchCode = arg.BranchCode;
+            Swal.fire({
+                showCancelButton: trueValue,
+                showLoaderOnConfirm: trueValue,
+                buttonsStyling: falseValue,
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: 'Hủy',
+                width: "22%",
+                html: 'Huỷ bỏ nghỉ phép/bổ sung công ?',
+                customClass: {
+                    confirmButton: 'btn btn-primary shadow-sm m-2',
+                    cancelButton: 'btn btn-danger shadow-sm m-2',
+                },
+                preConfirm: async () => {
+                    $.ajax({
+                        url: linkTimekeeping + "cancel",
+                        type: "PUT",
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        },
+                        data: {
+                            RowId: RowId,
+                            BranchCode: BranchCode
+                        },
+                        success: function (success) {
+                            ToastTopRight.fire({
+                                icon: success.status,
+                                title: success.msg,
+                            });
+                            calendar.fullCalendar("refetchEvents");
+                        },
+                        error: function (error) {
+                            let errors = error.responseJSON.errors;
+                            ToastTopRight.fire({
+                                icon: errors.status,
+                                title: errors.msg,
+                            });
+                        },
+                    });
+                },
+            });
+        }
     },
     select: function(start, end, jsEvent, view) {
         $('#additionalWork').modal('toggle');
