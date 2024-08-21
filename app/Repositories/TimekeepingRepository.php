@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 class TimekeepingRepository
 {
-    public function getData($EmployeeCode, $company, $timeNow)
+    public function getData($EmployeeCode, $company)
     {
         $np = DB::connection($company)->table('vB30HrmPTimesheet')
         ->where('IsActive', config('constants.number.one'))
@@ -35,14 +35,19 @@ class TimekeepingRepository
         ]);
         $labour = DB::connection($company)->table('vB30HrmCheckInOut')->where('EmployeeCodeCC', $EmployeeCode)->where('IsActive', config('constants.number.one'))->get(['CheckTime as start']);
         $dataCalendar = array_merge($bs->toArray(), $np->toArray(), $labour->toArray());
-        $dataArr['dataCalendar'] = $dataCalendar;
+        $data['dataCalendar'] = $dataCalendar;
         
         //Lấy dữ liệu nghỉ phép và bổ sung
         $npVsBs = DB::connection($company)->table('vB20HRMTimesheetType')
         ->where('IsActive', config('constants.number.one'))
         ->get(['RowId', 'Name', 'WorkDay']);
-        $dataArr['npVsBs'] = $npVsBs;
+        $data['npVsBs'] = $npVsBs;
         
+        return $data;
+    }
+
+    public function getStartTimeAndEndTimeInTimekeeping($EmployeeCode, $company, $timeNow) 
+    {
         //Kiểm tra và lấy thời gian bắt đầu
         $startTime = DB::connection($company)->table('vB30HrmCheckInOut')
         ->select('checkTime as start')
@@ -51,8 +56,9 @@ class TimekeepingRepository
         ->where('IsActive', config('constants.number.one'))
         ->orderBy('CheckTime', 'ASC')
         ->first();
+        
         if ($startTime !== config('constants.value.null')) {
-            $dataArr['start'] = $startTime->start;
+            $data['start'] = $startTime->start;
         }
         
         //Kiểm tra và lấy thời gian kết thúc
@@ -61,6 +67,7 @@ class TimekeepingRepository
         ->where('IsActive', config('constants.number.one'))
         ->where('EmployeeCodeCC', $EmployeeCode)
         ->count();
+        
         if ($count >= config('constants.number.two')) {
             $endTime = DB::connection($company)->table('vB30HrmCheckInOut')
             ->select('checkTime as end')
@@ -69,10 +76,12 @@ class TimekeepingRepository
             ->where('IsActive', config('constants.number.one'))
             ->orderBy('CheckTime', 'DESC')
             ->first();
-            $dataArr['end'] = $endTime->end;
+            $data['end'] = $endTime->end;
         }
+
+        $data['now'] = $timeNow->format('Y-m-d h:i:s');
         
-        return $dataArr;
+        return $data;
     }
 
     public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company) {

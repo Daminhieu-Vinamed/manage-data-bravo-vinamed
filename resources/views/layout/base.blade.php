@@ -24,9 +24,12 @@
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/swalalert2@11.js') }}"></script>
     <script src="{{ asset('assets/js/script.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/calendar/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/constants.js') }}"></script>
     <script src="{{ asset('assets/js/change-password.js') }}"></script>
     <script src="{{ asset('assets/js/notification.js') }}"></script>
+    <script src="{{ asset('assets/js/timekeeping/func.js') }}"></script>
+    <script src="{{ asset('assets/js/timekeeping/realtime.js') }}"></script>
     @stack('js')
 </body>
 </html>

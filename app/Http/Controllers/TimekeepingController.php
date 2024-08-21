@@ -29,6 +29,11 @@ class TimekeepingController extends Controller
         }
     }
 
+    public function getTimeInTimekeeping() 
+    {
+        return $this->timekeepingService->getTimeInTimekeeping();
+    }
+
     public function clockIn() {
         return $this->timekeepingService->clockIn();
     }

@@ -9,7 +9,33 @@ $(document).ready(function () {
         d.getFullYear()
     );
 
-    var removeCheckTimekeeping = checkTimekeeping($('#timekeeping-in').text(), $('#timekeeping-out').text());
+    $.ajax({
+        url: linkTimekeeping + "get-data-timekeeping",
+        type: "GET",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (success) {
+            $('#timekeeping-in').text(moment(success.data.start).format('HH:mm:ss'));
+            if (success.data.end) {
+                $('#timekeeping-out').text(moment(success.data.end).format('HH:mm:ss'));
+            }else{
+                $('#timekeeping-out').text(minTime);
+            }
+            changeButtonTimekeeping($('#clock_in').attr("id"));
+            var removeCheckTimekeeping = checkTimekeeping($('#timekeeping-in').text(), $('#timekeeping-out').text(), success.data.now);
+            $(document).on("click", "#clock_out", function () {
+                clockOutApi(removeCheckTimekeeping, $(this).attr("id"))
+            });
+        },
+        error: function (error) {
+            $('#timekeeping-in').text(minTime);
+            $('#timekeeping-out').text(minTime);
+            $(".run-second").text('00');
+            $(".run-minute").text('00');
+            $(".run-hour").text('00');
+        },
+    });
 
     $(document).on("click", "#clock_in", function () {
 
@@ -42,9 +68,5 @@ $(document).ready(function () {
                 });
             },
         });
-    });
-
-    $(document).on("click", "#clock_out", function () {
-        clockOutApi(removeCheckTimekeeping, $(this).attr("id"))
     });
 });
