@@ -1,5 +1,8 @@
 @extends('layout.master')
 @section('title', 'Tạo mới')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
+@endsection
 @section('title-manage')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">QUẢN LÝ NGƯỜI DÙNG</h1>
@@ -46,6 +49,16 @@
                             @endforeach
                         </select>
                         <span class="text-danger small" id="company_error"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="parent_user_id" class="form-label small">Quản lý</label>
+                        <select class="form-control-select2" id="parent_user_id">
+                            <option selected value="">Chọn quản lý</option>
+                            @foreach ($parents as $parent)
+                                <option value="{{$parent->id}}" {{ $user->parent_user_id == $parent->id ? 'selected' : '' }}>{{$parent->name}}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-danger small" id="parent_user_id_error"></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="department_code" class="form-label small">Phòng ban</label>
@@ -109,5 +122,6 @@
     </div>
 @endsection
 @push('js')
+    <script src="{{ asset('assets/vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/user/edit.js') }}"></script>
 @endpush

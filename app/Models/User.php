@@ -22,6 +22,7 @@ class User extends Authenticatable
         'EmployeeCode',
         'department_code',
         'company',
+        'parent_user_id',
         'username',
         'name',
         'avatar',

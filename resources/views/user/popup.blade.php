@@ -47,6 +47,16 @@
                     <span class="text-danger small" id="role_id_error"></span>
                 </div>
                 <div class="form-group col-md-4">
+                    <label for="parent_user_id" class="form-label small">Quản lý</label>
+                    <select class="form-control-select2" id="parent_user_id">
+                        <option selected value="">Chọn quản lý</option>
+                        @foreach ($parents as $parent)
+                            <option value="{{$parent->id}}">{{$parent->name}}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger small" id="parent_user_id_error"></span>
+                </div>
+                <div class="form-group col-md-4">
                     <label for="department_code" class="form-label small">Phòng ban</label>
                     <input list="list_department_code" class="form-control" id="department_code">
                     <datalist id="list_department_code">

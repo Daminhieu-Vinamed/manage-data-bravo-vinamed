@@ -3,6 +3,7 @@
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/select2/select2.min.css') }}">
 @endsection
 @section('title-manage')
     <div class="mb-4">
@@ -59,6 +60,7 @@
     <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/user/list.js') }}"></script>
     <script src="{{ asset('assets/js/user/create.js') }}"></script>
     <script src="{{ asset('assets/js/user/edit.js') }}"></script>

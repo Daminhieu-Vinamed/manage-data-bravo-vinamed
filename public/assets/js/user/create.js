@@ -45,6 +45,7 @@ $(document).ready(function () {
         formData.append('re_password', $('#re_password').val());
         formData.append('department_code', $('#department_code').val() !== nullValue ? $('#department_code').val() : '');
         formData.append('company', $('#company').val() !== nullValue ? $('#company').val() : '');
+        formData.append('parent_user_id', $('#parent_user_id').val() !== nullValue ? $('#parent_user_id').val() : '');
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
         formData.append('gender_id', $('#gender_id').val() !== nullValue ? $('#gender_id').val() : '');
         formData.append('status_id', $('#status_id').val() !== nullValue ? $('#status_id').val() : '');
@@ -120,6 +121,14 @@ $(document).ready(function () {
                 } else {
                     $('#company_error').text('')
                     $('#company').removeClass('is-invalid').addClass('is-valid');
+                }
+
+                if (errors.parent_user_id) {
+                    $('#parent_user_id_error').text(errors.parent_user_id[zeroConst])
+                    $('#parent_user_id').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#parent_user_id_error').text('')
+                    $('#parent_user_id').removeClass('is-invalid').addClass('is-valid');
                 }
 
                 if (errors.role_id) {
