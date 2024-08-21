@@ -79,7 +79,7 @@ class TimekeepingRepository
             $data['end'] = $endTime->end;
         }
 
-        $data['now'] = $timeNow->format('Y-m-d h:i:s');
+        $data['now'] = $timeNow->format('Y-m-d H:i:s');
         
         return $data;
     }
