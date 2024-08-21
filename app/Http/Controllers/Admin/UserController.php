@@ -7,6 +7,7 @@ use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\Department;
 use App\Models\Role;
+use App\Models\User;
 use App\Services\Admin\UserService;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class UserController extends Controller
     {
         $departments = Department::select('code', 'name')->get();
         $roles = Role::select('id', 'name')->get();
-        return view('user.list', compact('departments', 'roles'));
+        $parents = User::select('id', 'name')->where('role_id', '<>', [config('constants.number.six'), config('constants.number.seven')])->get();
+        return view('user.list', compact('departments', 'roles', 'parents'));
     }
 
     public function getData()
@@ -46,7 +48,8 @@ class UserController extends Controller
         $user = $this->userService->edit($request->id);
         $departments = Department::select('code', 'name')->get();
         $roles = Role::select('id', 'name')->get();
-        return view('user.edit', compact('user', 'departments', 'roles'));
+        $parents = User::select('id', 'name')->where('role_id', '<>', [config('constants.number.six'), config('constants.number.seven')])->get();
+        return view('user.edit', compact('user', 'departments', 'roles', 'parents'));
     }
     
     public function update(UpdateRequest $request)
