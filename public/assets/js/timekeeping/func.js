@@ -48,7 +48,7 @@ function runRealtime(hour, minute, second) {
     }, 1000);
 }
 
-function calculationTime(start, end) {
+function calculationTime(start, end) {    
     var duration = moment.duration(end.diff(start));
     return {
         hour: duration.hours(), 
@@ -72,13 +72,13 @@ function changeButtonTimekeeping(id) {
 }
 
 function checkTimekeeping(start, end, now) {
-    if (start !== minTime && end === minTime) {
-        var calculationTimeFunc = calculationTime(moment(start, 'H:mm:ss'), moment(now));
+    if (start !== undefinedValue && end === undefinedValue) {
+        var calculationTimeFunc = calculationTime(moment(start, "YYYY-MM-DD HH:mm:ss"), moment(now, "YYYY-MM-DD HH:mm:ss"));
         var runRealtimeFunc = runRealtime(calculationTimeFunc.hour, calculationTimeFunc.minute, calculationTimeFunc.second);
         return runRealtimeFunc;
-    }else if (start !== minTime && end !== minTime) {
+    }else if (start !== undefinedValue && end !== undefinedValue) {         
         changeButtonTimekeeping('clock_out');
-        var calculationTimeFunc = calculationTime(moment(start, 'H:mm:ss'), moment(end, 'H:mm:ss'));
+        var calculationTimeFunc = calculationTime(moment(start, 'YYYY-MM-DD HH:mm:ss'), moment(end, 'YYYY-MM-DD HH:mm:ss'));
         displayRunRealtime(calculationTimeFunc.hour, calculationTimeFunc.minute, calculationTimeFunc.second)
     }
 }

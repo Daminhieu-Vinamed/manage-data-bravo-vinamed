@@ -23,7 +23,7 @@ $(document).ready(function () {
                 $('#timekeeping-out').text(minTime);
             }
             changeButtonTimekeeping($('#clock_in').attr("id"));
-            var removeCheckTimekeeping = checkTimekeeping($('#timekeeping-in').text(), $('#timekeeping-out').text(), success.data.now);
+            var removeCheckTimekeeping = checkTimekeeping(success.data.start, success.data.end, success.data.now);
             $(document).on("click", "#clock_out", function () {
                 clockOutApi(removeCheckTimekeeping, $(this).attr("id"))
             });
