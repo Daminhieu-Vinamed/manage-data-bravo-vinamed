@@ -62,7 +62,7 @@ function changeButtonTimekeeping(id) {
         return $('#' + id).text("Chấm công").attr({
             class: "btn btn-primary shadow-sm",
             disabled: "disabled",
-        }).removeAttr('id').removeAttr('time-now');
+        }).removeAttr('id');
     }else if(id === 'clock_in'){
         return $('#' + id).text("Kết thúc").attr({
             class: "btn btn-danger shadow-sm",
@@ -71,12 +71,9 @@ function changeButtonTimekeeping(id) {
     }
 }
 
-function checkTimekeeping(start, end) {
+function checkTimekeeping(start, end, now) {
     if (start !== minTime && end === minTime) {
-        var getTimeNow = $('#clock_out');
-        var now = moment(getTimeNow.attr('time-now'));
-        getTimeNow.removeAttr('time-now');
-        var calculationTimeFunc = calculationTime(moment(start, 'H:mm:ss'), now);
+        var calculationTimeFunc = calculationTime(moment(start, 'H:mm:ss'), moment(now));
         var runRealtimeFunc = runRealtime(calculationTimeFunc.hour, calculationTimeFunc.minute, calculationTimeFunc.second);
         return runRealtimeFunc;
     }else if (start !== minTime && end !== minTime) {

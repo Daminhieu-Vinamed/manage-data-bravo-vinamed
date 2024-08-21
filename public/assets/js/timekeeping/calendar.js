@@ -62,7 +62,7 @@ var calendar = $("#calendar").fullCalendar({
         element.popover(popover);
     },
     eventClick:  function(arg) {
-        if (arg.status === "35" || arg.status === "36" || arg.status === "37" || arg.status === "51" || arg.status === "19" || arg.status === "50") {
+        if (arg.status === "19" || arg.status === "50") {
             const RowId = arg.RowId;
             const BranchCode = arg.BranchCode;
             Swal.fire({

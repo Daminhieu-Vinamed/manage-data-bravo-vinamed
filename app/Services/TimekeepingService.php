@@ -17,10 +17,19 @@ class TimekeepingService extends TimekeepingRepository
 
     public function calendar()
     {
-        $timeNow = new Carbon();
-        $data = $this->timekeepingRepository->getData(Auth::user()->EmployeeCode, Auth::user()->company, $timeNow);
-        $data['now'] = $timeNow;
+        $data = $this->timekeepingRepository->getData(Auth::user()->EmployeeCode, Auth::user()->company);
         return $data;
+    }
+
+    public function getTimeInTimekeeping() 
+    {
+        try {
+            $timeNow = new Carbon();
+            $data = $this->timekeepingRepository->getStartTimeAndEndTimeInTimekeeping(Auth::user()->EmployeeCode, Auth::user()->company, $timeNow);
+            return response()->json(['status' => 'success', 'data' => $data], 200);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'msg' => 'không có dữ liệu chấm công'], 401);
+        }
     }
 
     public function clockIn() {
