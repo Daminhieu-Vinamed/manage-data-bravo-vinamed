@@ -1,7 +1,7 @@
 function displayRunRealtime(hour, minute, second) {
-    var runSecond = $(".run-second").text(second < tenConst ? "0" + second : second);
-    var runMinute = $(".run-minute").text(minute < tenConst ? "0" + minute : minute);
-    var runHour = $(".run-hour").text(hour < tenConst ? "0" + hour : hour);
+    var runSecond = $(".run-second").text(second < tenConst ? '0' + second : second);
+    var runMinute = $(".run-minute").text(minute < tenConst ? '0' + minute : minute);
+    var runHour = $(".run-hour").text(hour < tenConst ? '0' + hour : hour);
     return {
         runHour: runHour,
         runMinute: runMinute,
@@ -58,13 +58,20 @@ function calculationTime(start, end) {
 }
 
 function changeButtonTimekeeping(id) {
-    if (id === 'clock_out') {
-        return $('#' + id).text("Chấm công").attr({
-            class: "btn btn-primary shadow-sm",
-            disabled: "disabled",
-        }).removeAttr('id');
-    }else if(id === 'clock_in'){
-        return $('#' + id).text("Kết thúc").attr({
+    if (id === 'clock_in_disabled') {
+        if ($('#clock_out').length) {
+            return $('#clock_out').text("Chấm công").attr({
+                class: "btn btn-primary shadow-sm",
+                disabled: "disabled",
+            }).removeAttr('id');
+        } else {
+            return $('#clock_in').text("Chấm công").attr({
+                class: "btn btn-primary shadow-sm",
+                disabled: "disabled",
+            }).removeAttr('id');
+        }
+    }else if(id === 'clock_out'){
+        return $('#clock_in').text("Kết thúc").attr({
             class: "btn btn-danger shadow-sm",
             id: "clock_out"
         });
@@ -72,14 +79,23 @@ function changeButtonTimekeeping(id) {
 }
 
 function checkTimekeeping(start, end, now) {
-    if (start !== undefinedValue && end === undefinedValue) {
+    if (start !== undefinedValue && end == undefinedValue) {
+        $('#timekeeping-in').text(moment(start).format('HH:mm:ss'));
+        $('#timekeeping-out').text(minTime);
+        changeButtonTimekeeping('clock_out');
         var calculationTimeFunc = calculationTime(moment(start, "YYYY-MM-DD HH:mm:ss"), moment(now, "YYYY-MM-DD HH:mm:ss"));
         var runRealtimeFunc = runRealtime(calculationTimeFunc.hour, calculationTimeFunc.minute, calculationTimeFunc.second);
         return runRealtimeFunc;
-    }else if (start !== undefinedValue && end !== undefinedValue) {         
-        changeButtonTimekeeping('clock_out');
+    }else if (start != undefinedValue && end != undefinedValue) {
+        $('#timekeeping-in').text(moment(start).format('HH:mm:ss'));
+        $('#timekeeping-out').text(moment(end).format('HH:mm:ss'));      
+        changeButtonTimekeeping('clock_in_disabled');
         var calculationTimeFunc = calculationTime(moment(start, 'YYYY-MM-DD HH:mm:ss'), moment(end, 'YYYY-MM-DD HH:mm:ss'));
         displayRunRealtime(calculationTimeFunc.hour, calculationTimeFunc.minute, calculationTimeFunc.second)
+    }else if (start == undefinedValue && end == undefinedValue) {
+        $('#timekeeping-in').text(minTime);
+        $('#timekeeping-out').text(minTime);
+        displayRunRealtime(zeroConst, zeroConst, zeroConst)
     }
 }
 
@@ -97,7 +113,7 @@ function clockOutApi(realTime, id) {
             cancelButton: 'btn btn-danger shadow-sm m-2',
         },
         preConfirm: async () => {
-            changeButtonTimekeeping(id);
+            changeButtonTimekeeping('clock_in_disabled');
 
             $.ajax({
                 url: linkTimekeeping + "clock-out",
