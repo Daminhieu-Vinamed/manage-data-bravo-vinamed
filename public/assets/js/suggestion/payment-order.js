@@ -197,14 +197,14 @@ $(document).ready(function () {
 
     $(document).on("blur", "#Stt_TU", function () {
         const valueSelected = $(this).val();
-        var Stt_TU = $(this).val(nullValue);
+        var Stt_TU = $(this).val(nullValue).removeAttr('data-value');
         $(this)
             .next("#list_Stt_TU")
             .children("option")
             .each(function () {
                 if ($(this).val() === valueSelected) {
                     $('#AmountTU').val($(this).attr("TotalAmount0"));
-                    return Stt_TU.val(valueSelected);
+                    return Stt_TU.val(valueSelected).attr("data-value", $(this).attr('data-value'));
                 }
             });
     });
@@ -310,7 +310,7 @@ $(document).ready(function () {
         const EmployeeCode = $("#EmployeeCode").attr('data-value');
         const CustomerCode1 = $("#CustomerCode1").attr('data-value');
         const AmountTT = $("#AmountTT").val();
-        const Stt_TU = $("#Stt_TU").val();
+        const Stt_TU = $("#Stt_TU").attr('data-value');
         const AmountTU = $("#AmountTU").val();
         const Hinh_Thuc_TT = $("#Hinh_Thuc_TT").val();
         const CurrencyCode = $("#CurrencyCode").val();
@@ -323,8 +323,8 @@ $(document).ready(function () {
         const Description = $("textarea[name='Description[]']").map(function () { return $(this).val() }).get();
         const Invoice = $("input[name='Invoice[]']").map(function () { return $(this).val() }).get();
         const So_Van_Don = $("input[name='So_Van_Don[]']").map(function () { return $(this).val() }).get();
-        const Trong_Luong = $("input[name='Trong_Luong[]']").map(function () { return $(this).val() }).get();
-        const DV_Trong_Luong = $("input[name='DV_Trong_Luong[]']").map(function () { return $(this).val() }).get();
+        // const Trong_Luong = $("input[name='Trong_Luong[]']").map(function () { return $(this).val() }).get();
+        // const DV_Trong_Luong = $("input[name='DV_Trong_Luong[]']").map(function () { return $(this).val() }).get();
         const CustomerCode2 = $("input[name='CustomerCode2[]']").map(function () { return $(this).val() }).get();
         const ExpenseCatgCode = $("input[name='ExpenseCatgCode[]']").map(function () { return $(this).val() }).get();
         const EmployeeCode1 = $("input[name='EmployeeCode1[]']").map(function () { return $(this).val() }).get();
@@ -372,8 +372,8 @@ $(document).ready(function () {
                 Description: Description,
                 Invoice: Invoice,
                 So_Van_Don: So_Van_Don,
-                Trong_Luong: Trong_Luong,
-                DV_Trong_Luong: DV_Trong_Luong,
+                // Trong_Luong: Trong_Luong,
+                // DV_Trong_Luong: DV_Trong_Luong,
                 CustomerCode2: CustomerCode2,
                 ExpenseCatgCode: ExpenseCatgCode,
                 EmployeeCode1: EmployeeCode1,
