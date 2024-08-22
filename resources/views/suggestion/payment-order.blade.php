@@ -58,8 +58,8 @@
                     <input list="list_Stt_TU" class="form-control" id="Stt_TU">
                     <datalist id="list_Stt_TU">
                         @foreach ($data['requests_for_advances'] as $item)
-                            <option data-value="{{ $item->Stt }}" value="{{ $item->Stt }}" TotalAmount0="{{ $item->TotalAmount0 }}">
-                                {{ $item->DocNo . ' - ' . $item->CustomerName }}
+                            <option data-value="{{ $item->Stt }}" value="{{ $item->DocNo }}" TotalAmount0="{{ $item->TotalAmount0 }}">
+                                {{ $item->Stt . ' - ' . $item->CustomerName }}
                             </option>
                         @endforeach
                     </datalist>
@@ -102,8 +102,8 @@
                             <th>Nội dung</th>
                             <th>Số tờ khai</th>
                             <th>Số vận đơn</th>
-                            <th>Trọng lượng</th>
-                            <th>Đơn vị trọng lượng</th>
+                            {{-- <th>Trọng lượng</th>
+                            <th>Đơn vị trọng lượng</th> --}}
                             <th>Đối tượng chi tiết</th>
                             <th>Khoản mục</th>
                             <th>Nhân viên</th>
@@ -134,12 +134,12 @@
                             <td>
                                 <input type="text" class="form-control" name="So_Van_Don[]" id="So_Van_Don">
                             </td>
-                            <td>
+                            {{-- <td>
                                 <input type="number" class="form-control" name="Trong_Luong[]" id="Trong_Luong" value="0">
                             </td>
                             <td>
                                 <input type="text" class="form-control" name="DV_Trong_Luong[]" id="DV_Trong_Luong">
-                            </td>
+                            </td> --}}
                             <td>
                                 <input list="listCustomerCode2" class="form-control" name="CustomerCode2[]" id="CustomerCode2">
                                 <datalist id="listCustomerCode2">

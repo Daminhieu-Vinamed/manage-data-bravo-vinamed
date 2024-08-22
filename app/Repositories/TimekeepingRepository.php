@@ -33,7 +33,14 @@ class TimekeepingRepository
             'RowId as RowId',
             'BranchCode as BranchCode'
         ]);
-        $labour = DB::connection($company)->table('vB30HrmCheckInOut')->where('EmployeeCodeCC', $EmployeeCode)->where('IsActive', config('constants.number.one'))->get(['CheckTime as start']);
+        
+        $labour = DB::connection($company)->table('vB30HrmCheckInOut')
+        ->selectRaw('MIN(CheckTime) AS [start], MAX(CheckTime) AS [end]')
+        ->where('EmployeeCodeCC', $EmployeeCode)
+        ->where('IsActive', config('constants.number.one'))
+        ->groupBy(DB::raw('DAY(CheckTime), MONTH(CheckTime), YEAR(CheckTime)'))
+        ->get();
+        
         $dataCalendar = array_merge($bs->toArray(), $np->toArray(), $labour->toArray());
         $data['dataCalendar'] = $dataCalendar;
         
