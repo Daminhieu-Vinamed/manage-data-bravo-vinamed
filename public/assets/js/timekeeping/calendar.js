@@ -61,6 +61,34 @@ var calendar = $("#calendar").fullCalendar({
         }
         element.popover(popover);
     },
+
+    eventAfterAllRender: function(view) {
+        // Custom logic to count events per date
+        let dateCount = {};
+        
+        // Iterate through all the events
+        $('#calendar').fullCalendar('clientEvents').forEach(function(event) {
+            if (event.title) {
+                if (dateCount[event.start.format('YYYY-MM-DD')]) {
+                    console.log(dateCount[event.start.format('YYYY-MM-DD')], event.workday);
+                    
+                    dateCount[event.start.format('YYYY-MM-DD')] = dateCount[event.start.format('YYYY-MM-DD')] + parseInt(event.workday);
+                } else {
+                    dateCount[event.start.format('YYYY-MM-DD')] = parseInt(event.workday);
+                }   
+            }
+        });
+        console.log(dateCount);
+        //Đang làm đến đoạn này
+        
+        // Display the count on the specific dates in the calendar
+        Object.keys(dateCount).forEach(function(date) {
+          let cell = $('.fc-day[data-date="' + date + '"]');
+          if (cell.length) {
+            cell.append('<div class="event-count">Count: ' + dateCount[date] + '</div>');
+          }
+        });
+    },
     eventClick:  function(arg) {
         if (arg.status === "19" || arg.status === "50") {
             const RowId = arg.RowId;
