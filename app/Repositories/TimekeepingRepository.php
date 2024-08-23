@@ -18,7 +18,8 @@ class TimekeepingRepository
             'TimesheetTypeName as type',
             'DocStatus as status',
             'RowId as RowId',
-            'BranchCode as BranchCode'
+            'BranchCode as BranchCode',
+            'WorkDay as workday'
         ]);
         $bs = DB::connection($company)->table('vB30HrmPTimesheet')
         ->where('IsActive', config('constants.number.one'))
@@ -31,7 +32,8 @@ class TimekeepingRepository
             'TimesheetTypeName as type',
             'DocStatus as status',
             'RowId as RowId',
-            'BranchCode as BranchCode'
+            'BranchCode as BranchCode',
+            'WorkDay as workday'
         ]);
         
         $labour = DB::connection($company)->table('vB30HrmCheckInOut')
