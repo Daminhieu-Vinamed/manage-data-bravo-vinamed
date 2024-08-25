@@ -42,13 +42,13 @@ var calendar = $("#calendar").fullCalendar({
                 popover.content = moment(event.start).format('dddd, D MMMM [năm] YYYY');
             }
 
-            if (event.status === "35" || event.status === "36" || event.status === "37" || event.status === "51") {
+            if (event.status == "35" || event.status == "36" || event.status == "37" || event.status == "51") {
                 popover.content = popover.content + '<br>' + "Trạng thái: đã duyệt"
                 element.css({'background-color': '#1cc88a', 'border': '1px solid #1cc88a'});
-            }else if (event.status === "19" || event.status === "50") {
+            }else if (event.status == "19" || event.status == "50") {
                 popover.content = popover.content + '<br>' + "Trạng thái: chờ duyệt"
                 element.css({'background-color': '#f6c23e', 'border': '1px solid #f6c23e'});
-            }else if(event.status === "9") {
+            }else if(event.status == "9") {
                 popover.content = popover.content + '<br>' + "Trạng thái: hủy duyệt"
                 element.css({'background-color': '#e74a3b', 'border': '1px solid #e74a3b'});
             }
@@ -63,29 +63,28 @@ var calendar = $("#calendar").fullCalendar({
     },
 
     eventAfterAllRender: function(view) {
-        // Custom logic to count events per date
         let dateCount = {};
-        
-        // Iterate through all the events
         $('#calendar').fullCalendar('clientEvents').forEach(function(event) {
-            if (event.title) {
+            if (event.title && event.status == "35" || event.status == "36" || event.status == "37" || event.status == "51") {
                 if (dateCount[event.start.format('YYYY-MM-DD')]) {
-                    console.log(dateCount[event.start.format('YYYY-MM-DD')], event.workday);
-                    
-                    dateCount[event.start.format('YYYY-MM-DD')] = dateCount[event.start.format('YYYY-MM-DD')] + parseInt(event.workday);
+                    dateCount[event.start.format('YYYY-MM-DD')] = dateCount[event.start.format('YYYY-MM-DD')] + parseFloat(event.workday);
                 } else {
-                    dateCount[event.start.format('YYYY-MM-DD')] = parseInt(event.workday);
-                }   
+                    dateCount[event.start.format('YYYY-MM-DD')] = parseFloat(event.workday);
+                }  
+            } else {
+                if (moment(event.start).format('HH:mm:ss') > clockIn || moment(event.end).format('HH:mm:ss') < clockOut) {
+                    if (!dateCount[event.start.format('YYYY-MM-DD')]) {
+                        dateCount[event.start.format('YYYY-MM-DD')] = zeroConst;
+                    }
+                } else {
+                    dateCount[event.start.format('YYYY-MM-DD')] = oneConst;
+                }  
             }
         });
-        console.log(dateCount);
-        //Đang làm đến đoạn này
-        
-        // Display the count on the specific dates in the calendar
         Object.keys(dateCount).forEach(function(date) {
           let cell = $('.fc-day[data-date="' + date + '"]');
           if (cell.length) {
-            cell.append('<div class="event-count">Count: ' + dateCount[date] + '</div>');
+            cell.append('<div class="event-count" style="padding: 2px;">Công: ' + dateCount[date] + '</div>');
           }
         });
     },
