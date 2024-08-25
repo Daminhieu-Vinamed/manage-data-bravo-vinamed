@@ -72,13 +72,19 @@ var calendar = $("#calendar").fullCalendar({
                     dateCount[event.start.format('YYYY-MM-DD')] = parseFloat(event.workday);
                 }  
             } else {
-                if (moment(event.start).format('HH:mm:ss') > clockIn || moment(event.end).format('HH:mm:ss') < clockOut) {
+                if (event.start && event.end) {
+                    if (moment(event.start).format('HH:mm:ss') > clockIn || moment(event.end).format('HH:mm:ss') < clockOut) {
+                        if (!dateCount[event.start.format('YYYY-MM-DD')]) {
+                            dateCount[event.start.format('YYYY-MM-DD')] = zeroConst;
+                        }
+                    } else {
+                        dateCount[event.start.format('YYYY-MM-DD')] = oneConst;
+                    } 
+                } else {
                     if (!dateCount[event.start.format('YYYY-MM-DD')]) {
                         dateCount[event.start.format('YYYY-MM-DD')] = zeroConst;
                     }
-                } else {
-                    dateCount[event.start.format('YYYY-MM-DD')] = oneConst;
-                }  
+                } 
             }
         });
         Object.keys(dateCount).forEach(function(date) {
