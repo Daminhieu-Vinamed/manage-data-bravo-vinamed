@@ -88,10 +88,14 @@ var calendar = $("#calendar").fullCalendar({
             }
         });
         Object.keys(dateCount).forEach(function(date) {
-          let cell = $('.fc-day[data-date="' + date + '"]');
-          if (cell.length) {
-            cell.append('<div class="event-count" style="padding: 2px;">Công: ' + dateCount[date] + '</div>');
-          }
+            let cell = $('.fc-day[data-date="' + date + '"]');
+            if (cell.length) {
+                if (dateCount[date] == zeroConst) {
+                    cell.append('<div class="event-count" style="padding: 2px; color: red;">Công: ' + dateCount[date] + '</div>');
+                } else {
+                    cell.append('<div class="event-count" style="padding: 2px;">Công: ' + dateCount[date] + '</div>');   
+                }
+            }
         });
     },
     eventClick:  function(arg) {
