@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('parent_user_id')->after('company')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            //đang làm dở phần này
         });
     }
 

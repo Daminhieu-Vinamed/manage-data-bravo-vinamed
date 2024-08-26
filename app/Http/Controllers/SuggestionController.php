@@ -74,7 +74,17 @@ class SuggestionController extends Controller
     {
         try {
             $data = $this->suggestionService->getPaymentOrder($request);
-            return view('suggestion.payment-order', compact('data'));
+            return view('suggestion.create-payment-order', compact('data'));
+        } catch (\Exception $e) {
+            return view('404');
+        }
+    }
+    
+    public function editPaymentOrder(Request $request)
+    {
+        try {
+            $data = $this->suggestionService->editPaymentOrder($request);
+            return view('suggestion.edit-payment-order', compact('data'));
         } catch (\Exception $e) {
             return view('404');
         }
@@ -89,7 +99,7 @@ class SuggestionController extends Controller
     {
         try {
             $data = $this->suggestionService->getRequestsForAdvances($request);
-            return view('suggestion.requests-for-advances', compact('data'));
+            return view('suggestion.create-requests-for-advances', compact('data'));
         } catch (\Exception $e) {
             return view('404');
         }
@@ -104,7 +114,7 @@ class SuggestionController extends Controller
     {
         try {
             $data = $this->suggestionService->getSuggestedPerDiem($request);
-            return view('suggestion.suggested-per-diem', compact('data'));
+            return view('suggestion.create-suggested-per-diem', compact('data'));
         } catch (\Exception $e) {
             return view('404');
         }

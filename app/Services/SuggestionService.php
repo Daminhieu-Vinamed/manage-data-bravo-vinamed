@@ -67,6 +67,12 @@ class SuggestionService extends SuggestionRepository
         return $data;
     }
     
+    public function editPaymentOrder($request)
+    {
+        $data =  $this->suggestionRepository->editPaymentOrder($request);
+        return $data;
+    }
+    
     public function postPaymentOrder($request)
     {
         $connectCompany = DB::connection($request->BranchCode);
