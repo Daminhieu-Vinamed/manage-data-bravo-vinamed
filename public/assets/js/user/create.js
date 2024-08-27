@@ -43,7 +43,7 @@ $(document).ready(function () {
         formData.append('email', $('#email').val());
         formData.append('password', $('#password').val());
         formData.append('re_password', $('#re_password').val());
-        formData.append('department_code', $('#department_code').val() !== nullValue ? $('#department_code').val() : '');
+        formData.append('department_code', $('#department_code').attr('data-value') !== nullValue ? $('#department_code').attr('data-value') : '');
         formData.append('company', $('#company').val() !== nullValue ? $('#company').val() : '');
         formData.append('parent_user_id', $('#parent_user_id').val() !== nullValue ? $('#parent_user_id').val() : '');
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
