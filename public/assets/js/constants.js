@@ -31,4 +31,4 @@ const oneHundredConst = 100;
 
 const minTime = '00:00:00';
 const clockIn = '09:00:00';
-const clockOut = '17:15:00';
+const clockOut = '16:30:00';
