@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
+    
+    public function parent()
+    {
+        return $this->belongsTo(User::class, 'parent_user_id', 'id');
+    }
 }
