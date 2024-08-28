@@ -30,7 +30,7 @@ class CreateRequest extends FormRequest
             're_password' => 'required_with:password|same:password',
             'department_code' => 'required|string',
             'company' => 'required|string',
-            'parent_user_id' => 'required|integer',
+            'parent_user_id' => 'nullable|integer',
             'role_id' => 'required|integer',
             'gender_id' => 'required|integer',
             'status_id' => 'required|integer',
@@ -69,7 +69,6 @@ class CreateRequest extends FormRequest
 
             'department_code.required' => 'Chưa chọn phòng ban',
             'company.required' => 'Chưa chọn công ty',
-            'parent_user_id.required' => 'Chưa chọn quản lý',
             'role_id.required' => 'Chưa chọn vai trò',
             'gender_id.required' => 'Chưa chọn giới tính',
             'status_id.required' => 'Chưa chọn trạng thái',

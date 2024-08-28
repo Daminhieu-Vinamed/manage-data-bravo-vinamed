@@ -26,9 +26,7 @@
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
                             <th>Đơn vị</th>
-                            @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four'))
-                                <th>Hành động</th>
-                            @endif
+                            <th>Hành động</th>
                             <th>Ngày</th>
                             <th>Tình trạng</th>
                         </tr>
@@ -42,13 +40,14 @@
                                 <td>{{ $item->EmployeeName }}</td>
                                 <td>{{ number_format($item->TotalAmount, config('constants.number.zero'), ".", ".") }}</td>
                                 <td>{{ $item->CurrencyCode }}</td>
-                                @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four'))
                                     <td>
                                         {{-- <button title="Bước đề nghị thanh toán" class="btn btn-info shadow-sm btn-circle" data-toggle="modal" data-target="#paymentOrderModal"><i class="fas fa-walking"></i></button> --}}
-                                        <button title="Duyệt đề nghị thanh toán" type="button" class="btn btn-success shadow-sm btn-circle approve-payment-request" branch_code="{{ $item->BranchCode }}" stt="{{ $item->Stt }}"><i class="fas fa-check"></i></button>
+                                        @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four') || Auth::user()->role->id === config('constants.number.five'))
+                                            <button title="Duyệt đề nghị thanh toán" type="button" class="btn btn-success shadow-sm btn-circle approve-payment-request" branch_code="{{ $item->BranchCode }}" stt="{{ $item->Stt }}"><i class="fas fa-check"></i></button>
+                                        @endif
+                                        <a href="{{ route('suggestion.edit-payment-order', ['DocCode' => request()->get('DocCode'), 'company' => $item->BranchCode, 'Stt' => $item->Stt]) }}" title="Chỉnh sửa đề nghị thanh toán" class="btn btn-info shadow-sm btn-circle"><i class="fas fa-edit"></i></a>
                                         <button title="Hủy đề nghị thanh toán" type="button" class="btn btn-danger shadow-sm btn-circle cancel-payment-request" branch_code="{{ $item->BranchCode }}" stt="{{ $item->Stt }}"><i class="fas fa-ban"></i></button>
                                     </td>
-                                @endif
                                 <td>{{ date('d-m-Y', strtotime($item->DocDate)) }}</td>
                                 <td>{{ $item->_StatusTT }}</td>
                             </tr>
@@ -62,9 +61,7 @@
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
                             <th>Đơn vị</th>
-                            @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four'))
-                                <th>Hành động</th>
-                            @endif
+                            <th>Hành động</th>
                             <th>Ngày</th>
                             <th>Tình trạng</th>
                         </tr>

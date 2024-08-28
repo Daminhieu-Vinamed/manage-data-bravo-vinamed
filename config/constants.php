@@ -24,6 +24,7 @@ return [
         'nine' => 9,
         'ten' => 10,
         'eleven' => 11,
+        'one_hundred' => 100,
     ],
 
     'timekeeping' => [
