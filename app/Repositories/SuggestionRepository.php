@@ -238,6 +238,92 @@ class SuggestionRepository
             }
         }
     }
+    
+    public function updatePO($connectCompany, $data)
+    {
+        $dataPO = [
+            "BranchCode" => $data->BranchCode,
+            "DocStatus" => $data->DocStatus,
+            "DocDate" => $data->DocDate,
+            "DocNo" => $data->DocNo,
+            "DocCode" => $data->DocCode,
+            "CustomerCode" => $data->CustomerCode1,
+            "AmountTT" => empty($data->AmountTT) ? config('constants.number.zero') : $data->AmountTT,
+            "Stt_TU" => empty($data->Stt_TU) ? config('constants.value.empty') : $data->Stt_TU,
+            "AmountTU" => empty($data->AmountTU) ? config('constants.number.zero') : $data->AmountTU,
+            "Hinh_Thuc_TT" => $data->Hinh_Thuc_TT,
+            "CurrencyCode" => $data->CurrencyCode,
+            "ExchangeRate" => empty($data->ExchangeRate) ? config('constants.number.zero') : $data->ExchangeRate,
+            "TotalOriginalAmount0" => $data->TotalOriginalAmount0,
+            "TotalAmount0" => isset($data->TotalAmount0) ? $data->TotalAmount0 : $data->TotalOriginalAmount0,
+            "TotalOriginalAmount3" => $data->TotalOriginalAmount3,
+            "TotalAmount3" => isset($data->TotalAmount3) ? $data->TotalAmount3 : $data->TotalOriginalAmount3,
+            "TotalOriginalAmount" => $data->TotalOriginalAmount,
+            "TotalAmount" => isset($data->TotalAmount) ? $data->TotalAmount : $data->TotalOriginalAmount,
+            "BankName" => isset($data->BankName) ? $data->BankName : config('constants.value.empty'),
+            "BankAccountNo" => isset($data->BankAccountNo) ? $data->BankAccountNo : config('constants.value.empty'),
+            "Ten_Chu_TK" => isset($data->Ten_Chu_TK) ? $data->Ten_Chu_TK : config('constants.value.empty'),
+            "Description1" => isset($data->Description1) ? $data->Description1 : config('constants.value.empty'),
+        ];
+
+        $connectCompany->table('B33AccDoc')->where('Id', $data->IdPO)->update($dataPO);
+        $paymentOrder = $connectCompany->table('B33AccDoc')->where('Id', $data->IdPO)->first();
+        
+        for ($i = config('constants.number.zero'); $i < $data->CountRow; $i++) { 
+            $OriginalAmount9 = empty($data->OriginalAmount9[$i]) ? config('constants.number.zero') : $data->OriginalAmount9[$i];
+            $OriginalAmount3 = empty($data->OriginalAmount3[$i]) ? config('constants.number.zero') : $data->OriginalAmount3[$i];
+            $dataPODetail = [
+                "BranchCode" => $data->BranchCode,
+                'Stt' => $paymentOrder->Stt,
+                "EmployeeCode" => $data->EmployeeCode,
+                "DocDate" => $data->DocDate,
+                "DocCode" => $data->DocCode,
+                'BuiltinOrder' => $i + config('constants.number.one'),
+                "So_Hd" => empty($data->So_Hd[$i]) ? config('constants.value.empty') : $data->So_Hd[$i],
+                "Ngay_Hd" => $data->Ngay_Hd[$i],
+                "Description" => empty($data->Description[$i]) ? config('constants.value.empty') : $data->Description[$i],
+                "Invoice" => empty($data->Invoice[$i]) ? config('constants.value.empty') : $data->Invoice[$i],
+                "So_Van_Don" => empty($data->So_Van_Don[$i]) ? config('constants.value.empty') : $data->So_Van_Don[$i],
+                // "Trong_Luong" => empty($data->Trong_Luong[$i]) ? config("constants.number.zero") : $data->Trong_Luong[$i],
+                // "DV_Trong_Luong" => empty($data->DV_Trong_Luong[$i]) ? config('constants.value.empty') : $data->DV_Trong_Luong[$i],
+                "CustomerCode" => empty($data->CustomerCode2[$i]) ? config('constants.value.empty') : $data->CustomerCode2[$i],
+                "ExpenseCatgCode" => empty($data->ExpenseCatgCode[$i]) ? config('constants.value.empty') : $data->ExpenseCatgCode[$i],
+                "EmployeeCode1" => empty($data->EmployeeCode1[$i]) ? config('constants.value.empty') : $data->EmployeeCode1[$i],
+                "DeptCode" => empty($data->DeptCode[$i]) ? config('constants.value.empty') : $data->DeptCode[$i],
+                "BizDocId_PO" => empty($data->BizDocId_PO[$i]) ? config('constants.value.empty') : $data->BizDocId_PO[$i],
+                "Hang_SX" => empty($data->Hang_SX[$i]) ? config('constants.value.empty') : $data->Hang_SX[$i],
+                "OriginalAmount9" => $OriginalAmount9,
+                "Amount9" => isset($data->Amount9[$i]) && !empty($data->Amount9[$i]) ? $data->Amount9[$i] : $OriginalAmount9,
+                'BookingExchangeRate' => $data->ExchangeRate,
+                "Note" => empty($data->Note[$i]) ? config('constants.value.empty') : $data->Note[$i],
+            ];
+            
+            $connectCompany->table('B33AccDocJournalEntry')->where('Id', $data->IdPODetail[$i])->update($dataPODetail);
+
+            if (!empty($data->TaxCode[$i])) {
+                $paymentOrderDetail = $connectCompany->table('B33AccDocJournalEntry')
+                ->where("Stt", $paymentOrder->Stt)->where("BuiltinOrder", $i + config('constants.number.one'))->first();
+                $dataPODetailVAT = [
+                    'Stt' => $paymentOrder->Stt,
+                    'RowId_SourceDoc' => $paymentOrderDetail->RowId,
+                    'BuiltinOrder' => $i + config('constants.number.one'),
+                    "BranchCode" => $data->BranchCode,
+                    "DocCode" => $data->DocCode,
+                    "DocDate" => $data->DocDate,
+                    'AtchDocDate' => $data->Ngay_Hd[$i],
+                    'AtchDocNo' => $data->So_Hd[$i],
+                    'OriginalAmountBeforeTax' => $OriginalAmount9,
+                    'AmountBeforeTax' => isset($data->Amount9[$i]) && empty($data->Amount9[$i]) ? $data->Amount9[$i] : $OriginalAmount9,
+                    'TaxCode' => $data->TaxCode[$i],
+                    'TaxRate' => $data->TaxRate[$i],
+                    'OriginalAmount' => $OriginalAmount3,
+                    'Amount' => isset($data->Amount3[$i]) && !empty($data->Amount3[$i]) ? $data->Amount3[$i] : $OriginalAmount3,
+                    'AtchDocType' => 'E3'
+                ];
+                $connectCompany->table('B33AccDocAtchDoc')->where('Id', $data->IdPODetailVAT[$i])->update($dataPODetailVAT);
+            }
+        }
+    }
 
     public function getRequestsForAdvances($request)
     {

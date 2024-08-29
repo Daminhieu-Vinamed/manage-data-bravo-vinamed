@@ -22,6 +22,7 @@ const fortyConst = 40;
 const fortyFiveConst = 45;
 const fiftyThreeConst = 53;
 const oneConst = 1;
+const twoConst = 2;
 const threeConst = 3;
 const fourConst = 4;
 const fiveConst = 5;
