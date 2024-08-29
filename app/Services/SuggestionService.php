@@ -86,6 +86,20 @@ class SuggestionService extends SuggestionRepository
             return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
         }
     }
+    
+    public function updatePaymentOrder($request)
+    {
+        $connectCompany = DB::connection($request->BranchCode);
+        $connectCompany->beginTransaction();
+        try {
+            $this->suggestionRepository->updatePO($connectCompany, $request);
+            $connectCompany->commit();
+            return response()->json(['status' => 'success', 'msg' => 'CẬP NHẬT ĐỀ NGHỊ THANH TOÁN THÀNH CÔNG'], 200);
+        } catch (\Exception $e) {
+            $connectCompany->rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đã bị lỗi, vui lòng liên hệ phòng IT Vmed để được hỗ trợ'], 401);
+        }
+    }
 
     public function getRequestsForAdvances($request)
     {

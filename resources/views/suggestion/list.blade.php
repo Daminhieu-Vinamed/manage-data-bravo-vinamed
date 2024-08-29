@@ -25,7 +25,7 @@
                             <th>Người nhận</th>
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
-                            <th>Đơn vị</th>
+                            {{-- <th>Đơn vị</th> --}}
                             <th>Hành động</th>
                             <th>Ngày</th>
                             <th>Tình trạng</th>
@@ -39,7 +39,7 @@
                                 <td>{{ $item->CustomerName }}</td>
                                 <td>{{ $item->EmployeeName }}</td>
                                 <td>{{ number_format($item->TotalAmount, config('constants.number.zero'), ".", ".") }}</td>
-                                <td>{{ $item->CurrencyCode }}</td>
+                                {{-- <td>{{ $item->CurrencyCode }}</td> --}}
                                     <td>
                                         {{-- <button title="Bước đề nghị thanh toán" class="btn btn-info shadow-sm btn-circle" data-toggle="modal" data-target="#paymentOrderModal"><i class="fas fa-walking"></i></button> --}}
                                         @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four') || Auth::user()->role->id === config('constants.number.five'))
@@ -60,7 +60,7 @@
                             <th>Người nhận</th>
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
-                            <th>Đơn vị</th>
+                            {{-- <th>Đơn vị</th> --}}
                             <th>Hành động</th>
                             <th>Ngày</th>
                             <th>Tình trạng</th>

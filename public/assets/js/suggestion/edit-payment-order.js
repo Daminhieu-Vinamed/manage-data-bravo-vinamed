@@ -127,6 +127,42 @@ $(document).ready(function () {
             });
     });
 
+    var elementEmployeeCode = $("#EmployeeCode");
+    const valueSelectedEmployeeCode = elementEmployeeCode.attr('data-value');    
+    var EmployeeCode = elementEmployeeCode.val(nullValue).removeAttr('data-value');
+    elementEmployeeCode
+        .next("#listEmployeeCode")
+        .children("option")
+        .each(function () {
+            if ($(this).attr('data-value') == valueSelectedEmployeeCode) {
+                return EmployeeCode.val($(this).val()).attr("data-value", $(this).attr('data-value'));
+            }
+        });
+
+    var elementCustomerCode1 = $("#CustomerCode1");
+    const valueSelectedCustomerCode1 = elementCustomerCode1.attr('data-value');
+    var CustomerCode = elementCustomerCode1.val(nullValue).removeAttr('data-value');
+    elementCustomerCode1
+        .next("#listCustomerCode1")
+        .children("option")
+        .each(function () {
+            if ($(this).attr('data-value') == valueSelectedCustomerCode1) {
+                return CustomerCode.val($(this).val()).attr("data-value", $(this).attr('data-value'));
+            }
+        });
+    
+    var elementSttTU = $("#Stt_TU");
+    const valueSelectedSttTU = elementSttTU.attr('data-value');
+    var Stt_TU = elementSttTU.val(nullValue).removeAttr('data-value');
+    elementSttTU
+        .next("#list_Stt_TU")
+        .children("option")
+        .each(function () {
+            if ($(this).attr('data-value') == valueSelectedSttTU) {
+                return Stt_TU.val($(this).val()).attr("data-value", $(this).attr('data-value'));
+            }
+        });
+
     $(document).on("blur", "#EmployeeCode", function () {
         const valueSelected = $(this).val();
         var EmployeeCode = $(this).val(nullValue).removeAttr('data-value');
@@ -292,6 +328,7 @@ $(document).ready(function () {
         const DocNo = $("#DocNo").val();
         const BranchCode = $("#company").val();
         const DocCode = $("#DocCode").val();
+        const IdPO = $("#IdPO").val();
         const DocStatus = fortyFiveConst;
         const EmployeeCode = $("#EmployeeCode").attr('data-value');
         const CustomerCode1 = $("#CustomerCode1").attr('data-value');
@@ -304,6 +341,8 @@ $(document).ready(function () {
         const TotalOriginalAmount0 = $("#TotalOriginalAmount0").val();
         const TotalOriginalAmount3 = $("#TotalOriginalAmount3").val();
         const TotalOriginalAmount = $("#TotalOriginalAmount").val();
+        const IdPODetail = $("input[name='IdPODetail[]']").map(function () { return $(this).val() }).get();
+        const IdPODetailVAT = $("input[name='IdPODetailVAT[]']").map(function () { return $(this).val() }).get();
         const So_Hd = $("input[name='So_Hd[]']").map(function () { return $(this).val() }).get();
         const Ngay_Hd = $("input[name='Ngay_Hd[]']").map(function () { return $(this).val() }).get();
         const Description = $("textarea[name='Description[]']").map(function () { return $(this).val() }).get();
@@ -333,7 +372,7 @@ $(document).ready(function () {
         const Description1 = $("#Description1").val();
 
         $.ajax({
-            url: linkSuggestion + "create-payment-order",
+            url: linkSuggestion + "update-payment-order",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -344,6 +383,7 @@ $(document).ready(function () {
                 DocNo: DocNo,
                 BranchCode: BranchCode,
                 DocCode: DocCode,
+                IdPO: IdPO,
                 DocStatus: DocStatus,
                 EmployeeCode: EmployeeCode,
                 CustomerCode1: CustomerCode1,
@@ -353,6 +393,8 @@ $(document).ready(function () {
                 Hinh_Thuc_TT: Hinh_Thuc_TT,
                 CurrencyCode: CurrencyCode,
                 ExchangeRate: ExchangeRate,
+                IdPODetail: IdPODetail,
+                IdPODetailVAT: IdPODetailVAT,
                 So_Hd: So_Hd,
                 Ngay_Hd: Ngay_Hd,
                 Description: Description,

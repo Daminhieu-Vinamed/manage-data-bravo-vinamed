@@ -94,6 +94,11 @@ class SuggestionController extends Controller
     {
         return $this->suggestionService->postPaymentOrder($request);
     }
+    
+    public function updatePaymentOrder(Request $request)
+    {
+        return $this->suggestionService->updatePaymentOrder($request);
+    }
 
     public function getRequestsForAdvances(ChooseCompanyCreateRequest $request)
     {

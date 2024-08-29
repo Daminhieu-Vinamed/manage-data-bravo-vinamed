@@ -24,11 +24,12 @@
         </div>
         <input type="hidden" value="{{ request()->get('company') }}" id="company">
         <input type="hidden" value="{{ request()->get('DocCode') }}" id="DocCode">
+        <input type="hidden" value="{{ $data['payment_order']->Id }}" id="IdPO">
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="EmployeeCode" class="form-label small">Người đề nghị</label>
-                    <input list="listEmployeeCode" class="form-control" id="EmployeeCode" value="{{ $data['payment_order_detail'][config('constants.number.zero')]->EmployeeCode }}">
+                    <input list="listEmployeeCode" class="form-control" id="EmployeeCode" data-value="{{ $data['payment_order_detail'][config('constants.number.zero')]->EmployeeCode }}">
                     <datalist id="listEmployeeCode">
                         @foreach ($data['bill_staff'] as $item)
                             <option data-value="{{ $item->Code }}" value="{{ $item->Code . ": " . $item->Name }}">{{ $item->Email }}</option>
@@ -38,7 +39,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="CustomerCode1" class="form-label small">Nhà cung cấp/Người nhận</label>
-                    <input list="listCustomerCode1" class="form-control" id="CustomerCode1" value="{{ $data['payment_order']->CustomerCode }}">
+                    <input list="listCustomerCode1" class="form-control" id="CustomerCode1" data-value="{{ $data['payment_order']->CustomerCode }}">
                     <datalist id="listCustomerCode1">
                         @foreach ($data['bill_detailed_object'] as $item)
                             <option data-value="{{ $item->Code }}" value="{{ $item->Code . ": " . $item->Name }}" 
@@ -55,7 +56,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Stt_TU" class="form-label small">Đề nghị tạm ứng</label>
-                    <input list="list_Stt_TU" class="form-control" id="Stt_TU" value="{{ $data['payment_order']->Stt_TU }}">
+                    <input list="list_Stt_TU" class="form-control" id="Stt_TU" data-value="{{ $data['payment_order']->Stt_TU }}">
                     <datalist id="list_Stt_TU">
                         @foreach ($data['requests_for_advances'] as $item)
                             <option data-value="{{ $item->Stt }}" value="{{ $item->DocNo }}" TotalAmount0="{{ $item->TotalAmount0 }}">
@@ -124,6 +125,8 @@
                     <tbody>
                         @foreach ($data['payment_order_detail'] as $key => $value)
                             <tr id="line-{{$key}}">
+                                <input type="hidden" name="IdPODetail[]" value="{{ $value->Id }}">
+                                <input type="hidden" name="IdPODetailVAT[]" value="{{ $data['payment_order_detail_VAT'][$key]->Id }}">
                                 @if ($data['payment_order_detail']->count() > config('constants.number.one'))
                                     @if ($key == config('constants.number.zero'))
                                         <td></td>
@@ -327,7 +330,7 @@
                 </div>
             @endif
             <div class="py-3 row justify-content-center">
-                <button type="button" id="create-payment-order" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">TẠO MỚI</button>
+                <button type="button" id="update-payment-order" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">CẬP NHẬT</button>
             </div>
         </div>
     </div>
