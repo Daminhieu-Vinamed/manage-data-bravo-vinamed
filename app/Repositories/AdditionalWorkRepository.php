@@ -56,7 +56,7 @@ class AdditionalWorkRepository
                 ]);
                 $additionalWorkTotal[$value] = $additionalWork->toArray();
             };
-        }elseif (Auth::user()->role->id === config('constants.number.four')) {
+        }elseif (Auth::user()->role->id === config('constants.number.four') || Auth::user()->role->id === config('constants.number.five')) {
             $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
             foreach (config('constants.company') as $value) {
                 $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
