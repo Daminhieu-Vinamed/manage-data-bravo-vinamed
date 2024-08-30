@@ -4,7 +4,7 @@ namespace App\Http\Requests\Suggestion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CancelPaymentOrderRequest extends FormRequest
+class CancelSuggestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

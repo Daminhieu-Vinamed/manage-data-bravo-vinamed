@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\SuggestionRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class SuggestionService extends SuggestionRepository
 {
@@ -30,7 +31,23 @@ class SuggestionService extends SuggestionRepository
             $arrayDataCollect["A25"]
         );
         $collectData = collect($arrayData)->sortByDesc('DocDate')->all();
-        return $collectData;
+        return DataTables::of($collectData)
+        ->editColumn('TotalAmount', function ($paymentOrder) {
+            return number_format($paymentOrder->TotalAmount, config('constants.number.zero'), ".", ".");
+        })
+        ->editColumn('DocDate', function ($paymentOrder) {
+            return date('d-m-Y', strtotime($paymentOrder->DocDate));
+        })
+        ->addColumn('action', function ($paymentOrder) {
+            $action = '<a href="' . route('suggestion.edit-payment-order', ['DocCode' => request()->get('DocCode'), 'company' => $paymentOrder->BranchCode, 'Stt' => $paymentOrder->Stt]) . '" title="Chỉnh sửa đề nghị thanh toán" class="btn btn-info shadow-sm btn-circle"><i class="fas fa-edit"></i></a>' .
+            ' <button title="Hủy đề nghị thanh toán" type="button" class="btn btn-danger shadow-sm btn-circle cancel-payment-request" branch_code="'. $paymentOrder->BranchCode .'" stt="'. $paymentOrder->Stt .'"><i class="fas fa-ban"></i></button>';
+            if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four') || Auth::user()->role->id === config('constants.number.five')) {
+                $action = '<button title="Duyệt đề nghị thanh toán" type="button" class="btn btn-success shadow-sm btn-circle approve-payment-request" branch_code="'. $paymentOrder->BranchCode .'" stt="'. $paymentOrder->Stt .'"><i class="fas fa-check"></i></button> ' . $action;
+            }
+            return $action;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
     }
 
     public function approve($request)
