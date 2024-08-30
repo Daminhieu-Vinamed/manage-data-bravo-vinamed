@@ -93,7 +93,8 @@
                 @if (Auth::user()->role->id === config('constants.number.one') ||
                     Auth::user()->role->id === config('constants.number.two') ||
                     Auth::user()->role->id === config('constants.number.three') ||
-                    Auth::user()->role->id === config('constants.number.four'))
+                    Auth::user()->role->id === config('constants.number.four')||
+                    Auth::user()->role->id === config('constants.number.five'))
                     <a class="collapse-item {{ request()->routeIs('on-leave.list') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('on-leave.list') }}">Danh sách nghỉ phép</a>
                     <a class="collapse-item {{ request()->routeIs('additional-work.list') ? 'active' : config('constants.value.empty') }}"
