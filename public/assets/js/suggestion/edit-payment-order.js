@@ -230,7 +230,6 @@ $(document).ready(function () {
     });
 
     $(document).on("blur", ".ExpenseCatgCode", function () {
-        // lam den day
         const valueSelected = $(this).val();
         var thisExpenseCatgCode = $(this).val(nullValue);
         $(this)

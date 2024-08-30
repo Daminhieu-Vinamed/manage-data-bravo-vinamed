@@ -10,6 +10,7 @@ use App\Http\Requests\Suggestion\CreatePaymentOrderRequest;
 use App\Http\Requests\Suggestion\CreateRequestsForAdvancesRequest;
 use App\Http\Requests\Suggestion\CreateSuggestedPerDiemRequest;
 use App\Http\Requests\Suggestion\EditSuggestionRequest;
+use App\Http\Requests\Suggestion\UpdatePaymentOrderRequest;
 use App\Services\SuggestionService;
 use Illuminate\Http\Request;
 
@@ -74,6 +75,20 @@ class SuggestionController extends Controller
             return view('404');
         }
     }
+    
+    public function directionalEdit(EditSuggestionRequest $request)
+    {
+        if ($request->DocCode === "TT") {
+            return redirect()->route('suggestion.edit-payment-order', ['company' => $request->company, 'DocCode' => $request->DocCode, 'Stt' => $request->Stt]);
+        } elseif ($request->DocCode === "TG") {
+            return redirect()->route('suggestion.edit-requests-for-advances', ['company' => $request->company, 'DocCode' => $request->DocCode, 'Stt' => $request->Stt]);
+        } 
+        // elseif ($request->DocCode === "CC") {
+        //     return redirect()->route('suggestion.edit-suggested-per-diem', ['company' => $request->company, 'DocCode' => $request->DocCode, 'Stt' => $request->Stt]);
+        // }else{
+        //     return view('404');
+        // }
+    }
 
     public function getPaymentOrder(ChooseCompanyCreateRequest $request)
     {
@@ -100,7 +115,7 @@ class SuggestionController extends Controller
         return $this->suggestionService->postPaymentOrder($request);
     }
     
-    public function updatePaymentOrder(Request $request)
+    public function updatePaymentOrder(UpdatePaymentOrderRequest $request)
     {
         return $this->suggestionService->updatePaymentOrder($request);
     }

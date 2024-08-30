@@ -145,7 +145,7 @@
                                     <span class="text-danger small" id="So_Hd_error"></span>
                                 </td>
                                 <td>
-                                    <input type="date" class="form-control Ngay_Hd" name="Ngay_Hd[]" value="{{ date('Y-m-d', strtotime($value->Ngay_Hd)) }}">
+                                    <input type="date" class="form-control Ngay_Hd" name="Ngay_Hd[]" value="{{ empty($value->Ngay_Hd) ? config('constants.value.null') : date('Y-m-d', strtotime($value->Ngay_Hd)) }}">
                                     <span class="text-danger small" id="Ngay_Hd_error"></span>
                                 </td>
                                 <td>
