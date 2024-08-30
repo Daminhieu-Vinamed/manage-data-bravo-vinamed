@@ -55,7 +55,7 @@ class OnLeaveRepository
                 ]);
                 $onLeaveTotal[$value] = $onLeave->toArray();
             };
-        }elseif (Auth::user()->role->id === config('constants.number.four')) {
+        }elseif (Auth::user()->role->id === config('constants.number.four') || Auth::user()->role->id === config('constants.number.five')) {
             $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
             foreach (config('constants.company') as $value) {
                 $onLeave = DB::connection($value)->table('vB30HrmPTimesheet')
