@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Suggestion\CancelPaymentOrderRequest;
+use App\Http\Requests\Suggestion\CancelSuggestionRequest;
 use App\Http\Requests\Suggestion\ChooseCompanyCreateRequest;
 use App\Http\Requests\Suggestion\ChooseCompanyListRequest;
 use App\Http\Requests\Suggestion\CreatePaymentOrderRequest;
 use App\Http\Requests\Suggestion\CreateRequestsForAdvancesRequest;
 use App\Http\Requests\Suggestion\CreateSuggestedPerDiemRequest;
+use App\Http\Requests\Suggestion\EditSuggestionRequest;
 use App\Services\SuggestionService;
 use Illuminate\Http\Request;
 
@@ -22,10 +23,14 @@ class SuggestionController extends Controller
         $this->suggestionService = $suggestionService;
     }
 
-    public function list(Request $request)
+    public function list()
     {
-        $data = $this->suggestionService->getData($request->DocCode);
-        return view('suggestion.list', compact('data'));
+        return view('suggestion.list');
+    }
+    
+    public function getData(Request $request)
+    {
+        return $this->suggestionService->getData($request->DocCode);
     }
 
     public function approve(Request $request)
@@ -33,7 +38,7 @@ class SuggestionController extends Controller
         return $this->suggestionService->approve($request);
     }
 
-    public function cancel(CancelPaymentOrderRequest $request)
+    public function cancel(CancelSuggestionRequest $request)
     {
         return $this->suggestionService->cancel($request);
     }
@@ -80,7 +85,7 @@ class SuggestionController extends Controller
         }
     }
     
-    public function editPaymentOrder(Request $request)
+    public function editPaymentOrder(EditSuggestionRequest $request)
     {
         try {
             $data = $this->suggestionService->editPaymentOrder($request);

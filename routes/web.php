@@ -20,6 +20,7 @@ Route::prefix('/')->group(function () {
 
         Route::prefix('suggestion')->name('suggestion.')->group(function () {
             Route::get('/', [SuggestionController::class, 'list'])->name('list');
+            Route::get('get-data', [SuggestionController::class, 'getData']);
             Route::get('choose-company-list', [SuggestionController::class, 'chooseCompanyList'])->name('choose-company-list');
             Route::get('directional-list', [SuggestionController::class, 'directionalList'])->name('directional-list');
             Route::middleware('checkRoleManage')->group(function () {

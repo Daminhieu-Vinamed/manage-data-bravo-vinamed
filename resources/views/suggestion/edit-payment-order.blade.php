@@ -19,7 +19,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Số chứng từ</span>
                 </div>
-                <input type="text" class="form-control" id="DocNo" value="{{ $data['payment_order']->DocNo }}">
+                <input type="text" class="form-control" id="DocNo" value="{{ $data['payment_order']->DocNo }}" readonly>
             </div>
         </div>
         <input type="hidden" value="{{ request()->get('company') }}" id="company">
@@ -126,7 +126,9 @@
                         @foreach ($data['payment_order_detail'] as $key => $value)
                             <tr id="line-{{$key}}">
                                 <input type="hidden" name="IdPODetail[]" value="{{ $value->Id }}">
-                                <input type="hidden" name="IdPODetailVAT[]" value="{{ $data['payment_order_detail_VAT'][$key]->Id }}">
+                                @if (isset($data['payment_order_detail_VAT'][$key]))
+                                    <input type="hidden" name="IdPODetailVAT[]" value="{{ $data['payment_order_detail_VAT'][$key]->Id }}">
+                                @endif
                                 @if ($data['payment_order_detail']->count() > config('constants.number.one'))
                                     @if ($key == config('constants.number.zero'))
                                         <td></td>
@@ -225,7 +227,7 @@
                                 @endif
                                 <td>
                                     <label for="TaxCode" class="form-label small">Loại</label>
-                                    <input list="listTaxCode" class="form-control TaxCode" name="TaxCode[]" value="{{ $data['payment_order_detail_VAT'][$key]->TaxCode }}">
+                                    <input list="listTaxCode" class="form-control TaxCode" name="TaxCode[]" value="{{ isset($data['payment_order_detail_VAT'][$key]) ? $data['payment_order_detail_VAT'][$key]->TaxCode : config('constants.value.empty') }}">
                                     <datalist id="listTaxCode">
                                         @foreach ($data['bill_tax_category'] as $item)
                                             <option percent="{{ $item->Rate }}" data-value="{{ $item->Code }}"
@@ -236,16 +238,16 @@
                                 </td>
                                 <td>
                                     <label for="TaxRate" class="form-label small">%</label>
-                                    <input type="number" class="form-control" name="TaxRate[]" id="TaxRate" percent="{{ $data['payment_order_detail_VAT'][$key]->TaxRate }}" value="{{ number_format($data['payment_order_detail_VAT'][$key]->TaxRate * config('constants.number.one_hundred'), config('constants.number.zero')) }}" readonly>
+                                    <input type="number" class="form-control" name="TaxRate[]" id="TaxRate" percent="{{ isset($data['payment_order_detail_VAT'][$key]) ? $data['payment_order_detail_VAT'][$key]->TaxRate : config('constants.value.empty') }}" value="{{ isset($data['payment_order_detail_VAT'][$key]) ? number_format($data['payment_order_detail_VAT'][$key]->TaxRate * config('constants.number.one_hundred'), config('constants.number.zero')) : config('constants.value.empty') }}" readonly>
                                 </td>
                                 <td>
                                     <label for="OriginalAmount3" class="form-label small">Tiền {{ $data['payment_order']->CurrencyCode }}</label>
-                                    <input type="text" class="form-control" name="OriginalAmount3[]" id="OriginalAmount3" value="{{ number_format($data['payment_order_detail_VAT'][$key]->OriginalAmount, config('constants.number.zero'), '.', '') }}" readonly>
+                                    <input type="text" class="form-control" name="OriginalAmount3[]" id="OriginalAmount3" value="{{ isset($data['payment_order_detail_VAT'][$key]) ? number_format($data['payment_order_detail_VAT'][$key]->OriginalAmount, config('constants.number.zero'), '.', '') : config('constants.value.empty') }}" readonly>
                                 </td>
                                 @if ($data['payment_order']->CurrencyCode != 'VND')
                                     <td id="td_Amount3">
                                         <label for="Amount3" class="form-label small">Tiền VND</label>
-                                        <input type="number" class="form-control" name="Amount3[]" id="Amount3" value="{{ number_format($data['payment_order_detail_VAT'][$key]->Amount, config('constants.number.zero'), '.', '') }}" readonly>
+                                        <input type="number" class="form-control" name="Amount3[]" id="Amount3" value="{{ isset($data['payment_order_detail_VAT'][$key]) ? number_format($data['payment_order_detail_VAT'][$key]->Amount, config('constants.number.zero'), '.', '') : config('constants.value.empty') }}" readonly>
                                     </td>
                                 @endif
                                 <td>

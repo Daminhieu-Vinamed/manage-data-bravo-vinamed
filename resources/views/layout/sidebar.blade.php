@@ -19,6 +19,7 @@
         request()->routeIs('suggestion.choose-company-create') ||
         request()->routeIs('suggestion.payment-order') ||
         request()->routeIs('suggestion.requests-for-advances') ||
+        request()->routeIs('suggestion.edit-payment-order') ||
         request()->routeIs('suggestion.suggested-per-diem')
             ? 'active'
             : config('constants.value.empty') }}">
@@ -28,6 +29,7 @@
         request()->routeIs('suggestion.choose-company-create') ||
         request()->routeIs('suggestion.payment-order') ||
         request()->routeIs('suggestion.requests-for-advances') ||
+         request()->routeIs('suggestion.edit-payment-order') ||
         request()->routeIs('suggestion.suggested-per-diem')
             ? config('constants.value.empty')
             : 'collapsed' }}"
@@ -42,6 +44,7 @@
             request()->routeIs('suggestion.choose-company-create') ||
             request()->routeIs('suggestion.payment-order') ||
             request()->routeIs('suggestion.requests-for-advances') ||
+             request()->routeIs('suggestion.edit-payment-order') ||
              request()->routeIs('suggestion.suggested-per-diem')
                 ? 'show'
                 : config('constants.value.empty') }}"
@@ -52,7 +55,7 @@
                     <a class="collapse-item {{ request()->routeIs('suggestion.statistical') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('suggestion.statistical') }}">Thống kê</a>
                 @endif
-                <a class="collapse-item {{ request()->routeIs('suggestion.choose-company-list') || request()->routeIs('suggestion.list') ? 'active' : config('constants.value.empty') }}"
+                <a class="collapse-item {{ request()->routeIs('suggestion.choose-company-list') || request()->routeIs('suggestion.list') || request()->routeIs('suggestion.edit-payment-order') ? 'active' : config('constants.value.empty') }}"
                     href="{{ route('suggestion.choose-company-list') }}">Danh sách</a>
                 <a class="collapse-item {{ request()->routeIs('suggestion.choose-company-create') || request()->routeIs('suggestion.payment-order') || request()->routeIs('suggestion.requests-for-advances') || request()->routeIs('suggestion.suggested-per-diem') ? 'active' : config('constants.value.empty') }}"
                     href="{{ route('suggestion.choose-company-create') }}">Tạo mới</a>

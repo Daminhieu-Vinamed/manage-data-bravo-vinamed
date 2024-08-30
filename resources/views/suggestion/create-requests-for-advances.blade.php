@@ -19,7 +19,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Số chứng từ</span>
                 </div>
-                <input type="text" class="form-control" id="DocNo" value="{{ $data['DocNo'] }}">
+                <input type="text" class="form-control" id="DocNo" value="{{ $data['DocNo'] }}" readonly>
             </div>
         </div>
         <input type="hidden" value="{{ request()->get('company') }}" id="company">
