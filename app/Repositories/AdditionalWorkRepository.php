@@ -38,6 +38,7 @@ class AdditionalWorkRepository
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', 'BS')
                 ->where('DocStatus', '50')
+                ->where('IsTP', config('constants.number.one'))
                 ->whereIn('DeptCode', $arrayDeptCode)
                 ->whereYear('FromDate',  $timeNow->format('Y'))
                 ->get([
