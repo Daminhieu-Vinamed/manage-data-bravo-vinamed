@@ -1,4 +1,4 @@
-var listPaymentOrder = $("#payment_order").DataTable({
+var listPaymentOrder = $("#suggestion").DataTable({
     ajax: {
         type: "get",
         url: linkSuggestion + "get-data" + location.search,
@@ -43,8 +43,8 @@ var listPaymentOrder = $("#payment_order").DataTable({
         var len = api.page.len();
         var numRows = api.rows().count();
         if (numRows <= len) {
-            $('#payment_order_wrapper').children('.row:last').remove();
-            $('#payment_order_wrapper').children('.row:first').remove();
+            $('#suggestion_wrapper').children('.row:last').remove();
+            $('#suggestion_wrapper').children('.row:first').remove();
         }
     },
 });

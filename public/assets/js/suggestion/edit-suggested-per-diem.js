@@ -1,22 +1,6 @@
 $(document).ready(function () {
-    $("#ExchangeRate").val(oneConst);
-    const docNo = $("#DocNo").val();
-    const numberLastBefore = parseInt(docNo.slice(docNo.lastIndexOf(".") + oneConst));
-    const lengthDocNoBefore = docNo.slice(docNo.lastIndexOf(".") + oneConst).length;
-    var numberLastAfter = (numberLastBefore + oneConst).toString();
-    for (let index = zeroConst; index < lengthDocNoBefore; index++) {    
-        if (numberLastAfter.length < lengthDocNoBefore) {
-            numberLastAfter = "0" + numberLastAfter
-        }
-    }
-    let firstDotIndex = docNo.indexOf(".");
-    if (firstDotIndex !== -oneConst) {
-        let secondDotIndex = docNo.indexOf(".", firstDotIndex + oneConst);
-        if (secondDotIndex !== -oneConst) {
-            const sliced2 = docNo.substring(zeroConst, secondDotIndex);
-            const docNoNew = sliced2 + "." + numberLastAfter;
-            $("#DocNo").val(docNoNew);
-        }
+    if ($('#CurrencyCode').val() != "VND") {
+        $("#ExchangeRate").removeAttr("readonly");
     }
     $(document).on("change", "#Hinh_Thuc_TT", function () {
         const value_Hinh_Thuc_TT = $(this).val();
@@ -57,9 +41,9 @@ $(document).ready(function () {
 
         $("#th_OriginalAmount9").text("Giá trị " + valueCurrency + " chưa VAT");
         $('label[for="OriginalAmount3"]').text("Tiền " + valueCurrency);
-        if (valueCurrency !== "VND") {
+        if (valueCurrency != "VND") {
+            $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
             if (!$("#th_Amount9").length) {
-                $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
                 $("thead tr #th_OriginalAmount9").after(
                     '<th id="th_Amount9">Tiền VND</th>'
                 );
@@ -90,7 +74,7 @@ $(document).ready(function () {
                     <div/>
                 `);
             }
-        } else if (valueCurrency === "VND") {
+        } else {
             $("thead tr #th_value_added_tax_vat").attr("colspan", threeConst);
             $("#ExchangeRate").val(oneConst).attr("readonly", trueValue);
             $("thead tr #th_Amount9, tbody tr #td_Amount9, tbody tr #td_Amount3").remove();
@@ -130,7 +114,7 @@ $(document).ready(function () {
         total_payment_order();
     });
 
-    $(document).on("blur", "#CustomerCode2", function () {
+    $(document).on("blur", ".CustomerCode2", function () {
         const valueSelected = $(this).val();
         var CustomerCode2 = $(this).val(nullValue);
         $(this)
@@ -143,7 +127,7 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on("blur", "#TerritoryCode", function () {
+    $(document).on("blur", ".TerritoryCode", function () {
         const valueSelected = $(this).val();
         var TerritoryCode = $(this).val(nullValue);
         $(this)
@@ -155,6 +139,42 @@ $(document).ready(function () {
                 }
             });
     });
+
+    var elementEmployeeCode = $("#EmployeeCode");
+    const valueSelectedEmployeeCode = elementEmployeeCode.attr('data-value');    
+    var EmployeeCode = elementEmployeeCode.val(nullValue).removeAttr('data-value');
+    elementEmployeeCode
+        .next("#listEmployeeCode")
+        .children("option")
+        .each(function () {
+            if ($(this).attr('data-value') == valueSelectedEmployeeCode) {
+                return EmployeeCode.val($(this).val()).attr("data-value", $(this).attr('data-value'));
+            }
+        });
+
+    var elementCustomerCode1 = $("#CustomerCode1");
+    const valueSelectedCustomerCode1 = elementCustomerCode1.attr('data-value');
+    var CustomerCode = elementCustomerCode1.val(nullValue).removeAttr('data-value');
+    elementCustomerCode1
+        .next("#listCustomerCode1")
+        .children("option")
+        .each(function () {
+            if ($(this).attr('data-value') == valueSelectedCustomerCode1) {
+                return CustomerCode.val($(this).val()).attr("data-value", $(this).attr('data-value'));
+            }
+        });
+
+    var elementSttTU = $("#Stt_TU");
+    const valueSelectedSttTU = elementSttTU.attr('data-value');
+    var Stt_TU = elementSttTU.val(nullValue).removeAttr('data-value');
+    elementSttTU
+        .next("#list_Stt_TU")
+        .children("option")
+        .each(function () {
+            if ($(this).attr('data-value') == valueSelectedSttTU) {
+                return Stt_TU.val($(this).val()).attr("data-value", $(this).attr('data-value'));
+            }
+        });
 
     $(document).on("blur", "#EmployeeCode", function () {
         const valueSelected = $(this).val();
@@ -191,7 +211,7 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on("blur", "#EmployeeCode1", function () {
+    $(document).on("blur", ".EmployeeCode1", function () {
         const valueSelected = $(this).val();
         var EmployeeCode1 = $(this).val(nullValue);
         $(this)
@@ -201,7 +221,7 @@ $(document).ready(function () {
                 if ($(this).val() === valueSelected) {
                     const trId = $(this).parents("tr").attr("id");
                     $("#" + trId)
-                        .find("#DeptCode")
+                        .find(".DeptCode")
                         .val($(this).attr("department"));
                     return EmployeeCode1.val(valueSelected);
                 }
@@ -222,7 +242,7 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on("blur", "#ExpenseCatgCode", function () {
+    $(document).on("blur", ".ExpenseCatgCode", function () {
         const valueSelected = $(this).val();
         var thisExpenseCatgCode = $(this).val(nullValue);
         $(this)
@@ -235,7 +255,7 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on("blur", "#DeptCode", function () {
+    $(document).on("blur", ".DeptCode", function () {
         const valueSelected = $(this).val();
         var DeptCode = $(this).val(nullValue);
         $(this)
@@ -272,6 +292,19 @@ $(document).ready(function () {
         total_payment_order();
     });
 
+    $(document).on("blur", ".BizDocId_PO", function () {
+        const valueSelected = $(this).val();
+        var this_BizDocId_PO = $(this).val(nullValue);
+        $(this)
+            .next("#list_BizDocId_PO")
+            .children("option")
+            .each(function () {
+                if ($(this).val() === valueSelected) {
+                    return this_BizDocId_PO.val(valueSelected);
+                }
+            });
+    });
+
     $(document).on("change keyup paste", "#OriginalAmount9", function () {
         const percentFormat = $(this).parents("tr").find("#TaxRate").val();
         const percent = $(this).parents("tr").find("#TaxRate").attr("percent");
@@ -300,11 +333,12 @@ $(document).ready(function () {
         total_payment_order();
     });
 
-    $(document).on("click", "#create-suggested-per-diem", function () {
+    $(document).on("click", "#edit-suggested-per-diem", function () {
         const CountRow = $('#table-suggested-per-diem > tbody > tr').length;
         const DocDate = $("#DocDate").val();
         const DocNo = $("#DocNo").val();
         const BranchCode = $("#company").val();
+        const IdSPD = $("#IdSPD").val();
         const DocCode = $("#DocCode").val();
         const DocStatus = fiftyThreeConst;
         const EmployeeCode = $("#EmployeeCode").attr('data-value');
@@ -323,14 +357,17 @@ $(document).ready(function () {
         const TotalOriginalAmount0 = $("#TotalOriginalAmount0").val();
         const TotalOriginalAmount3 = $("#TotalOriginalAmount3").val();
         const TotalOriginalAmount = $("#TotalOriginalAmount").val();
+        const IdSPDDetail = $("input[name='IdSPDDetail[]']").map(function () { return $(this).val() }).get();
+        const IdSPDDetailVAT = $("input[name='IdSPDDetailVAT[]']").map(function () { return $(this).val() }).get();
         const So_Hd = $("input[name='So_Hd[]']").map(function () { return $(this).val() }).get();
         const Ngay_Hd = $("input[name='Ngay_Hd[]']").map(function () { return $(this).val() }).get();
-        const TerritoryCode = $("input[name='TerritoryCode[]']").map(function () { return $(this).val() }).get();
         const DescriptionDetail = $("textarea[name='Description[]']").map(function () { return $(this).val() }).get();
         const CustomerCode2 = $("input[name='CustomerCode2[]']").map(function () { return $(this).val() }).get();
         const ExpenseCatgCode = $("input[name='ExpenseCatgCode[]']").map(function () { return $(this).val() }).get();
         const EmployeeCode1 = $("input[name='EmployeeCode1[]']").map(function () { return $(this).val() }).get();
         const DeptCode = $("input[name='DeptCode[]']").map(function () { return $(this).val() }).get();
+        const BizDocId_PO = $("input[name='BizDocId_PO[]']").map(function () { return $(this).val() }).get();
+        const Hang_SX = $("input[name='Hang_SX[]']").map(function () { return $(this).val() }).get();
         const OriginalAmount9 = $("input[name='OriginalAmount9[]']").map(function () { return $(this).val() }).get();
         const Amount9 = $("input[name='Amount9[]']").map(function () { return $(this).val() }).get();
         const TaxCode = $("input[name='TaxCode[]']").map(function () { return $(this).val() }).get();
@@ -347,7 +384,7 @@ $(document).ready(function () {
         const Description1 = $("#Description1").val();
 
         $.ajax({
-            url: linkSuggestion + "create-suggested-per-diem",
+            url: linkSuggestion + "update-suggested-per-diem",
             type: "POST",
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -357,6 +394,9 @@ $(document).ready(function () {
                 DocDate: DocDate,
                 DocNo: DocNo,
                 BranchCode: BranchCode,
+                IdSPD: IdSPD,
+                IdSPDDetail: IdSPDDetail,
+                IdSPDDetailVAT: IdSPDDetailVAT,
                 DocCode: DocCode,
                 DocStatus: DocStatus,
                 EmployeeCode: EmployeeCode,
@@ -374,12 +414,13 @@ $(document).ready(function () {
                 ExchangeRate: ExchangeRate,
                 So_Hd: So_Hd,
                 Ngay_Hd: Ngay_Hd,
-                TerritoryCode: TerritoryCode,
                 DescriptionDetail: DescriptionDetail,
                 CustomerCode2: CustomerCode2,
                 ExpenseCatgCode: ExpenseCatgCode,
                 EmployeeCode1: EmployeeCode1,
                 DeptCode: DeptCode,
+                BizDocId_PO: BizDocId_PO,
+                Hang_SX: Hang_SX,
                 OriginalAmount9: OriginalAmount9,
                 Amount9: Amount9,
                 TaxCode: TaxCode,

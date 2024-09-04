@@ -11,6 +11,8 @@ use App\Http\Requests\Suggestion\CreateRequestsForAdvancesRequest;
 use App\Http\Requests\Suggestion\CreateSuggestedPerDiemRequest;
 use App\Http\Requests\Suggestion\EditSuggestionRequest;
 use App\Http\Requests\Suggestion\UpdatePaymentOrderRequest;
+use App\Http\Requests\Suggestion\UpdateRequestsForAdvancesRequest;
+use App\Http\Requests\Suggestion\UpdateSuggestedPerDiemRequest;
 use App\Services\SuggestionService;
 use Illuminate\Http\Request;
 
@@ -82,12 +84,11 @@ class SuggestionController extends Controller
             return redirect()->route('suggestion.edit-payment-order', ['company' => $request->company, 'DocCode' => $request->DocCode, 'Stt' => $request->Stt]);
         } elseif ($request->DocCode === "TG") {
             return redirect()->route('suggestion.edit-requests-for-advances', ['company' => $request->company, 'DocCode' => $request->DocCode, 'Stt' => $request->Stt]);
-        } 
-        // elseif ($request->DocCode === "CC") {
-        //     return redirect()->route('suggestion.edit-suggested-per-diem', ['company' => $request->company, 'DocCode' => $request->DocCode, 'Stt' => $request->Stt]);
-        // }else{
-        //     return view('404');
-        // }
+        } elseif ($request->DocCode === "CC") {
+            return redirect()->route('suggestion.edit-suggested-per-diem', ['company' => $request->company, 'DocCode' => $request->DocCode, 'Stt' => $request->Stt]);
+        }else{
+            return view('404');
+        }
     }
 
     public function getPaymentOrder(ChooseCompanyCreateRequest $request)
@@ -129,6 +130,21 @@ class SuggestionController extends Controller
             return view('404');
         }
     }
+
+    public function editRequestsForAdvances(EditSuggestionRequest $request)
+    {
+        try {
+            $data = $this->suggestionService->editRequestsForAdvances($request);
+            return view('suggestion.edit-requests-for-advances', compact('data'));
+        } catch (\Exception $e) {
+            return view('404');
+        }
+    }
+
+    public function updateRequestsForAdvances(UpdateRequestsForAdvancesRequest $request)
+    {
+        return $this->suggestionService->updateRequestsForAdvances($request);
+    }
     
     public function postRequestsForAdvances(CreateRequestsForAdvancesRequest $request)
     {
@@ -148,6 +164,21 @@ class SuggestionController extends Controller
     public function postSuggestedPerDiem(CreateSuggestedPerDiemRequest $request)
     {   
         return $this->suggestionService->postSuggestedPerDiem($request);
+    }
+
+    public function editSuggestedPerDiem(ChooseCompanyCreateRequest $request)
+    {
+        try {
+            $data = $this->suggestionService->editSuggestedPerDiem($request);
+            return view('suggestion.edit-suggested-per-diem', compact('data'));
+        } catch (\Exception $e) {
+            return view('404');
+        }
+    }
+
+    public function updateSuggestedPerDiem(UpdateSuggestedPerDiemRequest $request)
+    {   
+        return $this->suggestionService->updateSuggestedPerDiem($request);
     }
 
     public function statistical()
