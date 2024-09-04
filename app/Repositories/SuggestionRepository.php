@@ -137,7 +137,6 @@ class SuggestionRepository
         $paymentOrder = DB::connection($request->company)->table('B33AccDoc')->where("Stt", $request->Stt)->first();
         $paymentOrderDetail = DB::connection($request->company)->table('B33AccDocJournalEntry')->where("Stt", $request->Stt)->get();
         $paymentOrderDetailVAT = DB::connection($request->company)->table('B33AccDocAtchDoc')->where("Stt", $request->Stt)->get();
-        // dd($paymentOrder, $paymentOrderDetail, $paymentOrderDetailVAT);
         return array(
             'bill_detailed_object' => $B20Customer, 
             'bill_staff' => $B20Employee, 
