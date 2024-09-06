@@ -146,23 +146,17 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered" id="table-payment-order" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="table-suggested-per-diem" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Số hóa đơn</th>
                             <th>Ngày hóa đơn</th>
                             <th>Nơi đến</th>
                             <th>Nội dung</th>
-                            <th>Số tờ khai</th>
-                            <th>Số vận đơn</th>
-                            {{-- <th>Trọng lượng</th>
-                            <th>Đơn vị trọng lượng</th> --}}
-                            <th>Đối tượng chi tiết</th>
                             <th>Khoản mục</th>
+                            <th>Đối tượng chi tiết</th>
                             <th>Nhân viên</th>
                             <th>Bộ phận</th>
-                            <th>Đơn hàng mua</th>
-                            <th>Hãng cung cấp</th>
                             <th id="th_OriginalAmount9">Giá trị VND chưa VAT</th>
                             <th colspan="3" id="th_value_added_tax_vat">Thuế giá trị gia tăng (VAT)</th>
                             <th>Ghi chú</th>
@@ -190,17 +184,14 @@
                                 <textarea class="form-control" maxlength="255" name="Description[]" id="Description"></textarea>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="Invoice[]" id="Invoice">
+                                <input list="listExpenseCatgCode" class="form-control" name="ExpenseCatgCode[]" id="ExpenseCatgCode">
+                                <datalist id="listExpenseCatgCode">
+                                    @foreach ($data['base_items'] as $item)
+                                        <option data-value="{{ $item->Code }}" value="{{ $item->Code }}">
+                                            {{ $item->Name }}</option>
+                                    @endforeach
+                                </datalist>
                             </td>
-                            <td>
-                                <input type="text" class="form-control" name="So_Van_Don[]" id="So_Van_Don">
-                            </td>
-                            {{-- <td>
-                                <input type="number" class="form-control" name="Trong_Luong[]" id="Trong_Luong" value="0">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" name="DV_Trong_Luong[]" id="DV_Trong_Luong">
-                            </td> --}}
                             <td>
                                 <input list="listCustomerCode2" class="form-control" name="CustomerCode2[]" id="CustomerCode2">
                                 <datalist id="listCustomerCode2">
@@ -209,15 +200,6 @@
                                             {{ $item->Address }}
                                             {{ $item->Person !== config('constants.value.empty') ? ' - ' . $item->Person . ' - ' : config('constants.value.empty') }}
                                             {{ $item->TaxRegNo }} {{ $item->Name2 }}</option>
-                                    @endforeach
-                                </datalist>
-                            </td>
-                            <td>
-                                <input list="listExpenseCatgCode" class="form-control" name="ExpenseCatgCode[]" id="ExpenseCatgCode">
-                                <datalist id="listExpenseCatgCode">
-                                    @foreach ($data['base_items'] as $item)
-                                        <option data-value="{{ $item->Code }}" value="{{ $item->Code }}">
-                                            {{ $item->Name }}</option>
                                     @endforeach
                                 </datalist>
                             </td>
@@ -241,19 +223,6 @@
                                             {{ $item->Name2 }}</option>
                                     @endforeach
                                 </datalist>
-                            </td>
-                            <td>
-                                <input list="list_BizDocId_PO" class="form-control" name="BizDocId_PO[]" id="BizDocId_PO">
-                                <datalist id="list_BizDocId_PO">
-                                    @foreach ($data['bill_purchase_order'] as $item)
-                                        <option data-value="{{ $item->BizDocId }}" value="{{ $item->BizDocId }}">
-                                            {{ $item->DocInfo . ' - ' . date('d-m-Y', strtotime($item->DocDate)) . ' - ' . $item->EmployeeName }}
-                                        </option>
-                                    @endforeach
-                                </datalist>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" name="Hang_SX[]" id="Hang_SX">
                             </td>
                             <td>
                                 <input type="number" class="form-control" name="OriginalAmount9[]" id="OriginalAmount9" value="0">

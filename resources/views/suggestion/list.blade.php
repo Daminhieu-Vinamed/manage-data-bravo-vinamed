@@ -17,7 +17,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="payment_order" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="suggestion" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Mã công ty</th>

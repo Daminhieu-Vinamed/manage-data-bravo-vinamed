@@ -30,14 +30,19 @@ Route::prefix('/')->group(function () {
             });
             Route::get('choose-company-create', [SuggestionController::class, 'chooseCompanyCreate'])->name('choose-company-create');
             Route::get('directional-create', [SuggestionController::class, 'directionalCreate'])->name('directional-create');
+            Route::get('directional-edit', [SuggestionController::class, 'directionalEdit'])->name('directional-edit');
             Route::get('payment-order', [SuggestionController::class, 'getPaymentOrder'])->name('payment-order');
             Route::post('create-payment-order', [SuggestionController::class, 'postPaymentOrder']);
             Route::get('edit-payment-order', [SuggestionController::class, 'editPaymentOrder'])->name('edit-payment-order');
             Route::post('update-payment-order', [SuggestionController::class, 'updatePaymentOrder']);
             Route::get('requests-for-advances', [SuggestionController::class, 'getRequestsForAdvances'])->name('requests-for-advances');
             Route::post('create-requests-for-advances', [SuggestionController::class, 'postRequestsForAdvances']);
+            Route::get('edit-requests-for-advances', [SuggestionController::class, 'editRequestsForAdvances'])->name('edit-requests-for-advances');
+            Route::post('update-requests-for-advances', [SuggestionController::class, 'updateRequestsForAdvances']);
             Route::get('suggested-per-diem', [SuggestionController::class, 'getSuggestedPerDiem'])->name('suggested-per-diem');
             Route::post('create-suggested-per-diem', [SuggestionController::class, 'postSuggestedPerDiem']);
+            Route::get('edit-suggested-per-diem', [SuggestionController::class, 'editSuggestedPerDiem'])->name('edit-suggested-per-diem');
+            Route::post('update-suggested-per-diem', [SuggestionController::class, 'updateSuggestedPerDiem']);
         });
 
         Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {

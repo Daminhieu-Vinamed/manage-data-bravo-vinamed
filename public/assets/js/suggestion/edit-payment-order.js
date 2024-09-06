@@ -47,8 +47,8 @@ $(document).ready(function () {
             $("thead tr #th_Amount9, tbody tr #td_Amount9, tbody tr #td_Amount3").remove();
             $(".form-group-into-money #TotalAmount0, .form-group-tax-money #TotalAmount3, .form-group-total #TotalAmount").remove();
         } else {
+            $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
             if (!$("#th_Amount9").length) {
-                $("#ExchangeRate").val(zeroConst).removeAttr("readonly");
                 $("thead tr #th_OriginalAmount9").after(
                     '<th id="th_Amount9">Tiền VND</th>'
                 );
@@ -230,7 +230,6 @@ $(document).ready(function () {
     });
 
     $(document).on("blur", ".ExpenseCatgCode", function () {
-        // lam den day
         const valueSelected = $(this).val();
         var thisExpenseCatgCode = $(this).val(nullValue);
         $(this)
