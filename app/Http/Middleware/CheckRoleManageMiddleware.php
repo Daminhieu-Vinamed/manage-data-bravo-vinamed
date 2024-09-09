@@ -21,7 +21,8 @@ class CheckRoleManageMiddleware
             Auth::user()->role->id === config('constants.number.two') || 
             Auth::user()->role->id === config('constants.number.three') || 
             Auth::user()->role->id === config('constants.number.four') ||
-            Auth::user()->role->id === config('constants.number.five')
+            Auth::user()->role->id === config('constants.number.five') ||
+            Auth::user()->role->id === config('constants.number.six')
         ) {
             return $next($request);
         }

@@ -9,9 +9,10 @@ class AdditionalWorkRepository
 {
     public function getData($timeNow)
     {
+        $additionalWorkTotal = array();
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
-            foreach (config('constants.company') as $value) {
-                $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
+            foreach (config('constants.company') as $company) {
+                $additionalWork = DB::connection($company)->table('vB30HrmPTimesheet')
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', 'BS')
                 ->where('DocStatus', '50')
@@ -29,17 +30,20 @@ class AdditionalWorkRepository
                     'RowId',
                     'Description',
                 ]);
-                $additionalWorkTotal[$value] = $additionalWork->toArray();
+                if(!empty($additionalWork->toArray())){
+                    foreach ($additionalWork as $value) {
+                         array_push($additionalWorkTotal, $value);
+                    } 
+                 }
             };
-        }elseif (Auth::user()->role->id === config('constants.number.three')) {
-            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
-            foreach (config('constants.company') as $value) {
-                $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
+        }else {
+            $arrEmployee = Auth::user()->children;
+            foreach ($arrEmployee as $employee) {
+                $additionalWork = DB::connection($employee->company)->table('vB30HrmPTimesheet')
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', 'BS')
                 ->where('DocStatus', '50')
-                ->where('IsTP', config('constants.number.one'))
-                ->whereIn('DeptCode', $arrayDeptCode)
+                ->where('EmployeeCode', $employee->EmployeeCode)
                 ->whereYear('FromDate',  $timeNow->format('Y'))
                 ->get([
                     'BranchCode',
@@ -55,32 +59,11 @@ class AdditionalWorkRepository
                     'RowId',
                     'Description',
                 ]);
-                $additionalWorkTotal[$value] = $additionalWork->toArray();
-            };
-        }elseif (Auth::user()->role->id === config('constants.number.four') || Auth::user()->role->id === config('constants.number.five')) {
-            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
-            foreach (config('constants.company') as $value) {
-                $additionalWork = DB::connection($value)->table('vB30HrmPTimesheet')
-                ->where('IsActive', config('constants.number.one'))
-                ->where('DocCode', 'BS')
-                ->where('DocStatus', '50')
-                ->where('IsTP', '<>', config('constants.number.one'))
-                ->whereIn('DeptCode', $arrayDeptCode)
-                ->whereYear('FromDate',  $timeNow->format('Y'))
-                ->get([
-                    'BranchCode',
-                    'EmployeeCode', 
-                    'EmployeeName', 
-                    'DeptName', 
-                    'TimesheetTypeName', 
-                    DB::raw("FORMAT(FromDate, 'dd-MM-yyyy') AS [start]"),
-                    DB::raw("FORMAT(ToDate, 'dd-MM-yyyy') AS [end]"), 
-                    'DocStatusName',
-                    'DocCode',
-                    'RowId',
-                    'Description',
-                ]);
-                $additionalWorkTotal[$value] = $additionalWork->toArray();
+                if(!empty($additionalWork->toArray())){
+                   foreach ($additionalWork as $value) {
+                        array_push($additionalWorkTotal, $value);
+                   } 
+                }
             };
         }
         return $additionalWorkTotal;
