@@ -5,18 +5,32 @@ $.ajaxSetup({
 });
 
 var calendar = $("#calendar").fullCalendar({
-    locale: 'vi',
     header: {
-        left: 'prev, next today',
+        left: 'prev,next today',
         center: 'title',
-        right: 'agendaDay, agendaWeek, month, listMonth',
+        right: 'agendaDay,agendaWeek,month'
     },
+    windowResize: function(view) {
+        if ($(window).width() < 768) {
+            $('#calendar').fullCalendar('option', 'header', {
+                left: 'prev,next',
+                center: 'title',
+                right: 'month'
+            });
+        } else {
+            $('#calendar').fullCalendar('option', 'header', {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'agendaDay,agendaWeek,month'
+            });
+        }
+    },
+    locale: 'vi',
     buttonText: {
         today:    'Hôm nay',
         month:    'Tháng',
         week:     'Tuần',
         day:      'Ngày',
-        list:     'Lịch biểu'
     },
     noEventsMessage: "Không có sự kiện để hiển thị",
     timeFormat: 'H(:mm) A',
