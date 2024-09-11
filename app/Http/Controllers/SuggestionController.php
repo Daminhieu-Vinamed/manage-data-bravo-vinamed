@@ -190,4 +190,9 @@ class SuggestionController extends Controller
             return view('404');
         }
     }
+
+    public function showPrintedSample(Request $request)
+    {
+        return $this->suggestionService->showPrintedSample($request);
+    }
 }

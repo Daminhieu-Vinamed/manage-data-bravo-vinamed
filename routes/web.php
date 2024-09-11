@@ -28,6 +28,7 @@ Route::prefix('/')->group(function () {
                 Route::post('approve-payment-request', [SuggestionController::class, 'approve']);
                 Route::post('cancel-payment-request', [SuggestionController::class, 'cancel']);
             });
+            Route::get('show-printed-sample', [SuggestionController::class, 'showPrintedSample']);
             Route::get('choose-company-create', [SuggestionController::class, 'chooseCompanyCreate'])->name('choose-company-create');
             Route::get('directional-create', [SuggestionController::class, 'directionalCreate'])->name('directional-create');
             Route::get('directional-edit', [SuggestionController::class, 'directionalEdit'])->name('directional-edit');

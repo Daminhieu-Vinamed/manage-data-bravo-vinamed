@@ -25,9 +25,9 @@
                             <th>Người nhận</th>
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
-                            <th>Hành động</th>
                             <th>Ngày</th>
                             <th>Tình trạng</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -38,9 +38,9 @@
                             <th>Người nhận</th>
                             <th>Người đề nghị</th>
                             <th>Tiền</th>
-                            <th>Hành động</th>
                             <th>Ngày</th>
                             <th>Tình trạng</th>
+                            <th>Hành động</th>
                         </tr>
                     </tfoot>
                 </table>

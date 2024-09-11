@@ -39,7 +39,8 @@ class SuggestionService extends SuggestionRepository
             return date('d-m-Y', strtotime($paymentOrder->DocDate));
         })
         ->addColumn('action', function ($paymentOrder) {
-            $action = '<a href="' . route('suggestion.directional-edit', ['DocCode' => request()->get('DocCode'), 'company' => $paymentOrder->BranchCode, 'Stt' => $paymentOrder->Stt]) . '" title="Chỉnh sửa đề nghị thanh toán" class="btn btn-info shadow-sm btn-circle"><i class="fas fa-edit"></i></a>' .
+            $action = '<button title="Mẫu in" type="button" class="btn btn-warning shadow-sm btn-circle printed-sample" branch_code="'. $paymentOrder->BranchCode .'" id="'. $paymentOrder->Id .'"><i class="fas fa-print"></i></button>' . 
+            ' <a href="' . route('suggestion.directional-edit', ['DocCode' => request()->get('DocCode'), 'company' => $paymentOrder->BranchCode, 'Stt' => $paymentOrder->Stt]) . '" title="Chỉnh sửa đề nghị thanh toán" class="btn btn-info shadow-sm btn-circle"><i class="fas fa-edit"></i></a>' .
             ' <button title="Hủy đề nghị thanh toán" type="button" class="btn btn-danger shadow-sm btn-circle cancel-payment-request" branch_code="'. $paymentOrder->BranchCode .'" stt="'. $paymentOrder->Stt .'"><i class="fas fa-ban"></i></button>';
             if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.three') || Auth::user()->role->id === config('constants.number.four') || Auth::user()->role->id === config('constants.number.five') || Auth::user()->role->id === config('constants.number.six')) {
                 $action = '<button title="Duyệt đề nghị thanh toán" type="button" class="btn btn-success shadow-sm btn-circle approve-payment-request" branch_code="'. $paymentOrder->BranchCode .'" stt="'. $paymentOrder->Stt .'"><i class="fas fa-check"></i></button> ' . $action;
@@ -208,5 +209,13 @@ class SuggestionService extends SuggestionRepository
         $countAll = array_sum($paymentOrder['count']);
         $paymentOrder['count-total'] = $countAll;
         return $paymentOrder;
+    }
+
+    public function showPrintedSample($request)
+    {
+        // $connectCompany = DB::connection($request->BranchCode);
+        // $connectCompany->beginTransaction();
+        $printedSample = DB::connection($request->BranchCode)->select('EXEC usp_B33AccDoc_VoucherForm ?', [$request->Id]);
+        dd($printedSample);
     }
 }
