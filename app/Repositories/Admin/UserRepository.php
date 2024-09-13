@@ -14,7 +14,11 @@ class UserRepository extends AbstractRepository
     }
     
     public function getData() {
-        $users = $this->builder()->where('role_id', '<>', config('constants.number.one'))->where('id', '<>', Auth::user()->id)->get();
+        $users = $this->builder()->where('role_id', '<>', config('constants.number.one'))->where('id', '<>', Auth::user()->id);
+        if (Auth::user()->role_id == config('constants.number.nine')) {
+            $users->where('role_id', '<>', config('constants.number.two'));
+        }
+        $users->get();
         return $users;
     }
     

@@ -23,8 +23,15 @@ class UserController extends Controller
     public function list()
     {
         $departments = Department::select('code', 'name')->get();
-        $roles = Role::select('id', 'name')->get();
-        $parents = User::select('id', 'name')->where('role_id', '<>', [config('constants.number.six'), config('constants.number.seven')])->get();
+        $roles = Role::select('id', 'name')
+        ->where('id', '<>', config('constants.number.one'))
+        ->where('id', '<>', config('constants.number.two'))
+        ->where('id', '<>', config('constants.number.nine'))
+        ->get();
+        $parents = User::select('id', 'name')
+        ->where('role_id', '<>', config('constants.number.seven'))
+        ->where('role_id', '<>', config('constants.number.eight'))
+        ->get();
         return view('user.list', compact('departments', 'roles', 'parents'));
     }
 
@@ -47,8 +54,15 @@ class UserController extends Controller
     {
         $user = $this->userService->edit($request->id);
         $departments = Department::select('code', 'name')->get();
-        $roles = Role::select('id', 'name')->get();
-        $parents = User::select('id', 'name')->where('role_id', '<>', [config('constants.number.six'), config('constants.number.seven')])->get();
+        $roles = Role::select('id', 'name')
+        ->where('id', '<>', config('constants.number.one'))
+        ->where('id', '<>', config('constants.number.two'))
+        ->where('id', '<>', config('constants.number.nine'))
+        ->get();
+        $parents = User::select('id', 'name')
+        ->where('role_id', '<>', config('constants.number.seven'))
+        ->where('role_id', '<>', config('constants.number.eight'))
+        ->get();
         return view('user.edit', compact('user', 'departments', 'roles', 'parents'));
     }
     

@@ -77,9 +77,7 @@
                         <select class="custom-select" id="role_id">
                             <option disabled selected>Chọn vai trò</option>
                             @foreach ($roles as $item)
-                                @if ($item->id !== config('constants.number.one'))
-                                    <option value="{{ $item->id }}" {{$user->role_id === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
-                                @endif
+                                <option value="{{ $item->id }}" {{$user->role_id === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                             @endforeach
                         </select>
                         <span class="text-danger small" id="role_id_error"></span>
