@@ -16,7 +16,7 @@ class CheckRoleAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
+        if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->role->id === config('constants.number.nine')) {
             return $next($request);
         }
         return redirect()->back();

@@ -112,7 +112,9 @@
         </div>
     </li>
     @if (Auth::user()->role->id === config('constants.number.one') ||
-            Auth::user()->role->id === config('constants.number.two'))
+        Auth::user()->role->id === config('constants.number.two') ||
+        Auth::user()->role->id === config('constants.number.nine'))
+            
         <li
             class="nav-item {{ request()->routeIs('user.list') || request()->routeIs('user.edit') ? 'active' : config('constants.value.empty') }}">
             <a class="nav-link" href="{{ route('user.list') }}">
