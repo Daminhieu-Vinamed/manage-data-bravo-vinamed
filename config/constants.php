@@ -27,10 +27,9 @@ return [
         'one_hundred' => 100,
     ],
 
-    'timekeeping' => [
-        'clock_in' => '08:15:00',
-        'clock_out' => '17:15:00',
-        'min' => '00:00:00',
+    'location' => [
+        'latitude' => 21.0020231,
+        'longitude' => 105.8335452
     ],
 
     'company' => ['A06', 'A11', 'A12', 'A14', 'A18', 'A19', 'A21', 'A22', 'A25'],

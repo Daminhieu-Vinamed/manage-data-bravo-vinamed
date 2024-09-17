@@ -35,7 +35,7 @@ class AdditionalWorkAndOnLeaveNotification extends Notification
             'user_id' => $this->user['id'],
             'name' => $this->user['name'],
             'email' => $this->user['email'],
-            'type_notification' => config('constants.number.two'),
+            'type' => config('constants.number.two'),
         ];
     }
 }

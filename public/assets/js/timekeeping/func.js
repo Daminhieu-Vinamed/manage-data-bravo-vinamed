@@ -99,44 +99,51 @@ function checkTimekeeping(start, end, now) {
     }
 }
 
-function clockOutApi(realTime, id) {
+function clockOutApi(realTime) {
     return Swal.fire({
         showCancelButton: trueValue,
         showLoaderOnConfirm: trueValue,
         buttonsStyling: falseValue,
         confirmButtonText: 'Kết thúc',
         cancelButtonText: 'Hủy',
-        width: "16%",
-        html: 'Kết thúc chấm công ?',
+        width: '238px',
+        html: 'Kết thúc giờ làm việc ?',
         customClass: {
             confirmButton: 'btn btn-primary shadow-sm m-2',
             cancelButton: 'btn btn-danger shadow-sm m-2',
         },
         preConfirm: async () => {
             changeButtonTimekeeping('clock_in_disabled');
-
-            $.ajax({
-                url: linkTimekeeping + "clock-out",
-                type: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function (success) {
-                    ToastTopRight.fire({
-                        icon: success.status,
-                        title: success.msg,
-                    });
-                    $("#timekeeping-out").text(success.data);
-                    clearInterval(realTime);
-                    calendar.fullCalendar("refetchEvents");
-                },
-                error: function (error) {
-                    let errors = error.responseJSON.errors;
-                    ToastTopRight.fire({
-                        icon: errors.status,
-                        title: errors.msg,
-                    });
-                },
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var currentLat = position.coords.latitude;
+                var currentLng = position.coords.longitude;
+                $.ajax({
+                    url: linkTimekeeping + "clock-out",
+                    type: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        lat: currentLat,
+                        lng: currentLng
+                    },
+                    success: function (success) {
+                        ToastTopRight.fire({
+                            icon: success.status,
+                            title: success.msg,
+                        });
+                        $("#timekeeping-out").text(success.data);
+                        clearInterval(realTime);
+                        calendar.fullCalendar("refetchEvents");
+                    },
+                    error: function (error) {
+                        let errors = error.responseJSON.errors;
+                        ToastTopRight.fire({
+                            icon: errors.status,
+                            title: errors.msg,
+                        });
+                    },
+                });
             });
         },
     });

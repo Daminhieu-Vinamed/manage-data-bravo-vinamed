@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(User::class, 'parent_user_id', 'id');
     }
+    
+    public function locate()
+    {
+        return $this->hasMany(Locate::class, 'user_id', 'id');
+    }
 }

@@ -35,7 +35,7 @@ class CreateSuggestionNotification extends Notification
             'user_id' => $this->user['id'],
             'name' => $this->user['name'],
             'email' => $this->user['email'],
-            'type_notification' => config('constants.number.one'),
+            'type' => config('constants.number.one'),
         ];
     }
 }

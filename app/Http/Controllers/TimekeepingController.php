@@ -34,12 +34,12 @@ class TimekeepingController extends Controller
         return $this->timekeepingService->getTimeInTimekeeping();
     }
 
-    public function clockIn() {
-        return $this->timekeepingService->clockIn();
+    public function clockIn(Request $request) {
+        return $this->timekeepingService->clockIn($request);
     }
     
-    public function clockOut() {
-        return $this->timekeepingService->clockOut();
+    public function clockOut(Request $request) {
+        return $this->timekeepingService->clockOut($request);
     }
 
     public function supplementsAndLeave(SupplementsAndLeaveRequest $request) {

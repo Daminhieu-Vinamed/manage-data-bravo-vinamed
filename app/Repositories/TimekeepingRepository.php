@@ -1,10 +1,20 @@
 <?php
 
 namespace App\Repositories;
+
+use App\Models\Locate;
+use App\Models\User;
+use App\Notifications\AdditionalWorkAndOnLeaveNotification;
+use App\Repositories\BaseRepository\AbstractRepository;
 use Illuminate\Support\Facades\DB;
 
-class TimekeepingRepository
+class TimekeepingRepository extends AbstractRepository
 {
+    protected function model(): string
+    {
+        return Locate::class;
+    }
+    
     public function getData($EmployeeCode, $company)
     {
         $np = DB::connection($company)->table('vB30HrmPTimesheet')
@@ -93,12 +103,21 @@ class TimekeepingRepository
         return $data;
     }
 
-    public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company) {
+    public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company, $userId, $lat, $lng, $distance, $type) {
+        $this->create([
+            'user_id' => $userId,
+            'latitude' => $lat,
+            'longitude' => $lng,
+            'distance' => $distance,
+            'type' => $type,
+        ]);
         return $connectCompany->update('EXEC usp_B30HrmCheckInOut_Tuandh ?, ?, ?', [$Timekeeping, $EmployeeCode, $company]);
     }
 
-    public function additionalWork($connectCompany, $EmployeeCode, $company, $type, $start, $end, $description) {
-        return $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?, ?', [$EmployeeCode, $company, $type, $start, $end, $description]);
+    public function additionalWork($connectCompany, $user, $type, $start, $end, $description) {
+        $userManager = User::find($user->parent->id);
+        $userManager->notify(new AdditionalWorkAndOnLeaveNotification($user));
+        return $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?, ?', [$user->EmployeeCode, $user->company, $type, $start, $end, $description]);
     }
 
     public function approveLeave($connectCompany, $RowId, $DocCode)

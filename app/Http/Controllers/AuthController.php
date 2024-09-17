@@ -40,9 +40,4 @@ class AuthController extends Controller
     {
         return $this->authService->changePassword($request);
     }
-
-    public function markAsRead($id) 
-    {   
-        return $this->authService->markAsRead($id);
-    }
 }
