@@ -122,7 +122,7 @@ var calendar = $("#calendar").fullCalendar({
                 buttonsStyling: falseValue,
                 confirmButtonText: 'Đồng ý',
                 cancelButtonText: 'Hủy',
-                width: "22%",
+                width: "327px",
                 html: 'Huỷ bỏ nghỉ phép/bổ sung công ?',
                 customClass: {
                     confirmButton: 'btn btn-primary shadow-sm m-2',

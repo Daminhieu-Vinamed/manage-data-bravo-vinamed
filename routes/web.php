@@ -5,6 +5,7 @@ use App\Http\Controllers\OnLeaveController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TimekeepingController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,6 @@ Route::prefix('/')->group(function () {
         Route::get('welcome', [AuthController::class, 'welcome'])->name('welcome');
 
         Route::put('change-password', [AuthController::class, 'changePassword']);
-
-        Route::get('mark-as-read/{id}', [AuthController::class, 'markAsRead'])->name('mark-as-read');
 
         Route::prefix('suggestion')->name('suggestion.')->group(function () {
             Route::get('/', [SuggestionController::class, 'list'])->name('list');
@@ -52,6 +51,13 @@ Route::prefix('/')->group(function () {
             Route::get('edit', [UserController::class, 'edit'])->name('edit');
             Route::post('update', [UserController::class, 'update']);
             Route::delete('delete', [UserController::class, 'delete']);
+        });
+
+        Route::prefix('notification')->name('notification.')->group(function () {
+            Route::get('/', [NotificationController::class, 'list'])->name('list');
+            Route::get('get-data', [NotificationController::class, 'getData']);
+            Route::get('list-additional-work-and-on-leave', [NotificationController::class, 'listViewAdditionalWorkAndOnLeave'])->name('list-additional-work-and-on-leave');
+            Route::get('get-data-additional-work-and-on-leave', [NotificationController::class, 'listDataAdditionalWorkAndOnLeave']);
         });
 
         Route::prefix('timekeeping')->name('timekeeping.')->group(function () {

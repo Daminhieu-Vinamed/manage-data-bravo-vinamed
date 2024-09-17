@@ -46,6 +46,5 @@ class AuthService
         if ($id) {
             Auth::user()->unreadNotifications->where('id', $id)->markAsRead();
         }
-        return back();
     }
 }

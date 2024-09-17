@@ -49,47 +49,64 @@
 
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-4">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">{{ Auth::user()->unreadnotifications->count() }}</span>
+                @if (Auth::user()->unreadnotifications->count() > config('constants.number.five'))
+                    <span class="badge badge-danger badge-counter">{{ Auth::user()->unreadNotifications()->take(config('constants.number.five'))->get()->count() }}+</span>
+                @elseif(Auth::user()->unreadnotifications->count() > config('constants.number.zero'))
+                    <span class="badge badge-danger badge-counter">{{ Auth::user()->unreadnotifications->count() }}</span>
+                @endif
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">Thông báo</h6>
-                @foreach (Auth::user()->unreadnotifications as $notification)
-                    <a class="dropdown-item d-flex align-items-center" href="{{ route('mark-as-read', $notification->id) }}">
-                        @if ($notification->data['type_notification'] == config('constants.number.one'))
-                            <div class="mr-3">
-                                <div class="icon-circle bg-primary">
-                                    <i class="fas fa-file-invoice-dollar text-white"></i>
+                @if (Auth::user()->unreadnotifications->count() > config('constants.number.zero'))
+                    @foreach (Auth::user()->unreadNotifications()->take(config('constants.number.five'))->get() as $notification)
+                        @if ($notification->data['type'] == config('constants.number.one'))
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="{{ route('mark-as-read', $notification->id) }}">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-invoice-dollar text-white"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">{{ date('d-m-Y', strtotime($notification->created_at)) }}</div>
-                                <span class="font-weight-bold">{{ $notification->data['name'] }} đã tạo đề đề nghị</span>
-                            </div>
-                        @elseif($notification->data['type_notification'] == config('constants.number.two'))
-                            <div class="mr-3">
-                                <div class="icon-circle bg-primary">
-                                    <i class="fas fa-pencil-alt text-white"></i>
+                                <div>
+                                    <div class="small text-gray-500">Ngày tạo: {{ date('d-m-Y', strtotime($notification->created_at)) }}</div>
+                                    <span class="font-weight-bold">{{ $notification->data['name'] }} đã tạo đề nghị</span>
+                                    <div class="small text-gray-500">Thời gian: {{ date('H:i:s', strtotime($notification->created_at)) }}</div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">{{ date('d-m-Y', strtotime($notification->created_at)) }}</div>
-                                <span class="font-weight-bold">{{ $notification->data['name'] }} đã tạo nghỉ phép/bổ sung</span>
-                            </div>
+                            </a>
+                        @elseif($notification->data['type'] == config('constants.number.two'))
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="{{ route('notification.list-additional-work-and-on-leave', ['notification_id' => $notification->id, 'user_id' => $notification->data['user_id']]) }}">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-pencil-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">Ngày tạo: {{ date('d-m-Y', strtotime($notification->created_at)) }}</div>
+                                    <span class="font-weight-bold">{{ $notification->data['name'] }} đã tạo nghỉ phép/bổ sung</span>
+                                    <div class="small text-gray-500">Thời gian: {{ date('H:i:s', strtotime($notification->created_at)) }}</div>
+                                </div>
+                            </a>
                         @endif
-                    </a>
-                @endforeach
-                {{-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> --}}
+                    @endforeach
+                    @if (Auth::user()->unreadnotifications->count() > config('constants.number.five'))
+                        <a class="dropdown-item text-center small text-gray-500" href="{{ route('notification.list') }}">Hiển thị toàn bộ thông báo</a>
+                    @endif
+                @else
+                    <h6 class="text-center py-3">Hiện tại không có thông báo</h6>
+                @endif
             </div>
         </li>
 
         <li class="nav-item dropdown no-arrow d-flex align-items-center">
-            <button class="btn btn-primary shadow-sm" data-toggle="modal" data-target="#timekeepingModal" title="Chấm công">Chấm công</button>
+            <button class="btn btn-primary shadow-sm" data-toggle="modal" data-target="#timekeepingModal"
+                title="Chấm công">Chấm công</button>
         </li>
 
         {{-- <!-- Nav Item - Messages -->

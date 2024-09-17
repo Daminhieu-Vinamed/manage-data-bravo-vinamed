@@ -32,13 +32,37 @@ class TimekeepingService extends TimekeepingRepository
         }
     }
 
-    public function clockIn() {
+    private function calculateHaversineDistance($lat1, $lng1, $lat2, $lng2)
+    {
+        $earthRadius = 6371; // Bán kính trái đất tính bằng km
+
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLng = deg2rad($lng2 - $lng1);
+
+        $a = sin($dLat / 2) * sin($dLat / 2) +
+            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+            sin($dLng / 2) * sin($dLng / 2);
+
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        $distance = $earthRadius * $c; // Khoảng cách tính bằng km
+
+        return $distance;
+    }
+
+    public function clockIn($request) {
         $user = Auth::user();
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();
         $clockIn = new Carbon();
         try {
-            $this->timekeepingRepository->timekeeping($connectCompany, $clockIn, $user->EmployeeCode, $user->company);
+            $currentLat = $request->lat;
+            $currentLng = $request->lng;
+            $targetLat = config('constants.location.latitude');
+            $targetLng = config('constants.location.longitude');
+            $type = config('constants.number.zero');
+            $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockIn, $user->EmployeeCode, $user->company, $user->id, $currentLat, $currentLng, $distance, $type);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Đã chấm công', 'data' => $clockIn->format('H:i:s')], 200);
         } catch (\Exception $e) {
@@ -47,13 +71,19 @@ class TimekeepingService extends TimekeepingRepository
         }
     }
 
-    public function clockOut() {
+    public function clockOut($request) {
         $user = Auth::user();
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();
         $clockOut = new Carbon();
         try {
-            $this->timekeepingRepository->timekeeping($connectCompany, $clockOut, $user->EmployeeCode, $user->company);
+            $currentLat = $request->lat;
+            $currentLng = $request->lng;
+            $targetLat = config('constants.location.latitude');
+            $targetLng = config('constants.location.longitude');
+            $type = config('constants.number.one');
+            $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockOut, $user->EmployeeCode, $user->company, $user->id, $currentLat, $currentLng, $distance, $type);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Kết thúc chấm công', 'data' => $clockOut->format('H:i:s')], 200);
         } catch (\Exception $e) {
@@ -67,7 +97,7 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();
         try {
-            $this->timekeepingRepository->additionalWork($connectCompany, $user->EmployeeCode, $user->company, $request->type, $request->start, $request->end, $request->description);
+            $this->timekeepingRepository->additionalWork($connectCompany, $user, $request->type, $request->start, $request->end, $request->description);
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Đã bổ sung công'], 200);
         } catch (\Exception $e) {
