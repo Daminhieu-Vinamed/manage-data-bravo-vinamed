@@ -56,13 +56,15 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany->beginTransaction();
         $clockIn = new Carbon();
         try {
-            $currentLat = $request->lat;
-            $currentLng = $request->lng;
-            $targetLat = config('constants.location.latitude');
-            $targetLng = config('constants.location.longitude');
-            $type = config('constants.number.zero');
-            $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
-            $this->timekeepingRepository->timekeeping($connectCompany, $clockIn, $user->EmployeeCode, $user->company, $user->id, $currentLat, $currentLng, $distance, $type);
+            // $currentLat = $request->lat;
+            // $currentLng = $request->lng;
+            // $targetLat = config('constants.location.latitude');
+            // $targetLng = config('constants.location.longitude');
+            // $type = config('constants.number.zero');
+            // $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockIn, $user->EmployeeCode, $user->company
+            // , $user->id, $currentLat, $currentLng, $distance, $type
+        );
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Đã chấm công', 'data' => $clockIn->format('H:i:s')], 200);
         } catch (\Exception $e) {
@@ -77,13 +79,15 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany->beginTransaction();
         $clockOut = new Carbon();
         try {
-            $currentLat = $request->lat;
-            $currentLng = $request->lng;
-            $targetLat = config('constants.location.latitude');
-            $targetLng = config('constants.location.longitude');
-            $type = config('constants.number.one');
-            $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
-            $this->timekeepingRepository->timekeeping($connectCompany, $clockOut, $user->EmployeeCode, $user->company, $user->id, $currentLat, $currentLng, $distance, $type);
+            // $currentLat = $request->lat;
+            // $currentLng = $request->lng;
+            // $targetLat = config('constants.location.latitude');
+            // $targetLng = config('constants.location.longitude');
+            // $type = config('constants.number.one');
+            // $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockOut, $user->EmployeeCode, $user->company
+            // , $user->id, $currentLat, $currentLng, $distance, $type
+        );
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Kết thúc chấm công', 'data' => $clockOut->format('H:i:s')], 200);
         } catch (\Exception $e) {
