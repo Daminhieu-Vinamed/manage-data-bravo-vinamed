@@ -114,19 +114,19 @@ function clockOutApi(realTime) {
         },
         preConfirm: async () => {
             changeButtonTimekeeping('clock_in_disabled');
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var currentLat = position.coords.latitude;
-                var currentLng = position.coords.longitude;
+            // navigator.geolocation.getCurrentPosition(function(position) {
+            //     var currentLat = position.coords.latitude;
+            //     var currentLng = position.coords.longitude;
                 $.ajax({
                     url: linkTimekeeping + "clock-out",
                     type: "POST",
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                     },
-                    data: {
-                        lat: currentLat,
-                        lng: currentLng
-                    },
+                    // data: {
+                    //     lat: currentLat,
+                    //     lng: currentLng
+                    // },
                     success: function (success) {
                         ToastTopRight.fire({
                             icon: success.status,
@@ -144,7 +144,7 @@ function clockOutApi(realTime) {
                         });
                     },
                 });
-            });
+            // });
         },
     });
 }

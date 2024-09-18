@@ -103,14 +103,16 @@ class TimekeepingRepository extends AbstractRepository
         return $data;
     }
 
-    public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company, $userId, $lat, $lng, $distance, $type) {
-        $this->create([
-            'user_id' => $userId,
-            'latitude' => $lat,
-            'longitude' => $lng,
-            'distance' => $distance,
-            'type' => $type,
-        ]);
+    public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company
+    // , $userId, $lat, $lng, $distance, $type
+    ) {
+        // $this->create([
+        //     'user_id' => $userId,
+        //     'latitude' => $lat,
+        //     'longitude' => $lng,
+        //     'distance' => $distance,
+        //     'type' => $type,
+        // ]);
         return $connectCompany->update('EXEC usp_B30HrmCheckInOut_Tuandh ?, ?, ?', [$Timekeeping, $EmployeeCode, $company]);
     }
 
