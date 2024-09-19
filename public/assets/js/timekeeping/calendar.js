@@ -8,29 +8,13 @@ var calendar = $("#calendar").fullCalendar({
     header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'agendaDay,agendaWeek,month'
-    },
-    windowResize: function(view) {
-        if ($(window).width() < 768) {
-            $('#calendar').fullCalendar('option', 'header', {
-                left: 'prev,next',
-                center: 'title',
-                right: 'month'
-            });
-        } else {
-            $('#calendar').fullCalendar('option', 'header', {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'agendaDay,agendaWeek,month'
-            });
-        }
+        right: 'agendaWeek,month'
     },
     locale: 'vi',
     buttonText: {
         today:    'Hôm nay',
         month:    'Tháng',
-        week:     'Tuần',
-        day:      'Ngày',
+        week:     'Tuần'
     },
     noEventsMessage: "Không có sự kiện để hiển thị",
     timeFormat: 'H(:mm) A',
