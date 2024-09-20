@@ -117,8 +117,10 @@ class TimekeepingRepository extends AbstractRepository
     }
 
     public function additionalWork($connectCompany, $user, $type, $start, $end, $description) {
-        $userManager = User::find($user->parent->id);
-        $userManager->notify(new AdditionalWorkAndOnLeaveNotification($user));
+        if (!empty($user->parent)) {
+            $userManager = User::find($user->parent->id);
+            $userManager->notify(new AdditionalWorkAndOnLeaveNotification($user));
+        }
         return $connectCompany->update('EXEC usp_ERP_BSCong_Tuandh ?, ?, ?, ?, ?, ?', [$user->EmployeeCode, $user->company, $type, $start, $end, $description]);
     }
 
