@@ -13,7 +13,7 @@ var listUser = $("#users").DataTable({
         { data: "name", name: "name" },
         { data: "email", name: "email" },
         { data: "role", name: "role" },
-        { data: "department", name: "department" },
+        { data: "parent_user_id", name: "parent_user_id" },
         { data: "action", name: "action" },
         { data: "company", name: "company" },
         { data: "avatar", name: "avatar" },
