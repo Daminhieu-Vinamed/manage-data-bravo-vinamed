@@ -34,6 +34,11 @@ class UserService
         ->editColumn('avatar', function ($user) {
             return '<img class="w-25 img-thumbnail" src="'. $user->avatar .'" />';
         })
+        ->editColumn('parent_user_id', function ($user) {
+            if (!empty($user->parent)) {
+                return $user->parent->name;
+            }
+        })
         ->addColumn('action', function ($user) {
             return  '<a href="'. route('user.edit', ['id' => $user->id]) .'" title="Chỉnh sửa tài khoản" class="btn btn-info shadow-sm btn-circle edit_user"><i class="fas fa-user-edit"></i></a>' .
                     ' <button id="'. $user->id .'" title="Xóa tài khoản" class="btn btn-danger shadow-sm btn-circle delete_user"><i class="fas fa-trash-alt"></i></button>';
