@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $('#parent_user_id').select2();
+    $('#company, #role_id, #status_id, #gender_id').select2({ minimumResultsForSearch: -1 });
     $(document).on("change", "#avatar", function (e) {
         const file = e.target.files[0];
         if (!$('#flex_avatar').length) {

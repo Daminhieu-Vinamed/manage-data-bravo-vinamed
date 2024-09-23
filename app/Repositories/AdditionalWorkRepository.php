@@ -38,6 +38,7 @@ class AdditionalWorkRepository
             };
         }else {
             $arrEmployee = Auth::user()->children;
+            $arrEmployee->push(Auth::user());
             foreach ($arrEmployee as $employee) {
                 $additionalWork = DB::connection($employee->company)->table('vB30HrmPTimesheet')
                 ->where('IsActive', config('constants.number.one'))
