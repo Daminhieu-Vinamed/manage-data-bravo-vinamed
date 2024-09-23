@@ -7,6 +7,7 @@ $(document).ready(function () {
     });
 
     $('#parent_user_id').select2();
+    $('#company, #role_id, #status_id, #gender_id').select2({ minimumResultsForSearch: -1 });
 
     $(document).on("click", "#change-password", function () {
         $('#avatar').parent().after(`<div class="form-group col-md-4">

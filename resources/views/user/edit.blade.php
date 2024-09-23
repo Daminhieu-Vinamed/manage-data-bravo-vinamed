@@ -41,9 +41,9 @@
                         <span class="text-danger small" id="EmployeeCode_error"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="company" class="form-label small">Công ty</label>
-                        <select class="custom-select" id="company">
-                            <option disabled selected>Chọn công ty</option>
+                        <label for="company" class="form-label small">Khay</label>
+                        <select class="form-control-select2" id="company">
+                            <option selected value="">Chọn công ty</option>
                             @foreach (config('constants.company') as $company)
                                 <option value="{{$company}}" {{ $user->company === $company ? 'selected' : '' }}>{{$company}}</option>
                             @endforeach
@@ -74,8 +74,8 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="role_id" class="form-label small">Vai trò</label>
-                        <select class="custom-select" id="role_id">
-                            <option disabled selected>Chọn vai trò</option>
+                        <select class="form-control-select2" id="role_id">
+                            <option selected>Chọn vai trò</option>
                             @foreach ($roles as $item)
                                 <option value="{{ $item->id }}" {{$user->role_id === $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                             @endforeach
@@ -84,8 +84,8 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="status_id" class="form-label small">Trạng thái</label>
-                        <select class="custom-select" id="status_id">
-                            <option disabled selected>Chọn trạng thái</option>
+                        <select class="form-control-select2" id="status_id">
+                            <option selected>Chọn trạng thái</option>
                             <option value="{{ config('constants.number.one') }}" {{$user->status_id === config('constants.number.one') ? 'selected' : '' }}>Hoạt động</option>
                             <option value="{{ config('constants.number.two') }}" {{$user->status_id === config('constants.number.two') ? 'selected' : '' }}>Dừng hoạt động</option>
                         </select>
@@ -93,8 +93,8 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="gender_id" class="form-label small">Giới tính</label>
-                        <select class="custom-select" id="gender_id">
-                            <option disabled selected>Chọn giới tính</option>
+                        <select class="form-control-select2" id="gender_id">
+                            <option selected>Chọn giới tính</option>
                             <option value="{{ config('constants.number.one') }}" {{$user->gender_id === config('constants.number.one') ? 'selected' : '' }}>Nam</option>
                             <option value="{{ config('constants.number.two') }}" {{$user->gender_id === config('constants.number.two') ? 'selected' : '' }}>Nữ</option>
                         </select>

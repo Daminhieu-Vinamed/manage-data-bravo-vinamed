@@ -63,6 +63,5 @@
     <script src="{{ asset('assets/vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/user/list.js') }}"></script>
     <script src="{{ asset('assets/js/user/create.js') }}"></script>
-    <script src="{{ asset('assets/js/user/edit.js') }}"></script>
     <script src="{{ asset('assets/js/user/delete.js') }}"></script>
 @endpush

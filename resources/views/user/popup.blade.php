@@ -26,8 +26,8 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="company" class="form-label small">Khay</label>
-                    <select class="custom-select" id="company">
-                        <option disabled selected>Chọn khay</option>
+                    <select class="form-control-select2" id="company">
+                        <option selected value="">Chọn khay</option>
                         @foreach (config('constants.company') as $company)
                             <option value="{{$company}}">{{$company}}</option>
                         @endforeach
@@ -36,8 +36,8 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="role_id" class="form-label small">Vai trò</label>
-                    <select class="custom-select" id="role_id">
-                        <option disabled selected>Chọn vai trò</option>
+                    <select class="form-control-select2" id="role_id">
+                        <option selected value="">Chọn vai trò</option>
                         @foreach ($roles as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
@@ -68,8 +68,8 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="status_id" class="form-label small">Trạng thái</label>
-                    <select class="custom-select" id="status_id">
-                        <option disabled selected>Chọn trạng thái</option>
+                    <select class="form-control-select2" id="status_id">
+                        <option selected value="">Chọn trạng thái</option>
                         <option value="{{ config('constants.number.one') }}">Hoạt động</option>
                         <option value="{{ config('constants.number.two') }}">Dừng hoạt động</option>
                     </select>
@@ -77,8 +77,8 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="gender_id" class="form-label small">Giới tính</label>
-                    <select class="custom-select" id="gender_id">
-                        <option disabled selected>Chọn giới tính</option>
+                    <select class="form-control-select2" id="gender_id">
+                        <option selected value="">Chọn giới tính</option>
                         <option value="{{ config('constants.number.one') }}">Nam</option>
                         <option value="{{ config('constants.number.two') }}">Nữ</option>
                     </select>

@@ -28,9 +28,9 @@ class UpdateRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users,email,'.$this->id,
             'password' => 'nullable|min:6|max:255',
             're_password' => 'required_with:password|same:password',
+            'parent_user_id' => 'nullable|integer',
             'department_code' => 'required|string',
             'company' => 'required|string',
-            'parent_user_id' => 'nullable|integer',
             'role_id' => 'required|integer',
             'gender_id' => 'required|integer',
             'status_id' => 'required|integer',
@@ -68,10 +68,15 @@ class UpdateRequest extends FormRequest
             're_password.same' => 'Xác nhận mật khẩu không đúng',
 
             'department_code.required' => 'Chưa chọn phòng ban',
-            'company.required' => 'Chưa chọn công ty',
+            'company.required' => 'Chưa chọn khay',
             'role_id.required' => 'Chưa chọn vai trò',
             'gender_id.required' => 'Chưa chọn giới tính',
             'status_id.required' => 'Chưa chọn trạng thái',
+
+            'company.string' => 'Chưa chọn khay',
+            'role_id.integer' => 'Chưa chọn vai trò',
+            'gender_id.integer' => 'Chưa chọn giới tính',
+            'status_id.integer' => 'Chưa chọn trạng thái',
             
             'avatar.image' => 'Ảnh đại diện không đúng định dạng',
         ];
