@@ -47,7 +47,7 @@ class UpdateRequest extends FormRequest
 
             'username.required' => 'Chưa điền tên đăng nhập',
             'username.string' => 'Tên đăng nhập phải là chuỗi ký tự',
-            'username.min' => 'Tên đăng nhập tối thiểu 6 ký tự',
+            'username.min' => 'Tên đăng nhập tối thiểu 4 ký tự',
             'username.max' => 'Tên đăng nhập tối đa 255 ký tự',
             'username.unique' => 'Tên đăng nhập đã tồn tại',
 

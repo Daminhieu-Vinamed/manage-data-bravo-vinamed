@@ -30,6 +30,20 @@ class UserRepository extends AbstractRepository
         $users->get();
         return $users;
     }
+
+    public function restore($id)
+    {
+        $user = User::withTrashed()->find($id);
+        if ($user->trashed()) {
+            return $user->restore();
+        }
+    }
+    
+    public function deletePermanently($id)
+    {
+        $user = User::withTrashed()->find($id);
+        return $user->forceDelete();
+    }
     
     public function store($data) {
         $users = $this->create($data);

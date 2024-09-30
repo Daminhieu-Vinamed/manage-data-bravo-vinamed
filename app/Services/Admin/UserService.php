@@ -96,7 +96,6 @@ class UserService
             return $user->role->name; 
         })
         ->editColumn('avatar', function ($user) {
-            dd();
             return '<img class="w-25 img-thumbnail" src="'. $user->avatar .'" />';
         })
         ->editColumn('parent_user_id', function ($user) {
@@ -105,11 +104,37 @@ class UserService
             }
         })
         ->addColumn('action', function ($user) {
-            return '<a href="'. route('user.edit', ['id' => $user->id]) .'" title="Khôi phục tài khoản" class="btn btn-info shadow-sm btn-circle user_restore"><i class="fas fa-trash-restore-alt"></i></a>' .
+            return '<button id="'. $user->id .'" title="Khôi phục tài khoản" class="btn btn-info shadow-sm btn-circle restore_user"><i class="fas fa-trash-restore-alt"></i></button>' .
             ' <button id="'. $user->id .'" title="Hủy tài khoản" class="btn btn-danger shadow-sm btn-circle destroy_user"><i class="fas fa-user-slash"></i></button>';
         })
         ->rawColumns(['avatar', 'action'])
         ->make(true);
+    }
+
+    public function restore($id)
+    {
+        DB::beginTransaction();
+        try {
+            $this->userRepository->restore($id);
+            DB::commit();
+            return response()->json(['status' => 'success', 'msg' => 'Khôi phục khoản thành công'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đang xảy ra lỗi'], 401);
+        }
+    }
+
+    public function destroy($id)
+    { 
+        DB::beginTransaction();
+        try {
+            $this->userRepository->deletePermanently($id);
+            DB::commit();
+            return response()->json(['status' => 'success', 'msg' => 'Xóa tài vĩnh viễn khoản thành công'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'msg' => 'Hệ thống đang xảy ra lỗi'], 401);
+        }
     }
     
     public function edit($id)
