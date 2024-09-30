@@ -41,7 +41,7 @@ class UserService
         })
         ->addColumn('action', function ($user) {
             return  '<a href="'. route('user.edit', ['id' => $user->id]) .'" title="Chỉnh sửa tài khoản" class="btn btn-info shadow-sm btn-circle edit_user"><i class="fas fa-user-edit"></i></a>' .
-                    ' <button id="'. $user->id .'" title="Xóa tài khoản" class="btn btn-danger shadow-sm btn-circle delete_user"><i class="fas fa-trash-alt"></i></button>';
+                    ' <button id="'. $user->id .'" title="Xóa tài khoản" class="btn btn-danger shadow-sm btn-circle delete_user"><i class="fas fa-user-times"></i></button>';
         })
         ->rawColumns(['avatar', 'action'])
         ->make(true);
@@ -80,6 +80,36 @@ class UserService
             DB::rollBack();
             return response()->json(['status' => 'error', 'msg' => 'Hệ thống đang xảy ra lỗi'], 401);
         }
+    }
+
+    public function getDataDeleted() 
+    {
+        $users = $this->userRepository->getDataDeleted();
+        return DataTables::of($users)
+        ->editColumn('department', function ($user) {
+            return $user->department->name;
+        })
+        ->editColumn('gender', function ($user) {
+            return $user->gender->name; 
+        })
+        ->editColumn('role', function ($user) {
+            return $user->role->name; 
+        })
+        ->editColumn('avatar', function ($user) {
+            dd();
+            return '<img class="w-25 img-thumbnail" src="'. $user->avatar .'" />';
+        })
+        ->editColumn('parent_user_id', function ($user) {
+            if (!empty($user->parent)) {
+                return $user->parent->name;
+            }
+        })
+        ->addColumn('action', function ($user) {
+            return '<a href="'. route('user.edit', ['id' => $user->id]) .'" title="Khôi phục tài khoản" class="btn btn-info shadow-sm btn-circle user_restore"><i class="fas fa-trash-restore-alt"></i></a>' .
+            ' <button id="'. $user->id .'" title="Hủy tài khoản" class="btn btn-danger shadow-sm btn-circle destroy_user"><i class="fas fa-user-slash"></i></button>';
+        })
+        ->rawColumns(['avatar', 'action'])
+        ->make(true);
     }
     
     public function edit($id)

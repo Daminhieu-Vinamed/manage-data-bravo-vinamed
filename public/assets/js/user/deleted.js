@@ -1,7 +1,7 @@
-var listUser = $("#users").DataTable({
+var listUser = $("#user_deleted").DataTable({
     ajax: {
         type: "get",
-        url: linkUser + "get-data",
+        url: linkUser + "get-data-deleted",
     },
     responsive: trueValue,
     rowReorder: trueValue,
@@ -46,8 +46,8 @@ var listUser = $("#users").DataTable({
         var len = api.page.len();
         var numRows = api.rows().count();
         if (numRows <= len) {
-            $('#users_wrapper').children('.row:last').remove();
-            $('#users_wrapper').children('.row:first').remove();
+            $('#user_deleted_wrapper').children('.row:last').remove();
+            $('#user_deleted_wrapper').children('.row:first').remove();
         }
     },
 });

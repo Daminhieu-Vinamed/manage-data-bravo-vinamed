@@ -22,6 +22,15 @@ class UserRepository extends AbstractRepository
         return $users;
     }
     
+    public function getDataDeleted() {
+        $users = $this->builder()->onlyTrashed()->where('role_id', '<>', config('constants.number.one'))->where('id', '<>', Auth::user()->id);
+        if (Auth::user()->role_id == config('constants.number.nine')) {
+            $users->where('role_id', '<>', config('constants.number.two'));
+        }
+        $users->get();
+        return $users;
+    }
+    
     public function store($data) {
         $users = $this->create($data);
         return $users;

@@ -50,6 +50,8 @@ Route::prefix('/')->group(function () {
             Route::post('create', [UserController::class, 'create']);
             Route::get('edit', [UserController::class, 'edit'])->name('edit');
             Route::post('update', [UserController::class, 'update']);
+            Route::get('deleted', [UserController::class, 'deleted'])->name('deleted');
+            Route::get('get-data-deleted', [UserController::class, 'getDataDeleted']);
             Route::delete('delete', [UserController::class, 'delete']);
         });
 
