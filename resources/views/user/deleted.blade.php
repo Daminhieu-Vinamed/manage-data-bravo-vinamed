@@ -13,15 +13,11 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Danh sách người dùng</h6>
-            <div>
-                <button class="btn btn-primary shadow-sm btn-circle" data-toggle="modal" data-target="#CreateUserModal" title="Tạo mới tài khoản"><i class="fas fa-user-plus"></i></button>
-                <a href="{{ route('user.deleted') }}" class="btn btn-danger shadow-sm btn-circle" title="Tài khoản đã xóa"><i class="fas fa-trash-alt"></i></a>
-            </div>
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách người dùng đã bị xóa</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="users" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="user_deleted" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Mã nhân viên</th>
@@ -57,14 +53,11 @@
             </div>
         </div>
     </div>
-    @include('user.popup')
 @endsection
 @push('js')
     <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/js/user/list.js') }}"></script>
-    <script src="{{ asset('assets/js/user/create.js') }}"></script>
+    <script src="{{ asset('assets/js/user/deleted.js') }}"></script>
     <script src="{{ asset('assets/js/user/delete.js') }}"></script>
 @endpush

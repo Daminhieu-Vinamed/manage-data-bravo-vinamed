@@ -45,6 +45,26 @@ class UserController extends Controller
         return $this->userService->create($request);
     }
 
+    public function deleted()
+    {
+        return view('user.deleted');
+    }
+
+    public function getDataDeleted() 
+    {
+        return $this->userService->getDataDeleted();
+    }
+
+    public function restore(Request $request)
+    {
+        return $this->userService->restore($request->id);
+    }
+    
+    public function destroy(Request $request)
+    {
+        return $this->userService->destroy($request->id);
+    }
+    
     public function delete(Request $request)
     {
         return $this->userService->delete($request->id);
