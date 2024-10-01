@@ -15,9 +15,7 @@ var listUser = $("#user_deleted").DataTable({
         { data: "role", name: "role" },
         { data: "parent_user_id", name: "parent_user_id" },
         { data: "company", name: "company" },
-        { data: "avatar", name: "avatar" },
-        { data: "gender", name: "gender" },
-        { data: "id", name: "id" },
+        { data: "deleted_at", name: "deleted_at" },
         { data: "action", name: "action" },
     ],
     language: {
