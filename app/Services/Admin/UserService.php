@@ -89,25 +89,22 @@ class UserService
         ->editColumn('department', function ($user) {
             return $user->department->name;
         })
-        ->editColumn('gender', function ($user) {
-            return $user->gender->name; 
-        })
         ->editColumn('role', function ($user) {
             return $user->role->name; 
-        })
-        ->editColumn('avatar', function ($user) {
-            return '<img class="w-25 img-thumbnail" src="'. $user->avatar .'" />';
         })
         ->editColumn('parent_user_id', function ($user) {
             if (!empty($user->parent)) {
                 return $user->parent->name;
             }
         })
+        ->editColumn('deleted_at', function ($user) {
+            return date('d-m-Y H:i:s', strtotime($user->deleted_at));
+        })
         ->addColumn('action', function ($user) {
             return '<button id="'. $user->id .'" title="Khôi phục tài khoản" class="btn btn-info shadow-sm btn-circle restore_user"><i class="fas fa-trash-restore-alt"></i></button>' .
             ' <button id="'. $user->id .'" title="Hủy tài khoản" class="btn btn-danger shadow-sm btn-circle destroy_user"><i class="fas fa-user-slash"></i></button>';
         })
-        ->rawColumns(['avatar', 'action'])
+        ->rawColumns(['action'])
         ->make(true);
     }
 

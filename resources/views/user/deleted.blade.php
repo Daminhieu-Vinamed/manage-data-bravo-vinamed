@@ -27,9 +27,7 @@
                             <th>Vai trò</th>
                             <th>Quản lý</th>
                             <th>Khay</th>
-                            <th>Ảnh</th>
-                            <th>Giới tính</th>
-                            <th>STT</th>
+                            <th>Thời gian xóa</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -42,9 +40,7 @@
                             <th>Vai trò</th>
                             <th>Quản lý</th>
                             <th>Khay</th>
-                            <th>Ảnh</th>
-                            <th>Giới tính</th>
-                            <th>STT</th>
+                            <th>Thời gian xóa</th>
                             <th>Hành động</th>
                         </tr>
                     </tfoot>
