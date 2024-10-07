@@ -22,9 +22,6 @@ class UserService
     {
         $users = $this->userRepository->getData();
         return DataTables::of($users)
-        ->editColumn('department', function ($user) {
-            return $user->department->name;
-        })
         ->editColumn('gender', function ($user) {
             return $user->gender->name; 
         })
@@ -86,9 +83,6 @@ class UserService
     {
         $users = $this->userRepository->getDataDeleted();
         return DataTables::of($users)
-        ->editColumn('department', function ($user) {
-            return $user->department->name;
-        })
         ->editColumn('role', function ($user) {
             return $user->role->name; 
         })
