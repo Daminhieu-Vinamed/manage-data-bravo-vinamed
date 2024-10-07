@@ -153,26 +153,26 @@ $(document).ready(function () {
 
                 if (errors.company) {
                     $('#company_error').text(errors.company[zeroConst])
-                    $('#company').removeClass('is-valid').addClass('is-invalid');
+                    $($('.form-group #company').prev()[zeroConst]).find('.select2-choice').css('border-color', '#e74a3b')
                 } else {
                     $('#company_error').text('')
-                    $('#company').removeClass('is-invalid').addClass('is-valid');
+                    $($('.form-group #company').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
                 }
 
                 if (errors.parent_user_id) {
                     $('#parent_user_id_error').text(errors.parent_user_id[zeroConst])
-                    $('#parent_user_id').removeClass('is-valid').addClass('is-invalid');
+                    $($('.form-group #parent_user_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#e74a3b')
                 } else {
                     $('#parent_user_id_error').text('')
-                    $('#parent_user_id').removeClass('is-invalid').addClass('is-valid');
+                    $($('.form-group #parent_user_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
                 }
 
                 if (errors.role_id) {
                     $('#role_id_error').text(errors.role_id[zeroConst])
-                    $('#role_id').removeClass('is-valid').addClass('is-invalid');
+                    $($('.form-group #role_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#e74a3b')
                 } else {
                     $('#role_id_error').text('')
-                    $('#role_id').removeClass('is-invalid').addClass('is-valid');
+                    $($('.form-group #role_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
                 }
 
                 if (errors.department_code) {
@@ -185,18 +185,18 @@ $(document).ready(function () {
 
                 if (errors.status_id) {
                     $('#status_id_error').text(errors.status_id[zeroConst])
-                    $('#status_id').removeClass('is-valid').addClass('is-invalid');
+                    $($('.form-group #status_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#e74a3b')
                 } else {
                     $('#status_id_error').text('')
-                    $('#status_id').removeClass('is-invalid').addClass('is-valid');
+                    $($('.form-group #status_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
                 }
 
                 if (errors.gender_id) {
                     $('#gender_id_error').text(errors.gender_id[zeroConst])
-                    $('#gender_id').removeClass('is-valid').addClass('is-invalid');
+                    $($('.form-group #gender_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#e74a3b')
                 } else {
                     $('#gender_id_error').text('')
-                    $('#gender_id').removeClass('is-invalid').addClass('is-valid');
+                    $($('.form-group #gender_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
                 }
 
                 if (errors.EmployeeCode) {
