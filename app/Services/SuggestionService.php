@@ -18,20 +18,8 @@ class SuggestionService extends SuggestionRepository
 
     public function getData($DocCode)
     {
-        $arrayDataCollect = $this->suggestionRepository->getData($DocCode);
-        $arrayData = array_merge(
-            $arrayDataCollect["A06"],
-            $arrayDataCollect["A11"],
-            $arrayDataCollect["A12"], 
-            $arrayDataCollect["A14"], 
-            $arrayDataCollect["A18"], 
-            $arrayDataCollect["A19"],
-            $arrayDataCollect["A21"],
-            $arrayDataCollect["A22"],
-            $arrayDataCollect["A25"]
-        );
-        $collectData = collect($arrayData)->sortByDesc('DocDate')->all();
-        return DataTables::of($collectData)
+        $data = $this->suggestionRepository->getData($DocCode);
+        return DataTables::of($data)
         ->editColumn('TotalAmount', function ($paymentOrder) {
             return number_format($paymentOrder->TotalAmount, config('constants.number.zero'), ".", ".");
         })

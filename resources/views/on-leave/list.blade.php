@@ -27,6 +27,7 @@
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
                             <th>Lý do</th>
+                            <th>Số ngày nghỉ phép còn lại</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
                             <th>Lý do</th>
+                            <th>Số ngày nghỉ phép còn lại</th>
                             <th>Hành động</th>
                         </tr>
                     </tfoot>

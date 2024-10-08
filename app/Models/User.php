@@ -20,9 +20,9 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $fillable = [
         'EmployeeCode',
-        'department_code',
         'company',
         'parent_user_id',
+        'parent_user_id_suggestion',
         'username',
         'name',
         'avatar',
@@ -61,11 +61,6 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
     
-    public function department()
-    {
-        return $this->belongsTo(Department::class, 'department_code', 'code');
-    }
-    
     public function gender()
     {
         return $this->belongsTo(Gender::class, 'gender_id', 'id');
@@ -81,9 +76,19 @@ class User extends Authenticatable
         return $this->belongsTo(User::class, 'parent_user_id', 'id');
     }
     
+    public function parent_suggestion()
+    {
+        return $this->belongsTo(User::class, 'parent_user_id_suggestion', 'id');
+    }
+    
     public function children()
     {
         return $this->hasMany(User::class, 'parent_user_id', 'id');
+    }
+    
+    public function children_suggestion()
+    {
+        return $this->hasMany(User::class, 'parent_user_id_suggestion', 'id');
     }
     
     public function locate()

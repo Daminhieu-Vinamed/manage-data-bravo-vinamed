@@ -29,7 +29,6 @@ class UpdateRequest extends FormRequest
             'password' => 'nullable|min:6|max:255',
             're_password' => 'required_with:password|same:password',
             'parent_user_id' => 'nullable|integer',
-            'department_code' => 'required|string',
             'company' => 'required|string',
             'role_id' => 'required|integer',
             'gender_id' => 'required|integer',
@@ -67,7 +66,6 @@ class UpdateRequest extends FormRequest
             're_password.required_with' => 'Chưa xác nhận mật khẩu',
             're_password.same' => 'Xác nhận mật khẩu không đúng',
 
-            'department_code.required' => 'Chưa chọn phòng ban',
             'company.required' => 'Chưa chọn khay',
             'role_id.required' => 'Chưa chọn vai trò',
             'gender_id.required' => 'Chưa chọn giới tính',

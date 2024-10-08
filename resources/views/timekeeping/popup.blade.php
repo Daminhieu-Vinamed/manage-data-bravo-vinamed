@@ -39,6 +39,11 @@
                     <span id="validate-description-error" class="text-danger small"></span>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    Số ngày nghỉ phép còn lại: {{ $data['vacation'] }} phép
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary shadow-sm" id="supplements_and_leave">Bổ sung</button>

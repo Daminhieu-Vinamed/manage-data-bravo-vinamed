@@ -29,6 +29,7 @@ class OnLeaveRepository
                     'DocCode',
                     'RowId',
                     'Description',
+                    'Vacation'
                 ]);
                 if(!empty($onLeave->toArray())){
                     foreach ($onLeave as $value) {
@@ -58,6 +59,7 @@ class OnLeaveRepository
                     'DocCode',
                     'RowId',
                     'Description',
+                    'Vacation'
                 ]);
                 if(!empty($onLeave->toArray())){
                    foreach ($onLeave as $value) {
