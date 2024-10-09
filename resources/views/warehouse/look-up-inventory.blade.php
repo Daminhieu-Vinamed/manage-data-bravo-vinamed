@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="mt-3 d-flex justify-content-center">
-                        <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Chạy báo cáo</button>
+                        <button class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Chạy báo cáo</button>
                     </div>
                 </form>
             </div>

@@ -65,18 +65,18 @@
             </div>
         </div>
     </li>
-    <li class="nav-item {{ request()->routeIs('warehouse.look-up-inventory') ? 'active' : config('constants.value.empty') }}">
-        <a class="nav-link {{ request()->routeIs('warehouse.look-up-inventory') ? config('constants.value.empty') : 'collapsed' }}"
+    <li class="nav-item {{ request()->routeIs('warehouse.look-up-inventory') || request()->routeIs('warehouse.data-look-up-inventory') ? 'active' : config('constants.value.empty') }}">
+        <a class="nav-link {{ request()->routeIs('warehouse.look-up-inventory') || request()->routeIs('warehouse.data-look-up-inventory') ? config('constants.value.empty') : 'collapsed' }}"
             data-toggle="collapse" data-target="#warehouseManagement" aria-expanded="true" aria-controls="warehouseManagement">
             <i class="fas fa-warehouse"></i>
             <span>Quản lý kho</span>
         </a>
         <div id="warehouseManagement"
-            class="collapse {{ request()->routeIs('warehouse.look-up-inventory') ? 'show' : config('constants.value.empty') }}"
+            class="collapse {{ request()->routeIs('warehouse.look-up-inventory') || request()->routeIs('warehouse.data-look-up-inventory') ? 'show' : config('constants.value.empty') }}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Hành động:</h6>
-                <a class="collapse-item {{ request()->routeIs('warehouse.look-up-inventory') ? 'active' : config('constants.value.empty') }}"
+                <a class="collapse-item {{ request()->routeIs('warehouse.look-up-inventory') || request()->routeIs('warehouse.data-look-up-inventory') ? 'active' : config('constants.value.empty') }}"
                     href="{{ route('warehouse.look-up-inventory') }}">Tra cứu tồn</a>
             </div>
         </div>
