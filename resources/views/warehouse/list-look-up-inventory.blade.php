@@ -57,7 +57,6 @@
                             <th>Được xuất</th>
                         </tr>
                     </tfoot>
-                    <tbody></tbody>
                 </table>
             </div>
         </div>
