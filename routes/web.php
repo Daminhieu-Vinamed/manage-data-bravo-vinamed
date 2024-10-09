@@ -63,14 +63,6 @@ Route::prefix('/')->group(function () {
             Route::get('search-warehouse', [WarehouseController::class, 'searchWarehouse']);
             Route::get('search-supplies', [WarehouseController::class, 'searchSupplies']);
             Route::post('data-look-up-inventory', [WarehouseController::class, 'getDataLookUpInventory'])->name('data-look-up-inventory');
-            Route::post('create', [UserController::class, 'create']);
-            Route::get('edit', [UserController::class, 'edit'])->name('edit');
-            Route::post('update', [UserController::class, 'update']);
-            Route::delete('delete', [UserController::class, 'delete']);
-            Route::get('deleted', [UserController::class, 'deleted'])->name('deleted');
-            Route::get('get-data-deleted', [UserController::class, 'getDataDeleted']);
-            Route::post('restore', [UserController::class, 'restore']);
-            Route::delete('destroy', [UserController::class, 'destroy']);
         });
 
         Route::prefix('notification')->name('notification.')->group(function () {
