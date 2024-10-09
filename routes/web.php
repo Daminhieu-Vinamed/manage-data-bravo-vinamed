@@ -7,6 +7,7 @@ use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TimekeepingController;
+use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -47,6 +48,21 @@ Route::prefix('/')->group(function () {
         Route::middleware('checkRoleAdmin')->prefix('user')->name('user.')->group(function () {
             Route::get('/', [UserController::class, 'list'])->name('list');
             Route::get('get-data', [UserController::class, 'getData']);
+            Route::post('create', [UserController::class, 'create']);
+            Route::get('edit', [UserController::class, 'edit'])->name('edit');
+            Route::post('update', [UserController::class, 'update']);
+            Route::delete('delete', [UserController::class, 'delete']);
+            Route::get('deleted', [UserController::class, 'deleted'])->name('deleted');
+            Route::get('get-data-deleted', [UserController::class, 'getDataDeleted']);
+            Route::post('restore', [UserController::class, 'restore']);
+            Route::delete('destroy', [UserController::class, 'destroy']);
+        });
+        
+        Route::prefix('warehouse')->name('warehouse.')->group(function () {
+            Route::get('look-up-inventory', [WarehouseController::class, 'lookUpInventory'])->name('look-up-inventory');
+            Route::get('search-warehouse', [WarehouseController::class, 'searchWarehouse']);
+            Route::get('search-supplies', [WarehouseController::class, 'searchSupplies']);
+            Route::post('data-look-up-inventory', [WarehouseController::class, 'getDataLookUpInventory'])->name('data-look-up-inventory');
             Route::post('create', [UserController::class, 'create']);
             Route::get('edit', [UserController::class, 'edit'])->name('edit');
             Route::post('update', [UserController::class, 'update']);

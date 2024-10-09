@@ -24,8 +24,8 @@ class SupplementsAndLeaveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "start" => "required",
-            "end" => "required|after_or_equal:start",
+            "start" => "required|date_format:Y-m-d",
+            "end" => "required|date_format:Y-m-d|after_or_equal:start",
             "description" => "required",
             "type" => [
                 "required",
@@ -69,6 +69,8 @@ class SupplementsAndLeaveRequest extends FormRequest
             'end.after_or_equal' => 'Thời gian kết thúc không hợp lệ',
             'start.required' => 'Chưa chọn thời gian bắt đầu',
             'type.required' => 'Chưa chọn loại ngày công',
+            'start.date_format' => 'Không đúng định dạng',
+            'end.date_format' => 'Không đúng định dạng',
         ];
     }
 }
