@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#tableWarehouse").DataTable({
-        pageLength : fiveConst,
+        pageLength : tenConst,
         responsive: trueValue,
         rowReorder: trueValue,
         scrollX: trueValue,
