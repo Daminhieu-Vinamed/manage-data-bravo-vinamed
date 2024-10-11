@@ -40,7 +40,7 @@
                                 <td>{{ $item->ItemCode_NCC }}</td>
                                 <td>{{ $item->ItemName }}</td>
                                 <td>{{ $item->So_Lo }}</td>
-                                <td>{{ $item->ExpiryDate }}</td>
+                                <td>{{ date('d-m-Y', strtotime($item->ExpiryDate)) }}</td>
                                 <td>{{ number_format($item->CloseInventory, config('constants.number.two'), ".", ",") }}</td>
                                 <td>{{ number_format($item->BlockType_9, config('constants.number.two'), ".", ",") }}</td>
                             </tr>
