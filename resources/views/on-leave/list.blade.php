@@ -22,12 +22,12 @@
                             <th>Khay</th>
                             <th>Mã nhân viên</th>
                             <th>Tên nhân viên</th>
-                            <th>Bộ phận</th>
+                            <th>Phép còn lại</th>
                             <th>Loại nghỉ phép</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
                             <th>Lý do</th>
-                            <th>Số ngày nghỉ phép còn lại</th>
+                            <th>Bộ phận</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -36,12 +36,12 @@
                             <th>Khay</th>
                             <th>Mã nhân viên</th>
                             <th>Tên nhân viên</th>
-                            <th>Bộ phận</th>
+                            <th>Phép còn lại</th>
                             <th>Loại nghỉ phép</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
                             <th>Lý do</th>
-                            <th>Số ngày nghỉ phép còn lại</th>
+                            <th>Bộ phận</th>
                             <th>Hành động</th>
                         </tr>
                     </tfoot>
