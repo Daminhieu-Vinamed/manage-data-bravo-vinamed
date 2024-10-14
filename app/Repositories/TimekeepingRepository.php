@@ -61,6 +61,9 @@ class TimekeepingRepository extends AbstractRepository
         ->where('IsActive', config('constants.number.one'))
         ->get(['RowId', 'Name', 'WorkDay']);
         $data['npVsBs'] = $npVsBs;
+
+        $Vacation = DB::connection($company)->table('vB30HrmPTimesheet')->where('EmployeeCode', $EmployeeCode)->orderByDesc('Date')->first(['Vacation']);
+        $data['vacation'] = floatval($Vacation->Vacation);
         
         return $data;
     }

@@ -63,10 +63,10 @@
                         <i class="fas fa-envelope text-primary"></i> 
                         <strong class="text-primary mx-2">Email:</strong> {{Auth::user()->email}}
                     </div>
-                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                    {{-- <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
                         <i class="fas fa-building text-primary"></i> 
                         <strong class="text-primary mx-2">Phòng ban:</strong> {{Auth::user()->department->name}}
-                    </div>
+                    </div> --}}
                     <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
                         <i class="fas fa-briefcase text-primary"></i> 
                         <strong class="text-primary mx-2">Vai trò:</strong> {{Auth::user()->role->name}}

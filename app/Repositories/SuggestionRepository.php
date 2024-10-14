@@ -9,26 +9,36 @@ class SuggestionRepository
 {
     public function getData($DocCode)
     {
+        $suggestionTotal = array();
         if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two')) {
             foreach (config('constants.company') as $company) {
-                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')
+                $suggestion = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', $DocCode)
                 ->orderBy('DocDate', 'desc')->get();
-                $paymentOrderTotal[$company] = $paymentOrder->toArray();
+                if(!empty($suggestion->toArray())){
+                    foreach ($suggestion as $value) {
+                        array_push($suggestionTotal, $value);
+                    } 
+                }
             }
         } else {
-            $arrayDeptCode = json_decode(Auth::user()->department->DeptCode);
-            foreach (config('constants.company') as $company) {
-                $paymentOrder = DB::connection($company)->table('vB33AccDoc_ExploreJournalEntry_Web')
-                ->whereIn('Dept', $arrayDeptCode)
+            $arrEmployee = Auth::user()->children_suggestion;
+            foreach ($arrEmployee as $employee) {
+                $suggestion = DB::connection($employee->company)->table('vB33AccDoc_ExploreJournalEntry_Web')
                 ->where('IsActive', config('constants.number.one'))
                 ->where('DocCode', $DocCode)
-                ->orderBy('DocDate', 'desc')->get();
-                $paymentOrderTotal[$company] = $paymentOrder->toArray();
+                ->orderBy('DocDate', 'desc')
+                ->where('EmployeeCode', $employee->EmployeeCode)
+                ->get();
+                if(!empty($suggestion->toArray())){
+                    foreach ($suggestion as $value) {
+                        array_push($suggestionTotal, $value);
+                    } 
+                }
             }
         }
-        return $paymentOrderTotal;
+        return $suggestionTotal;
     }
 
     public function approvePaymentOrder($connectCompany, $Stt, $nUserId, $description, $username)

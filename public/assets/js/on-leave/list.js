@@ -15,6 +15,7 @@ var listOnLeave = $("#on_leave").DataTable({
         { data: "start", name: "start" },
         { data: "end", name: "end" },
         { data: "Description", name: "Description" },
+        { data: "Vacation", name: "Vacation" },
         { data: "action", name: "action" },
     ],
     ordering: falseValue,

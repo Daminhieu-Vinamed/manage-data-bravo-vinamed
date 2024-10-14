@@ -64,11 +64,25 @@ var calendar = $("#calendar").fullCalendar({
         let dateCount = {};
         $('#calendar').fullCalendar('clientEvents').forEach(function(event) {
             if (event.title && event.status == "35" || event.status == "36" || event.status == "37" || event.status == "51") {
-                if (dateCount[event.start.format('YYYY-MM-DD')]) {
-                    dateCount[event.start.format('YYYY-MM-DD')] = dateCount[event.start.format('YYYY-MM-DD')] + parseFloat(event.workday);
-                } else {
-                    dateCount[event.start.format('YYYY-MM-DD')] = parseFloat(event.workday);
-                }  
+                if (event.start && event.end) {
+                    for (let index = parseInt(event.start.format('DD')); index <= parseInt(event.end.format('DD')); index++) {
+                        day = index.toString();
+                        if (day.length == oneConst) {
+                            day = '0' + day;
+                        }
+                        if (dateCount[event.start.format('YYYY-MM-' + day)]) {
+                            dateCount[event.start.format('YYYY-MM-' + day)] = dateCount[event.start.format('YYYY-MM-' + day)] + parseFloat(event.workday);
+                        } else {
+                            dateCount[event.start.format('YYYY-MM-' + day)] = parseFloat(event.workday);
+                        } 
+                    }
+                }else{
+                    if (dateCount[event.start.format('YYYY-MM-DD')]) {
+                        dateCount[event.start.format('YYYY-MM-DD')] = dateCount[event.start.format('YYYY-MM-DD')] + parseFloat(event.workday);
+                    } else {
+                        dateCount[event.start.format('YYYY-MM-DD')] = parseFloat(event.workday);
+                    } 
+                }
             } else {
                 if (event.start && event.end) {
                     if (moment(event.start).format('HH:mm:ss') > clockIn || moment(event.end).format('HH:mm:ss') < clockOut) {
