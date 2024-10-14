@@ -63,7 +63,7 @@ class TimekeepingRepository extends AbstractRepository
         $data['npVsBs'] = $npVsBs;
 
         $Vacation = DB::connection($company)->table('vB30HrmPTimesheet')->where('EmployeeCode', $EmployeeCode)->orderByDesc('Date')->first(['Vacation']);
-        $data['vacation'] = floatval($Vacation->Vacation);
+        $data['vacation'] = $Vacation == config('constants.value.null') ? config('constants.number.zero') : floatval($Vacation->Vacation);
         
         return $data;
     }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
-use App\Models\Department;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\Admin\UserService;
@@ -22,7 +21,6 @@ class UserController extends Controller
 
     public function list()
     {
-        $departments = Department::select('code', 'name')->get();
         $roles = Role::select('id', 'name')
         ->where('id', '<>', config('constants.number.one'))
         ->where('id', '<>', config('constants.number.two'))
@@ -32,7 +30,7 @@ class UserController extends Controller
         ->where('role_id', '<>', config('constants.number.seven'))
         ->where('role_id', '<>', config('constants.number.eight'))
         ->get();
-        return view('user.list', compact('departments', 'roles', 'parents'));
+        return view('user.list', compact('roles', 'parents'));
     }
 
     public function getData()
@@ -73,7 +71,6 @@ class UserController extends Controller
     public function edit(Request $request)
     {
         $user = $this->userService->edit($request->id);
-        $departments = Department::select('code', 'name')->get();
         $roles = Role::select('id', 'name')
         ->where('id', '<>', config('constants.number.one'))
         ->where('id', '<>', config('constants.number.two'))
@@ -83,7 +80,7 @@ class UserController extends Controller
         ->where('role_id', '<>', config('constants.number.seven'))
         ->where('role_id', '<>', config('constants.number.eight'))
         ->get();
-        return view('user.edit', compact('user', 'departments', 'roles', 'parents'));
+        return view('user.edit', compact('user', 'roles', 'parents'));
     }
     
     public function update(UpdateRequest $request)
