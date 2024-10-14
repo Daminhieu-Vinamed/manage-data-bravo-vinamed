@@ -55,18 +55,6 @@
                     <span class="text-danger small" id="parent_user_id_error"></span>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="department_code" class="form-label small">Phòng ban</label>
-                    <input list="list_department_code" class="form-control" id="department_code">
-                    <datalist id="list_department_code">
-                        @foreach ($departments as $item)
-                            @if ($item->code !== 'ADMIN')
-                                <option data-value="{{ $item->code }}" value="{{ $item->name }}"></option>
-                            @endif
-                        @endforeach
-                    </datalist>
-                    <span class="text-danger small" id="department_code_error"></span>
-                </div>
-                <div class="form-group col-md-4">
                     <label for="status_id" class="form-label small">Trạng thái</label>
                     <select class="form-control-select2" id="status_id">
                         <option selected value="">Chọn trạng thái</option>

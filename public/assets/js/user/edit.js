@@ -1,11 +1,4 @@
 $(document).ready(function () {
-    var department_code = $("#department_code");
-    department_code.next("#list_department_code").children("option").each(function () {
-        if ($(this).attr("data-value") === department_code.attr("data-value")) {
-            return department_code.val($(this).val()).attr("data-value", $(this).attr("data-value"));
-        }
-    });
-
     $('#parent_user_id').select2();
     $('#company, #role_id, #status_id, #gender_id').select2({ minimumResultsForSearch: -1 });
 
@@ -63,19 +56,6 @@ $(document).ready(function () {
         $(this).parent().remove();
     });
 
-    $(document).on("blur", "#department_code", function () {
-        const valueSelected = $(this).val();
-        var department_code = $(this).val(nullValue).removeAttr('data-value');
-        $(this)
-            .next("#list_department_code")
-            .children("option")
-            .each(function () {
-                if ($(this).val() === valueSelected) {
-                    return department_code.val(valueSelected).attr("data-value", $(this).attr('data-value'));
-                }
-            });
-    });
-
     $(document).on("click", "#update_user", function () {
         let id = new URLSearchParams(window.location.search).get('id')
         formData = new FormData();
@@ -88,7 +68,6 @@ $(document).ready(function () {
             formData.append('password', $('#password').val());
             formData.append('re_password', $('#re_password').val());
         }
-        formData.append('department_code', $('#department_code').attr('data-value') !== nullValue ? $('#department_code').attr('data-value') : '');
         formData.append('company', $('#company').val() !== nullValue ? $('#company').val() : '');
         formData.append('parent_user_id', $('#parent_user_id').val() !== nullValue ? $('#parent_user_id').val() : '');
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
@@ -173,14 +152,6 @@ $(document).ready(function () {
                 } else {
                     $('#role_id_error').text('')
                     $($('.form-group #role_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
-                }
-
-                if (errors.department_code) {
-                    $('#department_code_error').text(errors.department_code[zeroConst])
-                    $('#department_code').removeClass('is-valid').addClass('is-invalid');
-                } else {
-                    $('#department_code_error').text('')
-                    $('#department_code').removeClass('is-invalid').addClass('is-valid');
                 }
 
                 if (errors.status_id) {
