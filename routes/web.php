@@ -58,7 +58,7 @@ Route::prefix('/')->group(function () {
             Route::delete('destroy', [UserController::class, 'destroy']);
         });
         
-        Route::prefix('warehouse')->name('warehouse.')->group(function () {
+        Route::prefix('warehouse')->name('warehouse.')->middleware('checkIsWarehouseActive')->group(function () {
             Route::get('look-up-inventory', [WarehouseController::class, 'lookUpInventory'])->name('look-up-inventory');
             Route::get('search-warehouse', [WarehouseController::class, 'searchWarehouse']);
             Route::get('search-supplies', [WarehouseController::class, 'searchSupplies']);

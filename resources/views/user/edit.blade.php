@@ -89,6 +89,15 @@
                         <span class="text-danger small" id="gender_id_error"></span>
                     </div>
                     <div class="form-group col-md-4">
+                        <label for="is_warehouse_active" class="form-label small">Kho</label>
+                        <select class="form-control-select2" id="is_warehouse_active">
+                            <option selected value="">Hiển thị kho</option>
+                            <option value="{{ config('constants.number.one') }}" {{$user->is_warehouse_active === config('constants.number.one') ? 'selected' : '' }}>Có</option>
+                            <option value="{{ config('constants.number.two') }}" {{$user->is_warehouse_active === config('constants.number.two') ? 'selected' : '' }}>không</option>
+                        </select>
+                        <span class="text-danger small" id="is_warehouse_active_error"></span>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="avatar" class="form-label small">Ảnh đại diện</label>
                         <input type="file" class="form-control" id="avatar">
                         <input type="hidden" id="old_avatar" value="{{$user->avatar}}">

@@ -73,6 +73,15 @@
                     <span class="text-danger small" id="gender_id_error"></span>
                 </div>
                 <div class="form-group col-md-4">
+                    <label for="is_warehouse_active" class="form-label small">Kho</label>
+                    <select class="form-control-select2" id="is_warehouse_active">
+                        <option selected value="">Hiển thị kho</option>
+                        <option value="{{ config('constants.number.one') }}">Có</option>
+                        <option value="{{ config('constants.number.two') }}">không</option>
+                    </select>
+                    <span class="text-danger small" id="is_warehouse_active_error"></span>
+                </div>
+                <div class="form-group col-md-4">
                     <label for="EmployeeCode" class="form-label small">Mã nhân viên Bravo</label>
                     <input type="text" class="form-control" id="EmployeeCode">
                     <span class="text-danger small" id="EmployeeCode_error"></span>

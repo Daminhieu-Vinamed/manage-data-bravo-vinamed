@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#parent_user_id').select2();
-    $('#company, #role_id, #status_id, #gender_id').select2({ minimumResultsForSearch: -1 });
+    $('#company, #role_id, #status_id, #gender_id, #is_warehouse_active').select2({ minimumResultsForSearch: -1 });
 
     $(document).on("click", "#change-password", function () {
         $('#avatar').parent().after(`<div class="form-group col-md-4">
@@ -73,6 +73,7 @@ $(document).ready(function () {
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
         formData.append('gender_id', $('#gender_id').val() !== nullValue ? $('#gender_id').val() : '');
         formData.append('status_id', $('#status_id').val() !== nullValue ? $('#status_id').val() : '');
+        formData.append('is_warehouse_active', $('#is_warehouse_active').val() !== nullValue ? $('#is_warehouse_active').val() : '');
         formData.append('avatar', $('#avatar')[zeroConst].files[zeroConst] !== undefinedValue ? $('#avatar')[zeroConst].files[zeroConst] : '');
         formData.append('old_avatar', $('#old_avatar').val());   
         $.ajax({
@@ -160,6 +161,14 @@ $(document).ready(function () {
                 } else {
                     $('#status_id_error').text('')
                     $($('.form-group #status_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
+                }
+
+                if (errors.is_warehouse_active) {
+                    $('#is_warehouse_active_error').text(errors.is_warehouse_active[zeroConst])
+                    $($('.form-group #is_warehouse_active').prev()[zeroConst]).find('.select2-choice').css('border-color', '#e74a3b')
+                } else {
+                    $('#is_warehouse_active_error').text('')
+                    $($('.form-group #is_warehouse_active').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
                 }
 
                 if (errors.gender_id) {

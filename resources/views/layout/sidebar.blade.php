@@ -65,7 +65,7 @@
             </div>
         </div>
     </li>
-    @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two'))
+    @if (Auth::user()->role->id === config('constants.number.one') || Auth::user()->role->id === config('constants.number.two') || Auth::user()->is_warehouse_active == config('constants.number.one'))
         <li class="nav-item {{ request()->routeIs('warehouse.look-up-inventory') || request()->routeIs('warehouse.data-look-up-inventory') ? 'active' : config('constants.value.empty') }}">
             <a class="nav-link {{ request()->routeIs('warehouse.look-up-inventory') || request()->routeIs('warehouse.data-look-up-inventory') ? config('constants.value.empty') : 'collapsed' }}"
                 data-toggle="collapse" data-target="#warehouseManagement" aria-expanded="true" aria-controls="warehouseManagement">
