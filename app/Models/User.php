@@ -29,6 +29,7 @@ class User extends Authenticatable
         'gender_id',
         'status_id',
         'role_id',
+        'is_warehouse_active',
         'email',
         'password',
     ];

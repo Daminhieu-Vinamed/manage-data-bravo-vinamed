@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#parent_user_id').select2();
-    $('#company, #role_id, #status_id, #gender_id').select2({ minimumResultsForSearch: -1 });
+    $('#company, #role_id, #status_id, #gender_id, #is_warehouse_active').select2({ minimumResultsForSearch: -1 });
     $(document).on("change", "#avatar", function (e) {
         const file = e.target.files[0];
         if (!$('#flex_avatar').length) {
@@ -42,6 +42,7 @@ $(document).ready(function () {
         formData.append('role_id', $('#role_id').val() !== nullValue ? $('#role_id').val() : '');
         formData.append('gender_id', $('#gender_id').val() !== nullValue ? $('#gender_id').val() : '');
         formData.append('status_id', $('#status_id').val() !== nullValue ? $('#status_id').val() : '');
+        formData.append('is_warehouse_active', $('#is_warehouse_active').val() !== nullValue ? $('#is_warehouse_active').val() : '');
         formData.append('avatar', $('#avatar')[zeroConst].files[zeroConst] !== undefinedValue ? $('#avatar')[zeroConst].files[zeroConst] : '');
         $.ajax({
             url: linkUser + "create",
@@ -62,10 +63,10 @@ $(document).ready(function () {
                 $('#username').val('');
                 $('#name').val('');
                 $('#email').val('');
-                $('#company option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
-                $('#role_id option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
-                $('#status_id option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
-                $('#gender_id option:first').removeAttr('disabled').removeAttr('selected').attr('selected','selected').attr('disabled','disabled');
+                $('#company option:first').attr('selected','selected');
+                $('#role_id option:first').attr('selected','selected');
+                $('#status_id option:first').attr('selected','selected');
+                $('#gender_id option:first').attr('selected','selected');
                 $('#EmployeeCode').val('');
                 $('#password').val('');
                 $('#re_password').val('');
@@ -137,6 +138,14 @@ $(document).ready(function () {
                 } else {
                     $('#status_id_error').text('')
                     $($('.form-group #status_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
+                }
+
+                if (errors.is_warehouse_active) {
+                    $('#is_warehouse_active_error').text(errors.is_warehouse_active[zeroConst])
+                    $($('.form-group #is_warehouse_active').prev()[zeroConst]).find('.select2-choice').css('border-color', '#e74a3b')
+                } else {
+                    $('#is_warehouse_active_error').text('')
+                    $($('.form-group #is_warehouse_active').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
                 }
 
                 if (errors.gender_id) {

@@ -33,6 +33,7 @@ class UpdateRequest extends FormRequest
             'role_id' => 'required|integer',
             'gender_id' => 'required|integer',
             'status_id' => 'required|integer',
+            'is_warehouse_active' => 'required|integer',
             'avatar' => 'nullable|image',
         ];
     }
@@ -70,11 +71,13 @@ class UpdateRequest extends FormRequest
             'role_id.required' => 'Chưa chọn vai trò',
             'gender_id.required' => 'Chưa chọn giới tính',
             'status_id.required' => 'Chưa chọn trạng thái',
+            'is_warehouse_active.required' => 'Chưa chọn kho',
 
             'company.string' => 'Chưa chọn khay',
             'role_id.integer' => 'Chưa chọn vai trò',
             'gender_id.integer' => 'Chưa chọn giới tính',
             'status_id.integer' => 'Chưa chọn trạng thái',
+            'is_warehouse_active.integer' => 'Chưa chọn kho',
             
             'avatar.image' => 'Ảnh đại diện không đúng định dạng',
         ];
