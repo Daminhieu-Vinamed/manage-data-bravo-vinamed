@@ -74,6 +74,7 @@ $(document).ready(function () {
         formData.append('gender_id', $('#gender_id').val() !== nullValue ? $('#gender_id').val() : '');
         formData.append('status_id', $('#status_id').val() !== nullValue ? $('#status_id').val() : '');
         formData.append('is_warehouse_active', $('#is_warehouse_active').val() !== nullValue ? $('#is_warehouse_active').val() : '');
+        formData.append('birthday', $('#birthday').val() !== nullValue ? $('#birthday').val() : '');
         formData.append('avatar', $('#avatar')[zeroConst].files[zeroConst] !== undefinedValue ? $('#avatar')[zeroConst].files[zeroConst] : '');
         formData.append('old_avatar', $('#old_avatar').val());   
         $.ajax({
@@ -98,6 +99,14 @@ $(document).ready(function () {
                     class: "d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ml-2",
                     id: "change-password"
                 });
+                $('#username_error, #name_error, #email_error, #birthday_error, #EmployeeCode_error, #password_error, #re_password_error, #avatar_error, #company_error, #parent_user_id_error, #role_id_error, #status_id_error, #is_warehouse_active_error, #gender_id_error').text('');
+                $('#username, #name, #email, #birthday, #EmployeeCode, #password, #re_password, #avatar').removeClass().addClass('form-control');
+                $($('.form-group #company').prev()[zeroConst]).find('.select2-choice').css('border-color', '#d1d3e2')
+                $($('.form-group #parent_user_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#d1d3e2')
+                $($('.form-group #role_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#d1d3e2')
+                $($('.form-group #status_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#d1d3e2')
+                $($('.form-group #is_warehouse_active').prev()[zeroConst]).find('.select2-choice').css('border-color', '#d1d3e2')
+                $($('.form-group #gender_id').prev()[zeroConst]).find('.select2-choice').css('border-color', '#d1d3e2')
             },
             error: function (error) {
                 if (error.responseJSON.status || error.responseJSON.msg) {
@@ -169,6 +178,14 @@ $(document).ready(function () {
                 } else {
                     $('#is_warehouse_active_error').text('')
                     $($('.form-group #is_warehouse_active').prev()[zeroConst]).find('.select2-choice').css('border-color', '#1cc88a')
+                }
+
+                if (errors.birthday) {
+                    $('#birthday_error').text(errors.birthday[zeroConst])
+                    $('#birthday').removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $('#birthday_error').text('')
+                    $('#birthday').removeClass('is-invalid').addClass('is-valid');
                 }
 
                 if (errors.gender_id) {

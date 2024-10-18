@@ -82,6 +82,11 @@
                     <span class="text-danger small" id="is_warehouse_active_error"></span>
                 </div>
                 <div class="form-group col-md-4">
+                    <label for="birthday" class="form-label small">Sinh nhật</label>
+                    <input type="date" class="form-control" id="birthday">
+                    <span class="text-danger small" id="birthday_error"></span>
+                </div>
+                <div class="form-group col-md-4">
                     <label for="EmployeeCode" class="form-label small">Mã nhân viên Bravo</label>
                     <input type="text" class="form-control" id="EmployeeCode">
                     <span class="text-danger small" id="EmployeeCode_error"></span>
