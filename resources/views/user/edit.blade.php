@@ -98,6 +98,11 @@
                         <span class="text-danger small" id="is_warehouse_active_error"></span>
                     </div>
                     <div class="form-group col-md-4">
+                        <label for="birthday" class="form-label small">Sinh nhật</label>
+                        <input type="date" class="form-control" id="birthday" value="{{ date('Y-m-d', strtotime($user->birthday)) }}">
+                        <span class="text-danger small" id="birthday_error"></span>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="avatar" class="form-label small">Ảnh đại diện</label>
                         <input type="file" class="form-control" id="avatar">
                         <input type="hidden" id="old_avatar" value="{{$user->avatar}}">

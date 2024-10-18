@@ -5,6 +5,7 @@ use App\Http\Controllers\OnLeaveController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TimekeepingController;
 use App\Http\Controllers\WarehouseController;
@@ -15,6 +16,8 @@ Route::prefix('/')->group(function () {
     Route::middleware('checkLogin')->group(function () {
 
         Route::get('welcome', [AuthController::class, 'welcome'])->name('welcome');
+        
+        Route::get('happy-woman-day', [EventController::class, 'happyWomanDay'])->name('happyWomanDay');
 
         Route::put('change-password', [AuthController::class, 'changePassword']);
 

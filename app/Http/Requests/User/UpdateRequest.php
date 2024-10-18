@@ -34,6 +34,7 @@ class UpdateRequest extends FormRequest
             'gender_id' => 'required|integer',
             'status_id' => 'required|integer',
             'is_warehouse_active' => 'required|integer',
+            'birthday' => 'required|date|date_format:Y-m-d',
             'avatar' => 'nullable|image',
         ];
     }
@@ -78,6 +79,10 @@ class UpdateRequest extends FormRequest
             'gender_id.integer' => 'Chưa chọn giới tính',
             'status_id.integer' => 'Chưa chọn trạng thái',
             'is_warehouse_active.integer' => 'Chưa chọn kho',
+
+            'birthday.required' => 'Ngày sinh nhật không được để trống',
+            'birthday.date' => 'Ngày sinh nhật không đúng kiểu',
+            'birthday.date_format' => 'Ngày sinh nhật không đúng định dạng',
             
             'avatar.image' => 'Ảnh đại diện không đúng định dạng',
         ];
