@@ -78,7 +78,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Hành động:</h6>
                     <a class="collapse-item {{ request()->routeIs('warehouse.look-up-inventory') || request()->routeIs('warehouse.data-look-up-inventory') ? 'active' : config('constants.value.empty') }}"
-                        href="{{ route('warehouse.look-up-inventory') }}">Tra cứu tồn</a>
+                        href="{{ route('warehouse.look-up-inventory') }}">Tra cứu tồn theo QR</a>
                 </div>
             </div>
         </li>
