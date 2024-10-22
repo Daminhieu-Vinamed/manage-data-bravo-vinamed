@@ -13,6 +13,7 @@ const linkOnLeave = window.location.origin + "/on-leave/";
 const linkAdditionalWork = window.location.origin + "/additional-work/";
 const linkNotification = window.location.origin + "/notification/";
 const linkWarehouse = window.location.origin + "/warehouse/";
+const linkEvent = window.location.origin + "/Event/";
 
 var zero = 0;
 var one = 1;

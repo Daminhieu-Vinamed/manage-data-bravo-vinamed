@@ -47,26 +47,23 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                    <input type="hidden" value="{{Auth::user()->id}}" class="auth-id">
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom username-info">
                         <i class="fas fa-user text-primary"></i> 
-                        <strong class="text-primary mx-2">Tên đăng nhập:</strong> {{Auth::user()->username}}
+                        <strong class="text-primary mx-2">Tên đăng nhập:</strong> {{Auth::user()->username}} <a href="#" class="edit-username"><i class="fas fa-pen text-primary mx-2"></i></a>
                     </div>
-                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom name-info">
                         <i class="fas fa-id-badge text-primary"></i> 
-                        <strong class="text-primary mx-2">Họ và tên:</strong> {{Auth::user()->name}}
+                        <strong class="text-primary mx-2">Họ và tên:</strong> {{Auth::user()->name}} <a href="#" class="edit-name"><i class="fas fa-pen text-primary mx-2"></i></a>
                     </div>
                     <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
                         <i class="fas fa-id-card text-primary"></i> 
                         <strong class="text-primary mx-2">Mã nhân viên:</strong> {{Auth::user()->EmployeeCode}}
                     </div>
-                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom email-info">
                         <i class="fas fa-envelope text-primary"></i> 
-                        <strong class="text-primary mx-2">Email:</strong> {{Auth::user()->email}}
+                        <strong class="text-primary mx-2">Email:</strong> {{Auth::user()->email}} <a href="#" class="edit-email"><i class="fas fa-pen text-primary mx-2"></i></a>
                     </div>
-                    {{-- <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
-                        <i class="fas fa-building text-primary"></i> 
-                        <strong class="text-primary mx-2">Phòng ban:</strong> {{Auth::user()->department->name}}
-                    </div> --}}
                     <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
                         <i class="fas fa-briefcase text-primary"></i> 
                         <strong class="text-primary mx-2">Vai trò:</strong> {{Auth::user()->role->name}}
@@ -74,6 +71,10 @@
                     <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom">
                         <i class="fas fa-inbox text-primary"></i> 
                         <strong class="text-primary mx-2">Khay:</strong> {{Auth::user()->company}}
+                    </div>
+                    <div class="info-item mb-3 d-flex align-items-center py-3 border-bottom birthday-info">
+                        <i class="fas fa-birthday-cake text-primary"></i>
+                        <strong class="text-primary mx-2">Sinh nhật:</strong> {{Auth::user()->birthday}} <a href="#" class="edit-birthday"><i class="fas fa-pen text-primary mx-2"></i></a>
                     </div>
                 </div>
             </div>

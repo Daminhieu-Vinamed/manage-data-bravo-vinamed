@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Admin\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class AuthService
 {
@@ -18,7 +19,12 @@ class AuthService
     public function postLogin($request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công'], 200);
+            $now = new Carbon();
+            $url = '/welcome';
+            if (Auth::user()->birthday == $now->format('Y-m-d')) {
+                $url = '/happy-birthday';
+            }
+            return response()->json(['status' => 'success', 'msg' => 'Đăng nhập thành công', 'url' => $url], 200);
         } else {
             return response()->json(['status' => 'error', 'msg' => 'Sai tên đăng nhập hoặc mật khẩu'], 401);
         }
@@ -39,6 +45,14 @@ class AuthService
         $data['password'] = Hash::make($request->new_password);
         $this->userRepository->updateUser($id, $data);
         return response()->json(['status' => 'success', 'msg' => 'Đổi mật khẩu thành công'], 200);
+    }
+    
+    public function updateInfo($request)
+    {
+        $id = Auth::user()->id;
+        $data = $request->all();
+        $this->userRepository->updateUser($id, $data);
+        return response()->json(['status' => 'success', 'msg' => 'Cập nhật thông tin thành công'], 200);
     }
 
     public function markAsRead($id) 
