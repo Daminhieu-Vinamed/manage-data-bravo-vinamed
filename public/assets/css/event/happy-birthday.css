@@ -1,0 +1,17 @@
+.confetti{
+   margin: 0 auto;
+}
+.wish{
+   font-weight: 900;
+   color: #4e73df;
+   font-size: 65px;
+   text-shadow: 2px 4px 11px rgb(0 0 0 / 28%);
+   -webkit-text-stroke-width: 3px;
+   -webkit-text-stroke-color: white;
+}
+.container-fluid{
+   padding: 0;
+}
+.navbar.navbar-expand.navbar-light.bg-white{
+   margin-bottom: 0 !important;
+}

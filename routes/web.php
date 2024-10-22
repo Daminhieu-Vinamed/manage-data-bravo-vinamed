@@ -17,9 +17,17 @@ Route::prefix('/')->group(function () {
 
         Route::get('welcome', [AuthController::class, 'welcome'])->name('welcome');
         
-        Route::get('happy-woman-day', [EventController::class, 'happyWomanDay'])->name('happyWomanDay');
-
+        Route::middleware('checkBirthday')->prefix('happy-birthday')->group(function () {
+            Route::get('/', [EventController::class, 'happyBirthday']);
+            Route::get('name', [EventController::class, 'happyBirthdayName']);
+        });
+        
         Route::put('change-password', [AuthController::class, 'changePassword']);
+        
+        Route::put('update-birthday', [AuthController::class, 'updateBirthday']);
+        Route::put('update-name', [AuthController::class, 'updateName']);
+        Route::put('update-username', [AuthController::class, 'updateUsername']);
+        Route::put('update-email', [AuthController::class, 'updateEmail']);
 
         Route::prefix('suggestion')->name('suggestion.')->group(function () {
             Route::get('/', [SuggestionController::class, 'list'])->name('list');

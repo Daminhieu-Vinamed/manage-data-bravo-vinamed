@@ -10,7 +10,7 @@ function login(username, password) {
             password: password,
         },
         success: function (success) {
-            location.href = linkOrigin + '/welcome'
+            location.href = linkOrigin + success.url;
         },
         error: function (error) {
             let notification = error.responseJSON;
