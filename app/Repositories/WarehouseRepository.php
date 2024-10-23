@@ -30,8 +30,7 @@ class WarehouseRepository
     public function searchSuppliesQuery($search, $page, $perPage)
     {
         $vB20Item = DB::connection('A25')->table('vB20Item')
-        ->where('IsActive', config('constants.number.one'))
-        ->where('IsGroup', config('constants.number.zero'));
+        ->where('IsActive', config('constants.number.one'));
         if ($search) {
             $vB20Item->where('Code', 'LIKE', '%' . $search . '%')->orWhere('Name', 'LIKE', '%' . $search . '%')->orWhere('ItemCode_NCC', 'LIKE', '%' . $search . '%');
         }
