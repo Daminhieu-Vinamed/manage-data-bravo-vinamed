@@ -56,6 +56,7 @@ $(document).ready(function () {
         placeholder: 'Chọn vật tư',
         minimumInputLength: twoConst,
         allowClear: trueValue,
+        multiple: trueValue,
         ajax: {
             url: linkWarehouse + 'search-supplies',
             dataType: 'json',
