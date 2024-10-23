@@ -4,7 +4,7 @@ namespace App\Http\Requests\Warehouse;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LookUpInventoryRequest extends FormRequest
+class LookUpInventoryWarehouseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,6 @@ class LookUpInventoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "startDate" => "required|date_format:Y-m-d",
             "endDate" => "required|date_format:Y-m-d|after_or_equal:startDate",
         ];
     }
@@ -30,8 +29,6 @@ class LookUpInventoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'startDate.required' => 'Thời gian bắt đầu không được để trống',
-            'startDate.date_format' => 'Không đúng định dạng',
             'endDate.required' => 'Thời gian kết thúc không được để trống',
             'endDate.date_format' => 'Không đúng định dạng',
             'end.after_or_equal' => 'Thời gian kết thúc không hợp lệ',

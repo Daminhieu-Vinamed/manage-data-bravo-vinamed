@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Danh sách tồn')
+@section('title', 'Danh sách tồn theo kho')
 @section('css')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.responsive.min.css') }}" rel="stylesheet">
@@ -13,7 +13,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Danh sách tồn</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách tồn theo kho</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -30,7 +30,6 @@
                             <th>Số lô</th>
                             <th>Hạn sử dụng</th>
                             <th>Tồn kho</th>
-                            <th>Được xuất</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,9 +39,10 @@
                                 <td>{{ $item->ItemCode_NCC }}</td>
                                 <td>{{ $item->ItemName }}</td>
                                 <td>{{ $item->So_Lo }}</td>
-                                <td>{{ $item->ExpiryDate == config('constants.value.null') ? config('constants.value.empty') : date('d-m-Y', strtotime($item->ExpiryDate)) }}</td>
-                                <td>{{ number_format($item->CloseInventory, config('constants.number.two'), ".", ",") }}</td>
-                                <td>{{ number_format($item->BlockType_9, config('constants.number.two'), ".", ",") }}</td>
+                                <td>{{ $item->ExpiryDate == config('constants.value.null') ? config('constants.value.empty') : date('d-m-Y', strtotime($item->ExpiryDate)) }}
+                                </td>
+                                <td>{{ number_format($item->CloseInventory, config('constants.number.two'), '.', ',') }}
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -54,7 +54,6 @@
                             <th>Số lô</th>
                             <th>Hạn sử dụng</th>
                             <th>Tồn kho</th>
-                            <th>Được xuất</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -66,5 +65,5 @@
     <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/js/warehouse/list-look-up-inventory.js') }}"></script>
+    <script src="{{ asset('assets/js/warehouse/list-look-up-inventory-by-warehouse.js') }}"></script>
 @endpush
