@@ -48,9 +48,15 @@ class WarehouseRepository
         ]);
     }
    
-    public function getDataLookUpInventory($request)
+    public function getDataLookUpInventoryByQR($request)
     {
         $data = DB::connection('A25')->select('EXEC usp_Vcd_TongHopNhapXuatTon_Barcode ?, ?, ?, ?, ?, ?', [$request->startDate, $request->endDate, config('constants.value.null'), $request->warehouse, config('constants.number.zero'), $request->supplies]);
+        return $data;
+    }
+    
+    public function getDataLookUpInventoryByWarehouse($request)
+    {
+        $data = DB::connection('A25')->select('EXEC usp_Vcd_TongHopNhapXuatTon_Barcode_Tuandh ?, ?, ?, ?', [config('constants.value.null'), $request->endDate, $request->warehouse, $request->supplies]);
         return $data;
     }
 }

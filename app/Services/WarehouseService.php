@@ -31,8 +31,13 @@ class WarehouseService extends WarehouseRepository
         return $dataWarehouse;
     }
     
-    public function getDataLookUpInventory($request)
+    public function getDataLookUpInventoryByQR($request)
     {
-        return $this->warehouseRepository->getDataLookUpInventory($request);
+        return $this->warehouseRepository->getDataLookUpInventoryByQR($request);
+    }
+    
+    public function getDataLookUpInventoryByWarehouse($request)
+    {
+        return $this->warehouseRepository->getDataLookUpInventoryByWarehouse($request);
     }
 }

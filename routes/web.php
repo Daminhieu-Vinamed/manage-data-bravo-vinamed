@@ -16,14 +16,14 @@ Route::prefix('/')->group(function () {
     Route::middleware('checkLogin')->group(function () {
 
         Route::get('welcome', [AuthController::class, 'welcome'])->name('welcome');
-        
+
         Route::middleware('checkBirthday')->prefix('happy-birthday')->group(function () {
             Route::get('/', [EventController::class, 'happyBirthday']);
             Route::get('name', [EventController::class, 'happyBirthdayName']);
         });
-        
+
         Route::put('change-password', [AuthController::class, 'changePassword']);
-        
+
         Route::put('update-birthday', [AuthController::class, 'updateBirthday']);
         Route::put('update-name', [AuthController::class, 'updateName']);
         Route::put('update-username', [AuthController::class, 'updateUsername']);
@@ -68,12 +68,14 @@ Route::prefix('/')->group(function () {
             Route::post('restore', [UserController::class, 'restore']);
             Route::delete('destroy', [UserController::class, 'destroy']);
         });
-        
+
         Route::prefix('warehouse')->name('warehouse.')->middleware('checkIsWarehouseActive')->group(function () {
-            Route::get('look-up-inventory', [WarehouseController::class, 'lookUpInventory'])->name('look-up-inventory');
+            Route::get('look-up-inventory-by-QR', [WarehouseController::class, 'lookUpInventoryByQR'])->name('look-up-inventory-by-QR');
+            Route::post('data-look-up-inventory-by-QR', [WarehouseController::class, 'getDataLookUpInventoryByQR'])->name('data-look-up-inventory-by-QR');
+            Route::get('look-up-inventory-by-warehouse', [WarehouseController::class, 'lookUpInventoryByWarehouse'])->name('look-up-inventory-by-warehouse');
+            Route::post('data-look-up-inventory-by-warehouse', [WarehouseController::class, 'getDataLookUpInventoryByWarehouse'])->name('data-look-up-inventory-by-warehouse');
             Route::get('search-warehouse', [WarehouseController::class, 'searchWarehouse']);
             Route::get('search-supplies', [WarehouseController::class, 'searchSupplies']);
-            Route::post('data-look-up-inventory', [WarehouseController::class, 'getDataLookUpInventory'])->name('data-look-up-inventory');
         });
 
         Route::prefix('notification')->name('notification.')->group(function () {
@@ -89,7 +91,7 @@ Route::prefix('/')->group(function () {
             Route::post('supplements-and-leave', [TimekeepingController::class, 'supplementsAndLeave']);
             Route::post('clock-in', [TimekeepingController::class, 'clockIn']);
             Route::post('clock-out', [TimekeepingController::class, 'clockOut']);
-            Route::middleware('checkRoleManage')->group(function () { 
+            Route::middleware('checkRoleManage')->group(function () {
                 Route::put('approve', [TimekeepingController::class, 'approve']);
             });
             Route::put('cancel', [TimekeepingController::class, 'cancel']);
