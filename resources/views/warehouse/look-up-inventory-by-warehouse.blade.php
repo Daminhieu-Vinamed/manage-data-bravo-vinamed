@@ -26,11 +26,11 @@
                                 <span class="text-danger small" id="validate-endDate-error">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-8">
                             <label for="warehouse" class="form-label small">Kho hàng</label>
                             <input type="text" id="warehouse" name="warehouse" class="form-control-select2" />
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-12">
                             <label for="supplies" class="form-label small">Vật tư</label>
                             <input type="text" id="supplies" name="supplies" class="form-control-select2" />
                         </div>

@@ -27,6 +27,7 @@
                             <th>Mã mặt hàng</th>
                             <th>Mã vật tư NCC</th>
                             <th>Tên mặt hàng</th>
+                            <th>Mã kho</th>
                             <th>Số lô</th>
                             <th>Hạn sử dụng</th>
                             <th>Tồn kho</th>
@@ -38,6 +39,7 @@
                                 <td>{{ $item->ItemCode }}</td>
                                 <td>{{ $item->ItemCode_NCC }}</td>
                                 <td>{{ $item->ItemName }}</td>
+                                <td>{{ $item->WarehouseCode }}</td>
                                 <td>{{ $item->So_Lo }}</td>
                                 <td>{{ $item->ExpiryDate == config('constants.value.null') ? config('constants.value.empty') : date('d-m-Y', strtotime($item->ExpiryDate)) }}
                                 </td>
@@ -51,6 +53,7 @@
                             <th>Mã mặt hàng</th>
                             <th>Mã vật tư NCC</th>
                             <th>Tên mặt hàng</th>
+                            <th>Mã kho</th>
                             <th>Số lô</th>
                             <th>Hạn sử dụng</th>
                             <th>Tồn kho</th>
