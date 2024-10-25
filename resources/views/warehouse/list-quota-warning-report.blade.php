@@ -40,7 +40,7 @@
                             <th>Số đã bán</th>
                             <th>Số lượng trả lại</th>
                             <th>Số lượng còn lại</th>
-                            <th>% Hoàn thành</th>
+                            <th>% hoàn thành</th>
                             <th>Mã ngành</th>
                             <th>Tên ngành</th>
                             <th>Nhân viên KD</th>
@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
-                            <tr>
+                            <tr class="{{ intval(number_format($item->QuantityP, config('constants.number.zero'), ',', '.')) == config('constants.number.one_hundred') ? 'warning' : '' }}">
                                 <td>{{ $item->DocNo }}</td>
                                 <td>{{ $item->MaSo }}</td>
                                 <td>{{ date('d-m-Y', strtotime($item->DocDate)) }}</td>

@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $('.warning td').css({'border': '1px solid red', 'color': 'red'});
+
     $("#tableWarehouse").DataTable({
         pageLength : tenConst,
         responsive: trueValue,
