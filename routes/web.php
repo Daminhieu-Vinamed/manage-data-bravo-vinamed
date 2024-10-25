@@ -74,8 +74,11 @@ Route::prefix('/')->group(function () {
             Route::post('data-look-up-inventory-by-QR', [WarehouseController::class, 'getDataLookUpInventoryByQR'])->name('data-look-up-inventory-by-QR');
             Route::get('look-up-inventory-by-warehouse', [WarehouseController::class, 'lookUpInventoryByWarehouse'])->name('look-up-inventory-by-warehouse');
             Route::post('data-look-up-inventory-by-warehouse', [WarehouseController::class, 'getDataLookUpInventoryByWarehouse'])->name('data-look-up-inventory-by-warehouse');
+            Route::get('quota-warning-report', [WarehouseController::class, 'quotaWarningReport'])->name('quota-warning-report');
+            Route::post('data-quota-warning-report', [WarehouseController::class, 'getDataQuotaWarningReport'])->name('data-quota-warning-report');
             Route::get('search-warehouse', [WarehouseController::class, 'searchWarehouse']);
             Route::get('search-supplies', [WarehouseController::class, 'searchSupplies']);
+            Route::get('search-customer', [WarehouseController::class, 'searchCustomer']);
         });
 
         Route::prefix('notification')->name('notification.')->group(function () {

@@ -31,6 +31,15 @@ class WarehouseService extends WarehouseRepository
         return $dataWarehouse;
     }
     
+    public function searchCustomer($request)
+    {
+        $search = $request->input('q');
+        $page = $request->input('page', 1);
+        $perPage = 20;
+        $dataWarehouse = $this->warehouseRepository->searchCustomerQuery($search, $page, $perPage);
+        return $dataWarehouse;
+    }
+    
     public function getDataLookUpInventoryByQR($request)
     {
         return $this->warehouseRepository->getDataLookUpInventoryByQR($request);
@@ -39,5 +48,10 @@ class WarehouseService extends WarehouseRepository
     public function getDataLookUpInventoryByWarehouse($request)
     {
         return $this->warehouseRepository->getDataLookUpInventoryByWarehouse($request);
+    }
+    
+    public function getDataQuotaWarningReport($request)
+    {
+        return $this->warehouseRepository->getDataQuotaWarningReport($request);
     }
 }

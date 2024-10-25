@@ -46,6 +46,26 @@ class WarehouseRepository
             'total' => $dataItem->total()
         ]);
     }
+    
+    public function searchCustomerQuery($search, $page, $perPage)
+    {
+        $vB20Item = DB::connection('A25')->table('B20Customer')
+        ->where('IsActive', config('constants.number.one'));
+        if ($search) {
+            $vB20Item->where('Code', 'LIKE', '%' . $search . '%')->orWhere('Name', 'LIKE', '%' . $search . '%');
+        }
+        $dataItem = $vB20Item->paginate($perPage, ['Code', 'Name'], 'page', $page);
+        $results = $dataItem->map(function($item) {
+            return [
+                'id' => $item->Code,
+                'text' => $item->Name
+            ];
+        });
+        return response()->json([
+            'data' => $results,
+            'total' => $dataItem->total()
+        ]);
+    }
    
     public function getDataLookUpInventoryByQR($request)
     {
@@ -56,6 +76,12 @@ class WarehouseRepository
     public function getDataLookUpInventoryByWarehouse($request)
     {
         $data = DB::connection('A25')->select('EXEC usp_Vcd_TongHopNhapXuatTon_Barcode_Tuandh ?, ?, ?, ?', [config('constants.value.null'), $request->endDate, $request->warehouse, $request->supplies]);
+        return $data;
+    }
+    
+    public function getDataQuotaWarningReport($request)
+    {
+        $data = DB::connection('A18')->select('EXEC usp_Vct_BangKeDonDatHangTuandh ?, ?, ?, ?, ?, ?, ?', [$request->startDate, $request->endDate, config('constants.number.two'), $request->customer, config('constants.number.zero'), config('constants.number.zero'), 'A18']);
         return $data;
     }
 }
