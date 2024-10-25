@@ -75,11 +75,15 @@
             class="nav-item {{ request()->routeIs('warehouse.look-up-inventory-by-QR') 
             || request()->routeIs('warehouse.data-look-up-inventory-by-QR') 
             || request()->routeIs('warehouse.look-up-inventory-by-warehouse') 
-            || request()->routeIs('warehouse.data-look-up-inventory-by-warehouse') ? 'active' : config('constants.value.empty') }}">
+            || request()->routeIs('warehouse.data-look-up-inventory-by-warehouse') 
+            || request()->routeIs('warehouse.quota-warning-report') 
+            || request()->routeIs('warehouse.data-quota-warning-report') ? 'active' : config('constants.value.empty') }}">
             <a class="nav-link {{ request()->routeIs('warehouse.look-up-inventory-by-QR') 
             || request()->routeIs('warehouse.data-look-up-inventory-by-QR') 
             || request()->routeIs('warehouse.look-up-inventory-by-warehouse') 
-            || request()->routeIs('warehouse.data-look-up-inventory-by-warehouse') ? config('constants.value.empty') : 'collapsed' }}"
+            || request()->routeIs('warehouse.data-look-up-inventory-by-warehouse')
+            || request()->routeIs('warehouse.quota-warning-report') 
+            || request()->routeIs('warehouse.data-quota-warning-report') ? config('constants.value.empty') : 'collapsed' }}"
                 data-toggle="collapse" data-target="#warehouseManagement" aria-expanded="true"
                 aria-controls="warehouseManagement">
                 <i class="fas fa-warehouse"></i>
@@ -89,7 +93,9 @@
                 class="collapse {{ request()->routeIs('warehouse.look-up-inventory-by-QR') || 
                 request()->routeIs('warehouse.data-look-up-inventory-by-QR') || 
                 request()->routeIs('warehouse.look-up-inventory-by-warehouse') || 
-                request()->routeIs('warehouse.data-look-up-inventory-by-warehouse') ? 'show' : config('constants.value.empty') }}"
+                request()->routeIs('warehouse.data-look-up-inventory-by-warehouse') || 
+                request()->routeIs('warehouse.quota-warning-report') || 
+                request()->routeIs('warehouse.data-quota-warning-report') ? 'show' : config('constants.value.empty') }}"
                 aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Hành động:</h6>
@@ -97,6 +103,8 @@
                         href="{{ route('warehouse.look-up-inventory-by-QR') }}">Tra cứu tồn theo QR</a>
                     <a class="collapse-item {{ request()->routeIs('warehouse.look-up-inventory-by-warehouse') || request()->routeIs('warehouse.data-look-up-inventory-by-warehouse') ? 'active' : config('constants.value.empty') }}"
                         href="{{ route('warehouse.look-up-inventory-by-warehouse') }}">Tra cứu tồn theo kho</a>
+                    <a class="collapse-item {{ request()->routeIs('warehouse.quota-warning-report') || request()->routeIs('warehouse.data-quota-warning-report') ? 'active' : config('constants.value.empty') }}"
+                        href="{{ route('warehouse.quota-warning-report') }}">Báo cáo Quota</a>
                 </div>
             </div>
         </li>
