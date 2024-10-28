@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.warning td').css({'border': '1px solid red', 'color': 'red'});
+    $('.warning td').addClass('border border-danger text-danger');
 
     $("#tableWarehouse").DataTable({
         pageLength : tenConst,
