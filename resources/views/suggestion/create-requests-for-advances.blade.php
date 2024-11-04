@@ -152,7 +152,7 @@
                 <div class="col-md-4"></div>
             </div>
             <div class="py-3 row justify-content-center">
-                <button type="button" id="create-requests-for-advances" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">TẠO MỚI</button>
+                <button type="button" id="create-requests-for-advances" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Tạo mới</button>
             </div>
         </div>
     </div>
