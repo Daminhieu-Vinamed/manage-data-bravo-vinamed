@@ -18,7 +18,8 @@ class CheckBirthdayMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $now = new Carbon();
-        if (Auth::user()->birthday == $now->format('Y-m-d')) {
+        $birthdayUser = Carbon::parse(Auth::user()->birthday);
+        if ($birthdayUser->format('m-d') == $now->format('m-d')) {
             return $next($request);
         }
         return redirect()->route('welcome');

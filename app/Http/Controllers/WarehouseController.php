@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Warehouse\LookUpInventoryByQRRequest;
+use App\Http\Requests\Warehouse\LookUpInventoryQRRequest;
 use App\Http\Requests\Warehouse\LookUpInventoryWarehouseRequest;
 use App\Http\Requests\Warehouse\QuotaWarningReportRequest;
 use App\Services\WarehouseService;
@@ -22,7 +22,7 @@ class WarehouseController extends Controller
         return view('warehouse.look-up-inventory-by-QR');
     }
 
-    public function getDataLookUpInventoryByQR(LookUpInventoryByQRRequest $request)
+    public function getDataLookUpInventoryByQR(LookUpInventoryQRRequest $request)
     {
         $data = $this->warehouseService->getDataLookUpInventoryByQR($request);
         return view('warehouse.list-look-up-inventory-by-QR', compact('data'));
@@ -49,7 +49,17 @@ class WarehouseController extends Controller
         $data = $this->warehouseService->getDataQuotaWarningReport($request);
         return view('warehouse.list-quota-warning-report', compact('data'));
     }
-
+    
+    public function recommendWarehouseRelease()
+    {
+        return view('warehouse.recommend-warehouse-release.create');
+    }
+    
+    public function managementRequestsWarehouseRelease()
+    {
+        return view('warehouse.recommend-warehouse-release.list');
+    }
+    
     public function searchWarehouse(Request $request)
     {
         return $this->warehouseService->searchWarehouse($request);

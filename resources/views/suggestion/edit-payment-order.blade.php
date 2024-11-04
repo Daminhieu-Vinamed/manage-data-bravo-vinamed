@@ -332,7 +332,7 @@
                 </div>
             @endif
             <div class="py-3 row justify-content-center">
-                <button type="button" id="update-payment-order" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">CẬP NHẬT</button>
+                <button type="button" id="update-payment-order" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Cập nhật</button>
             </div>
         </div>
     </div>
