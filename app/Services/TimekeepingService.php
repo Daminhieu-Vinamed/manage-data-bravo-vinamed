@@ -5,6 +5,7 @@ use App\Repositories\TimekeepingRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Agent\Agent;
 
 class TimekeepingService extends TimekeepingRepository
 {
@@ -55,15 +56,20 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();
         $clockIn = new Carbon();
+        $agent = new Agent();
         try {
             // $currentLat = $request->lat;
             // $currentLng = $request->lng;
             // $targetLat = config('constants.location.latitude');
             // $targetLng = config('constants.location.longitude');
-            // $type = config('constants.number.zero');
+            $type = config('constants.number.zero');
             // $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
-            $this->timekeepingRepository->timekeeping($connectCompany, $clockIn, $user->EmployeeCode, $user->company
-            // , $user->id, $currentLat, $currentLng, $distance, $type
+            $device = $agent->device();
+            $platform = $agent->platform();
+            $browser = $agent->browser();
+            $version = $agent->version($browser);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockIn, $user->EmployeeCode, $user->company, $user->id, $device, $platform, $browser, $version, $type
+            //  $currentLat, $currentLng, $distance, $type
         );
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Đã chấm công', 'data' => $clockIn->format('H:i:s')], 200);
@@ -78,15 +84,20 @@ class TimekeepingService extends TimekeepingRepository
         $connectCompany = DB::connection($user->company);
         $connectCompany->beginTransaction();
         $clockOut = new Carbon();
+        $agent = new Agent();
         try {
             // $currentLat = $request->lat;
             // $currentLng = $request->lng;
             // $targetLat = config('constants.location.latitude');
             // $targetLng = config('constants.location.longitude');
-            // $type = config('constants.number.one');
+            $type = config('constants.number.one');
             // $distance = $this->calculateHaversineDistance($currentLat, $currentLng, $targetLat, $targetLng);
-            $this->timekeepingRepository->timekeeping($connectCompany, $clockOut, $user->EmployeeCode, $user->company
-            // , $user->id, $currentLat, $currentLng, $distance, $type
+            $device = $agent->device();
+            $platform = $agent->platform();
+            $browser = $agent->browser();
+            $version = $agent->version($browser);
+            $this->timekeepingRepository->timekeeping($connectCompany, $clockOut, $user->EmployeeCode, $user->company, $user->id, $device, $platform, $browser, $version, $type
+            // $currentLat, $currentLng, $distance, $type
         );
             $connectCompany->commit();
             return response()->json(['status' => 'success', 'msg' => 'Kết thúc chấm công', 'data' => $clockOut->format('H:i:s')], 200);

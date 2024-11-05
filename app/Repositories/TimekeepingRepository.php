@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\DeviceInfo;
 use App\Models\Locate;
 use App\Models\User;
 use App\Notifications\AdditionalWorkAndOnLeaveNotification;
@@ -106,8 +107,8 @@ class TimekeepingRepository extends AbstractRepository
         return $data;
     }
 
-    public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company
-    // , $userId, $lat, $lng, $distance, $type
+    public function timekeeping($connectCompany, $Timekeeping, $EmployeeCode, $company, $userId, $device, $platform, $browser, $version, $type
+    // $lat, $lng, $distance, $type
     ) {
         // $this->create([
         //     'user_id' => $userId,
@@ -116,6 +117,14 @@ class TimekeepingRepository extends AbstractRepository
         //     'distance' => $distance,
         //     'type' => $type,
         // ]);
+        DeviceInfo::create([
+            'user_id' => $userId,
+            'device' => $device,
+            'platform' => $platform,
+            'browser' => $browser,
+            'version' => $version,
+            'type' => $type,
+        ]);
         return $connectCompany->update('EXEC usp_B30HrmCheckInOut_Tuandh ?, ?, ?', [$Timekeeping, $EmployeeCode, $company]);
     }
 
