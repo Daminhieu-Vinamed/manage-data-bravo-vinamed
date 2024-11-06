@@ -66,6 +66,27 @@ class WarehouseRepository
             'total' => $dataItem->total()
         ]);
     }
+    
+    public function searchEmployeeQuery($search, $page, $perPage)
+    {
+        $vB20Item = DB::connection('A25')->table('B20Employee')
+        ->where('IsActive', config('constants.number.one'))
+        ->where('IsGroup', config('constants.number.zero'));
+        if ($search) {
+            $vB20Item->where('Code', 'LIKE', '%' . $search . '%')->orWhere('Name', 'LIKE', '%' . $search . '%');
+        }
+        $dataItem = $vB20Item->paginate($perPage, ['Code', 'Name'], 'page', $page);
+        $results = $dataItem->map(function($item) {
+            return [
+                'id' => $item->Code,
+                'text' => $item->Name
+            ];
+        });
+        return response()->json([
+            'data' => $results,
+            'total' => $dataItem->total()
+        ]);
+    }
    
     public function getDataLookUpInventoryByQR($request)
     {

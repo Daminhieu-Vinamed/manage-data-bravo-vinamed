@@ -81,6 +81,7 @@ Route::prefix('/')->group(function () {
             Route::get('search-warehouse', [WarehouseController::class, 'searchWarehouse']);
             Route::get('search-supplies', [WarehouseController::class, 'searchSupplies']);
             Route::get('search-customer', [WarehouseController::class, 'searchCustomer']);
+            Route::get('search-employee', [WarehouseController::class, 'searchEmployee']);
         });
 
         Route::prefix('notification')->name('notification.')->group(function () {

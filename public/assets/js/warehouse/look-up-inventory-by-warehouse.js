@@ -5,7 +5,6 @@ $(document).ready(function () {
     }
 
     $('#warehouse').select2({
-        language: 'vi',
         placeholder: 'Chọn kho hàng',
         minimumInputLength: twoConst,
         allowClear: trueValue,
@@ -52,7 +51,6 @@ $(document).ready(function () {
     });
 
     $('#supplies').select2({
-        language: 'vi',
         placeholder: 'Chọn vật tư',
         minimumInputLength: twoConst,
         allowClear: trueValue,
