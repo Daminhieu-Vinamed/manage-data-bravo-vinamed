@@ -74,4 +74,9 @@ class WarehouseController extends Controller
     {
         return $this->warehouseService->searchCustomer($request);
     }
+    
+    public function searchEmployee(Request $request)
+    {
+        return $this->warehouseService->searchEmployee($request);
+    }
 }

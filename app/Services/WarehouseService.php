@@ -40,6 +40,15 @@ class WarehouseService extends WarehouseRepository
         return $dataWarehouse;
     }
     
+    public function searchEmployee($request)
+    {
+        $search = $request->input('q');
+        $page = $request->input('page', 1);
+        $perPage = 20;
+        $dataWarehouse = $this->warehouseRepository->searchEmployeeQuery($search, $page, $perPage);
+        return $dataWarehouse;
+    }
+    
     public function getDataLookUpInventoryByQR($request)
     {
         return $this->warehouseRepository->getDataLookUpInventoryByQR($request);

@@ -20,12 +20,20 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="startDate" class="form-label small">Khách hàng</label>
-                            <input type="text" class="form-control-select2" id="customer" name="customer">
+                            <label for="employee" class="form-label small">Nhân viên sales</label>
+                            <input type="text" class="form-control-select2" name="employee">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="customer" class="form-label small">Khách hàng</label>
+                            <input type="text" class="form-control-select2" name="customer">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="endDate" class="form-label small">Mục đích sử dụng</label>
-                            <input type="text" class="form-control-select2" id="customer" name="customer">
+                            <input type="text" class="form-control-select2" name="customer">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="supplies" class="form-label small">Vật tư</label>
+                            <input type="text" class="form-control-select2" name="supplies">
                         </div>
                     </div>
                     <div class="mt-3 d-flex justify-content-center">

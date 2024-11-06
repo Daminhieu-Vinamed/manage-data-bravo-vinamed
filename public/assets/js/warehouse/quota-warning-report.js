@@ -10,7 +10,6 @@ $(document).ready(function () {
     }
 
     $('#customer').select2({
-        language: 'vi',
         placeholder: 'Chọn khách hàng',
         minimumInputLength: twoConst,
         allowClear: trueValue,
